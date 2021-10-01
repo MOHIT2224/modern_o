@@ -1,0 +1,59 @@
+<div class="content-wrapper ng-scope" style="min-height: 720px;">
+<div class="cric row padding">
+    <div class="col-sm-12 col-md-12">
+      <div class="cont_head">Cricket</div>
+    </div>
+</div>
+<div class="row padding">
+    <div class="col-sm-12 col-md-12">
+        <ul class="sport-high">
+            <li class="clearfix head-li">
+              <div class="spor-rgt">
+                <ul class="odd-cat-head">
+                  <li class="sec-mar-rgt">1</li>
+                  <li class="sec-mar-rgt">x</li>
+                  <li>2</li>
+                </ul>
+              </div>
+            </li>
+              </li>
+              <li class="clearfix" ng-repeat="match in sportDetail" ng-show="od.status=='OPEN'">
+                <div class="spor-lft"> 
+                  <a ui-sref="userDashboard.{{getUrl(match.TypeID,'match.matchid','match.marketid',match.matchName,match.MstDate,match.SportId)}}" class="left-play">
+                    <i class="fa fa-star-o icon"></i>
+                    <span  ng-class="{'mat-stat':(od.inplay && od.status=='OPEN')}"></span>
+                   {{match.matchName}} {{match.HeadName}}
+                  </a>
+                   <div class="right-play">
+                  <span>{{match.MstDate | date : 'EEEE HH:mm'}}</span>
+                    <span  ng-class="{'mat-stat':(od.inplay && od.status=='OPEN')}">{{od.status=='OPEN'?od.inplay?"In-Play":"Going In-Play":od.status}}</span>
+                  </div>
+                </div>
+                <div class="spor-rgt" ng-if='od=(oddsDetail|filter:{"marketId":match.marketid})[0]' ng-show='od.status=="OPEN"'>
+                  <ul class="odds-detail">
+                    <li>
+                      <a  class="cell back-cell">{{getOddCalcVal(od.runners[0].ex.availableToBack[0].price,match.oddsLimit)}}</a>
+                    </li>
+                    <li>
+                      <a class="cell lay-cell">{{getOddCalcVal(od.runners[0].ex.availableToLay[0].price,match.oddsLimit)}}</a>
+                    </li>
+                    <li>
+                      <a  class="cell back-cell">{{getOddCalcVal(od.runners[2].ex.availableToBack[0].price,match.oddsLimit)}}</a>
+                    </li>
+                    <li>
+                      <a  class="cell lay-cell">{{getOddCalcVal(od.runners[2].ex.availableToLay[0].price,match.oddsLimit)}}</a>
+                    </li>
+                    <li>
+                      <a  class="cell back-cell">{{getOddCalcVal(od.runners[1].ex.availableToBack[0].price,match.oddsLimit)}}</a>
+                    </li>
+                    <li>
+                      <a  class="cell lay-cell">{{getOddCalcVal(od.runners[1].ex.availableToLay[0].price,match.oddsLimit)}}</a>
+                    </li>
+                  </ul>
+                </div>
+              </li>
+            </ul>
+          </div>
+           </div>
+  </div>
+</div>

@@ -1,0 +1,282 @@
+	<div class="content-wrapper ng-scope" style="min-height: 720px;">
+ <div class="load-box" ng-show="loading">
+        <img id="mySpinner" src="app/images/loading1.gif" />
+    </div>
+    <div class="innerbox">
+        <h1 class="page-heading">Configuration</h1>
+      <!-- <h2 style="text-align: center; font-size: 28px; margin-bottom: 15px;">SET ADMIN LIMIT</h2> -->
+        <div class=" creat_form">
+            <div class="clearfix">
+             
+              <!--   {{message}} -->
+                                <div class="row">
+                    <div class="col-md-3">
+                           
+						
+						<div class="row">
+                                    <form name="userForm" ng-submit="submitForm()">
+                                            <h2 class="inner-head-form">Set Admin Limit  </h2>
+                                            <div class="col-md-12 form-group">
+                                                    <label style="display:inline-block; margin:0;">Set Limit <!-- {{adminLimit[0]}} --></label>
+                                                    <input type="number" name="adminLimit" class="form-control" ng-model="adminLimit1" ng-value="adminLimit.adminLImit" required="required" >
+                                                    <input type="hidden" name="id" ng-model="limitId1" ng-value="adminLimit[0].Id" >
+                                            </div>
+                                            <div class="col-md-12 form-group" style="text-align:left;">                             
+                                                    <button type="button" ng-disabled="adminLimit1 == Null " class="btn btn-primary" ng-click="saveData(adminLimit1,adminLimit[0].Id)" style="margin-top:-1px; padding:2px 10px;">Submit</button>
+                                                </div>
+                        
+                                        </form>
+                            </div> 
+                    </div>
+                        <!--   {{message}} -->
+  
+                          
+                      </div>
+                
+            </div>
+       
+            <div class="clearfix">
+                <div class="row">
+                    <div class="col-md-3">
+                        <div class="row">
+                            <h2 class="inner-head-form">Going InPlay Limit</h2>
+                            <!--   {{message}} -->
+                                <form name="userForm1" ng-submit="submitForm()">
+
+                                    <div class="col-md-12 form-group">
+                                     <label style="display:inline-block; margin:0;">Going InPlay Limit test</label>
+                                    <input type="number" name="adminLimit" class="form-control" ng-model="gngSetLimit"  ng-value="adminLimit.going_in_play_limit" required="required" >
+                                     </div>
+                                        <div class="col-md-12 form-group" style="text-align:left;"> 
+                                            <button type="button" class="btn btn-primary" ng-disabled="gngSetLimit == Null" ng-click="UpdateGngInPlayLimitLimit(gngSetLimit)" style="margin-top:-1px; padding:2px 10px;">Set limit</button>
+                                        </div>
+                                    
+                                </form>
+                         </div>
+                    </div>
+                </div>
+            </div>
+            <div class="clearfix">
+                <div class="row">
+                     <div class="col-md-3">
+                        <div class="row">
+              <h2 class="inner-head-form">Display Message In Header</h2>
+              <!--   {{message}} -->
+                <form name="userForm2" >
+
+                      <div class="col-md-12 form-group">
+                            <label style="display:inline-block; margin:0;">Set Message</label>
+                            <textarea ng-model="setMessage" class="form-control" ng-value="adminLimit.Marquee"></textarea>
+                        </div>
+                          <div class="col-md-12 form-group" style="text-align:left;"> 
+                              <button type="button" class="btn btn-primary" ng-disabled="setMessage ==Null" ng-click="setHeaderMsg(setMessage)" style="margin-top:-1px; padding:2px 10px;">Set Message</button>
+                             
+                          </div>
+                      
+
+                </form>
+                </div>
+                </div>
+                </div>
+
+            </div>
+            <div class="clearfix">
+              <div class="row">
+                <div class="col-md-3">
+                 <div class="row">
+                     <h2 class="inner-head-form">Set user Match detection POINT</h2>
+              <!--   {{message}} -->
+                         <form name="userForm3" >
+
+                        <div class="col-md-12 form-group">
+                            <label style="display:inline-block; margin:0;">Set Point</label>
+                            <input type="number" name="amountDetected" ng-value="adminLimit.match_detection_point" ng-model="PointValue" class="form-control" required="req">
+                            
+                          </div>
+                          <div class="col-md-12 form-group" style="text-align:left;"> 
+                              <button type="button" class="btn btn-primary" ng-disabled="PointValue == Null" ng-click="UpdatePoint(PointValue)" style="margin-top:-1px; padding:2px 10px;">Set Point</button>
+                             
+                          </div>
+                      
+
+                </form>
+            </div>
+                </div>
+                </div>
+                </div>
+            <div class="clearfix">
+                <div class="row">
+                   <div class="col-md-3">
+                    <div class="row">
+                    <h2 class="inner-head-form">Set Bet delay of All users</h2>
+              <!--   {{message}} -->
+                        <form name="userForm4" >
+
+                        <div class="col-md-12 form-group">
+                            <label style="display:inline-block; margin:0;">Set Delay(In Second)</label>
+                            <input type="number" name="betDelay" ng-value="adminLimit. bet_delay" ng-model="betDelay" class="form-control" required="req">
+                          </div>
+                          <div class="col-md-12 form-group" style="text-align:left;"> 
+                              <button type="button" class="btn btn-primary" ng-disabled="betDelay == Null" ng-click="UpdateBetDelay(betDelay)" style="margin-top:-1px; padding:2px 10px;">SetBetDelay</button>
+                             
+                          </div>
+                      
+
+                </form>
+            </div>
+                               </div>
+                               </div>
+                <div class="clearfix">
+                <div class="row">
+                    <div class="col-md-3">
+                        <div class="row">
+                            <h2 class="inner-head-form">Betting Time (In Minutes)</h2>
+                            <!--   {{message}} -->
+                                <form name="bettingForm">
+
+                                    <div class="col-md-12 form-group">
+                                     <label style="display:inline-block; margin:0;">Betting Time</label>
+                                    <input type="number" step=".1" name="bettingTime" class="form-control" ng-model="BetTime"  ng-value="BetTime" required="required" >
+                                     </div>
+                                        <div class="col-md-12 form-group" style="text-align:left;"> 
+                                            <button type="button" class="btn btn-primary" ng-disabled="BetTime == Null" ng-click="UpdateBettingTime(BetTime)" style="margin-top:-1px; padding:2px 10px;">Set Bet Time</button>
+                                        </div>
+                                    
+                                </form>
+                         </div>
+                    </div>
+                </div>
+            </div>
+                <div class="clearfix">
+                    <div class="row">
+                        <div class="col-md-3">
+                            <div class="row">
+                                <h2 class="inner-head-form">Max Match Bet Liability</h2>
+                                <!--   {{message}} -->
+                                <form name="bettingForm">
+
+                                    <div class="col-md-12 form-group">
+                                        <label style="display:inline-block; margin:0;">Bet Liability</label>
+                                        <input type="number"  name="max_bet_liability" class="form-control" ng-model="max_bet_liability"   ng-value="adminLimit.max_bet_liability" required="required" >
+                                    </div>
+                                    <div class="col-md-12 form-group" style="text-align:left;">
+                                        <button type="button" class="btn btn-primary" ng-disabled="max_bet_liability == Null" ng-click="UpdateLiability(max_bet_liability,'bet')" style="margin-top:-1px; padding:2px 10px;">Set Bet Liability</button>
+                                    </div>
+
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="clearfix">
+                    <div class="row">
+                        <div class="col-md-3">
+                            <div class="row">
+                                <h2 class="inner-head-form">Max Match Market Liability</h2>
+                                <!--   {{message}} -->
+                                <form name="bettingForm">
+
+                                    <div class="col-md-12 form-group">
+                                        <label style="display:inline-block; margin:0;">Market Liability</label>
+                                        <input type="number"  name="max_market_liability" class="form-control" ng-model="max_market_liability"  ng-value="adminLimit.max_market_liability" required="required" >
+                                    </div>
+                                    <div class="col-md-12 form-group" style="text-align:left;">
+                                        <button type="button" class="btn btn-primary" ng-disabled="max_market_liability == Null" ng-click="UpdateLiability(max_market_liability,'market')" style="margin-top:-1px; padding:2px 10px;">Set Market Liability</button>
+                                    </div>
+
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="clearfix">
+                    <div class="row">
+                        <div class="col-md-3">
+                            <div class="row">
+                                <h2 class="inner-head-form">Max Session bet Liability</h2>
+                                <!--   {{message}} -->
+                                <form name="bettingForm">
+
+                                    <div class="col-md-12 form-group">
+                                        <label style="display:inline-block; margin:0;">Bet Liability</label>
+                                        <input type="number"  name="max_session_bet_liability" class="form-control" ng-model="max_session_bet_liability"  ng-value="adminLimit.max_session_bet_liability" required="required" >
+                                    </div>
+                                    <div class="col-md-12 form-group" style="text-align:left;">
+                                        <button type="button" class="btn btn-primary" ng-disabled="max_session_bet_liability == Null" ng-click="UpdateSessionLiability(max_session_bet_liability,'bet')" style="margin-top:-1px; padding:2px 10px;">Set session bet liability</button>
+                                    </div>
+
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="clearfix">
+                    <div class="row">
+                        <div class="col-md-3">
+                            <div class="row">
+                                <h2 class="inner-head-form">Max Session Liability</h2>
+                                <!--   {{message}} -->
+                                <form name="bettingForm">
+
+                                    <div class="col-md-12 form-group">
+                                        <label style="display:inline-block; margin:0;">Session Liability</label>
+                                        <input type="number"  name="max_session_liability" class="form-control" ng-model="max_session_liability"  ng-value="adminLimit.max_session_liability" required="required" >
+                                    </div>
+                                    <div class="col-md-12 form-group" style="text-align:left;">
+                                        <button type="button" class="btn btn-primary" ng-disabled="max_session_liability == Null" ng-click="UpdateSessionLiability(max_session_liability,'session')" style="margin-top:-1px; padding:2px 10px;">Set session liability</button>
+                                    </div>
+
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="clearfix">
+                    <div class="row">
+                        <div class="col-md-3">
+                            <div class="row">
+                                <h2 class="inner-head-form">Max market global profit</h2>
+                                <!--   {{message}} -->
+                                <form name="bettingForm">
+
+                                    <div class="col-md-12 form-group">
+                                        <label style="display:inline-block; margin:0;">Global profit</label>
+                                        <input type="number"  name="max_market_profit" class="form-control" ng-model="max_market_profit"  ng-value="adminLimit.max_market_profit" required="required" >
+                                    </div>
+                                    <div class="col-md-12 form-group" style="text-align:left;">
+                                        <button type="button" class="btn btn-primary" ng-disabled="max_market_profit == Null" ng-click="UpdateProfit(max_market_profit)" style="margin-top:-1px; padding:2px 10px;">Set global profit</button>
+                                    </div>
+
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+        </div>
+            <div class="clearfix" ng-if="false">
+                <div class="row">
+                    <div class="col-md-3">
+                        <div class="row">
+                            <h2 class="inner-head-form">Sound Setting</h2>
+                            <!--   {{message}} -->
+                            <form name="userForm4" >
+
+                                <label class="switch" style=" float: right;">
+                                    <input type="checkbox" ng-model="IsSound" ng-checked="IsSound == 0 ? false: true" ng-click="IsSoundCall(IsSound)">
+                                    <span class="slider round"></span>
+                                </label><label style=" float: right;padding-right: 10px;padding-top: 12px;">{{IsSound == 0 ? 'DeActive':'Active'}}</label>
+
+
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+  </div>
+    </div>
+
+  
+</div>

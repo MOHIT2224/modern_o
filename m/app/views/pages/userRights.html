@@ -1,0 +1,83 @@
+<!-- <h1>Hello</h1> -->
+
+<div class="content-wrapper ng-scope" style="min-height: 720px;">
+    <!-- START -->
+   <h1 class="page-heading">User Rights</h1>
+    <div class="col-lg-12 col-md-12 col-sm-12 creat_form">
+        <div class="lst_master_top clearfix">
+            <div class="form_row col-lg-12 col-md-12 col-sm-12 col-xs-12 clearfix top_table_form" style="padding: 0px;">
+                <div class="form_box  col-lg-2 col-md-4 col-sm-4 col-xs-12" style="padding: 0px;">
+                    <label>SELECT USERTYPE</label>
+                    <select name="type_id" ng-model="type_id" ng-change="Get_activeUsers(type_id)" required="required" >
+
+						<option value=''>Select UserType</option>
+						<option value='1'>Select Master</option>
+						<option value='2'>Select Dealer</option>
+						<option value='3'>Select Client</option>
+
+
+					</select>
+                </div>
+
+                 <div class="form_box  col-lg-3 col-md-4 col-sm-5 col-xs-12" style="padding: 0px;">
+                    <label>SELECT USER</label>
+                  
+					<div class="multisel-drop">					    
+					    <multiselect-dropdown model="SelectedCountries" options="MasterCountries "></multiselect-dropdown>
+					</div>
+					<!-- End of Code -->
+					<!-- {{SelectedCountries}} -->
+                </div>
+
+                <div class="form_box col-lg-7 col-md-4 col-sm-3 col-xs-12" style="padding: 0px;">
+                      <div class="file-icons" style="margin-top:28px;">
+                         <a href=""><img src="app/images/file1.png" /></a>
+                         <a href=""><img src="app/images/file2.png" /></a>
+                         <a href=""><img src="app/images/file3.png" /></a>
+                      </div>
+                </div>
+               
+            </div>
+        </div>
+
+        <!-- END -->
+        <div class="col-lg-12 col-md-12 lst_master">
+            <div class="listdata-table clearfix ">
+	            <form name="EnqFrm" ng-submit="save_menu()">
+	                <table class="table table-bordered table-condensed table-responsive" style="background-color: #fff;">
+	                    <thead>
+	                        <tr>
+
+	                            <th><a ng-click="sort_by('mstrid');"><i class="glyphicon glyphicon-sort"></i></a>Serial No</th>	                            
+	                            <th><a ng-click="sort_by('menName');"><i class="glyphicon glyphicon-sort"></i></a>Menu Name</th>
+	                            <th><a ng-click="sort_by('menCode');"><i class="glyphicon glyphicon-sort"></i></a>View</th>
+								<!-- <th><a ng-click="sort_by('menDesc');"><i class="glyphicon glyphicon-sort"></i></a>Insert</th>
+								<th><a ng-click="sort_by('menform');"><i class="glyphicon glyphicon-sort"></i></a>Update</th> -->
+						
+	                        </tr>
+
+
+	                    </thead>
+	                   <!--  {{menuList}} -->
+	                    <tr ng-repeat="user in menuList">
+	                        <td data-label="Serial No">{{$index + 1}}</td>
+	                        <td data-label="Menu Name">{{user.menName}}</td>
+	                         <td data-label="Action"><label><input type="checkbox" name="View" ng-model="View.selected[user.menName]" ng-true-value="'{{user.MstCode}}'" ng-false-value="''">{{country.menName}}</label></td>
+	                       <!--  <td data-label="Action"><label><input type="checkbox" name="insert" ng-model="insert.selected[user.menName]" ng-true-value="'{{user.MstCode}}'" ng-false-value="''">{{country.menName}}</label></td>
+	                        <td data-label="Action"><label><input type="checkbox" name="Update" ng-model="Update.selected[user.menName]" ng-true-value="'{{user.MstCode}}'" ng-false-value="''">{{country.menName}}</label></td> -->
+	                    </tr>
+	                    
+	                </table>
+	              
+					<!-- {{View.selected}} -->
+					<!-- {{insert.selected}}
+					{{Update.selected}} -->
+					<input type="submit" class="btn btn-primary" name="SaveManu" value="set Permission">
+
+	            </form>
+            </div>
+
+           
+        </div>
+    </div>
+</div>

@@ -1,0 +1,88 @@
+ <div class="content-wrapper">
+ <div id="messageEq"></div>
+  <div class="alert alert-success" role="alert" ng-show="message">
+    <strong>{{message}}</strong> 
+  </div>
+
+  <div class="ses-fancy-cont" >
+   
+    
+    
+    </div>
+  <form name="userForm" method="post" ng-submit="SessionFancyForm(formData)" ui-keypress="{13:'SessionFancyForm(formData)'}" >
+                      
+                <div class="form_box col-lg-4 col-md-6 col-sm-6 col-xs-12">
+                   <label>Fancy Heading</label>
+                   <input ng-init="formData.HeadName=fancyHeaderName" id="headName" type="text" name="headName" class="input-box" ng-model="formData.HeadName" ng-value="fancyHeaderName" required="required" >
+                </div>
+                <!-- <div class="form_box col-lg-1 col-md-2 col-sm-2 col-xs-12" style="visibility:hidden">
+                    <label>Volume[No]</label>
+                    <input type="number" id="NoLayRange" name="NoLayRange" ng-model="NoLayRange" ng-keypress="checkInput(this.value)" width="100px" class="disab-input" readonly="readonly"  >
+                    
+                </div>
+                <div class="form_box col-lg-1 col-md-2 col-sm-2 col-xs-12" style="visibility:hidden">
+                    <label>Volume[Yes]</label>
+                    <input type="number" id="YesLayRange" name="NoLayRange" ng-model="YesLayRange" ng-keypress="checkInput(this.value)" width="100px" class="disab-input" readonly="readonly" >
+                </div> -->
+                <div class="form_box col-lg-2 col-md-2 col-sm-2 col-xs-12">
+                    <label>Rate Different</label>
+                    <input type="number" id="RateDiff" name="RateDiff" ng-model="RateDiff"  ng-keypress="checkInput(this.value)" width="100px" required >
+                </div>
+                <div class="form_box col-lg-2 col-md-2 col-sm-2 col-xs-12" ng-hide="true">
+                    <label>Max Stake</label>
+                    <input type="number" id="MaxStake" name="MaxStake" ng-model="MaxStake" ng-keypress="checkInput(this.value)" width="100px" required >
+                </div>
+                <div class="form_box col-lg-2 col-md-2 col-sm-2 col-xs-12">
+                    <label>Point Different</label>
+                    <input type="number" id="PointDiff" name="PointDiff" ng-model="PointDiff" ng-keypress="checkInput(this.value)" width="100px" required >
+                </div>
+                <div class="form_box col-lg-12 col-md-12 col-sm-12 col-xs-12 padd-zero">
+                  <!-- <div class="col-lg-1 col-md-1 col-sm-2 col-xs-12">
+                    <label>No:</label>
+                    <input type="number" class="yes-no-inp" onkeypress='return event.charCode >= 48 && event.charCode <= 57 || event.keyCode == 8 || event.keyCode == 46 || event.keyCode==37 || event.keyCode==39'  id="inputNo" name="input" ng-model="example" required="required"/>
+                  </div>
+
+                  <div class="col-lg-1 col-md-1 col-sm-2 col-xs-12" ng-init="example_1=example+RateDiff;">
+                    <label>YES:{{example_1=example+RateDiff}}</label>
+                    <input type="number"  class="yes-no-inp" id="inputYes" name="input1" ng-model="example_1" ng-value="example+RateDiff" readonly="readonly" required="required" >
+                  </div> -->
+
+                  <div class="col-lg-8 col-md-7 col-sm-5 col-xs-12 form-sub-btns">
+                  <button type="submit" class="btn btn-primary" >Submit</button>
+                  <button class="btn btn-primary" >Reset</button>
+                  <!-- <button class="btn btn-primary" >Stop</button> -->
+                  </div>
+               
+ 
+                </div>
+                <div class="form_box desc-ses col-lg-12 col-md-12 col-sm-12 col-xs-12" ng-init="formData.remarks='5% Commission Applied per winning bets, for eg. if you place 100chips and you win you will get 95chips otherwise lose 100chips. OddEven Means Score Last Digit, If it is ODD then ODD Win else EVEN, 0 is Even, 1 is Odd. Place bet and win. Market suspended before 4 over. Bets will be cancelled if there are bets after given suspend time. Good Luck.'">
+                   <label >Description</label>
+                    <textarea name="remarks" id="remarks123" ng-model="formData.remarks"  class="input-box"></textarea>
+                </div>
+                 <div class="form_box  col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                  <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
+                    <div class="form_box top-datepick">
+                      <label ng-init="">Fancy Date<!--  {{ formData.dt=NewCDate | date:'yyyy/MM/dd'}} ==={{formData.dt}} --></label>
+
+                     <!--  <input ng-init="formData.dt= dt | date:'yyyy-MM-dd'" type="text"  class="form-control input-box" datepicker-popup="{{format}}" ng-model="formData.dt" is-open="opened" datepicker-options="dateOptions" ng-required="true" close-text="Close" datetime-picker="yyyy dd MM" /> -->
+                    <input ui-date ui-date-format="yyyy/mm/dd" ng-init="formData.dt = NewCDate" type="date" id="exampleInput" name="input" ng-model="formData.dt "  placeholder="yyyy-MM-dd" min="2017-01-01" required />
+                   <!--  {{formData.dt}} -->
+                    </div>
+                  </div>
+                  <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
+                    <div style="margin-top:5px;"><!-- time -->
+                      <!-- <label >Fancy Time</label>   -->
+                      <timepicker ng-model="mytime" name="mytime" show-meridian="ismeridian" id="setFancyTime123" ></timepicker>
+                     <!--  {{userForm.input.$valid}} -->
+                    <!-- end -->
+
+                    </div>
+                  </div>
+                </div>
+               
+               
+              </form>
+
+  </div>
+  </div>
+ 

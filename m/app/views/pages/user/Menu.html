@@ -1,0 +1,141 @@
+<div class="content-wrapper ng-scope" ng-init="bindInplay()"> 
+<style>.usercontent, .content, .content-wrapper h1{ padding-top:8px}  </style>
+    <div class="load-box" ng-show="loading">
+            <img id="mySpinner" src="app/images/loading1.gif" />
+        </div>
+    <div class="row padding">
+
+<div class="col-md-12" ng-show="StepSecond">
+<div class="backbutton" ng-click="StepSecond=false;StepFirst=true;"> <i class="fa fa-arrow-left"></i></div>
+<h4>{{SeriesHead}}</h4>
+
+<div class="matchlistnew">
+<div class="listn" ng-repeat="matchlst in matchList track by $index">
+<p>{{matchlst.date}}</p>
+<div  class="top_xtow mitems" ng-repeat="match in matchlst.match track by $index">            
+   <a ui-sref="userDashboard.Matchodds({'MatchId': match.MstCode,'matchName':match.matchName,'date':match.MstDate,'sportId':match.SportID})">{{match.matchName}}</a><br>{{match.MstDate | date : 'dd MMM,yyyy HH:mm'}}</div>
+
+</div>
+
+
+</div>
+
+
+</div>
+<div class="col-md-12 inplay" ng-show="StepFirst">
+ <div class="sport_blk newdesign">
+ 
+ 
+ <div class="inpaygames" style="display:none;"> 
+ 
+  <div  ng-class="{'mat-stat':(match.inplay && match.status=='OPEN')}">
+  
+  
+  <div class="in-play page-title">
+          <span class="fa fa-play-circle" style="color:green;font-size:15px;margin-right:-5px"></span>
+            <span class="label">In Play</span>
+        </div>
+  
+  </div>
+ 
+ </div>
+<div>
+   <div ng-if="SportType==marketitems.value" class="market_tr"  ng-repeat="marketitems in BindArrayItems track by $index">
+    <h1 class="binding">{{marketitems.id}}<span class="starts-in-label ng-binding ng-scope" ng-if="globalStartsInLabel">Betting from 30mins before start</span> </h1>
+            <div class="clearfix"></div>
+<div ng-if="marketitems.InPlay.length==0">
+                        No record found.
+                    </div>
+	 <div class="in-play page-title inplaymatchs" ng-if="marketitems.InPlay.length>0">
+     
+     <span class="fa fa-play-circle" style="color:green;font-size:20px;"></span>
+            <span class="label" style="color:green;font-size:15px;margin-right:-5px">In Play ({{marketitems.InPlay.length}})</span>
+          
+        </div>
+        <div ng-repeat="marketitem in marketitems.InPlay">
+             <div ng-if="$last" ng-init="$last?CollectMarketMatchId():null"></div>
+                    <div>
+                        <div>
+
+                            <div>
+                                <div class="matchodd-header" ng-init="marketitem.status='OPEN';DisMarketId=marketitem">
+                                    <div class="row">
+                                        <div class="col-sm-8">
+
+                                          <!--   <div class="matchinfo hidden-xs">{{PLAYPAUSE}}_Matched : <b>GLC {{marketitem.totalMatched|number:0}}</b></div>  MarketWinLoss(marketitem.marketid,marketitem.matchid)-->
+                                        </div>
+                                        <div class="col-sm-4 text-right" ng-if="!marketitem.IsOpen">
+                                            <span class="goin-play"><!--{{marketitem.status=='OPEN'?marketitem.inplay?"In-Play":"Going In-Play":marketitem.status}}--> </span>
+                                            <button class="btn btn-warning btn-sm hidden-xs" ng-if="false" ng-click="GetMarketListId()">Refresh</button>
+<span class="rigt-ref" ng-if="marketitem.IsOpen==false" ng-click="marketitem.IsOpen=true;ChangeMarketId(marketitem.id)">
+                                                                                <i class="glyphicon glyphicon-triangle-top"></i>
+                
+                                                                            </span>
+<span class="rigt-ref" ng-if="marketitem.IsOpen==true" ng-click="marketitem.IsOpen=false;ChangeMarketId(marketitem.id)">
+                                                                                <i class="glyphicon glyphicon-triangle-bottom"></i>
+                
+                                                                            </span>
+
+                                        </div>
+                                    </div>
+                                </div>
+                    
+                                
+                                <div class="market-wrapper" ng-if="!marketitem.IsOpen">
+        
+                                    <div class="matchodd_dis" ng-if="PLAYPAUSE==1"></div>
+                                    <div class="table-overflow bet_table">
+                                        <table class="table market-listing-table">
+                                            <thead>
+                                                <tr class="top_xtow">
+                                                    <th class="title"><a ng-click="ClearAllTimeOut()" href="javascript:void(0)" ui-sref="userDashboard.Matchodds({'MatchId': marketitem.MstCode,'matchName':marketitem.matchName,'date':marketitem.MstDate,'sportId':marketitem.SportID})">{{marketitem.matchName}} 
+                                                    <span class="fa fa-play-circle playbutton"></span></a></th>
+                                                    
+                                               
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                            </tbody>
+                                        </table>
+                
+                                    </div>
+                                </div>
+                                <div class="betOverlay" ng-if="PLAYPAUSE==1">
+                                    stakeVal
+                                </div>
+                            </div>
+                    
+                        </div>
+               
+          
+          
+          
+</div>
+  
+  </div>
+<div class="page-title">
+         
+            <h2 class="label">Competitions</h2>
+<table class="table market-listing-table">
+	<thead>
+		<tr class="top_xtow" ng-repeat="series in marketitems.Series">
+			<td>
+				<a ng-click="StepSecond=true;StepFirst=false;bingMatchList(series)" href="javascript:void(0)">{{series.Name}}</a>	
+			</td>
+		</tr>
+	</thead>
+</table>
+
+</div>
+  </div>
+
+      </div>
+
+
+
+
+
+
+      </div>  
+      
+</div>

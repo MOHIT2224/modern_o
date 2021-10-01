@@ -1,0 +1,230 @@
+     
+        <div class="col-sm-8 col-md-9 col-md-12 clearfix"> 
+          <div class="clearfix ">
+                <div class="box-heading clearfix"> 
+                    <div style="float:left;">{{FancyData[0].HeadName}}<!--  Mangalore United v Rockstars -->
+                    <p class="head_min">{{FancyData[0].date | date:'fullDate'}} {{FancyData[0].time}}</p></div>
+                    <div style="float: right; margin-top: 9px;">{{MatchName}}</div>
+                </div>
+                
+                 
+                 <div class="fancy_wrapper clearfix ">
+                 		<!--<h3 style="margin-top:10px; font-weight:bold;">{{FancyData[0].HeadName}} </h3> -->
+                  		<div class="fancy_top clearfix ">
+                            <a class="rules-btn" style="background-color: #333333;border-radius: 2px;"> Rules</a>
+                  			<span>Risk : 00</span>	
+                  		</div>
+                  		<p class="info-ex">{{FancyData[0].Remarks}} </p>
+
+                        
+                        <div class="clearfix" style="position:relative;">
+          
+    						            <!--Top Box Start-->
+                            <div class="clearfix">
+                                <div class="top_pag2 clearfix">
+                                    <button class="DigitButton" ng-click="setNumber(0);chk_user();"><span id="clock-large">0 </span></button>
+                                    <button class="DigitButton" ng-click="setNumber(1);chk_user();"><span id="clock-large">1</span> </button>
+                                    <button class="DigitButton" ng-click="setNumber(2);chk_user();"><span id="clock-large">2</span> </button>
+                                    <button class="DigitButton" ng-click="setNumber(3);chk_user();"><span id="clock-large">3 </span></button>
+                                    <button class="DigitButton" ng-click="setNumber(4);chk_user();"><span id="clock-large">4 </span></button>
+                                <!--</div>
+
+                                <div class="top_pag2 clearfix">-->
+                                    <button class="DigitButton" ng-click="setNumber(5);chk_user();"><span id="clock-large">5</span> </button>
+                                    <button class="DigitButton" ng-click="setNumber(6);chk_user();"><span id="clock-large">6</span> </button>
+                                    <button class="DigitButton" ng-click="setNumber(7);chk_user();"><span id="clock-large">7</span> </button>
+                                    <button class="DigitButton" ng-click="setNumber(8);chk_user();"><span id="clock-large">8</span></button>
+                                    <button class="DigitButton" ng-click="setNumber(9);chk_user();"><span id="clock-large">9</span></button>
+                                </div>
+
+                            </div>
+    						            <!--Top Box End-->
+
+                						<!--Box 1 Start-->
+                            <div class="clearfix ld-open-box" ng-if="showBet==true && (userType==3 || UserTypeId==3)">
+                                <div class="even_top clearfix">
+
+                                    <div class="on-bet-left clearfix" style="float:left;">
+                                        <div class="bet-inp-des">
+                                        <span>Bet On </span>
+                                        <input type="text" class="bet-on" ng-model="digit" id="digit" name="digit" readonly="readonly">
+                                        </div>
+                                        <div class="bet-inp-des">
+                                        <span>Stake <!--||{{betValue}}--></span>
+                                        <input type="number" class="stake-inp" name="stake" id="betValue" ng-model="betValue" style="width:100px;" >
+                                        </div>
+                                    </div>
+                                    <div class="on-bet_right clearfix" style="float:right;">
+                                        <button class="eve_but place-btn" ng-click="saveLastDigit()" ng-disabled="btnPlaceDis">PLACE </button>
+                                        <button class="odd_but cancel-btn" ng-click="CancelBet()">CANCEL </button>
+                                        <button  class="odd_but clear-btn" ng-click="ClearBet()">CLEAR </button>
+                                    </div>
+                                </div>
+                                <div ng-hide="true">
+                                    {{$root.userPlcBtn[0].Name1==''?name1=50:name1=$root.userPlcBtn[0].Name1}}
+                                    {{$root.userPlcBtn[0].Value1==0?Value1=50:Value1=$root.userPlcBtn[0].Value1}}
+                                    {{$root.userPlcBtn[0].Name2==''?name2=100:name2=$root.userPlcBtn[0].Name2}}
+                                    {{$root.userPlcBtn[0].Value2==0?Value2=100:Value2=$root.userPlcBtn[0].Value2}}
+                                    {{$root.userPlcBtn[0].Name3==''?name3=500:name3=$root.userPlcBtn[0].Name3}}
+                                    {{$root.userPlcBtn[0].Value3==0?Value3=500:Value3=$root.userPlcBtn[0].Value3}}
+                                    {{$root.userPlcBtn[0].Name4==''?name4=1000:name4=$root.userPlcBtn[0].Name4}}
+                                    {{$root.userPlcBtn[0].Value4==0?Value4=1000:Value4=$root.userPlcBtn[0].Value4}}
+                                    {{$root.userPlcBtn[0].Name5==''?name5=5000:name5=$root.userPlcBtn[0].Name5}}
+                                    {{$root.userPlcBtn[0].Value5==0?Value5=5000:Value5=$root.userPlcBtn[0].Value5}}
+                                    {{$root.userPlcBtn[0].Name6==''?name6=10000:name6=$root.userPlcBtn[0].Name6}}
+                                    {{$root.userPlcBtn[0].Value6==0?Value6=10000:Value6=$root.userPlcBtn[0].Value6}}
+                                </div>
+                                <div ng-if="$root.MyLenth==0" class="even_bot clearfix">
+                                    <button ng-click="GetBetValue(betValue,50)" class="eve_but">50</button>
+                                    <button ng-click="GetBetValue(betValue,100)" class="eve_but">100</button>
+                                    <button ng-click="GetBetValue(betValue,250)" class="eve_but">250</button>
+                                    <button ng-click="GetBetValue(betValue,500)" class="eve_but">500</button>
+                                    <button ng-click="GetBetValue(betValue,1000)" class="eve_but">1000</button>
+                                    <button ng-click="GetBetValue(betValue,5000)" class="eve_but">5000</button>
+                                </div>
+                                <div ng-if="$root.MyLenth==1" class="even_bot clearfix">
+                                    <button type="button" ng-click="GetBetValue(betValue,Value1)" class="btn num-btns">{{name1}}</button>
+                                    <button type="button" ng-click="GetBetValue(betValue,Value2)" class="btn num-btns">{{name2}}</button>
+                                    <button type="button" ng-click="GetBetValue(betValue,Value3)" class="btn num-btns">{{name3}}</button>
+                                    <button type="button" ng-click="GetBetValue(betValue,Value4)" class="btn num-btns">{{name4}}</button>
+                                    <button type="button" ng-click="GetBetValue(betValue,Value5)" class="btn num-btns">{{name5}}</button>
+                                    <button type="button" ng-click="GetBetValue(betValue,Value6)" class="btn num-btns">{{name6}}</button>
+                                </div>
+                                
+                			</div>
+
+                            <!--Box 1 End-->
+
+                            <div ng-show="closeFancy" class="ball-msg-box">
+                               <h1>{{Msg}}</h1>
+                            </div>
+
+                        </div>
+                        
+                        
+                 </div>
+          </div>
+            <div class="clearfix fancy_bot col-lg-12 col-md-12 col-sm-12 lst_top_table">
+                <div class="box-heading"> Fancy Bets  </div>
+                    <div class="resp_table clearfix "> <div id="myGrid" class="ag-fresh" style="height: 300px; margin-top: 4px;"></div></div>
+            </div>
+          </div>
+
+        <div class="col-sm-4 col-md-3 " style="padding-right: 0px;">
+            <div>
+                <div class="">
+                    <div class="box-heading">Score Position 
+                        <span class="rigt-ref" style="margin-right:5px;">
+                            <i class="glyphicon glyphicon-refresh" style="font-size:15px;"  ng-click="RefreshData()"></i>
+                        </span>
+                    </div>
+                    <div class="bet-cont tab_container score-pos-box">
+                        <table class="table bets-table">
+                            <thead>
+                                <tr>
+                                    <th style="text-align: center;">Score</th>
+                                    <th style="text-align: center;">Amount</th>
+
+                                </tr>
+                            </thead>
+
+                            <tbody align="center">
+
+                                <tr ng-repeat="score in scorePosition">
+                                    <td class="back-txt">{{score.RunValue}}</td>
+                                    <td class="amou_no amt-txt">{{score.aa}}</td>
+
+                                </tr>
+
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <!--<div class="col-sm-4 col-md-4 ">
+          <div>
+            <div class="">
+              <div class="box-heading"> Betslip </div>
+                  <div class="bet-cont tab_container">
+
+                    <input id="bet-tab1" class="tab-inp" type="radio" name="bet-tabs" checked>
+                    <label for="bet-tab1" class="tab-label"><span>Singles</span></label>
+
+                    <input id="bet-tab2" class="tab-inp" type="radio" name="bet-tabs">
+                    <label for="bet-tab2" class="tab-label"><span>Multiples</span></label>
+
+                    <input id="bet-tab3" class="tab-inp" type="radio" name="bet-tabs">
+                    <label for="bet-tab3" class="tab-label"><span>Open Bets</span></label>
+                    
+                    <section id="bet-content1" class="tab-content">
+                      <table class="table bets-table">
+                        <thead>
+                          <tr>
+                            <th>Back (Bet For)</th>
+                            <th>Odds</th>
+                            <th>Stake</th>
+                            <th>Profit</th>
+                          </tr>
+                        </thead>
+                        
+                        <tbody>
+                          <tr>
+                            <td colspan="4" class="facing-teams">C Palace v Blackpool</td>
+                          </tr>
+                          
+                          <tr class="blue-row">
+                            <td class="bet-head">
+                              <a href=""><span class="glyphicon glyphicon-remove-sign"></span></a>
+                              <div class="bet-name">
+                                <span>C Palace</span>
+                                <span>Match Odds</span>
+                              </div>
+                            </td>
+                            <td><input type="text" class="odds-input" /></td>
+                            <td><input type="text" class="stake-input" /></td>
+                            <td>£0.00</td>
+                          </tr>
+                          
+                          <tr>
+                            <td colspan="4" class="facing-teams">C Palace v Blackpool</td>
+                          </tr>
+                          
+                          <tr class="blue-row">
+                            <td class="bet-head">
+                              <a href=""><span class="glyphicon glyphicon-remove-sign"></span></a>
+                              <div class="bet-name">
+                                <span>C Palace</span>
+                                <span>Match Odds</span>
+                              </div>
+                            </td>
+                            <td><input type="text" class="odds-input" /></td>
+                            <td><input type="text" class="stake-input" /></td>
+                            <td>£0.00</td>
+                          </tr>
+                          
+                          
+                        </tbody>
+                      </table>
+                    </section>
+                    
+                    <section id="bet-content2" class="tab-content">
+                      <p style="text-align:center;">
+                      	You will need to go to Sportsbook to place multiples
+                        <button class="go-sport">Go to Sportsbook</button>
+                      </p>
+                      
+                    </section>
+                    
+                    <section id="bet-content3" class="tab-content">
+                      <p> You have no bets on this market</p>
+                       <p>You can view all your open bets (including Fixed Odds and Multiples) in <a href="">My Account > Current Bets.</a></p>
+
+                    </section>
+                    
+                  </div>
+              </div>
+            </div>
+        </div>-->
+ 

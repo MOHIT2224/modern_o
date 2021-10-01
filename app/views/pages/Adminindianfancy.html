@@ -1,0 +1,44 @@
+<div class="content-wrapper">
+<div class="col-lg-12 col-md-12 lst_master">
+    <div class="load-box" ng-show="loading">
+        <img id="mySpinner" src="app/images/loading1.gif" />
+    </div>
+    <div class="resp_table clearfix ">
+    <!-- <button ng-click="show()">open</button> -->
+        <table class="table table-bordered table-condensed table-responsive" >
+            <thead>
+                <tr>
+                    <th><a ng-click="sort_by('id');"><i class="glyphicon glyphicon-sort"></i></a>Serial No</th>
+                    <th><a ng-click="sort_by('id');"><i class="glyphicon glyphicon-sort"></i></a>Runner Name</th>
+                  
+                    <th ng-show="$root.HelperAllRights==angular.isUndefinedOrNull || $root.HelperAllRights.addMatch==1">Action
+      
+		    </th>
+                </tr>
+            </thead>
+
+            <tbody id="tblData">
+                <tr ng-repeat="indianfancy in GetindianfancyData">
+
+                    <td data-label="Serial No">{{$index+1}}</td>
+                    <td data-label="Series ID">{{indianfancy.RunnerName}}</td>
+                    
+
+                    <td data-label="Action" >
+<button class="btn-info" ng-click="saveIndianSeries(indianfancy)"  ng-show="indianfancy.is_exists == 0">Add</button>
+<button class="btn-success" ng-click=""  ng-show="indianfancy.is_exists == 1">Added</button>
+                       </td>
+                </tr>
+                <tr ng-if="GetindianfancyData.length==0">
+                    <td colspan="3">
+                        <h4>{{Message}}</h4>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+    <div class="col-md-12" ng-show="totalitem > 0">
+           <pagination total-items="totalitem" ng-model="currentPage" max-size="5" class="pagination-sm" boundary-links="true" rotate="false" num-pages="noOfPages" items-per-page="entryLimit"></pagination>
+    </div>
+</div>
+</div>

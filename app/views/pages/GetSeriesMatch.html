@@ -1,0 +1,149 @@
+<div class="content-wrapper ng-scope" style="min-height: 720px;" ng-init="getSportDetail(0)"> 
+   <div class="load-box" ng-show="loading">
+            <img id="mySpinner" src="app/images/loading1.gif" />
+        </div>
+<div style="padding-left:0px;">
+  <div class="msg-alerts alert alert-success" role="alert" ng-show="msgShowHide==true" ng-click="msg_show();"> <strong>{{alertMessage}}.</strong> </div>
+<div class="row padding" ng-init="getSportList(4,'Cricket')">
+<div class="col-md-12 inplay">
+ <div class="sport_blk newdesign">
+          <h2>Manage Series/Matches</h2>
+          <ul class="nav nav-tabs">
+	
+		
+		<li  ng-class="{'active':inplaytab==4}" ng-click="getSportList(4,'Cricket')"><a data-toggle="tab"  href="javascript:void();">Cricket</a></li>
+		<li  ng-class="{'active':inplaytab==1}" ng-click="getSportList(1,'Soccer')"><a data-toggle="tab"  href="javascript:void();">Soccer</a></li>
+		<li ng-class="{'active':inplaytab==2}" ng-click="getSportList(2,'Tennis')"><a data-toggle="tab"  href="javascript:void();">Tennis</a></li>
+          
+
+          </ul>
+
+ <div class="sport_blk newdesign" id="menuinplay">
+           <h1 class="binding">{{SportName}}</h1>
+          <div class="bet_table  table-bordered">
+          <table class="table table-striped my-market" >
+            <thead>
+                <tr>
+                    <th>Serial No</th>
+                    <th><a ng-click="sort_by('seriesId');"><i class="glyphicon glyphicon-sort"></i></a>Series ID</th>
+                    <th><a ng-click="sort_by('SeriesName');"><i class="glyphicon glyphicon-sort"></i></a>Series Name</th>
+                    <th ng-show="$root.HelperAllRights==angular.isUndefinedOrNull || $root.HelperAllRights.addMatch==1">Action
+              <!--  <span> All<input type="checkbox" ng-model="selectAll" ng-click="allChk()" ng-checked="{{selectAll}}" id="select_all" ></span> -->
+		    </th>
+                </tr>
+            </thead>
+
+            <tbody id="tblData">
+                <tr ng-repeat-start="sportsSeries in filtered = (GetSeriesData.seriesfrmApi | filter:search | orderBy : predicate :reverse) | startFrom:(currentPage-1)*entryLimit | limitTo:entryLimit">
+
+                    <td data-label="Serial No">{{(currentPage-1)*entryLimit +$index+1}}</td>
+                    <td data-label="Series ID">{{sportsSeries.seriesId}}</td>
+                    <td data-label="Series Name">{{sportsSeries.SeriesName}}</td>
+                   
+                    <td data-label="Action" ng-show="$root.HelperAllRights==angular.isUndefinedOrNull || $root.HelperAllRights.addMatch==1">
+                        <input type="checkbox" class="checkbox" id="mid_{{sportsSeries.seriesId}}" ng-model="checkboxModel.value2"  ng-click="saveSeries(sportsSeries.seriesId,sportsSeries.SeriesName);" ng-checked="{{(GetSeriesData.seriesfrmDataBase|filter:{'seriesId':sportsSeries.seriesId})[0].seriesId!=angular.isUndefinedOrNull  && sportsSeries.seriesId==(GetSeriesData.seriesfrmDataBase|filter:{'seriesId':sportsSeries.seriesId})[0].seriesId}}" ng-change="CheckUncheckHeader()" >
+                        <label for="mid_{{sportsSeries.seriesId}}"></label>
+	       <button ng-show="(GetSeriesData.seriesfrmDataBase|filter:{'seriesId':sportsSeries.seriesId})[0].seriesId!=angular.isUndefinedOrNull  && sportsSeries.seriesId==(GetSeriesData.seriesfrmDataBase|filter:{'seriesId':sportsSeries.seriesId})[0].seriesId" class="btn btn-success" ng-click="expanded = !expanded;expanded==true ? getMarketList(sportsSeries.seriesId,$index) : ''" expand>
+                        <span ng-bind="(expanded && IsShowIndex==$index) ? '-' : '+'"></span>
+                    </button>
+                        </td>
+			
+			
+                </tr>
+ <tr ng-repeat-end ng-show="expanded && IsShowIndex==$index && ((GetSeriesData.seriesfrmDataBase|filter:{'seriesId':sportsSeries.seriesId})[0].seriesId!=angular.isUndefinedOrNull  && sportsSeries.seriesId==(GetSeriesData.seriesfrmDataBase|filter:{'seriesId':sportsSeries.seriesId})[0].seriesId)" >
+			
+		<td colspan="4">
+			 <div class="resp_table clearfix ">
+              <!-- {{GetSeriesData}} -->
+    		        <table class="table table-bordered table-condensed table-responsive">
+		    		      <thead>
+			    		        <tr >
+			    		       
+			    		        	<th>Serial No</th>
+			    		            <th><a ng-click="sort_by('eventId');"><i class="glyphicon glyphicon-sort"></i></a>Match Id</th>
+			    		            <th><a ng-click="sort_by('eventName');"><i class="glyphicon glyphicon-sort"></i></a>Match Name</th>
+			    		            <th><a ng-click="sort_by('eventDate');"><i class="glyphicon glyphicon-sort"></i></a>Open Date</th>
+			    		           <th ng-show="$root.HelperAllRights==angular.isUndefinedOrNull || $root.HelperAllRights.addMatch==1">Action 
+<!-- <span ng-if="GetSeriesData.matchfrmApi.length>0"> All
+      <input type="checkbox" ng-model="selectAll" ng-click="allChk(selectAll)" ng-checked="{{selectAll}}" > </span> -->
+        </th>
+			    		        </tr>
+		    		            
+		    		        
+		    		      </thead><!-- | date: 'yyyy-MM-dd HH:mm:ss' -->
+                          <tbody id="tblData1">
+		    		     	<tr ng-repeat-start="sportsMatch in filtered = (GetMatchData.matchfrmApi | filter:search | orderBy : predicate :reverse) | startFrom:(currentPage1-1)*entryLimit | limitTo:entryLimit"><!--sourabh 170105-->
+							<td ng-init="sportsMatch.value2=false" data-label="Serial No">{{(currentPage1-1)*entryLimit +$index+1}}</td>
+								<td data-label="Match Id">{{sportsMatch.eventId}}</td>
+								<td data-label="Match Name">{{sportsMatch.eventName}}</td>
+								<td data-label="Open Date">{{sportsMatch.eventDate | date: 'yyyy-MM-dd HH:mm:ss' }}<!-- | date: 'yyyy-MM-dd HH:mm:ss' --></td>
+								<td ng-init="sportsMatch.value2=(GetMatchData.matchfrmDataBase|filter:{'MstCode':sportsMatch.eventId})[0].MstCode!=angular.isUndefinedOrNull" data-label="Action" ng-show="$root.HelperAllRights==angular.isUndefinedOrNull || $root.HelperAllRights.addMatch==1"><input id="abc_{{sportsMatch.eventId}}" type="checkbox" ng-model="sportsMatch.value2" ng-click="saveMatch(sportsMatch);InplayClick=-1" ng-checked="{{(GetMatchData.matchfrmDataBase|filter:{'MstCode':sportsMatch.eventId})[0].MstCode!=angular.isUndefinedOrNull}}" >
+
+                                  <label for="abc_{{sportsMatch.eventId}}"></label>
+                                <!--sourabh 170105 check-->
+ <span class="myMenu2" ng-click="printParent2($event,sportsMatch,1,$index);InplayClick=$index" style="top:6px !important" ng-show="((inplaytab==4 || inplaytab==1) && sportsMatch.value2)"> </span>
+</td>
+							</tr>
+				<tr ng-repeat-end ng-show="InplayClick==$index && dropdownInplay['field_'+$index] && (inplaytab==4 || inplaytab==1) && sportsMatch.value2">
+				<td colspan="5" class="newfancyblock">
+                
+					   <ul class="treeview newtree">
+              <li ng-if="false">
+                <a ng-click="showCreateFancy($event,1)">Odd Even Fancy</a>
+              </li>
+              <li>
+                <a ui-sref="dashboard.CntrAdminSesssionFancy({matchId: CreateFancyMatchInfo.eventId,sportId:CreateFancyMatchInfo.EventTypeId})">Session Fancy</a>
+              </li>
+<li>
+                <a ui-sref="dashboard.CntrAdminIndianFancy({matchId: CreateFancyMatchInfo.eventId,sportId:CreateFancyMatchInfo.EventTypeId})">Indian Fancy</a>
+              </li>
+<li>
+                <a ui-sref="dashboard.CntrBetfairFancy({matchId: CreateFancyMatchInfo.eventId,sportId:CreateFancyMatchInfo.EventTypeId})">Betfair Market</a>
+              </li>
+              <li ng-if="false">
+                <a ng-click="showCreateFancy($event,3)">Khaddal Fancy</a>
+              </li>
+              <li ng-if="false">
+                <a ng-click="showCreateFancy($event,4)">Last Digit Fancy</a>
+              </li>
+              <li ng-if="false">
+                <a ng-click="showCreateFancy($event,5)">Up Down Fancy</a>
+              </li>
+            </ul>
+				</td>
+				</tr>
+                        </tbody>
+    		        </table>
+              </div>
+
+    		        <div class="col-md-12" ng-show="GetMatchData.matchfrmApi.length == 0">
+    		        <div class="col-md-12">
+    		            <h4>No records found</h4>
+    		        </div>
+    		        </div>
+    		    <div  class="col-md-12" ng-show="GetMatchData.matchfrmApi.length  > 0">
+    		            <pagination total-items="filtered.length" ng-model="currentPage1" max-size="5" class="pagination-sm" boundary-links="true" rotate="false" num-pages="noOfPages" items-per-page="entryLimit"></pagination>
+    		            
+    		            
+    		        </div> 
+		</td>
+</tr>
+            </tbody>
+        </table>
+          </div>
+
+</div>
+
+ <div class="col-md-12" ng-show="totalitem == 0">
+        <div class="col-md-12">
+            <h4>No Records Found</h4>
+        </div>
+    </div>
+    <div class="col-md-12" ng-show="totalitem > 0">
+           <pagination total-items="totalitem" ng-model="currentPage" max-size="5" class="pagination-sm" boundary-links="true" rotate="false" num-pages="noOfPages" items-per-page="entryLimit"></pagination>
+    </div>
+</div>
+</div>
+</div>
+</div>
+</div>

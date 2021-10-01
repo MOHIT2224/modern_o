@@ -1,0 +1,130 @@
+   <div class="content-wrapper">
+   <div class="load-box" ng-show="loading">
+            <img id="mySpinner" src="app/images/loading1.gif" />
+        </div>
+	<h1 class="page-heading">Profit and Loss</h1>
+    
+    
+<div class="form_box row">   
+
+ <div class="form-group"> 
+      <div class="col-sm-3 padding">
+         <input type="text" name="PL" ng-model="search.EventName" placeholder="EventName" class="form-control">
+      </div>
+      <div class="col-sm-3 padding">
+        <input type="text" name="CreatedOn" ng-model="search.CreatedOn" placeholder="CreatedOn" class="form-control">
+      </div>
+      <div class="col-sm-2 padding">
+          <input type="text" name="MarketName" ng-model="search.MarketName" placeholder="MarketName" class="form-control">
+      </div>
+      <div class="col-sm-1">
+        <a ng-click="onBtExport()"><img src="app/images/file2.png"/></a>
+      </div>
+      </div>
+      
+	
+      
+      
+
+  </div>
+
+   <div class="row">
+<div class="col-sm-12 col-md-12">
+    <!-- start Tab -->
+	<div class="row">
+	<div class="col-sm-12">
+    <div ng-cloak="" class="tabsdemoDynamicHeight" >
+      <md-content>
+        <md-tabs md-dynamic-height="" md-border-bottom="">
+        	 <md-tab label="All" md-on-select="Allsport(0)">
+            <md-content class="md-padding" style="display:none;">
+            </md-content>
+          </md-tab>
+          <md-tab label="Cricket" md-on-select="click_test(4)">
+            <md-content class="md-padding" style="display:none;">
+            </md-content>
+          </md-tab>
+          <md-tab label="Soccer" md-on-select="click_test(1)">
+            <md-content class="md-padding" style="display:none;">
+            </md-content>
+          </md-tab>
+          <md-tab label="Tennis" md-on-select="click_test(2)">
+            <md-content class="md-padding" style="display:none;">
+            </md-content>
+          </md-tab> 
+
+          <md-tab ng-if="false" label="Horse Racing" md-on-select="click_test(7)">
+            <md-content class="md-padding" style="display:none;">
+            </md-content>
+          </md-tab>
+          <md-tab label="Fancy" md-on-select="click_test(0)">
+            <md-content class="md-padding" style="display:none;">
+            </md-content>
+          </md-tab>
+         
+                    
+        </md-tabs>
+      </md-content>
+    </div>
+		</div>
+		</div>
+
+    <!-- end of Tab -->
+	<div class="row">
+    <div class="col-lg-12 col-md-12 col-sm-12 " style="height:400px;overflow: scroll;">
+        <div class="lst_master_top clearfix">
+            <div class="form_row clearfix top_table_form">
+             
+                <table class="table table-condensed table-responsive">
+                  <thead>               
+                    <tr class="bg-primary">
+                      <th>Sno</th>
+                      <th>EventName</th>
+                      <th>MarketName</th>
+                      <th>P_L</th>
+                      <th>Comm</th>
+                      <th>CreatedOn</th>
+                      <th>Action</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr  ng-repeat="pldata in resultValue=(FuserPL | filter:search)">
+                      <td class="text-center">{{$index+1}}</td>
+                      <td >{{pldata.EventName}}</td>
+                      <td class="text-center">{{pldata.MarketName}}</td>
+                      <td class="text-center" ng-class="{'green':pldata.PnL>0,'red':pldata.PnL<0}">{{pldata.PnL}}</td>
+                      <td class="text-center" ng-class="{'green':pldata.Comm>0,'red':pldata.Comm<0}">{{pldata.Comm}}</td>
+                      <td class="text-center">{{pldata.CreatedOn}}</td>
+                      <td class="text-center"><button class="btn btn-warning btn-sm" ng-click="showBet(pldata)">Show Bet</button></td>
+                    </tr>
+                  <tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+		</div>
+    <div class="row">   <div class="col-lg-12 col-md-12 col-sm-12 ">
+   
+      <table class="table table-bordered table-condensed table-responsive" style="margin-bottom:0px;">
+         <tfoot>
+          <tr class="bg-warning" style="color:royalblue;">
+              <td colspan="3"></td>
+              <td ng-class="{'green':CalSum(resultValue,'PnL')>0,'red':CalSum(resultValue,'PnL')<0}"><strong>(Total P & L )&emsp;    {{FuserPL.length > 0 ? (resultValue | sumOfValue:'PnL') : ''}}</strong></td>
+              <td ng-class="{'green':CalSum(resultValue,'Comm')>0,'red':CalSum(resultValue,'Comm')<0}"><strong>(Total Commission)&emsp;  {{FuserPL.length > 0 ? (resultValue | sumOfValue:'Comm') : ''}}</strong></td>
+              <td colspan="2"></td>
+          </tr>
+      </tfoot>
+      </table>
+    </div>
+    </div>
+    <div class="lst_master" ng-show="false">
+        <div class="resp_table clearfix" style="background-color:#f5f5f5; padding:5px 10px;">
+            <div id="myGrid" class="ag-fresh" style="height:400px; margin-top: 4px;"></div>
+        </div>
+        <div class="total-box clearfix">
+                
+        </div>
+    </div>
+</div>
+     </div>
+   </div> 

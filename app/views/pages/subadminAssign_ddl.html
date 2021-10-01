@@ -1,0 +1,49 @@
+<div class="col-sm-12 col-md-12 master-cont">
+    <div class="col-lg-12 col-md-12 col-sm-12 " style="padding: 0px;">
+        <div class="lst_master_top clearfix">
+            <div class="form_row col-lg-12 col-md-12 col-sm-12 col-xs-12 clearfix top_table_form" style="padding: 0px;">
+                <form name="setPermition" method="post">
+                    <div class="form_box  col-lg-2 col-md-2 col-sm-2 col-xs-12" style="padding: 0px;">
+                        <!--<label>SELECT USERTYPE</label>
+                        <select name="type_id" ng-model="type_id" ng-change="Get_activeUsers(type_id)" required="required">
+                            <option value=''>Select UserType</option>
+                            <option value='1'>Select Master</option>
+                            <option value='2'>Select Dealer</option>
+                            <option value='3'>Select Client</option>
+                        </select>-->
+                        <label>Helper Name</label>{{adminName}}
+                    </div>
+
+                    <div class="form_box  col-lg-2 col-md-2 col-sm-2 col-xs-12" style="padding: 0px;">
+                        <label>SELECT USER</label>
+<!--                        <div>
+                            <select name="User" ng-model="User" ng-options="user.label for user in userList track by user.id">
+                                <option value=''>Select Market</option>
+                            </select>
+                        </div>-->
+                        <div class="multisel-drop">
+                            <multiselect-dropdown model="SelectedCountries" options="MasterCountries "></multiselect-dropdown>
+                        </div>
+                        <div class="form_row col-lg-12 col-md-12 col-sm-12 col-xs-12 clearfix top_table_form" style="padding: 0px;">
+                            <input type="checkbox" id="addMatch" name="addMatch" ng-model="addMatch" ng-true-value="1" />Match Add
+                            <input type="checkbox" id="chkAddUser" name="chkAddUser" ng-model="chkAddUser" ng-true-value="1" />Add User
+                            <input type="checkbox" id="chkUpdateUser" name="chkUpdateUser" ng-model="chkUpdateUser" ng-true-value="1" />Update User 
+                            <input type="checkbox" id="chkChangePassword" name="chkChangePassword" ng-model="chkChangePassword" ng-true-value="1" />Change Pwd
+                            <input type="checkbox" id="chkChipDeposite" name="chkChipDeposite" ng-model="chkChipDeposite" ng-true-value="1" />Chip In Out (Deposite)
+                            <input type="checkbox" id="chkChipWithdraw" name="chkChipWithdraw" ng-model="chkChipWithdraw" ng-true-value="1" />Chip In Out (Withdraw)
+                            <input type="checkbox" id="chkUserLock" name="chkUserLock" ng-model="chkUserLock" ng-true-value="1" />User Lock
+                            <input type="checkbox" id="chkBettingLock" name="chkBettingLock" ng-model="chkBettingLock" ng-true-value="1" />Betting Lock
+                            <input type="checkbox" id="chkCloseAc" name="chkCloseAc" ng-model="chkCloseAc" ng-true-value="1" />Close A/c
+                            <input type="checkbox" id="createFancy" name="createFancy" ng-model="createFancy" ng-true-value="1" />Add Fancy
+                            <input type="checkbox" id="chkEditFancy" name="chkEditFancy" ng-model="chkEditFancy" ng-true-value="1" />Edit Fancy
+                            <input type="checkbox" id="setResult" name="setResult" ng-model="setResult" ng-true-value="1" />Result
+                            <input type="checkbox" id="chkChipHistory" name="chkChipHistory" ng-model="chkChipHistory" ng-true-value="1" />Chip History
+                            <input type="checkbox" id="chkChipSummary" name="chkChipSummary" ng-model="chkChipSummary" ng-true-value="1" />Chip Summary
+                        </div>
+                    </div>
+                    <button type="button" name="save" ng-click="SavePermition(type_id,User.id)">Save Permition</button>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,224 @@
+
+
+<div class="content-wrapper" ng-show="display">
+
+    <div class="load-box" ng-show="loading">
+        <img id="mySpinner" src="app/images/loading1.gif" />
+    </div>
+
+
+    <!-- {{treeNodes}} -->
+    <!-- {{OddsComm}} -->
+
+    <div class="member_listing clientlsitiing" ng-init="GetMasterList()">
+        <div class="login_table table-responsive">
+   <span>
+                   <button type="button" class="btn btn-info btn-sm" ng-click="GetMasterList();">Refresh</button>
+                  <button type="button" class="btn btn-info btn-sm" ng-click="Reload();">Reload</button>
+<input type="text" ng-model="users.mstrname" style="    margin-bottom: 10px;display: inline-block !important;" class="form-control" ng-change="filter()" placeholder="Search By Name" />
+       <!--   <button class="btn btn-success client-btn" ng-click="display=false">Add New Dealer</button> -->
+
+                </span>
+            <table class="table table-striped  dealerclient ">
+                <thead>
+
+                <tr  ng-if="false" class="masterbalance">
+                    <td ng-if="false"><button class="btn btn-success client-btn " ng-click="display=false" class="visible-xs">Add New Dealer</button></td>
+                    <td>
+                        <strong>Settlement
+                            <a href="" ui-sref="masterDashboard.SettlementEntry">
+                                <div ng-if="SETTLEing>0" class="text-center balance">{{SETTLEing | number : 2}}</div>
+                                <div ng-if="SETTLEing<0" class="text-center Libility">{{SETTLEing | number : 2 }}</div>
+                                <div ng-if="SETTLEing==0" class="text-center" style="color:#000;">{{SETTLEing | number : 2}}</div>
+                            </a>
+                        </strong>
+                    </td>
+                    <td>
+                        <strong>Master Balance
+                            <div class="text-center balance" ng-class="{'green':$root.DealerFreeChip>0,'red':$root.DealerFreeChip<0}"> {{$root.DealerFreeChip}}</div>
+                        </strong>
+                    </td>
+                    <td>
+                        <strong>Credit Limit
+                            <div class="text-center balance" ng-class="{'green':(TatalUsereBal(1,0)-$root.DealerFreeChip)>0,'red':(TatalUsereBal(1,0)-$root.DealerFreeChip)<0}">{{TatalUsereBal(1,0)-$root.DealerFreeChip | number : 2}}</div>
+                        </strong>
+                    </td>
+                    <td ng-if="false">
+                        <strong>Available Balance
+                            <div class="text-center balance" ng-class="{'green':availBal>0,'red':availBal<0}">{{availBal | number : 2}}</div>
+                        </strong>
+                    </td>
+
+                    <td>
+                        <strong>Profit&Loss
+                            <div ng-if="TotalP_L>0" ng-class="{'green':TatalUsereP_L(1,0,0)>0,'red':TatalUsereP_L(1,0,0)<0}" class="text-center balance">{{TatalUsereP_L(1,0,0) | number : 2}}</div>
+                            <div ng-if="TotalP_L<0" ng-class="{'green':TatalUsereP_L(1,0,0)>0,'red':TatalUsereP_L(1,0,0)<0}" class="text-center Libility">{{TatalUsereP_L(1,0,0) | number : 2}}</div>
+                            <div ng-if="TotalP_L==0" ng-class="{'green':TatalUsereP_L(1,0,0)>0,'red':TatalUsereP_L(1,0,0)<0}" class="text-center" style="color:#000;">{{TatalUsereP_L(1,0,0) | number : 2}}</div>
+                        </strong>
+                    </td>
+                    <td>
+                        <strong>Liability
+                            <div class="text-center Libility" ng-class="{'green':TotalLiability>0,'red':TotalLiability<0}">{{TotalLiability | number : 2}}</div>
+                        </strong>
+                    </td>
+                    <td>
+                        <strong>Balance
+                            <div class="text-center balance" ng-class="{'green':(TotalBal-$root.DealerFreeChip)>0,'red':(TotalBal-$root.DealerFreeChip)<0}">{{TotalBal-$root.DealerFreeChip | number : 2}}</div>
+                        </strong>
+                    </td>
+
+                    <td>
+                        <strong>Admin A/C
+                            <div ng-if="MasterAC>0"  ng-class="{'green':(SETTLEing+TatalUsereP_L(1,0,0))>0,'red':(SETTLEing+TatalUsereP_L(1,0,0))<0}" class="text-center balance">{{SETTLEing+TatalUsereP_L(1,0,0) | number : 2}}</div>
+                            <div ng-if="MasterAC<0"  ng-class="{'green':(SETTLEing+TatalUsereP_L(1,0,0))>0,'red':(SETTLEing+TatalUsereP_L(1,0,0))<0}" class="text-center Libility">{{SETTLEing+TatalUsereP_L(1,0,0) | number : 2}}</div>
+                            <div ng-if="MasterAC==0"  ng-class="{'green':(SETTLEing+TatalUsereP_L(1,0,0))>0,'red':(SETTLEing+TatalUsereP_L(1,0,0))<0}" class="text-center" style="color:#000;">{{SETTLEing+TatalUsereP_L(1,0,0) | number : 2}}</div>
+                        </strong>
+                    </td>
+                    <td>
+                        <strong>Total User
+                            <div  class="text-center balance">{{UserList.length}}</div>
+                        </strong>
+                    </td>
+                    <td>
+                    <span>
+                   <button type="button" class="btn btn-info btn-sm" ng-click="GetMasterList();">Refresh</button>
+                  <button type="button" class="btn btn-info btn-sm" ng-click="Reload();">Reload</button>
+<input type="text" ng-model="users.mstrname" style="    margin-bottom: 10px;display: inline-block !important;" class="form-control" ng-change="filter()" placeholder="Search By Name" />
+                        <!--   <button class="btn btn-success client-btn" ng-click="display=false">Add New Dealer</button> -->
+
+                </span>
+                    </td>
+                </tr>
+
+                <tr class="row-name client-rowthead">
+                    <th>S No</th>
+                    <th>Client</th>
+                    <th>A/c Name</th>
+                    <th>Credit Limit</th>
+                    <th ng-if="false">Avail Bal</th>
+
+                    <th>P|L</th>
+                    <th>Liability</th>
+                    <th>Balance</th>
+                    <th>Is Active</th>
+                    <th colspan="2">Action</th>
+                </tr>
+                </thead>
+                <tbody ng-init="Avail_BALANCE=0">
+                <tr class="row-content" ng-repeat="users in  filtered = (MasterList | filter:users | orderBy : predicate :reverse) | startFrom:(currentPage-1)*entryLimit | limitTo:entryLimit">
+                    <td>{{(currentPage-1)*entryLimit +$index+1}}  </td>
+                    <td >{{users.usename}}</td>
+                    <td>{{users.mstrname}}</td>
+                    <td ng-class="{'green':users.FreeChips>0,'red':users.FreeChips<0}">{{users.FreeChips | number : 2}}</td>
+                    <td ng-if="false" ng-class="{'green':users.availBal>0,'red':users.availBal<0}">{{users.availBal | number : 2}}</td>
+
+                    <td ng-class="{'green':users.P_L>0,'red':users.P_L<0}">{{users.P_L | number : 2}}</td>
+                    <td ng-class="{'green':users.Liability >0,'red':users.Liability <0}">{{users.Liability | number : 2}}</td>
+                    <td  ng-class="{'green':users.Balance>0,'red':users.Balance<0}">{{users.Balance | number : 2}}</td>
+                    <td><div ng-hide="true">{{users.active==1?switch=true:switch=false}}</div>
+                        <md-switch ng-model="switch" aria-label="Switch 1" ng-click='getStatus(users,switch)'></md-switch></td>
+                    <td colspan="2">
+                        <a class="btn btn-danger btn-sm" ui-sref="dashboard.mstanctStatementCntr({userId: users.usecode})" title="Report">R</a>
+                        <a class="btn btn-warning btn-sm" ng-click="showChipsInOut(users)" title="Deposite/Withdraw">D/W</a>
+                        <a class="btn btn-success btn-sm" ng-click="showChangePwd(users)" title="Change Password">C-P</i></a>
+                        <a ng-if="false" class="btn btn-success btn-sm" href="" ng-click="showSettlement(users,TatalUsereP_L(users.usecode,1,users.P_L));">Settlement</a>
+                        <a ng-if="false" href="" ui-sref="masterDashboard.userListByDealer({DealerId: users.usecode,TypeId:users.usetype})">List User</a>
+                        <button type="button" class="btn btn-primary btn-sm" ng-click="showViewSetting(users);"><i class="fa fa-pencil"></i></button>
+                        <button type="button" class="btn btn-info btn-sm" ng-click="showLockUser1(users)" ng-if="users.mstrlock==0?lckUse='unlock.png':lckUse='lock.png'" title="LOCK/UNLOCK USER">
+                            <img src="app/images/{{lckUse}}">U</button>
+                        <button type="button" class="btn btn-info btn-sm" ng-click="showLockBetting(users)" ng-if="users.lgnusrlckbtng==0?lckUseb='unlock.png':lckUseb='lock.png'" title="LOCK/UNLOCK BETTING">
+                            <img src="app/images/{{lckUseb}}">B</button>
+                </tr>
+
+
+                </tbody>
+            </table>
+        </div>
+
+
+    </div>
+    <div class="col-md-12" ng-show="filtered.length == 0">
+        <div class="col-md-12">
+            <h4>No Result found</h4>
+        </div>
+    </div>
+    <div class="col-md-12" ng-show="filtered.length > 0">
+        <pagination total-items="filtered.length" ng-model="currentPage" max-size="5" class="pagination-sm" boundary-links="true" rotate="false" num-pages="noOfPages" items-per-page="entryLimit"></pagination>
+
+
+    </div>
+</div>
+
+<div class="content-wrapper" ng-hide="display">
+    <div class="text-center">
+        <h4 class="page-heading text-left">Dealer Detail</h4>
+    </div>
+    <div class="">
+        <div class="client-formset">
+            <form name="useform" method="post" ng-submit="submitForm_Users(user)">
+                <div class="">
+                    <div class="col-md-12">
+                        <div class="row">
+                            <div class="col-md-4 form-group">
+                                <label>User Name</label>
+                                <input type="text" ng-init="user.master_name=''"  name="master_name" ng-model="user.master_name" ng-minlength="4" required="required"  class="form-control"  md-autofocus>
+                                <span style="text-align: center; color:RED; font-size: 14px; " ng-show="!useform.master_name.$error.required && (useform.master_name.$error.minlength ) && useform.master_name.$dirty">User Name must be four character.</span>
+                            </div>
+                            <div class="col-md-4 form-group">
+                                <label>User ID
+                                    <span ng-if="errorMsg" style="text-align: center; color:GREEN; font-size: 12px; margin-bottom: 15px;">{{errorMsg}}</span>
+                                    <span ng-if="errorMsg1" style="text-align: center; color:RED; font-size: 12px; margin-bottom: 15px;">{{errorMsg1}}</span>
+                                </label>
+                                <input type="text" ng-init="user.username=''" name="username" ng-model="user.username" ng-change="checkUserName(user.username)" ng-minlength="4"  required="required"  class="form-control">
+                                <span style="text-align: center; color:RED; font-size: 14px; " ng-show="!useform.username.$error.required && (useform.username.$error.minlength ) && useform.username.$dirty">User Id must be four character.</span>
+                            </div>
+                            <div class="col-md-4 form-group">
+                                <label>Password</label>
+                                <input type="password" name="password" ng-init="user.password=''" ng-model="user.password" required="required" ng-minlength="4"   class="form-control">
+                                <span style="text-align: center; color:RED; font-size: 14px; " ng-show="!useform.password.$error.required && (useform.password.$error.minlength ) && useform.password.$dirty">Password must be four character.</span>
+                            </div>
+                        </div>
+
+                        <div class="row">
+                            <div class="col-md-4 form-group">
+                                <label>Session Commission</label>
+                                <input ng-init="user.sessionCommission=0" type="number" ng-model="user.sessionCommission" max="100" step=".1" class="form-control">
+                            </div>
+                            <div class="col-md-4 form-group">
+                                <label>Other Commission</label>
+                                <input ng-init="user.otherCommission=0" type="number" ng-model="user.otherCommission" max="100" step=".1" class="form-control">
+                            </div>
+                            <div class="col-sm-3 form-group" ng-hide="true">
+                                <label>Session Commission</label>
+                                <input ng-init="user.sessionCommission=0" type="number" ng-model="user.sessionCommission" max="100" step=".1" class="form-control">
+                            </div>
+
+                            <div class="col-sm-3 form-group" ng-hide="true">
+                                <label>Other Commission</label>
+                                <input ng-init="user.otherCommission=0" type="number" ng-model="user.otherCommission" max="100" step=".1" class="form-control">
+                            </div>
+                            <div class="col-md-4 form-group">
+                                <label>Registration Date</label>
+                                <input type="text" ng-init="user.dt = (getDate | date:'yyyy-MM-dd')" ng-model="user.dt"  class="form-control" disabled="disabled">
+                            </div>
+                        </div>
+
+
+                        <div class="row">
+                            <div class="col-md-6 form-group">
+                                <label>Remark</label>
+                                <textarea ng-model="user.remarks"  rows="3" class="form-control"></textarea>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-sm-12 form-group"> <!-- {{useform.$invalid}}  -->
+                                <button type="button" class="btn btn-primary" ng-click="display=true">Back</button>
+                                <button type="submit" class="btn btn-primary" ng-disabled="useform.$invalid">Submit</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Cashfree - Signature Generator</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+</head>
+<body onload="document.frm1.submit()">
+
+<?php 
+$mode = $cofingmode;
+
+$appId=$cashid;
+$orderId = $data['horderid'];
+ $orderAmount =$data['orderamount'];
+$orderCurrency='INR';
+ $customerName =$_GET['name'];
+ $userid =$_GET['userid'];
+ $customerPhone =$_GET['contact'];
+ //$customerEmail =$_GET['email'];
+$customerEmail ='noreply@hyike.com';
+$returnUrl='https://www.hyike.com/api/cashfreeres.php';
+$notifyUrl='https://www.hyike.com/api/notifyUrl.php';
+$orderNote='Hyike Coins';
+
+if($userid=='1'){
+	
+	$orderAmount='1.00';
+	
+}
+
+extract($_POST);
+  $secretKey = $cashkey;
+  $postData = array( 
+  "appId" => $appId, 
+  "orderId" => $orderId, 
+  "orderAmount" => $orderAmount, 
+  "orderCurrency" => $orderCurrency, 
+  "orderNote" => $orderNote, 
+  "customerName" => $customerName, 
+  "customerPhone" => $customerPhone, 
+  "customerEmail" => $customerEmail,
+  "returnUrl" => $returnUrl, 
+  "notifyUrl" => $notifyUrl,
+);
+ksort($postData);
+$signatureData = "";
+foreach ($postData as $key => $value){
+    $signatureData .= $key.$value;
+}
+$signature = hash_hmac('sha256', $signatureData, $secretKey,true);
+$signature = base64_encode($signature);
+
+if ($mode == "PROD") {
+  $url = "https://www.cashfree.com/checkout/post/submit";
+} else {
+  $url = "https://test.cashfree.com/billpay/checkout/post/submit";
+}
+
+
+
+?>
+  <form action="<?php echo $url; ?>" name="frm1" method="post">
+      <p>Please wait.......</p>
+      <input type="hidden" name="signature" value='<?php echo $signature; ?>'/>
+      <input type="hidden" name="orderNote" value='<?php echo $orderNote; ?>'/>
+      <input type="hidden" name="orderCurrency" value='<?php echo $orderCurrency; ?>'/>
+      <input type="hidden" name="customerName" value='<?php echo $customerName; ?>'/>
+      <input type="hidden" name="customerEmail" value='<?php echo $customerEmail; ?>'/>
+      <input type="hidden" name="customerPhone" value='<?php echo $customerPhone; ?>'/>
+      <input type="hidden" name="orderAmount" value='<?php echo $orderAmount; ?>'/>
+      <input type ="hidden" name="notifyUrl" value='<?php echo $notifyUrl; ?>'/>
+      <input type ="hidden" name="returnUrl" value='<?php echo $returnUrl; ?>'/>
+      <input type="hidden" name="appId" value='<?php echo $appId; ?>'/>
+      <input type="hidden" name="orderId" value='<?php echo $orderId; ?>'/>
+	 
+  </form>
+</body>
+</html>

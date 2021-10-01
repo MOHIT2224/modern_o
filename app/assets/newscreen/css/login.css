@@ -1,0 +1,13 @@
+html,body{background:url(../images/bgnew.jpg);    
+/* background-size: 15% auto; */
+
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position: center;
+	background:#78d6ac;
+
+}
+
+.wrap-login100 {
+background: #0a0a0ab5 !important;}
+.container-login100{ background:none !important;}

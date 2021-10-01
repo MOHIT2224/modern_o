@@ -1,0 +1,119 @@
+<div class="content-wrapper" style="min-height: 720px;">
+ <div class="load-box" ng-show="loading">
+        <img id="mySpinner" src="app/images/loading1.gif" />
+    </div>
+<div class="container-fluid" >
+
+ 
+
+<div >
+  <div class="text-center" ng-init="GetUserRole();GetUserList()">
+    <h4 class="well well-sm">Sub Admin Detail</h4>
+  </div>
+
+    <div class="client-detail">
+      <form method="post" ng-submit="submitForm_Users(user)">
+        <div class="col-sm-12 client-form">
+          <div class="row">
+            <div class="col-lg-3 col-sm-6 form-group">
+              <label>User Name</label>
+              <input type="text" ng-model="user.master_name" required="required"  class="form-control"  md-autofocus>
+            </div>
+            <div class="col-lg-3 col-sm-6 form-group">
+              <label>User ID
+              <span ng-show="errorMsg" style="text-align: center; color:GREEN; font-size: 14px; margin-bottom: 15px;">{{errorMsg}}</span>
+              <span ng-show="errorMsg1" style="text-align: center; color:RED; font-size: 14px; margin-bottom: 15px;">{{errorMsg1}}</span>
+              </label>
+              <input type="text" ng-model="user.username" ng-change="checkUserName(user.username)" ng-minlength="0" required="required"  class="form-control">
+            </div>
+            <div class="col-lg-3 col-sm-6 form-group">
+              <label>Password</label>
+              <input type="password" ng-init="user.password=''" ng-model="user.password" required="required"   class="form-control">
+            </div>
+
+                     
+            
+
+            <div class="col-lg-3 col-sm-6 form-group">
+              <label>Registration Date</label>
+              <input type="text" ng-init="user.dt = (getDate | date:'yyyy-MM-dd')" ng-model="user.dt"  class="form-control" disabled="disabled">
+            </div>
+
+
+			 
+          <div class="col-sm-6 form-group">
+            <label>Remark</label>
+            <textarea ng-model="user.remarks"  rows="3" class="form-control"></textarea>
+          </div>
+                <div class="col-sm-6 form-group">
+                    <label>Role Id </label>
+                    <select ng-model="user.role_id" required>
+                        <option value="">Please select role</option>
+                        <option value="{{x.ID}}" ng-repeat="x in RoleList">{{x.name}}</option>
+                    </select>
+                </div>
+             
+			  
+			  
+          
+          <div class="col-sm-12 form-group">  
+
+               <button type="submit" ng-disabled="user.role_id==angular.isUndefinedOrNull || user.username.length < 4" class="btn btn-primary">Submit</button>
+            </div>    
+             
+        </div>
+      </form> 
+    </div>
+
+</div>
+
+  
+    <div class="">
+        <table class="table table-bordered table-striped dealerclient">  
+             <thead>
+                 <tr class="row-name">
+                   <th>S No</th>
+                   <th>Name</th>
+                   <th>UserId</th>
+                     <th>Role</th>
+                    <th>Created Date</th>
+      
+                   <th>Is Active</th>
+                   <th>Edit</th>
+                </tr>
+             </thead>   
+             <tbody>
+                <tr class="row-content" ng-repeat="users in UserList" >
+                   <td>{{$index+1}} </td>
+                   <td >{{users.mstrname}}</td>
+                   <td>{{users.mstruserid}}</td>
+                    <td>{{users.role_name}}</td>
+                   <td>{{users.mstrcrdate}}</td>
+                
+                   
+                    <td><div ng-hide="true">{{users.active==1?switch=true:switch=false}}</div>
+                    <md-switch ng-model="switch" aria-label="Switch 1" ng-click='getStatus(users,switch)'></md-switch></td>
+                    <td>
+                      <button type="button" class="btn btn-primary btn-sm" ng-click="showViewSetting(users);"><i class="fa fa-pencil"></i></button>
+                      <button type="button" class="btn btn-info btn-sm" ng-click="deleteUser(users)" ng-if="users.mstrlock==0?lckUse='unlock.png':lckUse='delete.png'">
+                        <img src="app/images/{{lckUse}}"></button>
+                    </td>
+
+                </tr>
+                
+                
+             </tbody>
+        </table>
+    </div>
+    <div class="col-md-12" ng-show="UserList.length == 0">
+        <div class="col-md-12">
+            <h4 class="page-heading">No records found</h4>
+        </div>
+    </div>
+    <div class="col-md-12" ng-show="UserList.length  > 0">
+        <pagination total-items="UserList.length" ng-model="currentPage" max-size="5" class="pagination-sm" boundary-links="true" rotate="false" num-pages="noOfPages" items-per-page="entryLimit"></pagination>
+
+
+    </div>
+</div>
+</div>

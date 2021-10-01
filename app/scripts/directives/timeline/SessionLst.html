@@ -1,0 +1,32 @@
+ <div class="fancy_wrapper clearfix" style="border:solid 2px #ddd; padding-bottom:20px;height: 400px;overflow: scroll;">
+         <div class="resp_table  clearfix ">
+         <!-- {{sessionBet}} -->
+          <table class="table table-bordered table-responsive">
+              <thead>
+               <tr>
+               <th>Action</th>
+               <th>Name</th>
+               <th>M-Distrbutor</th>
+               <th>Type</th>
+               <th>Rate</th>
+               <th>Amount</th>
+               <th>Time</th>
+               </tr>
+             </thead>
+
+              <tbody>
+                    <tr ng-repeat="sessionData in sessionBet" ng-class="{'lay-head': sessionData.isBack == 1 , 'back-head': sessionData.isBack == 0}">
+                        <td><i class="glyphicon glyphicon-trash" aria-hidden="true" ng-click="deleteRecord(sessionData.bet_id,sessionData.userId,2)"></i>{{$index+1}}</td>
+                        <td>{{sessionData.fName}}</td>                         
+                         <td>{{sessionData.userId}}</td>
+                         <td ng-if="sessionData.isBack==0? Back='Back':Back='Lay'">{{Back}}</td>
+                         <td>{{sessionData.odds}}</td>
+                         <td>{{sessionData.bet_value}}</td>                         
+                         <td>{{sessionData.MstDate}}</td>
+                         
+                    </tr>
+              </tbody>
+          </table>
+    </div>
+    </div>
+   

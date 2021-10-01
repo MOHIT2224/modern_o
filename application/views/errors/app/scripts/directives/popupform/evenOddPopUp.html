@@ -1,0 +1,47 @@
+<md-dialog class="dial-width-650">
+    <md-toolbar>
+        <div class="md-toolbar-tools">
+            <h2> {{HeadName}} For {{MatchName}}</h2>
+            <span flex></span>
+            <md-button class="md-icon-button" ng-click="hide()">
+                <md-icon md-svg-src="app/images/close.svg" aria-label="Close dialog"></md-icon>
+            </md-button>
+        </div>
+    </md-toolbar>
+    <md-dialog-content>
+        <div class="md-dialog-content">
+            <div class="clearfix">
+                <!-- {{oddEven}} -->
+                <form name="userForm" method="post" ng-submit="oddEvenFancy()">
+                    <div class="form_box col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                        <label>Fancy HeadName</label>
+                        <input type="text" name="headName" class="input-box" ng-model="HeadName" required="required">
+                    </div>
+
+                    <div class="form_box  col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                        <label>Remark</label>
+                        <textarea name="remarks" ng-model="Remarks" class="input-box">{{Remarks}}</textarea>
+                    </div>
+                    <div class="form_box  col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                        <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
+                            <div class="form_box top-datepick">
+                                <label>Fancy Date and Time</label>
+                                <!--  <input type="text" name="date" ng-model="date"> -->
+                                <input type="text" id="exampleInput" name="input" ng-model="date" placeholder="yyyy-MM-dd" min="2013-01-01" max="2013-12-31" required />
+                            </div>
+                        </div>
+                        <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
+                            <div style="margin-top:5px;">
+                                <!-- <timepicker ng-model="Time" name="mytime" show-meridian="ismeridian" ></timepicker> -->
+                            </div>
+                        </div>
+                    </div>
+                    <input type="hidden" name="FancyTime" id="setFancyTime" value="{{mytime}}">
+                    <input type="hidden" name="mid" ng-model="mid">
+                    <input type="hidden" name="fancyType" ng-model="fancyType">
+                    <button type="submit" class="btn btn-primary">Submit</button>
+                </form>
+            </div>
+        </div>
+    </md-dialog-content>
+</md-dialog>

@@ -1,0 +1,211 @@
+
+<div class=" master-cont">
+           <!-- Kiran code -->
+<div class="row inplay">
+
+     <div class="col-sm-12 col-md-12">
+      <div class="box-heading1">Upcoming Matches</div>
+    </div>
+<div class="col-md-12">
+<div class="panel-group" id="accordion" role="tablist" aria-multiselectable="true">
+    <div class="panel panel-default">
+        <div class="panel-heading" role="tab" id="headingOne">
+          <a data-toggle="collapse" data-parent="#accordion" id="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
+             <h4 class="panel-title">Cricket</h4>
+          </a>
+
+        </div>
+        <div id="collapseOne" class="panel-collapse collapse in" role="tabpanel" aria-labelledby="headingOne">
+            <div class="panel-body">
+              <ul class="sport-high">
+                  <li class="clearfix" ng-repeat="match in sportDetail" ng-show="match.sportname=='Cricket' && od.status=='OPEN'">
+                    <div class="spor-lft">   
+                      <a ui-sref="dashboard.{{getUrl(match.TypeID,'match.matchid','match.marketid',match.matchName,match.MstDate,match.SportId)}}" class="left-play">
+                        <span class="glyphicon glyphicon-check" ng-class="{'mat-stat':(od.inplay && od.status=='OPEN')}"></span>
+                       {{match.matchName}} {{match.HeadName}}
+                      </a>
+                      <div class="right-play">
+                      <span>{{match.MstDate | date : 'EEEE HH:mm'}}</span>
+                        <span  ng-class="{'mat-stat':(od.inplay && od.status=='OPEN')}">{{od.status=='OPEN'?od.inplay?"In-Play":"Going In-Play":od.status}}</span>
+                      </div>
+                  </div>
+                          
+                          <div class="spor-rgt" ng-if='od=(oddsDetail|filter:{"marketId":match.marketid})[0]' ng-show='od.status=="OPEN"'>
+                            <ul class="odds-detail">
+                              <li>
+                                <a  class="cell back-cell">{{getOddCalcVal(od.runners[0].ex.availableToBack[0].price,match.oddsLimit)}}</a>
+                              </li>
+                              <li>
+                                <a class="cell lay-cell">{{getOddCalcVal(od.runners[0].ex.availableToLay[0].price,match.oddsLimit)}}</a>
+                              </li>
+                              <li>
+                                <a  class="cell back-cell">{{getOddCalcVal(od.runners[2].ex.availableToBack[0].price,match.oddsLimit)}}</a>
+                              </li>
+                              <li>
+                                <a  class="cell lay-cell">{{getOddCalcVal(od.runners[2].ex.availableToLay[0].price,match.oddsLimit)}}</a>
+                              </li>
+                              <li>
+                                <a  class="cell back-cell">{{getOddCalcVal(od.runners[1].ex.availableToBack[0].price,match.oddsLimit)}}</a>
+                              </li>
+                              <li>
+                                <a  class="cell lay-cell">{{getOddCalcVal(od.runners[1].ex.availableToLay[0].price,match.oddsLimit)}}</a>
+                              </li>
+                            </ul>
+                          </div>
+                  </li>
+              </ul>
+            </div>
+        </div>
+    </div>
+    <div class="panel panel-default">
+        <div class="panel-heading" role="tab" id="headingTwo">
+          <a class="collapsed" data-toggle="collapse" data-parent="#accordion" id="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
+             <h4 class="panel-title"> Soccer</h4>
+          </a>
+        </div>
+        <div id="collapseTwo" class="panel-collapse collapse in" role="tabpanel" aria-labelledby="headingTwo">
+            <div class="panel-body">
+              <ul class="sport-high">
+                  <li class="clearfix" ng-repeat="match in sportDetail" ng-show="match.sportname=='Soccer' && od.status=='OPEN'">
+                         <!--  {{match.sportname}} -->
+                    <div class="spor-lft">   
+                      <a ui-sref="dashboard.{{getUrl(match.TypeID,'match.matchid','match.marketid',match.matchName,match.MstDate,match.SportId)}}" class="left-play">
+                        <span class="glyphicon glyphicon-check" ng-class="{'mat-stat':(od.inplay && od.status=='OPEN')}"></span>
+                       {{match.matchName}} {{match.HeadName}}
+                      </a>
+                      <div class="right-play">
+                      <span>{{match.MstDate | date : 'EEEE HH:mm'}}</span>
+                        <span  ng-class="{'mat-stat':(od.inplay && od.status=='OPEN')}">{{od.status=='OPEN'?od.inplay?"In-Play":"Going In-Play":od.status}}</span>
+                      </div>
+                  </div>
+                          <div class="spor-rgt" ng-if='od=(oddsDetail|filter:{"marketId":match.marketid})[0]' ng-show='od.status=="OPEN"'>
+                            <ul class="odds-detail">
+                              <li>
+                                <a  class="cell back-cell">{{getOddCalcVal(od.runners[0].ex.availableToBack[0].price,match.oddsLimit)}}</a>
+                              </li>
+                              <li>
+                                <a class="cell lay-cell">{{getOddCalcVal(od.runners[0].ex.availableToLay[0].price,match.oddsLimit)}}</a>
+                              </li>
+                              <li>
+                                <a  class="cell back-cell">{{getOddCalcVal(od.runners[2].ex.availableToBack[0].price,match.oddsLimit)}}</a>
+                              </li>
+                              <li>
+                                <a  class="cell lay-cell">{{getOddCalcVal(od.runners[2].ex.availableToLay[0].price,match.oddsLimit)}}</a>
+                              </li>
+                              <li>
+                                <a  class="cell back-cell">{{getOddCalcVal(od.runners[1].ex.availableToBack[0].price,match.oddsLimit)}}</a>
+                              </li>
+                              <li>
+                                <a  class="cell lay-cell">{{getOddCalcVal(od.runners[1].ex.availableToLay[0].price,match.oddsLimit)}}</a>
+                              </li>
+                            </ul>
+                          </div>
+                  </li>
+              </ul>
+            </div>
+        </div>
+    </div>
+    <div class="panel panel-default">
+        <div class="panel-heading" role="tab" id="headingThree">
+           <a class="collapsed" data-toggle="collapse" data-parent="#accordion" id="#collapseThree" aria-expanded="false" aria-controls="collapseThree">
+             <h4 class="panel-title"> Tennis </h4>
+           </a>
+        </div>
+        <div id="collapseThree" class="panel-collapse collapse in" role="tabpanel" aria-labelledby="headingThree">
+            <div class="panel-body">
+              <!-- {{sportDetail}} -->
+              <ul class="sport-high">
+                  <li class="clearfix" ng-repeat="match in sportDetail" ng-show="match.sportname=='Tennis' && od.status=='OPEN'">
+                          <!-- {{match.sportname}} -->
+                    <div class="spor-lft">   
+                      <a ui-sref="dashboard.{{getUrl(match.TypeID,'match.matchid','match.marketid',match.matchName,match.MstDate,match.SportId)}}" class="left-play">
+                        <span class="glyphicon glyphicon-check" ng-class="{'mat-stat':(od.inplay && od.status=='OPEN')}"></span>
+                       {{match.matchName}} {{match.HeadName}}
+                      </a>
+                      <div class="right-play">
+                      <span>{{match.MstDate | date : 'EEEE HH:mm'}}</span>
+                        <span  ng-class="{'mat-stat':(od.inplay && od.status=='OPEN')}">{{od.status=='OPEN'?od.inplay?"In-Play":"Going In-Play":od.status}}</span>
+                      </div>
+                  </div>
+                          <div class="spor-rgt" ng-if='od=(oddsDetail|filter:{"marketId":match.marketid})[0]' ng-show='od.status=="OPEN"'>
+                            <ul class="odds-detail">
+                              <li>
+                                <a  class="cell back-cell">{{getOddCalcVal(od.runners[0].ex.availableToBack[0].price,match.oddsLimit)}}</a>
+                              </li>
+                              <li>
+                                <a class="cell lay-cell">{{getOddCalcVal(od.runners[0].ex.availableToLay[0].price,match.oddsLimit)}}</a>
+                              </li>
+                              <li>
+                                <a  class="cell back-cell">{{getOddCalcVal(od.runners[2].ex.availableToBack[0].price,match.oddsLimit)}}</a>
+                              </li>
+                              <li>
+                                <a  class="cell lay-cell">{{getOddCalcVal(od.runners[2].ex.availableToLay[0].price,match.oddsLimit)}}</a>
+                              </li>
+                              <li>
+                                <a  class="cell back-cell">{{getOddCalcVal(od.runners[1].ex.availableToBack[0].price,match.oddsLimit)}}</a>
+                              </li>
+                              <li>
+                                <a  class="cell lay-cell">{{getOddCalcVal(od.runners[1].ex.availableToLay[0].price,match.oddsLimit)}}</a>
+                              </li>
+                            </ul>
+                          </div>
+                  </li>
+              </ul>
+            </div>
+        </div>
+    </div>
+    <div class="panel panel-default">
+        <div class="panel-heading" role="tab" id="headingfour">
+           <a class="collapsed" data-toggle="collapse" data-parent="#accordion" id="#collapseFour" aria-expanded="false" aria-controls="collapseThree">
+             <h4 class="panel-title"> Hourse Racing </h4>
+           </a>
+        </div>
+        <div id="collapseFour" class="panel-collapse collapse in" role="tabpanel" aria-labelledby="headingFour">
+            <div class="panel-body">
+              <!-- {{sportDetail}} -->
+              <ul class="sport-high">
+                  <li class="clearfix" ng-repeat="match in sportDetail" ng-show="match.sportname=='Horse Racing' && od.status=='OPEN'">
+                         <!--  {{match.sportname}} -->
+                    <div class="spor-lft">   
+                      <a ui-sref="dashboard.{{getUrl(match.TypeID,'match.matchid','match.marketid',match.matchName,match.MstDate,match.SportId)}}" class="left-play">
+                        <span class="glyphicon glyphicon-check" ng-class="{'mat-stat':(od.inplay && od.status=='OPEN')}"></span>
+                       {{match.matchName}} {{match.HeadName}}
+                      </a>
+                      <div class="right-play">
+                      <span>{{match.MstDate | date : 'EEEE HH:mm'}}</span>
+                        <span  ng-class="{'mat-stat':(od.inplay && od.status=='OPEN')}">{{od.status=='OPEN'?od.inplay?"In-Play":"Going In-Play":od.status}}</span>
+                      </div>
+                  </div>
+                          <div class="spor-rgt" ng-if='od=(oddsDetail|filter:{"marketId":match.marketid})[0]' ng-show='od.status=="OPEN"'>
+                            <ul class="odds-detail">
+                              <li>
+                                <a  class="cell back-cell">{{getOddCalcVal(od.runners[0].ex.availableToBack[0].price,match.oddsLimit)}}</a>
+                              </li>
+                              <li>
+                                <a class="cell lay-cell">{{getOddCalcVal(od.runners[0].ex.availableToLay[0].price,match.oddsLimit)}}</a>
+                              </li>
+                              <li>
+                                <a  class="cell back-cell">{{getOddCalcVal(od.runners[2].ex.availableToBack[0].price,match.oddsLimit)}}</a>
+                              </li>
+                              <li>
+                                <a  class="cell lay-cell">{{getOddCalcVal(od.runners[2].ex.availableToLay[0].price,match.oddsLimit)}}</a>
+                              </li>
+                              <li>
+                                <a  class="cell back-cell">{{getOddCalcVal(od.runners[1].ex.availableToBack[0].price,match.oddsLimit)}}</a>
+                              </li>
+                              <li>
+                                <a  class="cell lay-cell">{{getOddCalcVal(od.runners[1].ex.availableToLay[0].price,match.oddsLimit)}}</a>
+                              </li>
+                            </ul>
+                          </div>
+                  </li>
+              </ul>
+            </div>
+        </div>
+    </div>
+</div>
+</div>
+</div>
+
+        
+</div>

@@ -1,0 +1,37 @@
+<div class="content-wrapper" style="min-height: 720px;">
+    <div class="load-box" ng-show="loading">
+        <img id="mySpinner" src="app/images/loading1.gif" />
+    </div>
+    <h1 class="binding">Apk Setting</h1>
+    <div class="container-fluid" ng-init="GetApkInfo()">
+
+        <form method="post" name="apkForm" ng-submit="SaveApkVersion(apk)">
+            <div class="col-sm-12 client-form">
+                <div class="row">
+                    <div class="col-lg-3 col-sm-6 form-group">
+                        <label>Apk Version Code</label>
+                        <input type="text" ng-model="apk.Code" required="required"  class="form-control"  md-autofocus>
+                    </div>
+                    <div class="col-lg-3 col-sm-6 form-group">
+                        <label>Apk Version Name
+                        </label>
+                        <input type="text" ng-model="apk.name" required="required"  class="form-control">
+                    </div>
+                    <div class="col-lg-3 col-sm-6 form-group">
+
+                        <label class="switch" style=" float: right;">
+                            <input type="checkbox" ng-model="apk.status1" name="aab" ng-checked="apk.status == 0 ? false: true" ng-click="UpdateApkStatus(apk.status1)">
+                            <span class="slider round"></span>
+                        </label><label style=" float: right;padding-right: 10px;padding-top: 12px;">{{apk.status == 0 ? 'Deactive':'Active'}}</label>
+
+                    </div>
+                    <div class="col-sm-12 form-group">
+
+                        <button type="submit" ng-disabled="!apkForm.$valid" class="btn btn-primary">Submit</button>
+                    </div>
+
+                </div>
+            </div>
+        </form>
+    </div>
+</div>

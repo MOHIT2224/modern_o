@@ -1,0 +1,79 @@
+<div class="content-wrapper" style="min-height: 720px;">
+<div class="load-box" ng-show="loading">
+                <img id="mySpinner" src="app/images/loading1.gif" />
+            </div>
+  <div class="mastercontrol">
+   
+   <!-- <select id="page-size" ng-model="PageSize" ng-change="onPageSize()">
+        <option value="50" selected>50</option>
+        <option value="100">100</option>
+        <option value="500">500</option>
+        <option value="1000">1000</option>
+    </select> -->
+<form name="Master" class="whitecls">
+        <div class="form-group  col-lg-3 col-md-3 col-sm-12 col-xs-12 padding">
+            <label>Master</label>
+
+    <select name="MasterID"  class="form-control" ng-model="formData.MasterID" ng-change="GetDealer(formData.MasterID,1)" ng-options="Master.mstrid as Master.mstrname for Master in MasterList">    
+        <option value="">Please Select Master</option>
+    </select>
+        </div> 
+
+        <div class="form-group  col-lg-3 col-md-3 col-sm-12 col-xs-12 padding" >
+            <label>Dealer</label>
+            <select name="DealerID" ng-model="formData.DealerId" ng-change="GetDealer(formData.DealerId,2)" class="form-control">
+<option value="" >Please Select Dealer</option>  
+                <option ng-repeat="Dealer in DealerData" value="{{Dealer.mstrid}}">{{Dealer.mstruserid}}</option>           
+            </select>
+        </div>
+        <div class="form-group  col-lg-3 col-md-3 col-sm-12 col-xs-12 padding" >
+            <label>User</label>
+            <select name="UserId" ng-model="formData.UserId" ng-change="GetDealer(formData.UserId,3)" class="form-control">
+<option value="">Please Select User</option>  
+                <option ng-repeat="User in userData" value="{{User.mstrid}}">{{User.mstruserid}}</option>           
+            </select>
+        </div>
+        <div class="form-group  col-lg-3 col-md-3 col-sm-12 col-xs-12 padding">
+           <button type="button" class="btn btn-primary" ng-click="GetSearch();" style="margin-top:18px;">Submit</button>
+           
+              <div class="file-icons">
+            <a ng-click="onBtExport()"><img src="app/images/file2.png" /></a>
+            <button type="button" class="btn btn-primary btn-sm" ng-click="Reset();">Reset</button>
+        </div>
+        </div> 
+        
+        
+     
+          
+    </form> 
+    </div>
+<h1 class="page-heading">Online Users  <div class="file-icons" style="margin:0; float:right;">
+     
+    </div></h1>
+
+
+      <div class="col-sm-12 col-md-12 master-cont">
+
+      		<div class="col-lg-12 col-md-12 col-sm-12 " style="padding: 0px;">
+	            <div class="lst_master_top clearfix">
+	                <div class="form_row col-lg-12 col-md-12 col-sm-12 col-xs-12 clearfix top_table_form" style="padding: 0px;">                   
+	                    <div class="form_box  col-lg-4 col-md-4 col-sm-4 col-xs-12" style="padding: 0px;">
+	                        <div class="file-icons" style="margin:0;">
+	                         <!-- <a href=""><img src="app/images/file1.png" /></a>
+	                         <a href=""><img src="app/images/file2.png" /></a>
+	                         <a href=""><img src="app/images/file3.png" /></a> -->
+	                        </div>
+	                    </div>
+	                </div>                
+	            </div>
+        	</div>
+  			
+			<div class="col-lg-12 col-md-12 lst_master">
+			  <div class="resp_table clearfix ">
+			  	<div id="myGrid" class="ag-blue" style="height: 450px; margin-top: 4px;"></div>
+			       
+			  </div>
+
+			</div>
+      </div>
+</div>

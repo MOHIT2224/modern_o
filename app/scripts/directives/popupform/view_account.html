@@ -1,0 +1,195 @@
+﻿<md-dialog class="dial-width-650">
+    <md-toolbar>
+        <div class="md-toolbar-tools">
+            <h2>View Account For {{node.name}}</h2>
+            <span flex></span>
+            <md-button class="md-icon-button" ng-click="hide()">
+                <md-icon md-svg-src="app/images/close.svg" aria-label="Close dialog"></md-icon>
+            </md-button>
+        </div>
+    </md-toolbar>
+    <md-dialog-content>
+        <div class="md-dialog-content">
+            <div class="clearfix">
+                <form name="updateAc" id="updateAc" method="post" ng-submit="UpdateViewAccount(user,node,currentScope1)">
+                    <div class="popup-form-box col-lg-12 col-md-12 col-sm-12 col-xs-12 clearfix">
+                        <div style="border-bottom:solid 2px GREEN; font-size:14px; padding-bottom:9px; margin-bottom:15px; color:GREEN; font-weight:bold; text-transform:uppercase;">User</div>
+                        <div class="popup-inp-box col-lg-3 col-md-3 col-sm-3 col-xs-12">
+                            <input type="text" class="popup-input" name="username" id="vewMod2ID" ng-value="node.name" readonly="readonly" ng-model="user.vewMod2ID" md-autofocus />
+                            <label>User ID</label>
+                        </div>
+                        <div class="popup-inp-box  col-lg-3 col-md-3 col-sm-3 col-xs-12">
+                            <input type="text" class="popup-input" name="Name" id="vewMod2Name" ng-value="node.mstrname" ng-model="user.vewMod2Name" />
+                            <label>Name</label>
+                        </div>
+                        <div ng-if="node.usetype==3" class="popup-inp-box  col-lg-3 col-md-3 col-sm-3 col-xs-6">
+                            <input type="number" id="maxProfit1" name="maxProfit1" class="popup-input" ng-value="node.lgnUserMaxProfit" ng-model="user.maxProfit1" oninput="this.value = this.value.replace(/[^0-9]/g, '');"  />
+                            <label>Max Profit <!-- {{currentScope1}} --></label>
+                        </div>
+                        <div ng-if="node.usetype==3" class="popup-inp-box  col-lg-3 col-md-3 col-sm-3 col-xs-6">
+                            <input type="number" id="maxLoss1" name="maxLoss" class="popup-input" ng-value="node.lgnUserMaxLoss" ng-model="user.maxLoss1" oninput="this.value = this.value.replace(/[^0-9]/g, '');" />
+                            <label>Max Loss</label>
+                        </div>
+                         <!-- <div class="popup-inp-box  col-lg-3 col-md-3 col-sm-3 col-xs-6" ng-if="node.usetype!=3">
+                             <input type="text" id="betDelay" name="betDelay"  class="popup-input" ng-value="node.set_timeout" ng-model="node.set_timeout" oninput="this.value = this.value.replace(/[^0-9]/g, '');" />
+                                <label>Bet Delay<!-- {{node.set_timeout}} --><!-- </label>
+                        </div> --> 
+                        <div class="popup-inp-box  col-lg-3 col-md-3 col-sm-3 col-xs-6" ng-if="node.usetype!=3" >
+                           <textarea name="remarks" id="remarks" ng-value="node.mstrremarks"  ng-model="node.mstrremarks" class="popup-input ng-pristine ng-untouched ng-valid"></textarea>
+                            <label>Remark</label>
+                        </div>
+ <div class="popup-inp-box  col-lg-3 col-md-3 col-sm-3 col-xs-6" ng-if="node.usetype==0 || node.usetype==1 || node.usetype==2">
+                           <input  type="number" required id="nouser" name="nouser" class="popup-input" ng-value="node.create_no_of_child" ng-model="user.create_no_of_child" oninput="this.value = this.value.replace(/[^0-9]/g, '');" />
+                            <label>No. of users</label>
+     <span class="red" ng-show="updateAc.nouser.$touched && updateAc.nouser.$invalid">Enter no. of users</span>
+                        </div>
+                    </div>
+                    <div class="popup-form-box col-lg-12 col-md-12 col-sm-12 col-xs-12 clearfix">
+                        <!--{{node.usetype==3?prtnship=true:prtnship=false}}-->
+                        <div class="popup-inp-box  col-lg-3 col-md-3 col-sm-3 col-xs-12" ng-if="node.usetype==6">
+                            <input type="number" id="partnership1" name="partnership" class="popup-input" step="1" max="{{maxValue}}" ng-value="node.partner" ng-model="user.partnership1" oninput="this.value = this.value.replace(/[^0-9]/g, '');"  />
+                            <label>Partnership {{node.usetype==2?maxValue=(node.partner):maxValue=100}}</label>
+                        </div>
+                        <div class="popup-inp-box  col-lg-3 col-md-3 col-sm-3 col-xs-12">
+                           <!--  {{node.usetype=='3' && sessionusetype==0}} -->
+                       <!--  <div class="popup-inp-box col-lg-6 col-md-6 col-sm-6 col-xs-6"> -->
+                                <input type="number" required ng-init="user.set_timeout=node.set_timeout" id="betDelay" name="betDelay" ng-keypress="checkInput(this.value)" class="popup-input" ng-model="user.set_timeout" oninput="this.value = this.value.replace(/[^0-9]/g, '');" />
+                                <label>Bet Delay<!-- {{node.set_timeout}} --></label>
+                            <p ng-show="user.set_timeout<node.parent_set_timeout" style="position: absolute; color:red; font-size: 14px; margin-bottom: 15px;">Minimum bet delay is {{node.parent_set_timeout}}</p>
+                           <!--  </div> -->
+                        </div>
+                        <div class="popup-inp-box  col-lg-3 col-md-3 col-sm-3 col-xs-12">
+                            <!--  {{node.usetype=='3' && sessionusetype==0}} -->
+                            <!--  <div class="popup-inp-box col-lg-6 col-md-6 col-sm-6 col-xs-6"> -->
+                            <input type="number" required ng-init="user.session_delay=node.session_delay" id="session_delay" name="session_delay" class="popup-input" ng-model="user.session_delay" oninput="this.value = this.value.replace(/[^0-9]/g, '');" />
+                            <label>Session Delay<!-- {{node.set_timeout}} --></label>
+                            <p ng-show="user.session_delay<node.parent_session_delay" style="position: absolute; color:red; font-size: 14px; margin-bottom: 15px;">Minimum session delay is {{node.parent_session_delay}}</p>
+                            <!--  </div> -->
+                        </div>
+                         <div class="popup-inp-box  col-lg-3 col-md-3 col-sm-3 col-xs-12" ng-if="node.usetype==3">
+                      <!--    <div class="popup-inp-box col-lg-6 col-md-6 col-sm-6 col-xs-6"  > -->
+                           <textarea name="remarks" id="remarks" ng-value="node.mstrremarks"  ng-model="node.mstrremarks" class="popup-input "></textarea>
+                            <label>Remark</label>
+                        <!-- </div> -->
+                    </div>
+                        <div class="popup-inp-box  col-lg-3 col-md-3 col-sm-3 col-xs-12" ng-if="node.usetype==3">
+                            <input type="number" id="maxStake1" ng-value="node.lgnUserMaxStake" name="maxStake" class="popup-input" ng-model="user.maxStake1"  oninput="this.value = this.value.replace(/[^0-9]/g, '');" />
+                            <label>Odds Max Stake</label>
+                        </div>
+                        <div class="popup-inp-box  col-lg-3 col-md-3 col-sm-3 col-xs-12" ng-if="node.usetype==3">
+                            <input type="number" id="sessionStake1" ng-value="node.sessionMaxStake" name="sessionStake1" class="popup-input" ng-model="user.sessionStake1"  oninput="this.value = this.value.replace(/[^0-9]/g, '');" />
+                            <label>Session Max Stake</label>
+                        </div>
+                        <div class="popup-inp-box  col-lg-3 col-md-3 col-sm-3 col-xs-12" ng-if="node.usetype==3">
+                            <input type="number" id="InPlayStack" ng-value="node.InPlayStack" name="InPlayStack" class="popup-input" ng-model="user.InPlayStack" oninput="this.value = this.value.replace(/[^0-9]/g, '');" />
+                            <label>Going InPlay Stake</label>
+                        </div>
+                        <div class="popup-inp-box col-lg-3 col-md-3 col-sm-3 col-xs-12 clearfix" style="text-align:center; margin-bottom:20px;" ng-if="node.usetype!=sessionusetype">
+                            <input type="submit" name="updateAc1" class="btn btn-primary" ng-disabled=" (user.session_delay<node.parent_session_delay || user.set_timeout < node.parent_set_timeout)" value="Update" />
+                        </div>
+                    </div>
+                </form>
+                <form name="updatePrtnership" ng-if="sessionusetype==0">
+                    <div class="popup-form-box col-lg-12 col-md-12 col-sm-12 col-xs-12 clearfix">
+                        <div style="border-bottom:solid 2px GREEN; font-size:14px; padding-bottom:9px; margin-top:10px; margin-bottom:15px; color:GREEN; font-weight:bold; text-transform:uppercase;">Partnership <span style="color:GREEN;float:right;">TOTAL PARTNERSHIP <span ng-class="{true:'green-class',false:'red-class'}[btnvalue==100]">[{{btnvalue=(Admin+Master+Dealer)|number}}] </span></span> </div>
+                        <div class="popup-inp-box  col-lg-3 col-md-3 col-sm-3 col-xs-6" ng-show=" node.usetype != 1">
+                            <input class="popup-input" type="number" name="admin" ng-model="Admin" oninput="this.value = this.value.replace(/[^0-9]/g, '');" ng-disabled="true">
+                            <label>Admin</label>
+                        </div>
+    <div class="popup-inp-box  col-lg-3 col-md-3 col-sm-3 col-xs-6" ng-show=" node.usetype == 1">
+                            <input class="popup-input" type="number" name="admin" ng-model="Admin" oninput="this.value = this.value.replace(/[^0-9]/g, '');" ng-disabled="node.children != null && node.usetype == 1">
+                            <label>Admin</label>
+                        </div>
+                        <div class="popup-inp-box  col-lg-3 col-md-3 col-sm-3 col-xs-6">
+                            <input class="popup-input" type="number" name="Master" ng-model="Master" oninput="this.value = this.value.replace(/[^0-9]/g, '');" ng-disabled="node.children != null && node.usetype != 2">
+                            <label>Master </label>
+                        </div>
+
+                        <div class="popup-inp-box  col-lg-3 col-md-3 col-sm-3 col-xs-6" ng-hide ="node.usetype==1">
+                            <!-- ng-if="sessionusetype==2 ?disable1=true:disable1=false" ng-disabled="disable1" -->
+                            <input class="popup-input" type="number" name="Dealer" ng-model="Dealer" oninput="this.value = this.value.replace(/[^0-9]/g, '');" >
+                            <label>Dealer</label>
+                        </div>
+                        <div class="popup-inp-box  col-lg-3 col-md-3 col-sm-3 col-xs-6">
+                            <button type="button" class="btn btn-primary" ng-if="node.usetype!=3" name="updatePrtnerShip" ng-click="updatePartnerShip(Admin,Master,Dealer,node.id)" ng-hide="node.usetype==sessionusetype || sessionusetype==2">Update</button>
+                        </div>
+                    </div>
+                </form>
+                 <form name="updatePrtnership" ng-if="sessionusetype==1">
+                    <div class="popup-form-box col-lg-12 col-md-12 col-sm-12 col-xs-12 clearfix">
+                        <div style="border-bottom:solid 2px GREEN; font-size:14px; padding-bottom:9px; margin-top:10px; margin-bottom:15px; color:GREEN; font-weight:bold; text-transform:uppercase;">Partnership <span style="color:GREEN;float:right;">TOTAL PARTNERSHIP <span ng-class="{true:'green-class',false:'red-class'}[btnvalue==100]">[{{btnvalue=(Admin+Master+Dealer)|number}}]</span></span> </div>
+                        <div class="popup-inp-box  col-lg-3 col-md-3 col-sm-3 col-xs-6" ng-hide="sessionusetype==1">
+                            <input class="popup-input" type="number" name="admin" ng-model="Admin" oninput="this.value = this.value.replace(/[^0-9]/g, '');"  readonly >
+                            <label>Admin</label>
+                        </div>
+                        <div class="popup-inp-box  col-lg-3 col-md-3 col-sm-3 col-xs-6">
+                            <input class="popup-input" type="number" name="Master" ng-model="Master" oninput="this.value = this.value.replace(/[^0-9]/g, '');"  readonly>
+                            <label>Master </label>
+                        </div>
+                        <div class="popup-inp-box  col-lg-3 col-md-3 col-sm-3 col-xs-6">
+                            <!-- ng-if="sessionusetype==2 ?disable1=true:disable1=false" ng-disabled="disable1" -->
+                            <input class="popup-input" type="number" name="Dealer" ng-model="Dealer" oninput="this.value = this.value.replace(/[^0-9]/g, '');" >
+                            <label>Dealer</label>
+                        </div>
+                        <div class="popup-inp-box  col-lg-3 col-md-3 col-sm-3 col-xs-6">
+                            <button type="button" ng-if="node.usetype!=3" class="btn btn-primary" name="updatePrtnerShip" ng-click="updatePartnerShipMaster(Admin,Master,Dealer,node.id)" ng-hide="node.usetype==sessionusetype || sessionusetype==2">Update</button>
+                        </div>
+                    </div>
+                </form>
+                <form name="updatePrtnership" ng-if="sessionusetype==2">
+                    <div class="popup-form-box col-lg-12 col-md-12 col-sm-12 col-xs-12 clearfix">
+                       <div style="border-bottom:solid 2px GREEN; font-size:14px; padding-bottom:9px; margin-top:10px; margin-bottom:15px; color:GREEN; font-weight:bold; text-transform:uppercase;">Partnership  </div>
+                        <div class="popup-inp-box  col-lg-3 col-md-3 col-sm-3 col-xs-6">
+                            <!-- ng-if="sessionusetype==2 ?disable1=true:disable1=false" ng-disabled="disable1" -->
+                            <input class="popup-input" type="number" name="Dealer" ng-model="Dealer" oninput="this.value = this.value.replace(/[^0-9]/g, '');"  readonly>
+                            <label>Dealer</label>
+                        </div>
+                       
+                    </div>
+                </form>
+
+                <form name="updateCommission1">
+                    <div class="popup-form-box col-lg-12 col-md-12 col-sm-12 col-xs-12 clearfix">
+                        <div style="border-bottom:solid 2px GREEN; font-size:14px; padding-bottom:9px; margin-top:10px; margin-bottom:15px; color:GREEN; font-weight:bold; text-transform:uppercase;">Commission </div>
+                        <div class="popup-inp-box  col-lg-3 col-md-3 col-sm-3 col-xs-6" ng-if="node.usetype != 1">
+
+                            <input class="popup-input" type="number" name="oddsCommission"  ng-model="currentScope1.Commission1" step=".1" ng-minlength="1" ng-maxlength="100" min="0" max="100"  oninput="this.value = this.value.replace(/[^0-9.]/g, '').replace(/(\..*)\./g, '$1');"  required>
+                            <label>Odds Commission<!-- {{currentScope1.Commission}} --> </label>
+                           <div ng-init="node.usetype==0?minimumVal=0:minimumVal=currentScope1.Commission"></div>
+                        </div>
+                  <div class="popup-inp-box  col-lg-3 col-md-3 col-sm-3 col-xs-6" ng-if="node.usetype == 1">
+
+                            <input  class="popup-input" type="number" name="oddsCommission" ng-model="currentScope1.Commission1"  step="0.1" min="0" max="2"  oninput="this.value = this.value = this.value.replace(/[^0-9.]/g, '').replace(/(\..*)\./g, '$1');" limit-to-max  required>
+                            <label>Odds Commission<!-- {{currentScope1.Commission}} --> </label>
+                            <div ng-init="node.usetype==0?minimumVal=0:minimumVal=currentScope1.Commission"></div>
+                        </div>
+
+                        <div class="popup-inp-box  col-lg-3 col-md-3 col-sm-3 col-xs-6">
+                            <input class="popup-input" type="number" name="sessionCommition"  ng-model="SessionComm" step=".1" max="100"  oninput="this.value = this.value.replace(/[^0-9.]/g, '').replace(/(\..*)\./g, '$1');"  required>
+                            <label>Session Commission</label>
+                        </div>
+                        <div ng-if="false" class="popup-inp-box  col-lg-3 col-md-3 col-sm-3 col-xs-6">
+                            <input class="popup-input" type="number" name="otherCommisssion" ng-model="otherComm" step=".1" max="100" min="0" oninput="this.value = this.value.replace(/[^0-9.]/g, '').replace(/(\..*)\./g, '$1');"  required>
+                            <label>Other Commission</label>
+                        </div>
+                        <div class="popup-inp-box  col-lg-3 col-md-3 col-sm-3 col-xs-6" 
+                        ng-show="node.usetype==3" >
+                            <input class="popup-input" type="number" name="DetectedVal" ng-model="DetectedVal" step=".1" max="100" min="0" oninput="this.value = this.value.replace(/[^0-9.]/g, '').replace(/(\..*)\./g, '$1');"    required>
+                            <label>Bet Detection</label>
+                        </div>
+                        <div class="popup-inp-box  col-lg-3 col-md-3 col-sm-3 col-xs-6">
+                            <!-- {{updateCommission1.$valid}}\\1 -->
+                            <button type="button" ng-disabled="updateCommission1.$invalid" class="btn btn-primary" name="updatePrtnerShip" ng-click="updateCommission(currentScope1.Commission1,SessionComm,otherComm,DetectedVal,node.id,node.usetype)" ng-hide="node.usetype==sessionusetype">Update</button>
+                            
+                        </div>
+                    </div>
+
+                    <div style="text-align:center;">
+                        <button type="button" class="btn btn-primary" name="updatePrtnerShip" ng-click="hide()">Close</button>
+                    </div>
+                </form>
+                
+            </div>
+        </div>
+    </md-dialog-content>
+</md-dialog>

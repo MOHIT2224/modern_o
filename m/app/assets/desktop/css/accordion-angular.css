@@ -1,0 +1,121 @@
+.angShow {}
+
+* {
+    font-family: "Roboto", sans-serif;
+    font-size: 13px;
+    line-height: 100%;
+}
+
+h4.accordion {
+    margin: 0;
+}
+
+.accordionCls a {
+    padding: 20px 20px;
+    border-bottom: 2px solid #dfe2db;
+    background: transparent;
+    color: #191919;
+    text-decoration: none;
+    display: block;
+    margin-bottom: 0;
+    font-weight: 700;
+    position: relative;
+    font-size: 16px;
+}
+.all-sport:focus{
+    outline: none;
+    box-shadow: none;
+}
+.accordionCls a:hover {
+    background-color: #fff056;
+}
+.sub-item a {
+    display: block;
+    font-size: 13px;
+    padding: 5px 0 5px 19px;
+    position: relative;
+    color: #191919;;
+    font-weight: 500;
+    min-height: 30px;
+    vertical-align: middle;
+}
+
+.accordion-content {
+    padding: 10px;
+    margin: 0;
+    max-height:450px;
+}
+
+.acc-content ul li a {
+    position: relative;
+    display: block;
+    font-size: 14px;
+    padding: 5px 0 5px 35px;
+}
+
+@media only screen and (min-width: 600px) {
+    h1 {
+        font-size: 3.2rem;
+    }
+}
+
+.main-spr a::before,
+.sub-item a::before,
+.acc-content ul li a::before {
+    content: '';
+    display: inline-block;
+    width: 18px;
+    height: 18px;
+    position: absolute;
+    top: 25%;
+    right: 10px;
+}
+
+.sub-item a::before {
+    /*left: 10px;*/
+}
+
+.acc-content ul li a::before {
+    left: 18px;
+    background-image: url("../../images/normal-icon.png");
+    background-repeat: no-repeat;
+}
+
+.crick-ic a::before {
+    background-image: url();
+    background-repeat: no-repeat;
+}
+
+.footb-ic a::before {
+    background-image: url() !important;
+    background-repeat: no-repeat;
+}
+
+.tennis-ic a::before {
+    background-image: url() !important;
+    background-repeat: no-repeat;
+}
+
+.horse-ic a::before {
+    background-image: url() !important;
+    background-repeat: no-repeat;
+}
+
+.game-ic a::before {
+   /* background-image: url(../../images/game-master.png) !important;*/
+    background-repeat: no-repeat;
+    background-size: cover;
+}
+
+.flipImg a::before {
+    -moz-transform: scaleX(-1);
+    -o-transform: scaleX(-1);
+    -webkit-transform: scaleX(-1);
+    transform: scaleX(-1);
+    filter: FlipH;
+    -ms-filter: "FlipH";
+}
+.sidesubmenu
+{
+    padding: padding: 5px 0 7px 9px!important;
+}

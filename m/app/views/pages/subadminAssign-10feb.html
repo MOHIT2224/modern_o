@@ -1,0 +1,63 @@
+<div class="col-sm-12 col-md-12 master-cont">
+    <div class="col-lg-12 col-md-12 col-sm-12 " style="padding: 0px;">
+        <div class="lst_master_top clearfix">
+            <div class="form_row col-lg-12 col-md-12 col-sm-12 col-xs-12 clearfix top_table_form" style="padding: 0px;">
+                <form name="setPermition" method="post">
+                    <div class="form_box  col-lg-2 col-md-2 col-sm-2 col-xs-12" style="padding: 0px;">
+                        <!--<label>SELECT USERTYPE</label>
+                        <select name="type_id" ng-model="type_id" ng-change="Get_activeUsers(type_id)" required="required">
+                            <option value=''>Select UserType</option>
+                            <option value='1'>Select Master</option>
+                            <option value='2'>Select Dealer</option>
+                            <option value='3'>Select Client</option>
+                        </select>-->
+                        <label>Helper Name</label>{{adminName}}
+                    </div>
+
+                    <div class="form_box  col-lg-2 col-md-2 col-sm-2 col-xs-12" style="padding: 0px;">
+                        <label>SELECT USER</label>
+                        <!--<div>
+                            <select name="User" ng-model="User" ng-options="user.label for user in userList track by user.id">
+                                <option value=''>Select Market</option>
+                            </select>
+                        </div>-->
+                        <div class="multisel-drop">
+                            <!--<multiselect-dropdown model="SelectedCountries" options="MasterCountries "></multiselect-dropdown>-->
+                            <table class="table table-bordered table-condensed table-responsive" style="background-color: #fff;">
+                                <thead>
+                                    <tr>
+                                        <th><a ng-click="sort_by('id');"><i class="glyphicon glyphicon-sort"></i></a>Sr.No.</th>
+                                        <th><a ng-click="sort_by('label');"><i class="glyphicon glyphicon-sort"></i></a>Master Name</th>
+                                    </tr>
+                                </thead>
+                                <tr ng-repeat="username in MasterCountries">
+                                    <td data-label="Serial No">{{$index + 1}}</td>
+                                    <td data-label="Match Name">
+                                        <input type="checkbox" ng-click="toggleSelectItem(username)" ng-model="username.chkUserName" ng-checked="{{(MasterCountries|filter:{'HelperID':adminId,'id':username.id})[0].id!=angular.isUndefinedOrNull}}">{{username.label}}<!--170210-->
+                                    </td>
+                                </tr>
+                            </table>
+                        </div>
+                        <div class="form_row col-lg-12 col-md-12 col-sm-12 col-xs-12 clearfix top_table_form" style="padding: 0px;">
+                            <input type="checkbox" id="addMatch" name="addMatch" ng-model="addMatch" ng-true-value="1" ng-false-value="0" />Match Add {{addMatch}}
+                            <input type="checkbox" id="chkAddUser" name="chkAddUser" ng-model="chkAddUser" ng-true-value="1" ng-false-value="0" />Add User
+                            <input type="checkbox" id="chkUpdateUser" name="chkUpdateUser" ng-model="chkUpdateUser" ng-true-value="1" ng-false-value="0" />Update User 
+                            <input type="checkbox" id="chkChangePassword" name="chkChangePassword" ng-model="chkChangePassword" ng-true-value="1" ng-false-value="0" />Change Pwd
+                            <input type="checkbox" id="chkChipDeposite" name="chkChipDeposite" ng-model="chkChipDeposite" ng-true-value="1" ng-false-value="0" />Chip In Out (Deposite)
+                            <input type="checkbox" id="chkChipWithdraw" name="chkChipWithdraw" ng-model="chkChipWithdraw" ng-true-value="1" ng-false-value="0" />Chip In Out (Withdraw)
+                            <input type="checkbox" id="chkUserLock" name="chkUserLock" ng-model="chkUserLock" ng-true-value="1" ng-false-value="0" />User Lock
+                            <input type="checkbox" id="chkBettingLock" name="chkBettingLock" ng-model="chkBettingLock" ng-true-value="1" ng-false-value="0" />Betting Lock
+                            <input type="checkbox" id="chkCloseAc" name="chkCloseAc" ng-model="chkCloseAc" ng-true-value="1" ng-false-value="0" />Close A/c
+                            <input type="checkbox" id="createFancy" name="createFancy" ng-model="createFancy" ng-true-value="1" ng-false-value="0" />Add Fancy
+                            <input type="checkbox" id="chkEditFancy" name="chkEditFancy" ng-model="chkEditFancy" ng-true-value="1" ng-false-value="0" />Edit Fancy
+                            <input type="checkbox" id="setResult" name="setResult" ng-model="setResult" ng-true-value="1" ng-false-value="0" />Result
+                            <input type="checkbox" id="chkChipHistory" name="chkChipHistory" ng-model="chkChipHistory" ng-true-value="1" ng-false-value="0" />Chip History
+                            <input type="checkbox" id="chkChipSummary" name="chkChipSummary" ng-model="chkChipSummary" ng-true-value="1" ng-false-value="0" />Chip Summary
+                        </div>
+                    </div>
+                    <button type="button" name="save" ng-click="SavePermition()">Save Permition</button><!--170210-->
+                </form>
+            </div>
+        </div>
+    </div>
+</div>

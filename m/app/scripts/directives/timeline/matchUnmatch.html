@@ -1,0 +1,112 @@
+<div>
+  <div class="row">
+       <div class="col-sm-6 padding">
+          <div class="fancy-collapse-panel">
+                <div class="panel panel-default match">
+                    <div class="panel-heading" role="tab" id="headingOne">
+                        <h3 class="panel-title">Matched Bets ({{(MatchedBets | filter : {"IsMatched":"1"}).length}})</h3>
+                    </div>
+                    <div class="panel-body unmatchedScrollTable">
+                        <table class="table betslip-table">
+                            <thead>
+                               <tr>
+                                  <th><span class="glyphicon glyphicon-trash" ng-click="deleteUser(unMatchedData.MstCode,unMatchedData.UserId)"></span></th>
+                                  <th >Runner</th>
+                                  <th>Client</th>
+                                  <th>odds </th>
+                                  <th>stack</th>                                   
+                                  <th>P&l</th>
+                                  <th>dateTime</th>
+                                  <th>IP Address</th>
+                                   
+                                </tr>
+                            </thead>
+                             <tbody>
+                                <tr ng-repeat='unMatchedData in (MatchedBets | filter : {"IsMatched":"1"})' ng-class="{'lay-head': unMatchedData.isBack == 1 , 'back-head': unMatchedData.isBack == 0}">
+                                    <td><span class="glyphicon glyphicon-trash" ng-click="deleteUser1(unMatchedData.MstCode,unMatchedData.UserId,unMatchedData.MarketId)"></span>{{$index+1}}</td>
+                                    <td>{{unMatchedData.selectionName}}</td>
+                                    <td>{{unMatchedData.userName}}</td>
+                                    <td>{{unMatchedData.Odds}}</td>
+                                    <td>{{unMatchedData.Stack}}</td>
+                                    <td>{{unMatchedData.P_L}}</td>
+                                    <td>{{unMatchedData.MstDate}}</td>
+                                    <td>{{unMatchedData.ip}}</td>
+                                    
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+          </div>
+       </div>
+
+       <div class="col-sm-6 padding">
+          <div class="fancy-collapse-panel">
+                <div class="panel panel-default match">
+                    <div class="panel-heading" role="tab" id="headingOne">
+                        <h3 class="panel-title">Unmatched Bets ({{(UserData | filter : {"IsMatched":"0"}).length}})</h3>
+                    </div>
+                    <div class="panel-body unmatchedScrollTable" ng-if='(UserData | filter : {"IsMatched":"0"}).length>0'>
+                        <table class="table betslip-table">
+                    <thead>
+                       <tr>
+                            <th>SrNo</th>
+                           <th >Runner</th>                          
+                           <th>Dealer</th>
+                           <th>Client</th>
+                           <th>odds </th>
+                           <th>stack</th>
+                           <th>P&l</th>
+                          <th>dateTime</th>
+                        </tr>
+                    </thead>
+                     <tbody>
+                        <tr ng-repeat='unMatchedData in (UserData | filter : {"IsMatched":"0"})' ng-class="{'lay-head': unMatchedData.isBack == 1 , 'back-head': unMatchedData.isBack == 0}">
+                            <td><span class="glyphicon glyphicon-trash" ng-click="deleteUser(unMatchedData.MstCode,unMatchedData.UserId)"></span>{{$index+1}}</td>
+                            <td>{{unMatchedData.selectionName}}</td>
+                            <td>{{unMatchedData.ParantName}}</td>
+                            <td>{{unMatchedData.userName}}</td>
+                            <td>{{unMatchedData.Odds}}</td>
+                            <td>{{unMatchedData.Stack}}</td>
+                            <td>{{unMatchedData.P_L}}</td>
+                            <td>{{unMatchedData.MstDate}}</td>
+                        </tr>
+                    </tbody>
+                   </table>
+                    </div>
+                </div>
+            </div>
+       </div>
+     </div>
+
+  <!-- <ul class="nav nav-tabs">
+    <li class="active">
+      <a id="#home" class="btn active" data-toggle="tab" ng-click="callBetsData('1','0');setFancyData(0)">Matched({{(MatchedBets | filter : {"IsMatched":"1"}).length}})</a>
+    </li>
+    <li>
+      <a id="#menu1" class="btn" data-toggle="tab" ng-click="callBetsData('0','0');setFancyData(0)">Unmatched({{(UserData | filter : {"IsMatched":"0"}).length}})</a>
+    </li>
+    <li>
+      <a id="#menu2" class="btn" data-toggle="tab" ng-click="callBetsData('1','1');setFancyData(1)">Session({{SessiondBets.length}})</a>
+    </li>
+  
+    <span class="rigt-ref" style="line-height: 36px;">
+            <i class="glyphicon glyphicon-refresh"></i>
+        </span>
+        <div ng-if="USERTYPE !=3" style="line-height: 36px;display:inline-block; color:#45fb1a; float:right; margin-right:15px; font-size:15px;">Active Users[ <span style="color:#fff;font-weight:bold;">{{UserData[0].AUser}}</span>  ]</div>
+  </ul>
+
+  <div class="tab-content">
+    <div id="home" class="tab-pane fade in active">
+       <div ag-grid="CurrentAllBets" class="ag-blue" style="height: 200px; margin-top: 4px;overflow: scroll;" ng-show="showBetsData"></div> 
+    </div>
+    <div id="menu1" class="tab-pane fade">
+      <div ag-grid="CurrentAllBetsUn" class="ag-blue" style="height: 200px; margin-top: 4px;overflow: scroll;" ng-show="showBetsData0"></div>
+    </div>
+    <div id="menu2" class="tab-pane fade">
+      <div ag-grid="CurrentAllBetsSe" class="ag-blue" style="height: 200px; margin-top: 4px;overflow: scroll;" ng-show="showBetsData1"></div>
+    </div>
+  </div>
+  <div ag-grid="CurrentAllBetsUn" class="ag-blue" style="height: 200px; margin-top: 4px;overflow: scroll;" ng-show="showBetsData0"></div>
+  <div ag-grid="CurrentAllBetsSe" class="ag-blue" style="height: 200px; margin-top: 4px;overflow: scroll;" ng-show="showBetsData1"></div> -->
+</div>

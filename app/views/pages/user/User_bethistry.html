@@ -1,0 +1,111 @@
+<div class="content-wrapper ng-scope" style="min-height: 720px;">
+       <div class="load-box" ng-show="loading">
+            <img id="mySpinner" src="app/images/loading1.gif" />
+        </div>
+  <div class="row heading">
+    <div class="col-sm-9 col-xs-9">
+        <h1  class="page-heading">Bet History</h1>
+      </div>
+      <div class="col-sm-3 col-xs-3">
+        <div class="file-icons">
+            <a ng-click="onBtExport()"><img src="app/images/file2.png" /></a>
+	      <button ng-if="UserType!=3" type="button" class="btn btn-primary btn-sm resetbtn" ng-click="Reset();">Reset</button>
+        </div>
+      </div>
+  </div>
+
+        <!-- {{BetHistory}} -->
+        <div class="table-overflow">
+<form name="Master" ng-if="UserType!=3">
+<div class="row">
+	<div class="user-bthistorypt">
+        <div ng-if="UserType==1" class="form-group  col-lg-5 col-md-3 col-sm-12 col-xs-12 padding" >
+            <label>Dealer</label>
+            <select name="DealerID" ng-model="formData.DealerId" ng-change="GetDealer(formData.DealerId,2)" class="form-control">
+<option value="" >Please Select Dealer</option>  
+                <option ng-repeat="Dealer in DealerData" value="{{Dealer.mstrid}}">{{Dealer.mstruserid}}</option>           
+            </select>
+        </div>
+        <div  class="form-group  col-lg-5 col-md-3 col-sm-12 col-xs-12 padding" >
+            <label>User</label>
+            <select name="UserId" ng-model="formData.UserId" ng-change="GetDealer(formData.UserId,3)" class="form-control">
+<option value="">Please Select User</option>  
+                <option ng-repeat="User in userData" value="{{User.mstrid}}">{{User.mstruserid}}</option>           
+            </select>
+        </div>
+</div>
+	</div>
+<div class="row">
+<div class="form-group  col-lg-5 col-md-3 col-sm-12 col-xs-12 padding" >
+                  <label>From Date</label>
+                    <md-content>
+                        <md-datepicker ng-model="formData.from_date" ng-disabled="datedisable"  onkeydown="return false" md-max-date="formData.MaxDate1" ng-change="setDateFun(1)" md-open-on-focus></md-datepicker>
+                    </md-content>    
+                    </div>
+               <div class="form-group  col-lg-5 col-md-3 col-sm-12 col-xs-12 padding" >
+                  <label>To Date</label>
+                 <md-content>
+                        <md-datepicker ng-model="formData.to_date"  ng-disabled="datedisable"  md-min-date="formData.minDate1"  md-max-date="formData.MaxDate2" onkeydown="return false" ng-change="setDateFun(2)" md-open-on-focus></md-datepicker>
+                    </md-content>
+                </div>
+        <div class="form-group  col-lg-2 col-md-3 col-sm-12 col-xs-12 padding">
+           <button type="button" class="btn btn-primary" ng-click="GetSearch();" style="margin-top:18px;">Submit</button>
+        </div>   
+     </div>
+    </div>
+</form>
+<div class="bethistory usbethispart">
+       <div class="table-responsive member_listing">
+    <div class="widget-content login_table">
+          
+          <table class="table table-striped my-market"> 
+         <thead>
+            <tr class="bg-primary">
+               <th>SNo</th>
+               <th>Description</th>
+	       <th ng-if="UserType==1">Dealer</th>
+               <th ng-if="UserType!=3">User Name</th>
+               <th>Selection Name</th>
+               <th>Type</th>
+               <th>Odds</th>
+               <th>Stack</th>
+               <th>Date</th>
+               <th>P | L</th>
+               <th>Profit</th>
+               <th>Liability</th>
+               <th>Status</th>
+            </tr>
+         </thead>   
+         <tbody>
+            <tr ng-repeat="GetbetData in BetHistory" >
+               <td>{{GetbetData.SrNo}}</td>               
+              
+	 <td class="text-left">{{GetbetData.Description}}</td>
+<td ng-if="UserType==1">{{GetbetData.DealerNm}}</td>
+               <td ng-if="UserType!=3">{{GetbetData.UserNm}}</td>
+               <td>{{GetbetData.selectionName}}</td>
+               <td><span class="badge " ng-class="{'badge-danger': GetbetData.Type == 'Lay' ,'badge-info': GetbetData.Type == 'Back' } ">{{GetbetData.Type}}</span></td>
+               <td>{{GetbetData.Odds}}</td>
+               <td>{{GetbetData.Stack}}</td>
+               <td>{{GetbetData.MstDate}}</td>
+               <td ng-class="{'green':GetbetData.P_L>0,'red':GetbetData.P_L<0}">{{GetbetData.P_L}}</td>
+               <td ng-class="{'green':GetbetData.Profit>0,'red':GetbetData.Profit<0}">{{GetbetData.Profit}}</td>
+               <td ng-class="{'green':GetbetData.Liability>0,'red':GetbetData.Liability<0}">{{GetbetData.Liability}}</td>
+               <td>{{GetbetData.STATUS}}</td>
+            </tr>
+         </tbody>
+        </table>
+        </div>
+	</div>
+	</div>
+      </div>
+ <div class="lst_master" ng-show="false">
+        <div class="resp_table clearfix" style="background-color:#f5f5f5; padding:5px 10px;">
+            <div id="myGrid" class="ag-fresh" style="height:400px; margin-top: 4px;"></div>
+        </div>
+        <div class="total-box clearfix">
+                
+        </div>
+    </div>
+</div>
+  

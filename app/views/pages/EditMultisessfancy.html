@@ -1,0 +1,107 @@
+<div class="content-wrapper">
+
+<div id="messageEq"></div>
+<div class="alert alert-success" role="alert" ng-show="message">
+    <strong>{{message}}</strong>
+</div>
+<div ng-show="false">
+    sum={{sumUsrBet=myVar}}
+    {{totalStke=SessionData[0].MaxStake*(SessionData[0].RateChange )| number}}
+    stak={{totalStke1=SessionData[0].MaxStake}}
+</div>
+<!-- {{SessionData}} -->
+<div class="ses-fancy-cont col-lg-12 col-md-12 col-sm-12 col-xs-12 clearfix" style="text-align:center;" >
+    <div class="box-heading clearfix">
+<div class="row fancy_menu">
+    <!-- <div ng-repeat='person in Persons | orderBy: "number" track by person.id'>
+        <p>{{ person.name }} <input class='filter' type='number' ng-model='person.number' ng-focus="selectPerson(person.id)" set-focus person-id="{{person.id}}" selected-person-id="{{selectedPersonId}}" index="{{$index}}"></p>
+    </div> -->
+  <table>
+    <tr>
+      <td>{{MatchName}} <!-- {{MatchId}} >>{{Session.HeadName}} --></td>
+      <td>Rate Different{{rateDiff}}</td>
+      <td width="7%"><input type="number" name="RateDiff" id="rateDiff" ng-model="rateDiff" ng-keypress="RateDiffence(this.value)" /></td>
+      <td>Point Different</td>
+      <td><input type="number" name="PointDiff"  ng-model="pointDiff"/></td>
+      <!-- <td>Range</td>
+      <td width="7%"><input type="number" name="rangeLimit" ng-model="rangeLimit" ng-keypress="checkInput(this.value)" class="rang-head-box"></td>
+      <td>No</td>
+      <td><input type="number" name="NoLayRange" ng-model="NoLayRange" ng-keypress="checkInput(this.value)" class="range-boxs"></td>
+      <td>YES</td>
+      <td><input type="number" name="YesLayRange" ng-model="YesLayRange" ng-keypress="checkInput(this.value)" class="range-boxs"></td> -->
+    </tr>
+  </table>
+      </div>
+
+        <div class="rate-box" ng-if="sumUsrBet >= totalStke1-500"> 
+            <button type="button" class="rate-blink-btn blink" name="changerate" ng-click="chnageRate(SessionData[0].RateChange);">RATE CHANGE
+
+            </button>
+
+        </div>
+    </div>
+    <div class="fancy_wrapper clearfix" style="border:solid 2px #ddd; padding-bottom:7px; margin-bottom:20px;">
+        <form name="userForm" method="post">
+          <div class="row">
+                <div class="col-sm-7">
+                    <div class="well fancy text-center" ng-repeat="Session in SessionData">
+                        <div class="row">
+                            <div class="col-sm-3">
+                              <p>{{Session.HeadName}}</p>
+                            </div>
+                            <div class="col-sm-6">
+                                 <div class="rate">
+                                     <div class=" form_box fancy_YN">
+                                          <span>Rate Difference</span><input type="text" name="input" ng-model="Session.rateDiff">
+                                          <table class="table table-bordered" style="margin-bottom:0px;">
+                                          <tr>
+
+                                          <th class="pink"><span>NO</span><input type="text" class="disab-input " name="input" ng-model="Session.NoValume" readonly="readonly" style="width:60%;float:right;"></th> 
+                                          <th class="blue"><span>YES</span><input type="text" class="disab-input" name="input1" ng-model="Session.YesValume" readonly="readonly" style="width:60%;float: right;"></th> 
+                                          </tr>
+                                          <tr>
+                                          <td><input type="text" class="yes-no-inp" id="{{$index}}" name="input" ng-model="Session.SessInptNo" ng-KeyUp="getVal(Session.SessInptNo,$index,Session.rateDiff)" ng-Click="getVal(Session.SessInptNo,$index,Session.rateDiff)" ng-focus="selectPerson(Session.ID)" set-focus person-id="{{Session.ID}}" selected-person-id="{{selectedPersonId}}" index="{{$index}}" /></td>
+                                          <td><input type="text" class="yes-no-inp" id="inputYes{{$index}}" name="input1" ng-model="Session.SessInptYes" readonly="readonly" ng-disabled="Session.active==1" required></td>
+                                          </tr>
+
+                                          </table>
+                                     </div>
+                                 </div>
+                            </div>
+
+                            <div class="col-sm-3 col-xs-12 butnn">
+                              <button type="button" class="btn btn-success" id="{{$index}}" ng-click="callActiveDeactive($index,1,Session)" ng-if="Session.active==1">Active</button>
+                              <button type="button" class="btn btn-danger" id="{{$index}}" ng-click="callActiveDeactive($index,0,Session)" ng-if="Session.active==0 || Session.active==4" >Deactive</button>
+                              <button type="button" class="btn btn-danger" ng-click="nintyElevan($index,0,Session)" >90/11</button>
+                            </div>
+                        </div>
+                    </div>
+                  </div>
+                <div class="col-sm-5 padding">
+                  <div class="well fancy">
+                   <sessionlist></sessionlist>
+                 </div>
+                </div>
+            </div>
+            
+       </div>
+      <div class="">
+          <button class="btn btn-primary btn-lg" ng-click="setMessage('Over')">Over</button>
+          <button class="btn btn-primary btn-lg" ng-click="setMessage('SIX')">6</button> 
+          <button class="btn btn-primary btn-lg" ng-click="setMessage('One Run')">1</button>
+          <button class="btn btn-primary btn-lg" ng-click="setMessage('Two Runs')">2</button>
+          <button class="btn btn-primary btn-lg" ng-click="setMessage('Three Runs')">3</button>
+          <button class="btn btn-primary btn-lg" ng-click="setMessage('Four Runs')">4</button>
+          <button class="btn btn-primary btn-lg" ng-click="setMessage('No Ball')">No ball</button>
+          <button class="btn btn-primary btn-lg" ng-click="setMessage('Wide Ball')">Wide</button>
+          <button class="btn btn-primary btn-lg" ng-click="setMessage('Wicket Down')">Wicket</button>
+          <button class="btn btn-primary btn-lg" ng-click="setMessage('Free Hit')">FreeHit</button>
+          <button class="btn btn-primary btn-lg" ng-click="setMessage('Third Empire')">Third Empire</button>
+          <button class="btn btn-primary btn-lg" ng-click="setMessage('Ball start...')">LOCK ALL</button>
+
+      </div>
+        </form>
+    </div>
+    
+</div>
+<div>

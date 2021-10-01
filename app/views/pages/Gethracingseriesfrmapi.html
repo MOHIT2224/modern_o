@@ -1,0 +1,40 @@
+<div class="col-lg-12 col-md-12 lst_master">
+    <div class="load-box" ng-show="loading">
+        <img id="mySpinner" src="app/images/loading1.gif" />
+    </div>
+    <div class="resp_table clearfix ">
+        <table class="table table-bordered table-condensed table-responsive" style="background-color: #fff;">
+            <thead>
+                <tr>
+                    <th><i class="glyphicon glyphicon-sort"></i>Serial No</th>
+                    <th><i class="glyphicon glyphicon-sort"></i>Match Id</th>
+                    <th><i class="glyphicon glyphicon-sort"></i>Match Name</th>
+                    <th><i class="glyphicon glyphicon-sort"></i>Open Date</th>
+                    <th><i class="glyphicon glyphicon-sort"></i>countryCode</th>
+                    <th ng-show="$root.HelperAllRights==angular.isUndefinedOrNull || $root.HelperAllRights.addMatch==1">Action</th>
+                </tr>
+            </thead>
+
+            <tbody>
+                <tr ng-repeat="sportsMatch in GetSeriesData.seriesHorceracing">
+ 
+                    <td data-label="Serial No">{{$index+1}}</td>
+                    <td data-label="Series ID">{{sportsMatch.id}}</td>
+                    <td data-label="Series Name">{{sportsMatch.name}}</td>
+                    <td data-label="Market Count">{{sportsMatch.openDate | date: 'yyyy-MM-dd HH:mm:ss'}}</td>
+                    <td data-label="Market Count">{{sportsMatch.countryCode}}</td>
+                   <td data-label="Action" ng-show="$root.HelperAllRights==angular.isUndefinedOrNull || $root.HelperAllRights.addMatch==1"><input type="checkbox" ng-model="checkboxModel.value2" ng-click="saveMatch(sportsMatch.id,sportsMatch.name,sportsMatch.openDate,sportsMatch.countryCode);"  ng-click="saveMatch(sportsMatch.id,sportsMatch.name,sportsMatch.openDate,sportsMatch.countryCode);" ng-checked="{{(GetSeriesData.matchfrmDataBase|filter:{'MstCode':sportsMatch.id})[0].MstCode!=angular.isUndefinedOrNull}}"><!--sourabh 170105 check--></td>
+                </tr>
+            </tbody> 
+        </table>
+    </div>
+    <div class="col-md-12" ng-show="filteredItems == 0">
+        <div class="col-md-12">
+            <h4>No Users found</h4>
+        </div>
+    </div>
+    <div class="col-md-12" ng-show="filteredItems > 0">
+        <div pagination="" page="currentPage" on-select-page="setPage(page)" boundary-links="true" total-items="filteredItems" items-per-page="entryLimit" class="pagination-small" previous-text="&laquo;" next-text="&raquo;">
+        </div>
+    </div>
+</div>

@@ -1,0 +1,200 @@
+   <div class="content-wrapper">
+ 
+    
+    <h1 class="binding">Betting Profit and Loss<span class="starts-in-label ng-binding ng-scope" ng-if="globalStartsInLabel"></span></h1>
+    
+    
+    
+   <div class="my_bets"> 
+    
+<div class="row">    
+
+<div class="col-sm-3">
+<ul class="nav nav-pills">
+<li><a class="active" href="javascript:void();#1a" data-toggle="tab" id="show" aria-expanded="true">Current</a></li>
+<li><a href="javascript:void();#2a" data-toggle="tab" id="hide" class="" aria-expanded="false">Past</a></li>
+</ul>
+
+<ul class="current_past" style="">
+<li><a class="active" href="javascript:void()">Matched</a></li>
+<li><a href="javascript:void()">Unmatched</a></li>
+</ul>
+</div>
+
+        <div class="col-sm-5 col-md-6">
+    <div class="report_filter search_proft row">
+<ul>
+<li>
+  <div class="form-group">
+    <label for="PL">EventName</label>
+  <input type="text" name="PL" id="PL" ng-model="search.EventName" placeholder="EventName" class="form-control">
+  </div>
+</li>
+<li>
+  <div class="form-group">
+    <label for="CreatedOn">CreatedOn</label>
+ <input type="text" name="CreatedOn" id="CreatedOn" ng-model="search.CreatedOn" placeholder="CreatedOn" class="form-control">
+  </div>
+</li>
+
+
+<li>
+  <div class="form-group">
+    <label for="MarketName">MarketName</label>
+<input type="text" name="MarketName" id="MarketName" ng-model="search.MarketName" placeholder="MarketName" class="form-control">
+  </div>
+</li>
+
+<li>
+  <div class="form-group">
+    <label for="email">&nbsp;</label>
+	 <button type="button"><i class="fa fa-search"></i> Search</button>
+  </div>
+</li>
+</ul>
+</div> </div>
+
+<div class="col-sm-4 col-md-3"><div class="account_overview"> 
+     <div class="dropdown">
+     <button class="dropdown-toggle credit" type="button" data-toggle="dropdown">Available Credit:
+     <span class="caret">00:00</span></button>
+     <ul class="dropdown-menu">
+     <li>Credit Limit: <span>0.00</span></li>
+     <li>Winnings: <span>0.00</span></li>
+     <li>Total Net Exposure: <span>0.00</span></li>
+     </ul>
+     </div>
+
+	 
+	  </div></div>
+
+    </div>
+    
+    </div>
+    
+ <!--   
+    <div class="form-group"> 
+      <div class="col-sm-3 padding">
+         <input type="text" name="PL" ng-model="search.EventName" placeholder="EventName" class="form-control">
+      </div>
+      <div class="col-sm-3 padding">
+        <input type="text" name="CreatedOn" ng-model="search.CreatedOn" placeholder="CreatedOn" class="form-control">
+      </div>
+      <div class="col-sm-2 padding">
+          <input type="text" name="MarketName" ng-model="search.MarketName" placeholder="MarketName" class="form-control">
+      </div>
+      <div class="col-sm-1">
+        <a ng-click="onBtExport()"><img src="app/images/file2.png"/></a>
+      </div>
+
+  </div>
+
+   -->
+   
+   
+    <div class="downloadcls clearfix">
+       <div class="pull-right"> <a ng-click="onBtExport()"><img src="app/images/file2.png"/></a></div>
+      </div>
+   
+   
+<div class="row">
+<!--<div class="col-sm-12 col-md-12">-->
+    <!-- start Tab --> 
+    
+ <!--   <div ng-cloak="" class="tabsdemoDynamicHeight" ng-init="Allsport(0)">
+        <ul class="nav nav-tabs">
+	            <li class="active" ng-click='Allsport(0)'><a data-toggle="tab" href="javascript:void()">All</a></li>
+            <li ng-click='click_test(4)'><a data-toggle="tab" href="javascript:void()">Cricket</a></li>
+            <li><a data-toggle="tab"  ng-click='click_test(1)' href="javascript:void()">Soccer</a></li>
+            <li><a data-toggle="tab"  ng-click='click_test(2)' href="javascript:void()">Tennis</a></li>
+	       <li><a data-toggle="tab"  ng-click='click_test(0)' href="javascript:void()">Fancy</a></li>
+          </ul>
+      <md-content ng-if="false">
+        <md-tabs md-dynamic-height="" md-border-bottom="">
+                <md-tab label="All" md-on-select="Allsport(0)">
+            <md-content class="md-padding" style="display:none;">
+            </md-content>
+          </md-tab>
+          <md-tab label="Cricket" md-on-select="click_test(4)">
+            <md-content class="md-padding" style="display:none;">
+            </md-content>
+          </md-tab>
+          <md-tab label="Soccer" md-on-select="click_test(1)">
+            <md-content class="md-padding" style="display:none;">
+            </md-content>
+          </md-tab>
+          <md-tab label="Tennis" md-on-select="click_test(2)">
+            <md-content class="md-padding" style="display:none;">
+            </md-content>
+          </md-tab> 
+          <md-tab label="Horse Racing" md-on-select="click_test(7)">
+            <md-content class="md-padding" style="display:none;">
+            </md-content>
+          </md-tab>
+          <md-tab label="Fancy" md-on-select="click_test(0)">
+            <md-content class="md-padding" style="display:none;">
+            </md-content>
+          </md-tab>
+         
+                    
+        </md-tabs>
+      </md-content>
+    </div>
+-->
+    <!-- end of Tab -->
+    <div class="col-lg-12 col-md-12 col-sm-12 " style="max-height:400px;overflow: auto;">
+        <div class="lst_master_top settled_table clearfix">
+            <div class="form_row clearfix top_table_form">
+             
+                <table  class="table table-bordered table-condensed table-responsive">
+                  <thead>               
+                    <tr class="bg-primary">
+                      <th>Sno</th>
+                      <th>EventName</th>
+                      <th>MarketName</th>
+                      <th>P_L</th>
+                      <th>Comm</th>
+                      <th>CreatedOn</th>
+                      <th>Action</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr  ng-repeat="pldata in resultValue=(FuserPL | filter:search)">
+                      <td class="text-center">{{$index+1}}</td>
+                      <td >{{pldata.EventName}}</td>
+                      <td class="text-center">{{pldata.MarketName}}</td>
+                      <td class="text-center">{{pldata.PnL}}</td>
+                      <td class="text-center">{{pldata.Comm}}</td>
+                      <td class="text-center">{{pldata.CreatedOn}}</td>
+                      <td class="text-center"><button class="btn btn-warning btn-sm" ng-click="showBet(pldata)">Show Bet</button></td>
+                    </tr>
+                  <tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+    <div class="col-lg-12 col-md-12 col-sm-12 ">
+      <div class="top_table_form">
+      <table class="table table-bordered table-condensed table-responsive" style="margin-bottom:0px;">
+         <tfoot>
+          <tr class="bg-primary" style="">
+              <td colspan="3"></td>
+              <td><strong>(Total P & L )&emsp;    {{resultValue | sumOfValue:'PnL'}}</strong></td>
+              <td><strong>(Total Commission)&emsp;  {{resultValue | sumOfValue:'Comm'}}</strong></td>                    
+              <td colspan="2"></td>
+          </tr>
+      </tfoot>
+      </table>
+    </div>
+    </div>
+    <div class="lst_master" ng-show="false">
+        <div class="resp_table clearfix" style="background-color:#f5f5f5; padding:5px 10px;">
+            <div id="myGrid" class="ag-fresh" style="height:400px; margin-top: 4px;"></div>
+        </div>
+        <div class="total-box clearfix">
+                
+        </div>
+    </div>
+</div>
+     
+   </div> 

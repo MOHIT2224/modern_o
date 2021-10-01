@@ -1,0 +1,238 @@
+@media screen and (min-width:1200px) {
+#mobileDemo{ display:none}
+}
+
+@media screen and (max-width:1600px) {
+.banner_textarea { top:0px; }
+
+/*=======28-08-2018=======*/	
+	
+.bet_table {overflow-x: auto;}
+.bethistory {width: 100%;overflow-x: auto;}
+}
+
+
+@media screen and (max-width:1365px) {
+.banner_textarea{ left:15px; top:0px;}
+.banner_textarea h1 { font-size:20px; line-height:30px; }
+
+
+}
+
+@media screen and (max-width:1169px) {
+.banner_textarea{ left:25px; top:20px;}
+.banner_textarea h1{ font-size:18px; line-height:24px; padding-bottom: 5px;}
+.banner_textarea h2{ font-size:14px; line-height:16px; margin-bottom: 12px;}
+.banner_textarea a{ width: 80px; font-size:13px; padding:2px;}
+.banner_textarea a span{ padding:6px;}
+.td_btn { padding: 5px 7px;}
+.match-heading p { text-align:left; padding-left:7px; } 
+	
+
+/*=======28-08-2018=======*/
+	
+.binding{font-size: 24px;}
+a.td_btn {width: 80px;padding: 4px 5px;}
+.content-wrapper .heading{ padding-bottom: 10px;}
+.content-wrapper h1{font-size: 31px;}	
+.content-wrapper .table thead th{ font-size: 13px;}
+.content-wrapper .table tbody td{ font-size: 14px;}
+.terncondition ol li{font-size: 15px;}	
+.md-datepicker-input{min-width: 172px;}
+.report_filter ul li{width: 43%;}
+.report_history ul li {width: 33.5% !important;}
+form#form1{right: -15px;}
+.switch_box .form_text{width: 24%;}	
+.iner_form .form_text:last-child {width: 84% !important;}
+	
+.betsilip_sec{margin-top: 19px;}
+.betsilip_sec h5{padding-bottom: 0px;}
+.betsilip_sec h5 span{margin-top: 7px;}
+.betsilip_sec .nav-pills a{width: 100%;display: inline-block;}
+div#exTab1 ul.nav.nav-pills li{width: 100%;}
+.betsilip_sec .form_button {width: 100%;}
+
+#navbarResponsive .navbar-nav{flex-direction: inherit;margin-right: 27px;}
+.main-sidebar{padding-top: 10px;     left: -230px;}	
+body.addrightcls .main-sidebar{   left:0;}	
+body .content-wrapper {      margin-left: 0;}
+
+body.addrightcls .content-wrapper {      margin-left: 229px;}
+div#navbarResponsive{    width:75%;    position: absolute;    top: 0;  right: 14px;}
+
+#navbarResponsive li {   padding: 0 0;}
+
+}
+
+
+@media screen and (max-width:1023px) {
+.middle_left{ width:30%;}
+.middle_content{ width:70%; padding: 0 0px 0px 15px;}
+.banner_textarea{ left:15px; top:20px; text-align:left;}
+.banner_textarea h1{ font-size:15px; line-height:24px; padding-bottom: 5px; text-align:left;}
+.banner_textarea h2{ font-size:12px; line-height:16px; margin-bottom: 12px; text-align:left; }
+.banner_textarea a{ width: 80px; font-size:13px; padding:2px;}
+.banner_textarea a span{ padding:6px;}
+.middle_right{ display:none;}
+.td_btn { font-size:12px; padding: 5px 5px;}
+.match-heading p { text-align:left; padding-left:7px; } 
+	
+
+/*=======28-08-2018=======*/
+	
+.navbar-dark{padding: 25px 12px;}
+.navbar-toggler-right .fa.fa-bars{font-size: 25px;}
+#mainNav {z-index: 100000;}
+#mainNav .collapse{display: block;}
+#navbarResponsive .navbar-nav{flex-direction: inherit;margin-right: 27px;}
+#navbarResponsive.navbar-collapse {flex-basis: inherit;}
+p.last-login {display: none;}
+.navbar-toggler-right {position: absolute;right: 10px;}
+.navbar-nav .dropdown-menu{position: absolute;left: -100px;}
+ 
+.ng-scope .content-wrapper{margin-left: 0px;}	
+.bet_table table{ padding-bottom: 11px;}	
+.form_row .table{display: inline-table;}	
+.top_table_form .table{display: inline-table;}	
+.bg-primary td{font-size: 13px;}	
+.report_history ul li {width: 35%;}
+.first_row ul li{margin-right: 2px;}
+.anti_lrt,
+.anti_rig{    width: 50% !important;}
+
+} 
+
+
+@media screen and (max-width:767px) {
+	.lst_master_top .form_box{ width:100%}
+	#navbarResponsive .navbar-nav{flex-direction: inherit;margin-right: 7px;}
+header .navbar-inverse{ padding:10px 0 4px;}
+header .navbar-header{ float:left; margin:0px 0px !important;}
+header .mobile_login{ float:right;}
+header .mobile_login button{ background:#1e1e1e; color:#fff; border:none; border-radius:0px; font-weight:600; height:34px; margin-top:7px; padding: 5px 18px; border:1px solid #000; }
+header .mobile_login button:hover, header .mobile_login button:focus{ background:#1e1e1e; color:#ffb80c;}
+header .navbar-form{ display:none;}
+header .navbar-brand img{ width:165px;}
+.nav_blk .navbar-left.navbar-nav li a{ margin-right:0px;}
+.nav_blk .navbar-right.navbar-nav li a{ margin-left:0px;}
+.nav_blk .navbar-left.navbar-nav, .nav_blk .navbar-right.navbar-nav{ margin:0px 15px;}
+.middle_left, .middle_content{ width:100%;}
+.middle_left{ height:auto; margin-bottom:20px;}
+.middle_left .panel-group{ margin-bottom:0px;}
+.middle_content{ padding:0px;}
+.banner_textarea{ left:15px;}
+.banner_slider img{ max-width:100%; height:110px;}
+.banner_textarea h1{ font-size:0px; line-height:24px;}
+.banner_textarea h2{ font-size:0px; line-height:18px;}
+.banner_textarea a{ display:none;}
+.slick-dots{ bottom:2px;}
+.middle_right{ margin-top:20px;}
+.footer_top_blk{ padding:30px 0 5px;}
+.footer_top_blk ul{ margin: 30px 0 10px;}
+.footer_top_blk ul li{ padding: 0 15px 12px;}
+.bet_table table tr.blank_blk td:first-child, .bet_table table tr.blank_blk td:last-child, .bet_table table tr.blank_blk td:nth-child(2n+3){ display:block;}
+.bet_table table tr.blank_blk td.team_name{ width: 50% !important; display: table-cell;}
+.bet_table table tr.blank_blk td.team_name span{ display:inline-block; width:48%;}
+.odds_blk { width: 35%;}
+
+.bet_table table td.team_name { padding: 0 10px !important; width: 65%;}
+.sport_blk .nav-tabs li { width:33.33%;}
+.nav_blk .navbar-left.navbar-nav li a i {margin-right: 10px;}
+.nav_blk .navbar-nav li a i {margin-right: 10px;}
+.nav_blk .navbar-left.navbar-nav li a i {display: inline-block;margin-right: 10px;width: 21px;}
+	
+	
+/*=======28-08-2018=======*/
+
+	
+.content-wrapper h1{font-size: 28px;}	
+.content-wrapper .table thead th{ font-size: 12px;}
+.content-wrapper .table tbody td{ font-size: 12px;}
+.top_table_form .bg-primary td{font-size: 15px;}
+.report_filter ul li{width: 45%;margin-right: 9px;}
+.bg-primary td{font-size: 12px !important;}	
+.total-box h3 {font-size: 16px;}	
+.report_history .md-datepicker-triangle-button.md-button.md-icon-button{right: 46px;}	
+.top_table_form{margin-bottom: 15px;}	
+form#form1 {right: 30px;}
+.switch_box .form_text {width: 11%;}	
+.iner_form .form_text:last-child {width: 24% !important;}
+.betsilip_sec {margin-top: 0;}
+.market_tr.ng-scope{margin-bottom: 10px;}	
+div#exTab1 ul.nav.nav-pills li {width: 32%;}
+
+body.addrightcls .content-wrapper{   margin-left: 230px !important;   width: 100%;}
+#navbarResponsive .navbar-nav {  margin-right: 0px;  width: 100%;}
+
+/*.bet_table table td.team_name + td + td,
+.bet_table table td:last-child,
+.bet_table table td.team_name + td{ display:none}*/
+td.odds_blk a.td_btn{    width: 90px !important;}
+
+.bet_table table .top_xtow{ display:none}
+
+#navbarResponsive .nav-item { width:50%}
+
+.report_page .form-group .md-datepicker-triangle-button{ display:none}
+ 
+.report_page .anti_rig{ padding-right:15px;}
+.report_page .anti_lrt{ padding-left:15px;}
+
+
+}
+
+
+
+
+
+@media screen and (max-width:479px) {
+td.odds_blk a.td_btn {
+  float: none;
+  min-width: 50%;
+  width: 90px !important;
+}
+	
+	
+	
+/*=======28-08-2018=======*/
+	
+.navbar-brand{width: 168px;}	
+.navbar-toggler-right{top: 10px;}
+#mainNav{padding-bottom: 9px;}
+#navbarResponsive .navbar-nav{margin-right: 0px;}	
+.navbar-nav .dropdown-menu{left: -8px;}
+#navbarResponsive .dropdown-menu-right::before{display: none;}
+.main-header {max-height: 171px;}
+.terncondition h2{font-size: 22px !important;margin-bottom: 14px!important;}
+.terncondition ol li{font-size: 14px;}	
+.account_overview {margin-bottom: 24px;}	
+.top_table_form .bg-primary td{font-size: 11px;}
+.content-wrapper h1 {font-size: 23px;}
+	
+.total-box {padding-bottom: 20px;}
+.total-box h3 {font-size: 14px;line-height: 29px;}	
+.report_history ul li{width: 100% !important;}	
+.report_history md-content{ width:100%}
+.report_history .md-icon-button + .md-datepicker-input-container{margin-left: 26px;     width: 77%;}
+.report_history .md-datepicker-triangle-button.md-button.md-icon-button{right: 1px;}
+.report_history ul li:nth-child(3){width: 100%!important;}
+.search_proft {margin: 0px;margin-top: 0px;margin-top: 15px;}
+
+.switch_box .form_text {width: 12%;}
+form#form1 {right: -8px !important;}
+.switch_box .form_text:last-child .form_button a {margin-bottom: 0px;padding: 2px 5px;}
+.iner_form .form_text:last-child {width: 42% !important;}
+.switch_box .form_text:last-child .form_button + .form_button a{color:#000;font-size: 12px;}
+div#exTab1 ul.nav.nav-pills li {width: 100%;}
+
+
+}
+
+
+
+
+
+
+
+
+

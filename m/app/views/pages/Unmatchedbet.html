@@ -1,0 +1,44 @@
+<div>
+    <div>
+<div style="color:white;"><!-- {{UserData}} --></div>
+
+        <div class="table_match">
+            <div class="tab-content">
+              
+            <table class="table table-bordered table-condensed table-responsive" style="background-color:#fff;">
+            	<tr>
+            		<th>Srno</th>
+            		<th>Master</th>
+            		<th>Dealer</th>
+            		<th>User</th>
+            		<th>Selection Name</th>
+            		<th>Rate</th>
+            		<th>Amount</th>
+            		<th>P&L</th>
+            		<th>Back/Lay</th>
+            		<th>Date</th>
+            		<th>IP Address</th>
+            		<th>Action</th>
+            	</tr>
+            	<tr ng-repeat='records in UserData | filter : {"IsMatched":"0"}' ng-class="{lay-head: records.isBack == 1}">
+            		<td>{{$index+1}}</td>
+            		<td>{{records.MasterName}}</td>
+            		<td>{{records.ParantName}}</td>
+            		<td>{{records.userName}}</td>
+            		<td>{{records.selectionName}}</td>
+            		<td>{{records.Odds}}</td>
+            		<td>{{records.Stack}}</td>
+            		<td>{{records.P_L}}</td>
+            		<td>{{records.isBack}}</td>
+            		<td>{{records.MstDate}}</td>
+            		<td>{{records.ip}}</td>
+            		<td><a href="" ng-click="deleteUser(records.MstCode,records.UserId)"><i class="glyphicon glyphicon-remove" style="color:RED;"></i></a> {{records.MstCode}} || {{records.UserId}}</td>
+            		
+            	</tr>
+            </table>
+            </div>
+	            
+      	</div>
+       <!--  </div> -->
+    </div>
+</div>

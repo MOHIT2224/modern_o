@@ -1,0 +1,185 @@
+                
+        <!-- {{FancyData}} -->
+      <!--   <div ng-show="closeFancy">
+            <h1>Fancy Closed</h1>
+        </div> -->
+        <div class="col-sm-8 col-md-9 col-md-12 clearfix"> 
+
+          <div class="clearfix " >
+
+                 <div class="box-heading clearfix">
+                  <div style="float:left;">{{FancyData[0].HeadName}}
+                    <p class="head_min">{{FancyData[0].date | date:'fullDate'}} {{FancyData[0].time}}</p> 
+                  </div>
+                  <div style="float:right; margin-top:9px;">{{MatchName}}</div>
+          </div>
+                 
+           <div class="fancy_wrapper clearfix ">
+           		<!--<h3 style="margin-top:10px; font-weight:bold;">{{FancyData[0].HeadName}}</h3> -->
+            		<div class="fancy_top clearfix "> <a href="" class="rules-btn" style="background-color: #333333;border-radius: 2px;">
+                  		Rules</a>
+            			<span>Risk :  00</span>	
+            		</div>
+            		<p class="info-ex">
+                    {{FancyData[0].Remarks}}<!-- {{userType}}-{{UserTypeId}}-{{showOdd1}}-{{showEven1}} -->
+                     <!-- ||{{$root.NodeCntUsrDetails}}-->
+                </p>
+                 <div ng-hide="true">
+                     {{$root.userPlcBtn[0].Name1==''?name1=50:name1=$root.userPlcBtn[0].Name1}}
+                     {{$root.userPlcBtn[0].Value1==0?Value1=50:Value1=$root.userPlcBtn[0].Value1}}
+                     {{$root.userPlcBtn[0].Name2==''?name2=100:name2=$root.userPlcBtn[0].Name2}}
+                     {{$root.userPlcBtn[0].Value2==0?Value2=100:Value2=$root.userPlcBtn[0].Value2}}
+                     {{$root.userPlcBtn[0].Name3==''?name3=500:name3=$root.userPlcBtn[0].Name3}}
+                     {{$root.userPlcBtn[0].Value3==0?Value3=500:Value3=$root.userPlcBtn[0].Value3}}
+                     {{$root.userPlcBtn[0].Name4==''?name4=1000:name4=$root.userPlcBtn[0].Name4}}
+                     {{$root.userPlcBtn[0].Value4==0?Value4=1000:Value4=$root.userPlcBtn[0].Value4}}
+                     {{$root.userPlcBtn[0].Name5==''?name5=5000:name5=$root.userPlcBtn[0].Name5}}
+                     {{$root.userPlcBtn[0].Value5==0?Value5=5000:Value5=$root.userPlcBtn[0].Value5}}
+                     {{$root.userPlcBtn[0].Name6==''?name6=10000:name6=$root.userPlcBtn[0].Name6}}
+                     {{$root.userPlcBtn[0].Value6==0?Value6=10000:Value6=$root.userPlcBtn[0].Value6}}
+                 </div>
+                  <div class="even_odd clearfix" style="position:relative;">
+                     <button class="cell lay-cell" style="float:left;" ng-click="display_Oddfancy();">Odd</button>
+                     <button class="even_odd_but" style="float:right;" ng-click="display_Evenfancy();">Even</button>
+
+              		 		<div class="even_odd_box clearfix">
+              						<!--Box 1 Start-->
+                         
+                  						<div ng-show="showOdd1==true && (userType==3 || UserTypeId==3)" class="check-element animate-show lay-ele-box" style="padding:8px;"> 
+                  						<div class="even_top clearfix">
+                                            <form name="oddForm" method="post" >
+                                                <div class="even_top_left clearfix"> 
+                                                    <span>Bet On Odd </span>
+                                                    <input type="number" min="0" ng-model="betValue" id="betValue" name="betValue">
+                                            
+                                                    <input type="hidden" name="odd" value="1" ng-model="OddValue">
+
+                                                </div>
+                                                <div class="even_top_right clearfix"> 
+                                                    <button class="eve_but place-btn" ng-click="saveUserOddFancyBet(1)" ng-disabled="btnPlaceDis">PLACE</button>
+                                                    <button class="eve_but clear-btn" ng-click="betValue=0" >CLEAR </button>
+                                                    <button class="odd_but cancel-btn" ng-click="showOdd1=false;showEven1=false;betValue=0;" >CANCEL </button>                                                           
+                                                </div>
+                                            </form>
+                        					</div>
+                                                  
+
+                                          <div ng-if="$root.MyLenth==0" class="even_bot clearfix">
+                                              <button ng-click="GetBetValue(betValue,50)" class="eve_but">50</button>
+                                              <button ng-click="GetBetValue(betValue,100)" class="eve_but">100</button>
+                                              <button ng-click="GetBetValue(betValue,250)" class="eve_but">250</button>
+                                              <button ng-click="GetBetValue(betValue,500)" class="eve_but">500</button>
+                                              <button ng-click="GetBetValue(betValue,1000)" class="eve_but">1000</button>
+                                              <button ng-click="GetBetValue(betValue,5000)" class="eve_but">5000</button>
+                                          </div>
+                                          <div ng-if="$root.MyLenth==1" class="even_bot clearfix">
+                                              <button type="button" ng-click="GetBetValue(betValue,Value1)" class="btn num-btns">{{name1}}</button>
+                                              <button type="button" ng-click="GetBetValue(betValue,Value2)" class="btn num-btns">{{name2}}</button>
+                                              <button type="button" ng-click="GetBetValue(betValue,Value3)" class="btn num-btns">{{name3}}</button>
+                                              <button type="button" ng-click="GetBetValue(betValue,Value4)" class="btn num-btns">{{name4}}</button>
+                                              <button type="button" ng-click="GetBetValue(betValue,Value5)" class="btn num-btns">{{name5}}</button>
+                                              <button type="button" ng-click="GetBetValue(betValue,Value6)" class="btn num-btns">{{name6}}</button>
+                                          </div>
+                                 
+                  						</div>
+                          
+                          <!--Box 1 End-->
+                                      
+                 					<!--Box 2 Start-->
+                          
+                  			<div ng-show="showEven1==true && (userType==3 || UserTypeId==3)" class="check-element animate-show back-ele-box" style="padding:8px;"> 
+                            <div class="even_top clearfix">
+                              <form name="oddForm" method="post" >
+                                  <div class="even_top_left clearfix"> 
+                                      <span>Bet On Even <!-- {{userType==3}}{{UserTypeId==3}} --></span>
+                                      <input type="number" min="0" ng-model="betValue" id="betValueEven" name="betValue" >
+                                      
+                                      <input type="hidden" name="even" value="0" ng-model="EvenValue">
+
+                                  </div>
+                                  <div class="even_top_right clearfix"> 
+                                      <button class="eve_but place-btn" ng-click="saveUserOddFancyBet(0)" ng-disabled="btnPlaceDis">PLACE</button>
+                                      <button class="eve_but clear-btn" ng-click="betValue=0" >CLEAR </button>
+                                      <button class="odd_but cancel-btn" ng-click="showOdd1=false;showEven1=false;betValue=0;" >CANCEL </button>                                                  
+                                  </div>
+                              </form>
+                            </div>
+                                            
+                            <div ng-if="$root.MyLenth==0" class="even_bot clearfix">
+                                <button ng-click="GetBetValue(betValue,50)" class="eve_but">50</button>
+                                <button ng-click="GetBetValue(betValue,100)" class="eve_but">100</button>
+                                <button ng-click="GetBetValue(betValue,250)" class="eve_but">250</button>
+                                <button ng-click="GetBetValue(betValue,500)" class="eve_but">500</button>
+                                <button ng-click="GetBetValue(betValue,1000)" class="eve_but">1000</button>
+                                <button ng-click="GetBetValue(betValue,5000)" class="eve_but">5000</button>
+                            </div>
+                            <div ng-if="$root.MyLenth==1" class="even_bot clearfix">
+                                <button type="button" ng-click="GetBetValue(betValue,Value1)" class="btn num-btns">{{name1}}</button>
+                                <button type="button" ng-click="GetBetValue(betValue,Value2)" class="btn num-btns">{{name2}}</button>
+                                <button type="button" ng-click="GetBetValue(betValue,Value3)" class="btn num-btns">{{name3}}</button>
+                                <button type="button" ng-click="GetBetValue(betValue,Value4)" class="btn num-btns">{{name4}}</button>
+                                <button type="button" ng-click="GetBetValue(betValue,Value5)" class="btn num-btns">{{name5}}</button>
+                                <button type="button" ng-click="GetBetValue(betValue,Value6)" class="btn num-btns">{{name6}}</button>
+                            </div>
+                        </div>
+                          
+              						<!--Box 2 End-->
+                          <div ng-show="closeFancy" class="ball-msg-box">
+                           <h1>{{Msg}}</h1>
+                          </div>
+              		 		</div>
+                      <div ng-show="ngValue==true;" class="place-alert fade in ">
+                        {{ngMessage}}
+                      </div>
+
+              		</div>                 
+           </div>
+                  
+        </div>
+       <div class="clearfix fancy_bot col-lg-12 col-md-12 col-sm-12 lst_top_table">
+            	  <div class="box-heading"> Fancy Bets  </div>
+                  <div class="resp_table clearfix ">
+                  
+                      <div id="myGrid" class="ag-fresh" style="height: 300px; margin-top: 4px;"></div>
+                      	
+                  </div>
+          </div>
+        </div>
+        
+       <div class="col-sm-4 col-md-3 " style="padding-right:0px;">
+                <div>
+                  <div class="">
+                    <div class="box-heading"> Score Position
+                        <span class="rigt-ref" style="margin-right:5px;">
+                            <i class="glyphicon glyphicon-refresh" style="font-size:15px;" ng-click="RefreshData()"></i>
+                        </span>
+                    </div>
+                      <div class="bet-cont tab_container score-pos-box">
+                        <table class="table bets-table">
+                          <thead>
+                            <tr>
+                              <th style="text-align:center;">Score</th>
+                              <th style="text-align:center;">Amount</th>
+                              <!--  <th style="text-align:center;">Yes[Back]</th>
+                                <th style="text-align:center;">No[Lay]</th> -->
+                                <!--  <th style="text-align:center;">ResultValue</th> -->
+                            </tr>
+
+                          </thead>
+                          
+                          <tbody align="center"><!-- .ResultValue -->
+
+                            <tr ng-repeat="score in scorePosition"> 
+
+                                  <td class="back-txt">{{score.OddValue==null?0:score.OddValue}}</td>
+                                   <td class="amou_no amt-txt">{{score.a}}</td>
+
+                              </tr>
+                           
+                          </tbody>
+                        </table>
+                      </div>
+                  </div>
+                </div>
+              </div>
+ 

@@ -1,0 +1,137 @@
+﻿<md-dialog class="dial-width-650">
+    <md-toolbar>
+        <div class="md-toolbar-tools">
+            <h2>{{HeadingType}} For {{node.name}}</h2>
+            <span flex></span>
+            <md-button class="md-icon-button" ng-click="hide()">
+                <md-icon md-svg-src="app/images/close.svg" aria-label="Close dialog"></md-icon>
+            </md-button>
+        </div>
+    </md-toolbar>
+    <md-dialog-content>
+        <div class="md-dialog-content">
+            <div class="clearfix">
+                <form name="userForm" ng-submit="submitForm_Users(user,node)">
+                    <div class="popup-form-box col-lg-12 col-md-12 col-sm-12 col-xs-12 clearfix">
+                        <div class="popup-inp-box  col-lg-6 col-md-6 col-sm-6 col-xs-12">
+                            <input type="text" name="master_name" id="master_name" class="popup-input" ng-model="user.master_name" required="required" md-autofocus />
+                            <label>{{HeadingName}}</label>
+                        </div>
+                        <div class="popup-inp-box  col-lg-6 col-md-6 col-sm-6 col-xs-12">
+                            <p class="input-group datepick-box">
+                                <input ng-init="user.dt = (getDate | date:'yyyy-MM-dd')" type="text" dis="" class="popup-input" id="reg_date" datepicker-popup="{{format}}" ng-model="user.dt" is-open="opened" min-date="user.dt" datepicker-options="dateOptions" ng-required="true" close-text="Close" datetime-picker="yyyy dd MM " style="box-shadow:none;" ng-disabled="getDate" />
+                                <label>Registration Date</label>
+                                <span class="input-group-btn">
+                                    <button type="button" style="border-radius:50%; height:40px; width:40px;" class="btn btn-default" ng-click="open($event)">
+                                        <i class="glyphicon glyphicon-calendar"></i>
+                                    </button>
+                                </span>
+                            </p>
+                        </div>
+                    </div>
+                    <div class="popup-form-box col-lg-12 col-md-12 col-sm-12 col-xs-12 clearfix">
+                        <div class="popup-inp-box col-lg-6 col-md-6 col-sm-6 col-xs-12">
+                            <input ng-init="user.username=null" type="text" name="username" id="username" class="popup-input" ng-model="user.username" ng-change="checkUserName(user.username)" ng-minlength="4" required="required" />
+                            <label>User ID</label>
+
+                            <p ng-show="errorMsg" style="text-align: center; color:GREEN; font-size: 14px; margin-bottom: 15px;">{{errorMsg}}</p>
+                            <p ng-show="errorMsg1" style="text-align: center; color:RED; font-size: 14px; margin-bottom: 15px;">{{errorMsg1}}</p>
+                        </div>
+                        <div class="popup-inp-box  col-lg-6 col-md-6 col-sm-6 col-xs-12">
+                            <input ng-init="user.password=''" type="password" id="password" name="password" class="popup-input pwd-inp" ng-model="user.password" required="required" />
+                             <meter min="0" class="pwd-meter" max="4" value="{{v(user.password)}}"></meter>
+                            
+                            <label>Password</label>
+                        </div>
+                    </div>
+
+                    <div class="popup-form-box col-lg-12 col-md-12 col-sm-12 col-xs-12 clearfix">
+                        <!-- ng-show="node.usetype==1 || node.usetype==0" -->
+                        <!--   <div ng-init="pval=0;node.usetype=1?maxValue=(100-node.partner):maxValue=100;">{{node.usetype}}</div> -->
+                        <div class="popup-inp-box  col-lg-3 col-md-3 col-sm-3 col-xs-12" ng-if="node.usetype==1 || node.usetype==0">
+                            <input ng-init="user.partnership=0" type="number" id="partnership" name="partnership" class="popup-input"  min="0" oninput="this.value = this.value.replace(/[^0-9]/g, '');" max="{{node.partner}}" ng-model="user.partnership" ng-value="pval"  />
+                            <label>Partnership {{node.partner}}</label>
+                            <!-- <pre>{{ userForm.partnership.$error | json}}</pre> -->
+                        </div>
+
+                        <div class="popup-inp-box  col-lg-3 col-md-3 col-sm-3 col-xs-12" ng-if="node.usetype == 0">
+                            <input ng-init="user.Commission=UserComm" type="number" id="Commission" ng-minlength="1" 
+ng-maxlength="2" step=".1" name="Commission" min="0" max="2" class="popup-input comm-inp" ng-model="user.Commission" required="required" limit-to-max  oninput="this.value = this.value.replace(/[^0-9.]/g, '').replace(/(\..*)\./g, '$1');" /><!-- min="{{maxCommission}}" -->
+                            <label>
+                                Odds Commission
+                                <div ng-init="node.usetype!=0?maxCommission=0:maxCommission=node.Commission">
+                                </div>
+                            </label>
+                            <span class="perc" style="display:inline-block; vertical-align:bottom;">%</span>
+                        </div>
+      <div class="popup-inp-box  col-lg-3 col-md-3 col-sm-3 col-xs-12" ng-if="node.usetype != 0">
+                            <input ng-init="user.Commission=UserComm" type="number" id="Commission" ng-minlength="1" ng-maxlength="100" step=".1" name="Commission" min="0" max="100" class="popup-input comm-inp" ng-model="user.Commission"  required="required"  oninput="this.value = this.value.replace(/[^0-9.]/g, '').replace(/(\..*)\./g, '$1');" /><!-- min="{{maxCommission}}" -->
+                            <label>
+                                Odds Commission
+                                <div ng-init="node.usetype!=0?maxCommission=0:maxCommission=node.Commission">
+                                </div>
+                            </label>
+                            <span class="perc" style="display:inline-block; vertical-align:bottom;">%</span>
+                        </div>
+
+                        <div ng-if="node.usetype==3 || node.usetype==2" class="popup-inp-box  col-lg-3 col-md-3 col-sm-3 col-xs-12">
+                            <input ng-init="user.maxProfit=0" type="number" id="maxProfit" name="maxProfit" class="popup-input" ng-model="user.maxProfit" oninput="this.value = this.value.replace(/[^0-9]/g, '');" />
+                            <label>Max Profit</label>
+                        </div>
+                        <div ng-if="node.usetype==3 || node.usetype==2" class="popup-inp-box  col-lg-3 col-md-3 col-sm-3 col-xs-12">
+                            <input ng-init="user.maxLoss=0" type="number" id="maxLoss" name="maxLoss" class="popup-input" ng-model="user.maxLoss" oninput="this.value = this.value.replace(/[^0-9]/g, '');" />
+                            <label>Max Loss</label>
+                        </div>
+                        <div class="popup-inp-box col-lg-3 col-md-3 col-sm-3 col-xs-12" ng-if="node.usetype==2">
+                            <input ng-init="user.maxStake=0" type="number" id="maxStake" name="maxStake" class="popup-input" ng-model="user.maxStake" oninput="this.value = this.value.replace(/[^0-9]/g, '');" />
+                            <label>Odds Max Stake </label>
+                        </div>
+                        <div class="popup-inp-box col-lg-3 col-md-3 col-sm-3 col-xs-12" ng-if="node.usetype==2">
+                            <input ng-init="user.sessionStake=0" type="number" id="sessionStake" name="sessionStake" class="popup-input" ng-model="user.sessionStake" oninput="this.value = this.value.replace(/[^0-9]/g, '');" />
+                            <label>Session Max Stake </label>
+                        </div>
+                        <div class="popup-inp-box col-lg-4 col-md-4 col-sm-4 col-xs-12">
+                            <input ng-init="user.sessionCommission=0" type="number" id="sessionCommission" name="sessionCommission" class="popup-input" ng-model="user.sessionCommission" step=".1" max="100" oninput="sithis.value = this.value.replace(/[^0-9.]/g, '').replace(/(\..*)\./g, '$1');"/>
+                            <label>Session Commission</label>
+                        </div>
+                        <div ng-if="false" class="popup-inp-box col-lg-4 col-md-4 col-sm-4 col-xs-12">
+                            <input ng-init="user.otherCommission=0" type="number" id="otherCommission" name="otherCommission" class="popup-input" ng-model="user.otherCommission" max="100" step=".1"  oninput="this.value = this.value.replace(/[^0-9.]/g, '').replace(/(\..*)\./g, '$1');"/>
+                            <label>Other Commission </label>
+                        </div>
+                        <div class="popup-inp-box col-lg-4 col-md-4 col-sm-4 col-xs-12" ng-if="node.usetype==2 ">
+                            <input ng-init="user.gngInPlyStake=0" type="number" id="gngInPlyStake" name="gngInPlyStake" class="popup-input" ng-model="user.gngInPlyStake" oninput="this.value = this.value.replace(/[^0-9]/g, '');" />
+                            <label>Going InPlay Stake </label>
+                        </div>
+                    </div>
+                    <div class="popup-form-box col-lg-12 col-md-12 col-sm-12 col-xs-12 clearfix"><!-- change condition 20122017 -->
+                    <div class="popup-inp-box col-lg-3 col-md-3 col-sm-3 col-xs-6"><!-- && loginType==0 -->
+                            <input ng-init="user.betDelay=0" type="number" id="betDelay" name="betDelay" class="popup-input" ng-model="user.betDelay" oninput="this.value = this.value.replace(/[^0-9]/g, '');" />
+                            <label>Bet Delay(In Sec)</label>
+                        </div>
+                        <div class="popup-inp-box col-lg-3 col-md-3 col-sm-3 col-xs-6"><!-- && loginType==0 -->
+                            <input ng-init="user.session_delay=0" type="number" id="session_delay" name="session_delay" class="popup-input" ng-model="user.session_delay" oninput="this.value = this.value.replace(/[^0-9]/g, '');" />
+                            <label>Session Delay(In Sec)</label>
+                        </div>
+                        <div class="popup-inp-box  col-lg-6 col-md-6 col-sm-6 col-xs-12">
+                            <textarea name="remarks" id="remarks" ng-model="user.remarks" class="popup-input"></textarea>
+                            <label>Remark</label>
+                        </div>
+ <div class="popup-inp-box  col-lg-6 col-md-6 col-sm-6 col-xs-12" ng-if="node.usetype==0 || node.usetype==1">
+                           <input  type="number" id="nouser" name="nouser" required class="popup-input" ng-model="user.create_no_of_child" oninput="this.value = this.value.replace(/[^0-9]/g, '');" />
+                            <label>No. of users</label>
+     <span class="red" ng-show="userForm.nouser.$touched && userForm.nouser.$invalid">Enter no. of users</span>
+                        </div>
+                    </div>
+                    <div class="popup_row col-lg-12 col-md-12 col-sm-12 col-xs-12 clearfix">
+                        <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12" ng-init="user.typeId=HeadingTypeId" style="text-align:center;">
+                            <input type="hidden" id="typeId" name="typeId" value="{{HeadingTypeId}}" ng-modal="user.typeId" />
+                            <input type="hidden" id="parantId" name="parantId" value="{{parantId}}" ng-model="node.id" />
+           <button type="submit" class="btn btn-primary" ng-disabled="userForm.$invalid || chkUser">SUBMIT</button>
+                                        
+                     </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </md-dialog-content>
+</md-dialog>

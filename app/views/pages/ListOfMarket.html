@@ -1,0 +1,91 @@
+<div class="content-wrapper ng-scope" style="min-height: 720px;">
+<div class="innerbox clearfix">
+<div class="col-sm-12 col-md-12 master-cont">
+    <div class="load-box" ng-show="loading"><img id="mySpinner" src="app/images/loading1.gif" /></div>
+    <h5>Filtered {{ filtered.length }} of {{totalItems}} total Market</h5>
+    <div class="col-lg-12 col-md-12 col-sm-12 " style="padding: 0px;" ng-init="search.active=1">
+        <div class="lst_master_top clearfix">
+            <div class="form_row col-lg-12 col-md-12 col-sm-12 col-xs-12 clearfix top_table_form" style="padding: 0px;">
+                <!-- <div class="form_box  col-lg-2 col-md-2 col-sm-2 col-xs-12" style="padding: 0px;">
+                    <label>Status</label>
+                    <select ng-model="search.active" ngrequired>
+                        <option value="">All</option>
+                        <option value="1" ng-selected="true">Active</option>
+                        <option value="0">Inactive</option>
+                    </select>
+                </div> -->
+               <!--  <div class="form_box  col-lg-2 col-md-2 col-sm-2 col-xs-12" style="padding: 0px;">
+                    <label>Sport Name</label>
+                    <input type="text" ng-model="search.sportname" ng-change="filter()" placeholder="Search By Sport name" />
+                </div> -->
+                <div class="form_box  col-lg-3 col-md-3 col-sm-3 col-xs-12" style="padding: 0px;">
+                    <label>Series Name</label>
+                    <input class="form-control" type="text" ng-model="search.Name" ng-change="filter()" placeholder="Search By Series Name" />
+                </div>
+                <div class="form_box  col-lg-3 col-md-3 col-sm-3 col-xs-12" style="padding: 0px;">
+                    <label>Match Name</label>
+                    <input class="form-control" type="text" ng-model="search.matchName" ng-change="filter()" placeholder="Search By Match Name" />
+                </div>
+                <div class="form_box  col-lg-3 col-md-3 col-sm-3 col-xs-12" style="padding: 0px;">
+                    <label>Market Name</label>
+                    <input class="form-control" type="text" ng-model="search.MarketName" ng-change="filter()" placeholder="Search By Market Name" />
+                </div>
+            </div>
+            <div class="col-lg-12 col-md-12 col-sm-12 lst_top_table">
+            </div>
+        </div>
+        <div class="col-lg-12 col-md-12 lst_master">
+            <div class="listdata-table clearfix ">
+                <table class="table table-bordered table-condensed table-responsive" style="background-color: #fff;">
+                    <thead>
+                        <tr>
+                            <th><a ng-click="sort_by('seriesId');"><i class="glyphicon glyphicon-sort"></i></a>SNo</th>
+                            <th><a ng-click="sort_by('Name');"><i class="glyphicon glyphicon-sort"></i></a>Series Name</th>
+                            <th><a ng-click="sort_by('matchName');"><i class="glyphicon glyphicon-sort"></i></a>Match Name</th>
+                            <th><a ng-click="sort_by('MarketName');"><i class="glyphicon glyphicon-sort"></i></a>Market Name</th>
+                            <th ng-if="false">Max GoingInPlay Stake</th>
+                            <th>Max bet liability</th>
+                            <th>Max market liability</th>
+                            <th>Max market profit</th>
+                            <th>Bet Allow</th>
+                        </tr>
+                    </thead>
+                    <tr ng-repeat="matche in filtered = (match_data | filter:search | orderBy : predicate :reverse) | startFrom:(currentPage-1)*entryLimit | limitTo:entryLimit">
+                        <td data-label="Serial No">{{(currentPage-1)*entryLimit +$index+1}}</td>
+                        <td data-label="Match">{{matche.Name}}</td>
+                        <td data-label="MstDate">{{matche.matchName}}</td>
+                        <td data-label="FromTime">{{matche.MarketName}}</td>
+                        <td ng-if="false" data-label="Action" class="switch-icon">
+                            <input type="text" class="form-control" name="gngInPlay" ng-model="matche.stake" ng-blur='changeMarketStake(matche.MarketId,matche.stake)'>
+                        </td>
+                        <td data-label="Action" class="switch-icon">
+                            <input type="text" class="form-control" name="max_bet_liability" ng-model="matche.max_bet_liability" ng-blur='changeLiability(matche.MarketId,matche.max_bet_liability,"bet")'>
+                        </td>
+                        <td data-label="Action" class="switch-icon">
+                            <input type="text" class="form-control" name="max_market_liability" ng-model="matche.max_market_liability" ng-blur='changeLiability(matche.MarketId,matche.max_market_liability,"market")'>
+                        </td>
+
+                        <td data-label="Action" class="switch-icon">
+                            <input type="text" class="form-control" name="max_market_profit" ng-model="matche.max_market_profit" ng-blur='changeProfit(matche.MarketId,matche.max_market_profit)'>
+                        </td>
+                        <td data-label="Action" class="switch-icon">
+                            <div ng-hide="true">
+                                {{matche.visibility==1?switch=true:switch=false}}</div>
+                            <md-switch ng-model="switch" aria-label="Switch 1" ng-change='changeMarketStatus(matche.MarketId,switch)'><!--{{ switch }}--></md-switch></td>
+                    </tr>
+                </table>
+            </div>
+            <div class="col-md-12" ng-show="filteredItems == 0">
+                <div class="col-md-12">
+                    <h4>No Match found</h4>
+                </div>
+            </div>
+            <div class="col-md-12" ng-show="filteredItems > 0">
+                <pagination total-items="filtered.length" ng-model="currentPage" max-size="5" class="pagination-sm" boundary-links="true" rotate="false" num-pages="noOfPages" items-per-page="entryLimit"></pagination>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+</div>
+</div>

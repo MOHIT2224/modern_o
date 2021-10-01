@@ -1,0 +1,50 @@
+<div class="content-wrapper" ng-init="GetMatchMarket(1)">
+<div class="innerbox">
+<div class="binding"> <h1>Match Market</h1> </div>
+<!-- {{events}} -->
+	
+  <div class="col-lg-12 col-md-12 lst_master"><!-- ng-show="loading" -->
+  			<div class="load-box" ng-show="loading">
+  				<img id="mySpinner" src="app/images/loading1.gif" />
+  			</div>
+              <div class="resp_table clearfix ">
+              <!-- {{GetSeriesData}} -->
+    		        <table class="table table-bordered table-condensed table-responsive">
+		    		      <thead>
+			    		        <tr >
+			    		       
+			    		        	<th>Serial No</th>
+			    		            <th><a ng-click="sort_by('matchName');"><i class="glyphicon glyphicon-sort"></i></a>Match</th>
+			    		            <th><a ng-click="sort_by('MstDate');"><i class="glyphicon glyphicon-sort"></i></a>Open Date</th>
+			    		           <th>Action </th>
+			    		        </tr>
+		    		            
+		    		        
+		    		      </thead><!-- | date: 'yyyy-MM-dd HH:mm:ss' -->
+                          <tbody id="tblData1">
+		    		     	<tr ng-repeat="sbet in lstSettlementBet | orderBy : predicate :reverse"><!--sourabh 170105-->
+								<td data-label="Serial No">{{(currentPage-1)*entryLimit +$index+1}}</td>	
+								<td data-label="Match Id">{{sbet.matchName}}</td>
+			<td data-label="Open Date">{{sbet.MstDate | date: 'yyyy-MM-dd HH:mm:ss' }}<!-- | date: 'yyyy-MM-dd HH:mm:ss' --></td>
+								<td data-label="Action">
+									<span ng-if="sbet.bet_deleted==0" class="fa fa-trash" ng-click="deleteBet(sbet)" role="button" tabindex="0"></span>
+<span ng-if="sbet.bet_deleted==1" class="fa fa-undo" ng-click="undoBet(sbet)" role="button" tabindex="0"></span>
+                                							</td>
+							</tr>
+                        </tbody>
+    		        </table>
+              </div>
+
+    		        <div class="col-md-12" ng-show="lstSettlementBet.length == 0">
+    		        <div class="col-md-12">
+    		            <h4>No records found</h4>
+    		        </div>
+    		        </div>
+		   <div class="col-md-12" ng-show="lstSettlementBet.length > 0">
+ <pagination total-items="totalCount" ng-model="currentPage" ng-click="GetSettlementBetList(currentPage)" max-size="maxSize" class="pagination-sm" boundary-links="true" rotate="false" num-pages="noOfPages" items-per-page="entryLimit"></pagination>
+
+            </div>
+    		      </div>
+    		  </div>
+          </div>
+

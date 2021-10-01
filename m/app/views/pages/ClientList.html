@@ -1,0 +1,250 @@
+<div class="content-wrapper">
+<div ng-show="display">
+  <span style="left: 93%;top: 80px;z-index: 1;" class="hidden-xs" ng-if="false">
+  <button class="btn btn-success client-btn" ng-click="display=false">Add New User</button>
+</span>
+ <div class="load-box" ng-show="loading">
+        <img id="mySpinner" src="app/images/loading1.gif" />
+    </div>
+
+<div class="member_listing">
+
+    <div class="table-responsive login_table">
+        <table class="table  my-market table-striped dealerclient">  
+             <thead>
+                <tr class="masterbalance">
+                  <td ng-if="false"><button class="btn btn-success client-btn visible-xs" ng-click="display=false">Add New User</button>
+
+</td>
+                  <td colspan="2">
+                    <strong>Settlement
+                        <a href="" ui-sref="dealerDashboard.SettlementEntry">
+                          <div ng-if="SETTLEing>0" class="text-center balance">{{SETTLEing | number : 2}}</div>
+                          <div ng-if="SETTLEing<0" class="text-center Libility">{{SETTLEing | number : 2}}</div>
+                          <div ng-if="SETTLEing==0" class="text-center" style="color:#000;">{{SETTLEing | number : 2}}</div>
+                        </a>
+                    
+                    </strong>
+                  </td>
+                  <td>
+                    <strong>Dealer Balance 
+                      <div class="text-center balance" ng-class="{'green':$root.DealerFreeChip>0,'red':$root.DealerFreeChip<0}"> {{$root.DealerFreeChip}}</div>
+                    </strong>
+                  </td>
+                  <td>
+                    <strong>Credit Limit  
+                      <div class="text-center balance" ng-class="{'green':CreditLimit>0,'red':CreditLimit<0}">{{CreditLimit | number : 2}}</div>
+                    </strong>
+                  </td>
+                  <td>
+                    <strong>Available Balance 
+                      <div class="text-center balance" ng-class="{'green':availBal>0,'red':availBal<0}">{{availBal | number}}</div>
+                    </strong>
+                  </td>
+                  
+                  <td>
+                    <strong>Profit & Loss
+                      <div ng-if="TotalP_L>0" class="text-center balance" ng-class="{'green':TotalP_L>0,'red':TotalP_L<0}">{{TotalP_L | number : 2}}</div>
+                        <div ng-if="TotalP_L<0" class="text-center Libility" ng-class="{'green':TotalP_L>0,'red':TotalP_L<0}">{{TotalP_L | number : 2}}</div>
+                        <div ng-if="TotalP_L==0" class="text-center" style="color:#000;" ng-class="{'green':TotalP_L>0,'red':TotalP_L<0}">{{TotalP_L | number : 2}}</div>
+                    </strong>
+                  </td>
+                  <td>
+                    <strong>Liability
+                      <div class="text-center Libility" ng-class="{'green':TotalLiability>0,'red':TotalLiability<0}">{{TotalLiability | number : 2}}</div>
+                    </strong>
+                  </td>
+                  <td>
+                    <strong>Balance
+                      <div class="text-center balance" ng-class="{'green':TotalBal>0,'red':TotalBal<0}">{{TotalBal | number : 2}}</div>
+                    </strong>
+                  </td>
+                  
+                  
+                  <!-- <td>
+                    <strong>MASTER SETLING
+                        <div ng-if="SETTLEing>0" class="text-center balance">{{SETTLEing}}</div>
+                        <div ng-if="SETTLEing<0" class="text-center Libility">{{SETTLEing}}</div>
+                        <div ng-if="SETTLEing==0" class="text-center" style="color:#000;">{{SETTLEing}}</div>
+                    </strong>
+                  </td> -->
+                  <td>
+                    <strong>MASTER A/C
+                       <div ng-if="MasterAC>0" ng-class="{'green':(SETTLEing+TotalP_L)>0,'red':(SETTLEing+TotalP_L)<0}" class="text-center balance">{{SETTLEing +TotalP_L | number : 2}}</div>
+                        <div ng-if="MasterAC<0" ng-class="{'green':(SETTLEing+TotalP_L)>0,'red':(SETTLEing+TotalP_L)<0}" class="text-center Libility">{{SETTLEing +TotalP_L | number : 2}}</div>
+                        <div ng-if="MasterAC==0" ng-class="{'green':(SETTLEing+TotalP_L)>0,'red':(SETTLEing+TotalP_L)<0}" class="text-center" style="color:#000;">{{SETTLEing +TotalP_L | number : 2}}</div>
+                    </strong>
+                  </td>
+                  <td>
+                    <strong><button type="button" class="btn btn-info btn-sm" ng-click="GetUserList()">Refresh</button>
+                    </strong>
+                    <strong><button type="button" class="btn btn-info btn-sm" ng-click="Reload()">Reload</button>
+                    </strong>
+		<input type="text" ng-model="users.mstrname" style="display: inline-block !important" class="form-control" ng-change="filter()" placeholder="Search By Name" />
+                  </td>
+                </tr>
+
+				<tr class="row-name client-rowthead">
+					<th>S No</th>
+					<th>Client</th>
+					<th>A/c Name</th>
+					<th>Credit Limit</th>
+					<th>Avail Bal</th>
+					
+					<th>P|L</th>
+					<th>Liability</th>
+					<th>Balance</th>
+					<th>Is Active</th>
+					<th>Action</th>
+				</tr>
+             </thead>   
+             <tbody id="tblData">
+                <tr class="row-content" ng-repeat="users in  filtered = (UserList | filter:users | orderBy : predicate :reverse) | startFrom:(currentPage-1)*entryLimit | limitTo:entryLimit" ng-if="users.usetype !=2">
+					<td>{{(currentPage-1)*entryLimit +$index+1}} </td>
+					<td ><a href="" ui-sref="dealerDashboard.ProfitlossByUsercntr({UserID: users.usecode,usetype:users.usetype})">{{users.usename}}</a></td>
+					<td>{{users.mstrname}}</td>
+					<td>{{users.FreeChips}}</td>
+					<td ng-class="{'green':sumOfBal(users.FreeChips,users.P_L,users.Liability)>0,'red':sumOfBal(users.FreeChips,users.P_L,users.Liability)<0}">{{sumOfBal(users.FreeChips,users.P_L,users.Liability) | number : 2}}</td>
+					
+					<td ng-class="{'green':users.P_L>0,'red':users.P_L<0}">{{users.P_L | number : 2}}</td>
+					<td ng-class="{'green':users.Liability>0,'red':users.Liability<0}">{{users.Liability | number : 2}}</td>
+					<td ng-class="{'green':users.Balance>0,'red':users.Balance<0}">{{users.Balance | number : 2}}</td>
+					<td><div ng-hide="true">{{users.active==1?switch=true:switch=false}}</div>
+					<md-switch ng-model="switch" aria-label="Switch 1" ng-click='getStatus(users,switch)'></md-switch></td>
+					<td>
+					<a class="btn btn-danger btn-sm" ui-sref="dealerDashboard.anctStatementCntr({userId: users.usecode})" title="Report">R</a>
+					<a class="btn btn-warning btn-sm" ng-click="showChipsInOut(users)" title="Deposite/Withdraw">D/W</a> 
+					<a class="btn btn-success btn-sm" ng-click="showChangePwd(users)" title="Change Password">C-P</i></a> 
+					<a ng-if="users.P_L !=0 && false" class="btn btn-success btn-sm" href="" ng-click="showSettlement(users,$root.DealerFreeChip);">Settlement</a>
+					<button type="button" class="btn btn-primary btn-sm" ng-click="showViewSetting(users);"><i class="fa fa-pencil"></i></button>
+					<button type="button" class="btn btn-info btn-sm" ng-click="showLockUser1(users)" ng-if="users.mstrlock==0?lckUse='unlock.png':lckUse='lock.png'" title="LOCK/UNLOCK USER">
+					<img src="app/images/{{lckUse}}">U</button>
+          <button type="button" class="btn btn-info btn-sm" ng-click="showLockBetting(users)" ng-if="users.lgnusrlckbtng==0?lckUseb='unlock.png':lckUseb='lock.png'" title="LOCK/UNLOCK BETTING">
+          <img src="app/images/{{lckUseb}}">B</button>  
+          
+					</td>
+                </tr>
+                
+                
+             </tbody>
+        </table>
+    </div>
+    
+    </div>
+    
+    
+    
+   <div class="col-md-12" ng-show="filtered.length == 0">
+				    <div class="col-md-12">
+				        <h4>No Result found</h4>
+				    </div>
+				</div>
+				<div class="col-md-12" ng-show="filtered.length > 0">
+				   <pagination total-items="filtered.length" ng-model="currentPage" ng-change="pageChanged()" max-size="5" class="pagination-sm" boundary-links="true" rotate="false" num-pages="noOfPages" items-per-page="entryLimit"></pagination>
+
+
+				</div>
+</div>
+<div class="container-fluid" ng-hide="display">
+  <div class="row text-center">
+    <h4 class="page-heading text-left">Client Detail</h4>
+  </div>
+  <div class="">
+    <div class="row client-detail client-formset">
+      <form name="useform" method="post" ng-submit="submitForm_Users(user)">
+        <div class="col-sm-12 client-form">
+          <div class="row">
+            <div class="col-sm-3 form-group">
+              <label>User Name</label>
+              <input type="text" ng-init="user.master_name=''"  name="master_name" ng-model="user.master_name" ng-minlength="4" required="required"  class="form-control"  md-autofocus>
+<span style="text-align: center; color:RED; font-size: 14px; " ng-show="!useform.master_name.$error.required && (useform.master_name.$error.minlength ) && useform.master_name.$dirty">User Name must be four character.</span>
+            </div>
+            <div class="col-sm-3 form-group">
+              <label>User ID
+ 
+              <span ng-show="errorMsg && user.username.length>3" style="text-align: center; color:GREEN; font-size: 14px; margin-bottom: 15px;">{{errorMsg}}</span>
+              <span ng-show="errorMsg1" style="text-align: center; color:RED; font-size: 14px; margin-bottom: 15px;">{{errorMsg1}}</span>
+              </label>
+              <input type="text" ng-init="user.username=''" name="username" ng-model="user.username" ng-change="checkUserName(user.username)" ng-minlength="4"  required="required"  class="form-control">
+ <span style="text-align: center; color:RED; font-size: 14px; " ng-show="!useform.username.$error.required && (useform.username.$error.minlength ) && useform.username.$dirty">User Id must be four character.</span>
+            </div>
+            <div class="col-sm-3 form-group">
+              <label>Password</label>
+              <input type="password" name="password" ng-init="user.password=''" ng-model="user.password" required="required" ng-minlength="4"   class="form-control">
+<span style="text-align: center; color:RED; font-size: 14px; " ng-show="!useform.password.$error.required && (useform.password.$error.minlength ) && useform.password.$dirty">Password must be four character.</span>
+            </div>
+
+            <div class="col-sm-3 form-group">
+              <label>Odds Commission</label>
+             <input type="number" step=".1" ng-model="user.Commission" min="0" max="100" required="required" class="form-control" oninput="this.value = this.value.replace(/[^0-9.]/g, '').replace(/(\..*)\./g, '$1');">
+            </div>  
+          </div>  <!-- row -->        
+            
+          <div class="row">
+             <!-- <div class="col-sm-3 form-group" ng-hide="true">
+              <label>Session Commision</label>
+              <input ng-init="user.sessionCommission=0" step=".1"  type="number" ng-model="user.sessionCommission" max="100"  class="form-control">
+            </div>  
+            <div class="col-sm-3 form-group" ng-hide="true">
+              <label>Other Commission</label>
+              <input ng-init="user.otherCommission=0" type="number"  ng-model="user.otherCommission" max="100" class="form-control" disabled="disabled">
+            </div>  -->
+          
+            
+
+            <div class="col-sm-3 form-group">
+              <label>Registration Date</label>
+              <input type="text" ng-init="user.dt = (getDate | date:'yyyy-MM-dd')" ng-model="user.dt"  class="form-control" disabled="disabled">
+            </div>
+
+             <div class="col-sm-3 form-group" >
+              <label>Max Profit</label>
+              <input type="number" ng-init="user.maxProfit=0" ng-model="user.maxProfit"  class="form-control" oninput="this.value = this.value.replace(/[^0-9]/g, '');">
+            </div>
+            <div class="col-sm-3 form-group">
+              <label>Max Loss</label>
+              <input ng-init="user.maxLoss=0" type="number" ng-model="user.maxLoss"  class="form-control" oninput="this.value = this.value.replace(/[^0-9]/g, '');">
+            </div>  
+             <div class="col-sm-3 form-group">
+              <label>Bet Dealy(In Sec)</label>
+              <input ng-init="user.betDelay=0" type="number" ng-model="user.betDelay"  class="form-control" oninput="this.value = this.value.replace(/[^0-9]/g, '');">
+            </div>  
+          </div><!-- row -->
+
+          <div class="row">    
+            <!-- <div class="col-sm-3 form-group">
+              <label>Max Loss</label>
+              <input ng-init="user.maxLoss=0" type="number" ng-model="user.maxLoss"  class="form-control" disabled="disabled">
+            </div>  --> 
+            <!-- <div class="col-sm-3 form-group">
+              <label>Max Stack</label>
+              <input type="number" ng-init="user.maxStake=0" ng-model="user.maxStake"  class="form-control" disabled="disabled">
+            </div>  -->   
+         
+           <!--  <div class="col-sm-3 form-group">
+              <label>Going Inplay Stack</label>
+              <input ng-init="user.gngInPlyStake=0" type="number" ng-model="user.gngInPlyStake"  class="form-control" disabled="disabled">
+            </div> -->
+           <!--  <div class="col-sm-3 form-group">
+              <label>Bet Dealy(In Sec)</label>
+              <input ng-init="user.betDelay=0" type="number" ng-model="user.betDelay"  class="form-control" disabled="disabled">
+            </div> -->
+          </div> <!-- row -->
+		<div class="row">
+          <div class="col-sm-12 form-group">
+            <label>Remark</label>
+            <textarea ng-model="user.remarks"  rows="3" class="form-control"></textarea>
+          </div>  
+			</div>
+			<div class="row">
+          <div class="col-sm-12 form-group">  
+             <button type="button" class="btn btn-primary" ng-click="display=true">Back</button>  
+               <button type="submit" class="btn btn-primary" ng-disabled="useform.$invalid">Submit</button>  
+            </div> 
+			</div>
+        </div>
+      </form> 
+    </div>
+  </div>
+</div>
+</div>

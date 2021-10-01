@@ -1,0 +1,103 @@
+
+<div class="content-wrapper ng-scope" style="min-height: 720px;">
+<div class="load-box" ng-show="loading">
+                <img id="mySpinner" src="app/images/loading1.gif" />
+            </div>
+	<div class="innerbox">
+    <!-- START -->
+    <h1 class="page-heading">User List</h1>
+    <h5>Filtered {{ filtered.length }} of {{ totalItems}} total Masters</h5>
+    <div class="col-lg-12 col-md-12 col-sm-12 " style="padding: 0px;">
+        <div class="lst_master_top clearfix">
+            <div class="form_row col-lg-12 col-md-12 col-sm-12 col-xs-12 clearfix top_table_form" style="padding: 0px;">
+                <div class="form_box  col-lg-2 col-md-2 col-sm-2 col-xs-12" style="padding: 0px;">
+                    <label>UserName</label>
+                    <input type="text" ng-model="search.mstruserid" ng-change="filter()" class="form-control" placeholder="Search By UserName" />
+                </div>
+                <div class="form_box  col-lg-2 col-md-2 col-sm-2 col-xs-12" style="padding: 0px;">
+                    <label>Name</label>
+                    <input type="text" ng-model="search.mstrname" ng-change="filter()" class="form-control" placeholder="Search By Name" />
+                </div>
+
+               
+                <div class="form_box  col-lg-2 col-md-2 col-sm-2 col-xs-12" style="padding: 0px;">
+                    <label>User Type</label>
+                    <input type="text" ng-model="search.UserType" ng-change="filter()" class="form-control" placeholder="Search By usetype" />
+                </div>
+                <div class="form_box  col-lg-6 col-md-6 col-sm-6 col-xs-12" style="padding: 0px;">
+                    <div class="file-icons" style="margin-top:12px;">
+                     <a href=""><img src="app/images/search.png"/></a>
+                     <a ng-click="onBtExport()"><img src="app/images/file2.png" /></a>
+                    <!--  <a href=""><img src="app/images/file1.png" /></a>
+
+                     <a href=""><img src="app/images/file3.png" /></a> -->
+                     <button type="button" ng-click="Refresh_data()">Refresh List</button>
+                    </div>
+                </div>
+                
+            </div>
+
+           <!--  <div class="col-lg-12 col-md-12 col-sm-12 lst_top_table">
+              
+
+            </div> -->
+        </div>
+ <div class="lst_master" ng-show="false">
+        <div class="resp_table clearfix" style="background-color:#f5f5f5; padding:5px 10px;">
+            <div id="myGrid" class="ag-fresh" style="height:400px; margin-top: 4px;"></div>
+        </div>
+        <div class="total-box clearfix">
+                
+        </div>
+    </div>
+
+        <!-- END -->
+        <div class="col-lg-12 col-md-12 lst_master">
+            <div class="listdata-table clearfix ">
+                <table class="table table-bordered table-condensed table-responsive" style="background-color: #fff;">
+                    <thead>
+                        <tr>
+                            <th><a ng-click="sort_by('mstrid');"><i class="glyphicon glyphicon-sort"></i></a>Serial No</th>
+                            <th><a ng-click="sort_by('mstrname');"><i class="glyphicon glyphicon-sort"></i></a>Name</th>
+                            <th><a ng-click="sort_by('mstruserid');"><i class="glyphicon glyphicon-sort"></i></a>User Name</th>
+                           
+                            <th><a ng-click="sort_by('usecrdt');"><i class="glyphicon glyphicon-sort"></i></a>Created Date</th>
+                            <th><a ng-click="sort_by('UserType');"><i class="glyphicon glyphicon-sort"></i></a>User Type</th>
+                            <th>Action</th>
+                           
+                        </tr>
+
+
+                    </thead>
+                    <tr ng-repeat="user in filtered = (closeUser | filter:search | orderBy : predicate :reverse) | startFrom:(currentPage-1)*entryLimit | limitTo:entryLimit">
+                        <td data-label="Serial No" ng-model="a">{{$index + 1}}</td>
+                        <td data-label="Master Name">{{user.mstrname}}</td>
+                        <td data-label="User ID">{{user.mstruserid}}</td>
+                       
+                        <td data-label="IP Address">{{user.usecrdt}}</td>
+                        <td data-label="User Type">{{user.UserType}}</td>
+                        <td data-label="Action">
+                            <md-button type="button" class="md-fab md-mini" name="Inactive" ng-click="getStatus(user.mstrid,1,user.mstruserid)">
+                                <img src="app/images/opn-acc.png"/><!-- ={{user.lgnusrCloseAc}} -->
+                            </md-button>                        
+                        </td>
+                  
+                    </tr>
+
+                </table>
+            </div>
+
+            <div class="col-md-12" ng-show="filteredItems == 0">
+                <div class="col-md-12">
+                    <h4>No Users found</h4>
+                </div>
+            </div>
+            <div class="col-md-12" ng-show="filteredItems > 0">
+                <pagination total-items="filtered.length" ng-model="currentPage" max-size="5" class="pagination-sm" boundary-links="true" rotate="false" num-pages="noPages" items-per-page="entryLimit"></pagination>
+
+
+            </div>
+        </div>
+    </div>
+</div>
+</div>

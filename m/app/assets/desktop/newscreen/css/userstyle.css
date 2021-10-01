@@ -1,0 +1,441 @@
+#searchResult{  text-align: left !important;     max-height: 300px;
+    overflow: auto; font-size: 13px;   top: 38px !important;}
+#searchResult li{  background:#fff !important;     margin-bottom: 0px !important;
+    border-bottom: 1px solid #ded8d8;   padding: 5px 8px !important; font-size: 13px; text-align: left !important;} 
+
+#searchResult li:nth-child(even){    background: #fff !important;     color: #111!important;}
+
+.subactive{    max-height:50vh;
+    overflow: auto;
+    overflow-x: hidden;}
+	.main-header>.navbar{ padding-top:24px;}
+	
+/**** css start by Rajveer 28/08/2018  ***********/
+
+md-backdrop.md-dialog-backdrop{    left: 0;
+    top: 0;
+    height: 100% !important;
+    margin: auto;
+    bottom: 0;
+    right: 0;
+    width:500px;}
+	
+h3.panel-title.ng-binding {
+    font-size: 14px;
+    padding: 8px;
+}
+.show_betinfo .panel-title a {
+    padding: 8px 8px;
+    font-size: 14px;
+	 cursor: pointer;
+}
+div#exTab1 a {
+    cursor: pointer;
+}
+div#exTab1 ul.nav.nav-pills {
+    width: 100%;
+    display: inline-block;
+}
+div#exTab1 ul.nav.nav-pills li {
+    width: auto;
+    display: inline-block;
+	vertical-align: top;
+}
+.inplay .sport_blk {
+    background: #fff;
+    border: 1px solid #ddd;
+    padding: 10px;
+    margin-bottom: 10px;
+}
+ul.odds_tex {
+    width: 100%;
+    display: inline-block;
+}
+a.td_btn {
+    font-size: 12px;
+}
+.betsilip_sec h5 {
+    width: 100%;
+    display: inline-block;
+	vertical-align: middle;
+    line-height: 41px;
+}
+
+#edit_popup {
+    margin-top: -45px;
+}
+.iner_form .form_text:last-child {
+    width: 42% !important;
+}
+.form_button {
+    float: left;
+    display: inline-block;
+    width: auto;
+    margin: 0 2px;
+    padding: 1px 6px;
+}
+.iner_form .btn {
+    padding: .1rem 0.75rem;
+}
+.report_filter ul li {
+    vertical-align: top;
+}
+.total-red {
+    font-size: 20px;
+	text-align: right;
+}
+.total-green {
+    font-size: 20px;
+	
+}
+.ag-fresh .ag-paging-panel {
+    margin: 10px 0;
+    width: 100%;
+    display: inline-block;
+}
+.container.terncondition h2 {
+    font-size: 25px;
+    margin-bottom: 20px;
+}
+.content-wrapper .report_filter ul li {
+    display: inline-block;
+    width: auto;
+}
+md-content {
+    display: inline-table;
+}
+.report_filter .form-group [type="button"] {
+    padding: 10px 10px;
+}
+
+ .navbar-collapse{width: 32%; flex-basis: inherit;}
+
+.edit_stakes{float: right;}
+.edit_stakes .form_button a{margin-right: 0px;}
+
+.cdate {width: 66%;text-align: right;}
+.cdate .point_hed{display: inline-block;vertical-align: top;}
+.searchbar .form-control{float: right;border-radius: 2px;color: #0f2327;font-size: 14px;height: 40px; padding-left: 31px;}
+.searchbar .form-control::placeholder{color: #0f2327;}
+.cdate .datetime {float: left;color: #fff;padding-top: 10px;font-family: sans-serif;font-size: 14px;}
+.load-box {
+    position: fixed;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    background: #000000bd;
+    z-index: 10001;
+}
+.load-box img {   width: 55px;   height: 55px;  position: fixed;
+    left: 0; right:0;
+    top: 0; bottom:0; margin:auto}
+md-toolbar-tools{ background:#000 !important}
+
+.searchbar {
+    width: 245px;
+	position: relative;
+}
+.cdate .datetime{padding-left: 70px;}
+.searchbar .fa-search {position: absolute;color:#757575;left:-34px;top: 13px; font-size: 14px;}
+
+.tabsdemoDynamicHeight ul li a {
+  background: #4c4e4e;
+  color: #fff;
+  display: inline-block;
+  margin-right: 1px;
+  padding: 5px 15px;border-radius:3px 3px 0px 0px;
+}
+.tabsdemoDynamicHeight ul li a:hover, .tabsdemoDynamicHeight ul li a.active  { background:#323333; color:#fff; }
+
+.mobilebox{ position:relative}
+.terncondition  li{ padding: 0px 0 25px 12px;    list-style-type: decimal;    margin-left: 17px;}
+.bet_table table td.team_name + td,
+.bet_table table td.team_name a{ font-size:12px;} 
+.newdesign a.td_btn{margin: 0px;margin-bottom: 0px;}
+.newdesign .bet_table table td{ padding:0}
+.newdesign .bet_table{ border:none;}
+
+
+
+.bet_table .table tbody td a.td_btn{       padding: 6px 2px;    border-radius: 0;    width: 56px;    font-size: 12px;}
+.betright{ float:right}
+
+td.betboxtd {   width:54%; text-align:right}
+.betbox {     display: block;    width: 113px;    float: left;    overflow: hidden;}
+.blank_blk .betbox{ max-width: 103px; }
+.ball-msg-box{   width: 65% !important; left: auto !important;  right: 0;  background-color: #e6e6e6;  border: none;}
+.searchbar .fa-search{display:none !important}
+
+
+
+.showpoupbox form#form1{    top: 15px;}
+a.savebtn {  background: #4d9871;}
+
+body.activebetslip {    position: fixed;    height: 100%;    overflow: hidden;}
+
+.clearfix{ clear:both; display:block;}
+h2.fancyhead {    padding-top: 40px;    font-size: 21px;}
+.ses-fan-box .col-sm-12 {  padding: 0 6px;}
+.fancy{ background:#f3f3f3; margin-top: 0px; border:1px solid #dedede} 
+.ball-msg-box h1{ top:0 !important;     font-size: 14px;
+    color: #111;
+    margin-top: 0;
+    line-height: 50px;
+    margin-bottom: 0;
+    position: absolute;
+ 
+    bottom: 0;
+    left: 0;
+    right: 0;
+    margin: auto;}
+.mtitle {float: left;
+    width: 35%;
+    min-height: 45px;
+    padding-top: 13px;
+    padding-left: 10px;
+    margin-right: 21%;
+    font-size: 14px;
+}
+
+.first_row li [type="button"]{width: 50px!important;}
+.sport-high.fancyListDiv{padding-top:0 !important; margin-bottom:0 !important}
+	
+	.blockn { text-align: center;  float: left;  width: 11.5%;}
+	
+	.ses-fan-box .mtitle{ background:#fff;}
+	
+	.fancylist .blockn span {    font-weight: 600;  display: block;   font-size: 13px;}
+	.fancyClass .lay-cell, .fancyClass .back-cell{ font-weight:600; font-size:13px;} 
+	.fancyClass .lay-cell + .disab-btn{    background: #fac9d1;      font-size: 13px; min-height:25px; font-weight:400;  color: #000;}
+	.fancyClass .back-cell + .disab-btn{    background: #a6d8ff;     font-size: 13px; min-height:25px; font-weight:400;   color: #000;}	
+	.ses-fan-box .noblock{ background: #fac9d1;  }
+	.ses-fan-box .yesblock{ background: #a6d8ff;  }
+	
+
+.market-listing-table .back, .market-listing-table .lay{ text-align:center}
+
+.livetv_heading {
+    background: #1f5058;
+    color: #fff;
+    font-size: 12px;
+    line-height: 32px;
+    padding: 0 12px;
+    margin-bottom: 5px;
+	cursor:pointer;
+	position:relative;
+	 
+}
+
+.livetv_heading:after{      content: "\f106";
+    font: normal normal normal 14px/1 FontAwesome;
+    font-size: inherit;
+    text-rendering: auto;
+    -webkit-font-smoothing: antialiased;
+    position: absolute;
+    right: 10px;
+    width: 25px;
+    height: 25px;
+    border-radius: 45%;
+    font-size: 20px;
+    text-align: center;
+    line-height: 30px;}
+	
+	.livetv_heading.collapsed:after{    content: "\f107";}
+	
+.match-heading .col-lg-4 p{ text-align:right}	
+.remove_all ul li a.clsActive{background: #4d9871; color: #fff;}
+
+.switch_box .form_text .btn_active {  background: #4d9871;  color: #fff;}
+
+@keyframes blink {
+    0% {
+           background-color: rgba(255,0,0,1)
+    }
+    50% {
+           background-color: rgba(255,0,0,0.5)
+    }
+    100% {
+           background-color: rgba(255,0,0,1)
+    }
+}
+@-webkit-keyframes blink {
+    0% {
+           background-color: rgba(255,0,0,1)
+    }
+    50% {
+           background-color: rgba(255,0,0,0.5)
+    }
+    100% {
+           background-color: rgba(255,0,0,1)
+    }
+}
+
+ .banking {
+
+   
+    -moz-transition:all 0.3s ease-in-out;
+    -webkit-transition:all 0.3s ease-in-out;
+    -o-transition:all 0.3s ease-in-out;
+    -ms-transition:all 0.3s ease-in-out;
+    transition:all 0.3s ease-in-out;
+    -moz-animation:blink normal 1.3s infinite ease-in-out;
+    /* Firefox */
+    -webkit-animation:blink normal 1.3s infinite ease-in-out;
+    /* Webkit */
+    -ms-animation:blink normal 1.3s infinite ease-in-out;
+    /* IE */
+    animation:blink normal 1.3s infinite ease-in-out;
+    /* Opera */
+}
+
+
+@media screen and (min-width:768px) {
+	#showonclick{ display:none;}
+	
+}
+@media screen and (max-width:1023px) {
+ 
+/*td.odds_blk a.td_btn {float: none;min-width: 50%;width: auto !important;}
+.bet_table table tr td:first-child, .bet_table table tr td:last-child, .bet_table table tr td:nth-child(2n+3){ display:none;}
+*/
+
+
+
+.newdesign .bet_table table td {display: inline-block ;padding: 10px ;width: 100%;}
+.betright .betbox { display:inline-block; } 
+.betright .odds_blk.betbox { display:inline-block;  } 
+
+.newdesign .bet_table table tr td:first-child {width: 100%;}
+td.betboxtd {width: 30%;}
+.betright { width:100%; }
+
+}
+
+[type="checkbox"]:checked, [type="checkbox"]:not(:checked) { position: absolute; left: -9999px; }
+[type="checkbox"]:checked + label, [type="checkbox"]:not(:checked) + label { position: relative; padding-left: 22px; cursor: pointer; line-height: 18px; display: inline-block; color: #666; font-size: 13px;}
+[type="checkbox"]:checked + label:before, [type="checkbox"]:not(:checked) + label:before { border-radius: 2px; content: ''; position: absolute; left: 0; top: 0; width: 15px; height: 15px; border: 1px solid #b2b2b2; background: #fff; }
+[type="checkbox"]:checked + label:after, [type="checkbox"]:not(:checked) + label:after { content: ''; width: 5px; height: 10px; border: solid #838383; border-width: 0 2px 2px 0; position: absolute; top: 2px; left: 5px; transform: rotate(45deg); webkit-transition: all 0.2s ease; transition: all 0.2s ease; }
+[type="checkbox"]:not(:checked) + label:after { opacity: 0; }
+[type="checkbox"]:checked + label:after { opacity: 1; }
+
+@media screen and (max-width:1366px) {
+.cdate {   width: 100%;}
+.navbar-collapse {  width: 59%;}
+.bet_table table td.team_name {    width: 34%;}
+.betbox {  width: 113px;}
+.bet_table .table tbody td a.td_btn{ width:56px;}
+.blank_blk .betbox {  max-width: 92px;}
+}
+
+@media screen and (max-width:1169px) {
+	div#navbarResponsive{position: initial !important;}
+	.cdate { width:80%; }
+	.cdate .datetime {padding-left: 20px;}
+	.searchbar {width: 130px;}
+	form#form1{    top: 12px;  width: 83%;}
+	.bet_table .table tbody td a.td_btn {height: 30px;overflow: hidden;padding: 6px 2px !important;width: 42px !important;}
+	.betbox { width:auto !important; }
+	.navbar-expand-lg .navbar-toggler {display: inline-block;position: absolute;right: 10px;top: 22px;}
+	#mainNav .container-fluid {padding-top: 16px;}
+	#navbarResponsive .navbar-nav {margin-right: 37px;}
+}
+
+@media screen and (max-width:1000px) {
+.cdate { width:52%; }
+.cdate .datetime {padding-left: 5px;}
+.searchbar {width: 110px;}
+#navbarResponsive.navbar-collapse { width:28%; }
+#navbarResponsive .navbar-nav { float:left; }
+#mainNav .container-fluid {padding-top: 18px;}
+.navbar-toggler-right { top:20px; }
+body.addrightcls .main-sidebar {top: 58px !important;}
+.content-wrapper .table tbody td {font-size: 12px;}
+
+.content-wrapper .table tbody td {padding: 7px !important;}
+
+}
+
+@media screen and (max-width:767px) {
+#navbarResponsive.navbar-collapse{ width:100% !important}
+.cdate .datetime{    font-size: 13px;  padding-bottom: 10px;}
+.content{ padding:0}
+body .main-sidebar{left: -230px; }
+.cdate .datetime {  padding-left: 0;}
+.searchbar {  width: 100%;}
+.main-header {    position: relative;    z-index: 100;}
+.modal-backdrop.show{ z-index:140}
+.mobileview{       position: fixed;
+    top: 82px;
+    right: 0;
+    width: auto;
+    background: #1f5058;
+    color: #fff;
+    z-index: 10001;
+    padding: 10px;
+} 
+md-autocomplete input:not(.md-input){    line-height: 7px;   height: 30px;}
+md-autocomplete{    border-radius: 2px;
+    display: block;
+    height: 31px;
+    position: relative;
+    overflow: visible;
+    min-width: 190px;
+    width: 100%;
+    margin-top: 4px;     background: rgb(30, 70, 78);
+ }
+
+.newdesign .bet_table table tr td{ border:none !important}
+.newdesign .bet_table table tr td.betboxtd{ border-bottom:1px solid #ddd !important}
+
+.mobilebox{ position: fixed;   top: 0;  left: 0;   z-index: 1001; width:100%;  height: 100vh;  overflow: auto;   background: #fff; display:none;}
+.activebetslip .mobilebox{ display:block;} 
+.activebetslip .mobileview{   top: 63;}
+.closebtn{ display:none;}
+.activebetslip .betshowbtn{ display:none;}
+.activebetslip .closebtn{ display:block;}
+
+.main-header { max-height:123px; }
+.main-header > .navbar { padding-bottom:0px; }
+.main-header > .navbar { height:auto; }
+.cdate {
+  padding-right: 0;
+  width:100%;
+}
+
+#mainNav .container-fluid {padding-top: 0;}
+.mobileview { top:90px; padding:4px 10px; }
+body.addrightcls .main-sidebar {padding-top: 0;top: 0 !important;}
+}
+
+
+@media screen and (max-width:1280px) {
+ .navbar-collapse{    width: 38%;}
+}
+
+.right_account {padding-right: 15px;padding-top: 17px;}
+.account_section{padding-left: 0px;}
+.desbord_user{padding-right: 0px;}
+.desbord_user .content{padding-right: 0px;}
+
+
+@media screen and (max-width:1169px) {
+#mainNav .navbar-brand	{margin-right: 0px;}
+#mainNav .container-fluid{padding-top: 5px;}	
+.cdate .datetime{padding-left: 16px;}
+.navbar-expand-lg .navbar-toggler {right: 12px;top: 23px;}
+.navbar-dark .navbar-toggler{padding: 5px 8px;background: #1f5058;}
+.searchbar .form-control{padding: 0px;}	
+.cdate{width: 69%;}
+#navbarResponsive .navbar-nav li:first-child{display: none;}
+div#navbarResponsive width: 41%;padding-right: 20px;}
+.searchbar .ng-pristine {width: 230px;padding-left: 10px;}
+}
+
+
+
+
+
+
+
+

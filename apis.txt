@@ -1,0 +1,34 @@
+Base Url : http://35.178.10.18
+
+1. Check All SportSeries Matches
+Test URL : /Geteventcntr/saveAllCheckboxSportSeries
+Method : POST
+Params : [{"matchId":9886504,"matchName":"Womens One Day Internationals","marketCount":4,"region":"International","sportId":4,"HelperID":0},{"matchId":"11569227","matchName":"Sheffield Shield","marketCount":2,"region":"AUS","sportId":"4","HelperID":"0"}]
+
+2. De-select All SportSeries Matches
+Test URL : /Geteventcntr/saveSportSeriesDeSelectAll
+Method : POST
+Params : [{"matchId":9886504,"matchName":"Womens One Day Internationals","marketCount":4,"region":"International","sportId":4,"HelperID":0},{"matchId":"11569227","matchName":"Sheffield Shield","marketCount":2,"region":"AUS","sportId":"4","HelperID":"0"}]
+
+3. Select All Sport Matches
+Test URL : /Geteventcntr/saveSportMatchSelectAll
+Method : POST
+Params : [{"seriesId":"11781603","matchId":"28611618","matchName":"ICC World Cup Qualifier","openDate":"2099-01-01T00:00:00.000Z","countryCode":null,"marketCount":2,"sportId":"4","HelperID":"0"},{"seriesId":"11781603","matchId":"28643640","matchName":"Ireland v Afghanistan","openDate":"2018-03-23T07:30:00.000Z","countryCode":null,"marketCount":11,"sportId":"4","HelperID":"0"}]
+
+4. De-select All Sport Matches
+Test URL : /Geteventcntr/saveSportMatchDeSelectAll
+Method : POST
+Params : [{"seriesId":"11781603","matchId":"28611618","matchName":"ICC World Cup Qualifier","openDate":"2099-01-01T00:00:00.000Z","countryCode":null,"marketCount":2,"sportId":"4","HelperID":"0"},{"seriesId":"11781603","matchId":"28643640","matchName":"Ireland v Afghanistan","openDate":"2018-03-23T07:30:00.000Z","countryCode":null,"marketCount":11,"sportId":"4","HelperID":"0"}]
+
+5. Select All Match Markets
+Test URL : /Geteventcntr/saveMatchMarketSelectAll
+Method : POST
+Params : [{"marketId":"1.140730379","marketName":"To Reach The Final","totalMatched":8.21512,"MatchId":"28611618","SportsId":"4","seriesId":"11781603","HelperID":"0"},{"marketId":"1.140730378","marketName":"Winner","totalMatched":22682.286256,"MatchId":"28611618","SportsId":"4","seriesId":"11781603","HelperID":"0"}]
+
+6. De-select All Match Markets
+Test URL : /Geteventcntr/saveMatchMarketDeSelectAll
+Method : POST
+Params : [{"marketId":"1.140730379","marketName":"To Reach The Final","totalMatched":8.21512,"MatchId":"28611618","SportsId":"4","seriesId":"11781603","HelperID":"0"},{"marketId":"1.140730378","marketName":"Winner","totalMatched":22682.286256,"MatchId":"28611618","SportsId":"4","seriesId":"11781603","HelperID":"0"}]
+
+
+

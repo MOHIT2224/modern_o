@@ -1,0 +1,190 @@
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.22/pdfmake.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/0.4.1/html2canvas.min.js"></script>
+<div class="content-wrapper CollectionReport" style="min-height: 720px;">
+   <div class="load-box" ng-show="loading">
+            <img id="mySpinner" src="app/images/loading1.gif" />
+        </div>
+   <div class="ibox-content table-responsive" style="position: absolute; opacity: 0.0;font-size:12px;color:#000">
+	<div id="exportthis">
+               <p>PAYMENT RECEIVING FROM</p>
+               <table class="table " >
+                  <thead>
+                     <tr>
+                        <th>Client</th>
+                        <th>Balance</th>                         
+                     </tr>
+                  </thead>
+                  <tbody>
+                             <tr ng-repeat="receivingFrom in receivingFrom_data">
+                                <td><a href="javascript:void(0)" >{{receivingFrom.mstrname}}({{(receivingFrom.mstruserid)}})</a></td> 
+                                <td>{{-receivingFrom.balance}}</td>
+                             </tr>
+            
+                  <tfoot class="footer-table" ng-if="receivingFrom_data.length != 0">
+                     <tr>
+                     <th>Total</th> <!-- Username -->
+                     <th>{{-totalReceivingFrom}}</th> <!-- Total -->
+                     </tr>
+                  </tfoot>
+               </table>
+               <p>PAYMENT PAID TO</p>
+		<table class="table " >
+                  <thead>
+                     <tr>
+                        <th>Client</th>
+                        <th>Balance</th>                         
+                     </tr>
+                  </thead>
+                  <tbody>
+                             <tr ng-repeat="paidTo in paidTo_data">
+                                <td><a href="javascript:void(0)" >{{paidTo.mstrname}}({{(paidTo.mstruserid)}})</a></td> 
+                                <td>{{paidTo.balance}}</td>
+                             </tr>
+                  </tbody>
+                  <tfoot class="footer-table" ng-if="paidTo_data.length != 0">
+                     <tr>
+                     <th>Total</th> <!-- Username -->
+                     <th>{{totalPaidTo}}</th> <!-- Total -->
+                     </tr>
+                  </tfoot>
+               </table>
+            </div>
+            </div>
+<div class="wrapper wrapper-content animated fadeInRight">
+   <div class="row1" >
+      <div class="col-lg-4">
+         <div class="ibox float-e-margins">
+            <div class="ibox-title" >
+               <h5>PAYMENT RECEIVING FROM</h5>
+               <div class="ibox-tools">
+
+                  <a ng-if="false" class="dropdown-toggle" data-toggle="dropdown" href="javascript:void(0)">
+                     <i class="fa fa-wrench"></i>
+                  </a>
+                  <ul class="dropdown-menu dropdown-user">
+                      <li><a target="_blank" ng-click="export()">Export PDF</a>
+                      </li>
+                  </ul>
+               </div>
+            </div>
+            <div class="ibox-content table-responsive">
+               <table class="table" id="example_lena_hai">
+                  <thead>
+                     <tr>
+                        <th>Client</th>
+                        <th>Balance</th>                         
+                     </tr>
+                  </thead>
+                  <tbody>
+
+                             <tr ng-repeat="receivingFrom in receivingFrom_data">
+                                <td><a href="javascript:void(0)">{{receivingFrom.mstrname}}({{(receivingFrom.mstruserid)}})</a></td> 
+                                <td>{{-receivingFrom.balance}}</td>
+                             </tr>
+            
+                  <tfoot class="footer-table" ng-if="receivingFrom_data.length != 0">
+                     <tr>
+                     <th>Total</th> <!-- Username -->
+                     <th>{{-totalReceivingFrom}}</th> <!-- Total -->
+                     </tr>
+                  </tfoot>
+               </table>
+            </div>
+		<div ng-if="receivingFrom_data.length == 0">No Record Found            </div>
+         </div>
+      </div>
+
+
+      <div class="col-lg-4">
+         <div class="ibox float-e-margins" >
+            <div class="ibox-title">
+               <h5>PAYMENT PAID TO</h5>
+               <div class="ibox-tools">
+
+                  <a ng-if="false" class="dropdown-toggle" data-toggle="dropdown" href="javascript:void(0)">
+                     <i class="fa fa-wrench"></i>
+                  </a>
+                  <ul class="dropdown-menu dropdown-user">
+                      <li><a target="_blank" ng-click="export()">Export PDF</a>
+                      </li>
+                  </ul>
+
+               </div>
+            </div>
+            <div class="ibox-content table-responsive">
+               <table class="table display" id="">
+                  <thead>
+                     <tr>
+                        <th>Client</th>
+                        <th>Balance</th>                         
+                     </tr>
+                  </thead>
+                  <tbody>
+                             <tr ng-repeat="paidTo in paidTo_data">
+                                <td><a href="javascript:void(0)">{{paidTo.mstrname}}({{(paidTo.mstruserid)}})</a></td> 
+                                <td>{{paidTo.balance}}</td>
+                             </tr>
+                  </tbody>
+                  <tfoot class="footer-table" ng-if="paidTo_data.length != 0">
+                     <tr>
+                     <th>Total</th> <!-- Username -->
+                     <th>{{totalPaidTo}}</th> <!-- Total -->
+                     </tr>
+                  </tfoot>
+               </table>
+            </div>
+		<div ng-if="paidTo_data.length == 0">No Record Found            </div>
+         </div>
+      </div>
+      
+      <div class="col-lg-4">
+         <div class="ibox float-e-margins">
+            <div class="ibox-title">
+               <h5>PAYMENT CLEAR</h5>
+               <div class="ibox-tools">
+
+                  <a ng-if="false" class="dropdown-toggle" data-toggle="dropdown" href="javascript:void(0)">
+                     <i class="fa fa-wrench"></i>
+                  </a>
+                  <ul class="dropdown-menu dropdown-user">
+                      <li><a target="_blank" ng-click="export()">Export PDF</a>
+                      </li>
+                  </ul>
+               </div>
+            </div>
+            <div class="ibox-content table-responsive">
+               <table class="table" id="">
+                  <thead>
+                     <tr>
+                        <th>Client</th>
+                        <th>Balance</th>                         
+                     </tr>
+                  </thead>
+                  <tbody>
+                             <tr ng-repeat="clear in clear_data">
+                                <td><a href="javascript:void(0)">{{clear.mstrname}}({{(clear.mstruserid)}})</a></td> 
+                                <td>{{clear.balance}}</td>
+                             </tr>
+                  </tbody>
+                  <tfoot class="footer-table" ng-if="clear_data.length != 0">
+                     <tr>
+                     <th>Total</th> <!-- Username -->
+                     <th>0.0</th> <!-- Total -->
+                     </tr>
+                  </tfoot>
+               </table>
+  </div>
+		<div ng-if="clear_data.length == 0">No Record Found          
+            </div>
+         </div>
+      </div>
+
+   </div>
+</div>
+
+</div>
+
+
+      
+
+

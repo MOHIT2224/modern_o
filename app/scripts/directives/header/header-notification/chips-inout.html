@@ -1,0 +1,38 @@
+﻿
+<md-dialog>
+            <form ng-cloak>
+                <md-toolbar>
+                    <div class="md-toolbar-tools"><h2>Chips In/Out</h2></div>
+                </md-toolbar>
+                <md-dialog-content>
+                    <div class="md-dialog-content">
+
+
+                    <div class="clearfix">
+                        <form method="post" novalidate >
+                            <div class="popup-form-box col-lg-12 col-md-12 col-sm-12 col-xs-12 clearfix">
+                                <div class="popup-inp-box col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                                    <input type="number" id="Free_chip" name="Chips" ng-model="Chip.ChipVal" class="popup-input focus" md-autofocus/>
+                                    <label> Chips</label>
+                                </div>
+                                <div class="popup-inp-box  col-lg-12 col-md-2 col-sm-12 col-xs-12">
+                                    <input type="text" id="Free_chip_Reference" name="Reference"  ng-model="Chip.Ref" class="popup-input"/>
+                                    <label >Reference</label>
+                                </div>
+                            </div>
+                            <div class="popup-form-box  col-lg-12 col-md-12 col-sm-12 col-xs-12 clearfix" style="text-align:center;">
+                                <button type="button" class="btn btn-primary" ng-click="FreeChipsSubmit(Chip,1,node.id,0)">DEPOSIT</button>
+                                <button type="button" class="btn btn-primary" ng-click="FreeChipsSubmit(Chip,2,node.id,0)">WITHDRAWAL</button>
+                            </div>
+                        </form>
+                    </div>
+
+                    </div>
+                </md-dialog-content>
+                <!-- <md-dialog-actions layout="row">
+                    <md-button ng-click="hide()">
+                        Update Chips
+                    </md-button>
+                </md-dialog-actions> -->
+            </form>
+</md-dialog>

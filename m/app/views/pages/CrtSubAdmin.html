@@ -1,0 +1,84 @@
+<div class="content-wrapper">
+<h1 class="page-heading">Create Helper</h1>
+
+<div class="col-sm-12 col-md-12 master-cont">
+    <div>
+        <div class="clearfix creat_form">
+            <p ng-show="message" style="text-align: center; color:#1df50f; font-size: 18px; margin-bottom: 15px;">{{message}}</p>
+            <form name="userForm"  ng-submit="submitForm()">
+    <p ng-if="errorMsg" style="text-align: center; color:#1df50f; font-size: 18px; margin-bottom: 15px;" >{{errorMsg}}</p>
+               <p ng-if="errorMsg1" style="text-align: center; color:red; font-size: 18px; margin-bottom: 15px;">{{errorMsg1}}</p>
+                <div class="form_row col-lg-12 col-md-12 col-sm-12 col-xs-12 clearfix">
+                    <div class="form_box  col-lg-3 col-md-3 col-sm-3 col-xs-12">
+                        <label>Name</label>
+                        <input type="text" name="name" placeholder="Please enter Username" class="input-box" ng-model="name" required="required" ng-minlength="4" ng-maxlength="100" >
+                        
+                            <span style="text-align: center; color:RED; font-size: 14px; " ng-show="!userForm.name.$error.required && (userForm.name.$error.minlength ) && userForm.name.$dirty">Username must be four character.</span>
+                    </div>
+                    <div class="form_box  col-lg-3 col-md-3 col-sm-3 col-xs-12">
+                        <label>User ID</label>
+                        <input type="text" name="username" class="input-box" placeholder="Please enter User Id" ng-model="username"  ng-minlength="4" ng-maxlength="100" ng-change="checkUserName()" required="required">
+
+                            <span style="text-align: center; color:RED; font-size: 14px; " ng-show="!userForm.username.$error.required && (userForm.username.$error.minlength ) && userForm.username.$dirty">User ID must be four character.</span>
+                       
+                    </div>
+                    <div class="form_box  col-lg-3 col-md-3 col-sm-3 col-xs-12">
+                        <label>Password</label>
+                        <input type="password" name="password" placeholder="Please enter Password" class="input-box" ng-model="password" ng-minlength="4" ng-maxlength="100" required="required">
+
+                            <span style="text-align: center; color:RED; font-size: 14px; " ng-show="!userForm.password.$error.required && (userForm.password.$error.minlength ) && userForm.password.$dirty">Password must be four character.</span>
+                      
+                    </div>
+                    <div class="form_box  col-lg-2 col-md-2 col-sm-2 col-xs-12" style="text-align:left;">
+                        <button type="submit" class="btn btn-primary" ng-disabled="userForm.$pristine|| userForm.$invalid  || errorMsg == 'Username Already Exits...'" style="margin-top:21px;">Submit</button>
+                    </div>
+                </div>
+            </form>
+            <div class="lst_master_top clearfix">
+                <div class="form_row col-lg-12 col-md-12 col-sm-12 col-xs-12 clearfix top_table_form" style="padding: 0px;">
+                    <div class="form_box  col-lg-12 col-md-12 col-sm-12 col-xs-12" style="padding: 0px;">
+                        <div class="file-icons" style="float:right">
+                              <a ng-click="onBtExport()"><img src="app/images/file2.png" /></a>
+                           <!-- <a href=""><img src="app/images/file1.png" /></a>
+
+                            <a href=""><img src="app/images/file3.png" /></a> -->
+                        </div>
+                    </div>
+                </div>
+            </div>
+<div class="lst_master" ng-show="false">
+        <div class="resp_table clearfix" style="background-color:#f5f5f5; padding:5px 10px;">
+            <div id="myGrid" class="ag-fresh" style="height:400px; margin-top: 4px;"></div>
+        </div>
+        <div class="total-box clearfix">
+                
+        </div>
+    </div>
+
+            <div class="listdata-table">
+            <table class="table table-bordered table-condensed table-responsive match_td" border="1" bordercolor="#ccc" cellpadding="0" cellspacing="0">
+                <thead>
+                    <tr>
+                        <th>S No.</th>
+                        <th>Name</th>
+                        <th>User Name</th>
+                        <th>Action</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr ng-repeat="item in subadmin ">
+                        <td data-label="S No.">{{$index+1}}{{item.usecode}}</td>
+                        <td data-label="Name">{{item.mstrname}}</td>
+                        <td data-label="User Name">{{item.usename}}</td>
+                        <td data-label="Action">
+                            <a href="" ui-sref="dashboard.SubAdminAssignCntr({userId: item.usecode,userName: item.usename})">Assign Master</a>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+            </div>
+
+        </div>
+    </div>
+</div>
+</div>

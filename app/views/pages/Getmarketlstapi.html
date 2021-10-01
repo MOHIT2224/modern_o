@@ -1,0 +1,49 @@
+﻿<!-- {{events}} -->
+<div class="content-wrapper">
+            <div class="col-lg-12 col-md-12 lst_master"><!-- ng-show="loading" -->
+            <div class="load-box" ng-show="loading">
+                <img id="mySpinner" src="app/images/loading1.gif" />
+            </div>
+    <div class="resp_table clearfix ">
+        
+        <table class="table table-bordered table-condensed table-responsive">
+            <thead>
+            <tr>
+                <th><a ng-click="sort_by('id');"><i class="glyphicon glyphicon-sort"></i></a>Serial No</th>
+                <th><a ng-click="sort_by('marketName');"><i class="glyphicon glyphicon-sort"></i></a>Market Name</th>
+                <!--<th><i class="glyphicon glyphicon-sort"></i>Market Count</th>-->
+                  <th><a ng-click="sort_by('marketId');"><i class="glyphicon glyphicon-sort"></i></a>Market Id</th> 
+                 <th><a ng-click="sort_by('totalMatched');"><i class="glyphicon glyphicon-sort"></i></a>Total Matched</th> 
+                <th ng-show="$root.HelperAllRights==angular.isUndefinedOrNull || $root.HelperAllRights.addMatch==1">Action 
+<!-- <span > All  <input type="checkbox" ng-model="selectAll" ng-click="allChk(selectAll)" ng-checked="{{selectAll}}" ng-change="CheckUncheckAll()"> </span> -->
+        </th>
+            </tr>
+            </thead>
+            <!-- | date: 'yyyy-MM-dd HH:mm:ss' -->
+            
+            <tbody id="tblDataMarket">
+            <tr ng-repeat="MatchMarket in filtered = (GetMarketData.marketfrmApi | filter:search | orderBy : predicate :reverse) | startFrom:(currentPage-1)*entryLimit | limitTo:entryLimit" repeat-end="onEnd()">
+                <!--soruabh 170105-->
+                <td data-label="Serial No">{{(currentPage-1)*entryLimit +$index+1}}</td>
+                <td data-label="Market Name">{{MatchMarket.marketName}}</td> 
+                <!--<td>{{MatchMarket.marketCount}}</td>-->
+                <td data-label="Market Id">{{MatchMarket.marketId}}</td> 
+                <td data-label="Total Matched">{{MatchMarket.totalMatched}}</td> 
+                <td data-label="Action" ng-show="$root.HelperAllRights==angular.isUndefinedOrNull || $root.HelperAllRights.addMatch==1">
+                    <input type="checkbox" ng-model="checkboxModel.value2" ng-click="saveMarket(MatchMarket.marketId,MatchMarket.marketName,MatchMarket.totalMatched);"  ng-checked="{{(GetMarketData.marketfrmDataBase|filter:{'Id':MatchMarket.marketId})[0].Id!=angular.isUndefinedOrNull}}">
+                    <!--sourabh 170105 check--></td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
+
+    <div class="col-md-12" ng-show="GetMarketData.marketfrmApi.length == 0">
+        <div class="col-md-12">
+            <h4>No Users found</h4>
+        </div>
+    </div>
+    <div class="col-md-12" ng-show="GetMarketData.marketfrmApi.length > 0">
+         <pagination total-items="filtered.length" ng-model="currentPage" max-size="5" class="pagination-sm" boundary-links="true" rotate="false" num-pages="noOfPages" items-per-page="entryLimit"></pagination>
+    </div>
+</div>
+</div>

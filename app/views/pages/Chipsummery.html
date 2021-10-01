@@ -1,0 +1,54 @@
+<!-- {{chip_summery}} -->
+
+<h1 class="page-heading">User Chip Summary</h1>
+<!-- {{online_user}} -->
+
+      <div class="col-sm-12 col-md-12 master-cont">
+
+      		<div class="col-lg-12 col-md-12 col-sm-12 " style="padding: 0px;">
+	            <div class="lst_master_top clearfix">
+	                <div class="form_row col-lg-12 col-md-12 col-sm-12 col-xs-12 clearfix top_table_form" style="padding: 0px;">                   
+	                    <div class="form_box  col-lg-4 col-md-4 col-sm-4 col-xs-12" style="padding: 0px;">
+	                        <div class="file-icons" style="margin:0;">
+	                         <a href=""><img src="app/images/file1.png" /></a>
+	                         <a href=""><img src="app/images/file2.png" /></a>
+	                         <a href=""><img src="app/images/file3.png" /></a>
+	                        </div>
+	                    </div>
+	                </div>                
+	            </div>
+        	</div>
+  			
+			<div class="col-lg-12 col-md-12 lst_master">
+			  <div class="resp_table clearfix ">
+			        <table class="table table-bordered table-condensed table-responsive" style="background-color:#fff;">
+						<thead>
+
+								<tr>
+
+									<th><i class="glyphicon glyphicon-sort"></i>Serial No</th>
+									<th><i class="glyphicon glyphicon-sort"></i>Name</th>
+									<th><i class="glyphicon glyphicon-sort"></i>AccountName(UserName)</th>
+									<th><i class="glyphicon glyphicon-sort"></i>Chips</th>
+									<th><i class="glyphicon glyphicon-sort"></i>isFree</th>
+									<th><i class="glyphicon glyphicon-sort"></i>Action</th>
+											
+								</tr>
+
+
+						</thead>
+
+								<tr ng-repeat="chips in chip_summery">
+									<td>{{$index+1}}</td>
+									<td>{{chips.mstruserid}}</td>
+									<td>{{chips.mstrname}}</td>
+									<!--<td >{{chips.chipsBal}}</td>-->
+									<td><!-- {{chips.isFree}} -->{{chips.isFree==0?"Free Chips":"ChipsAc"}}</td>
+									<td>{{chips.mstrid}}</td>
+								</tr>
+
+			        </table>
+			  </div>
+
+			</div>
+      </div>

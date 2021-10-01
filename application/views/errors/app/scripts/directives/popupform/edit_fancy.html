@@ -1,0 +1,130 @@
+﻿<!--sourabh 170118-->
+<md-dialog class="dial-width-650">
+    <md-toolbar>
+        <div class="md-toolbar-tools">
+            <h2>{{fancyHeaderName}} Fancy</h2>
+            <span flex></span>
+            <md-button class="md-icon-button" ng-click="hide()">
+                <md-icon md-svg-src="app/images/close.svg" aria-label="Close dialog"></md-icon>
+            </md-button>
+        </div>
+    </md-toolbar>
+    <md-dialog-content>
+        <div class="md-dialog-content">
+            <div class="clearfix">
+                <div ng-if="fancyType==3">
+                    <form name="KhaddalForm" method="post" ng-submit="KhaddalFancyForm(formData)">
+                        <div class="form_box col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                            <label>Khaddal Heading</label>
+                            <input ng-init="formData.HeadName=fancyHeaderName" type="text" name="headName" class="input-box" ng-model="formData.HeadName" required="required">
+                            <div role="alert">
+                                <span class="error" ng-show="KhaddalForm.input.$error.required">Required!</span>
+                            </div>
+                        </div>
+                        <div class="form_box col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                            <label>Range</label>
+                            <input type="number" name="range" id="range" class="input-box" ng-model="formData.range" min="0" required="required">
+                        </div>
+                        <div class="form_box  col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                            <label>Remark</label>
+                            <textarea name="remarks" ng-model="formData.remarks" class="input-box"></textarea>
+                        </div>
+                        <div class="form_box  col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                            <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
+                                <div class="form_box datepick-box">
+                                    <label>Fancy Date and Time</label>
+                                    <input type="text" name="date" ng-model="formData.dt">
+                                </div>
+                            </div>
+                            <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
+                                <div style="margin-top:5px;">
+                                    <!-- time -->
+                                    <timepicker ng-model="mytime" name="mytime" show-meridian="ismeridian"></timepicker>
+                                </div>
+                            </div>
+                        </div>
+                        <input type="hidden" name="FancyTime" id="setFancyTimeK" value="{{mytime | date:' HH:MM:'}}">
+                        <input type="hidden" name="mid" ng-model="MatchID">
+                        <input type="hidden" name="fancyType" ng-model="fancyType">
+                        <input type="hidden" name="ID" ng-model="ID">
+                        <input type="hidden" name="TypeID" ng-model="TypeID">
+                        <button type="submit" class="btn btn-primary">Submit</button>
+                    </form>
+                </div>
+                <div ng-if="fancyType==4">
+                    <form name="userForm" method="post" ng-submit="LastDigitFancy(formData)">
+                        <div class="form_box col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                            <label>LastDigit Heading</label>
+                            <input ng-init="formData.HeadName=fancyHeaderName" type="text" name="headName" class="input-box" ng-model="formData.HeadName" required="required">
+                        </div>
+                        <div class="form_box  col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                            <label>Liability</label>
+                            <input type="text" id="liabilityLstDigit" ng-model="formData.upDwnLimit" />
+                        </div>
+                        <div class="form_box  col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                            <label>Remark</label>
+                            <textarea name="remarks" ng-model="formData.remarks" class="input-box"></textarea>
+                        </div>
+                        <div class="form_box  col-lg-12 col-md-12 col-sm-12 col-xs-12 padd-zero">
+                            <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
+                                <div class="form_box datepick-box">
+                                    <label>Fancy Date and Time</label>
+                                    <input type="text" name="date" ng-model="formData.dt">
+                                </div>
+                            </div>
+                            <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
+                                <div style="margin-top:5px;">
+                                    <timepicker ng-model="mytime" name="mytime" show-meridian="ismeridian"></timepicker>
+                                </div>
+                            </div>
+                        </div>
+                        <input type="hidden" name="FancyTime" id="setFancyTimeL" value="{{mytime | date:' HH:MM:'}}">
+                        <input type="hidden" name="mid" ng-model="mid">
+                        <input type="hidden" name="fancyType" ng-model="fancyType">
+                        <button type="submit" class="btn btn-primary">Submit</button>
+                    </form>
+                </div>
+                <div ng-if="fancyType==5">
+                    <form name="userForm" method="post" ng-submit="UpDownFancy(formData,selectedOption)">
+                        <div class="form_box col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                            <select name="PLaer" id="TextHeadName" data-ng-model="selectedOption" data-ng-options="getPlayerList.Name for getPlayerList in getplayer track by getPlayerList.ID">
+                                <option value=''>Select Player</option>
+                            </select>
+                            <label>Fancy Heading</label>
+                            <input ng-init="formData.HeadName=fancyHeaderName" type="text" name="headName" class="input-box" ng-model="formData.HeadName" required="required">
+                        </div>
+                        <div class="form_box col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                            <label>Fancy Back[Down]</label>
+                            <input type="number" name="Back_size" id="Back_size" ng-model="Back_size" style="width:100" required="required">
+                            <label>Fancy Lay[Up]</label>
+                            <input type="number" name="Back_lay" id="Lay_size" ng-model="Back_lay" style="width:100" required="required">
+                            <label>Liability</label>
+                            <input type="number" name="Back_lay" id="liability" ng-model="liability" style="width:50px;" required="required">
+                        </div>
+                        <div class="form_box  col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                            <label>Remark</label>
+                            <textarea name="remarks" data-ng-model="formData.remarks" class="input-box"></textarea>
+                        </div>
+                        <div class="form_box  col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                            <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
+                                <div class="form_box datepick-box">
+                                    <label>Fancy Date and Time</label>
+                                    <input type="text" name="date" data-ng-model="formData.dt">
+                                </div>
+                            </div>
+                            <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
+                                <div style="margin-top:5px;">
+                                    <timepicker ng-model="mytime" name="mytime" show-meridian="ismeridian"></timepicker>
+                                </div>
+                            </div>
+                        </div>
+                        <input type="hidden" name="FancyTime" id="setFancyTimeU" value="{{mytime | date:' HH:MM:'}}">
+                        <input type="hidden" name="mid" ng-model="mid">
+                        <input type="hidden" name="fancyType" ng-model="fancyType">
+                        <button type="submit" class="btn btn-primary">Submit</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </md-dialog-content>
+</md-dialog>

@@ -1,0 +1,145 @@
+        
+        <div class="col-sm-12 col-md-12 right_wrapper"> 
+        			<h2 style="text-align: center; font-size: 28px; margin-bottom: 15px;"> Match Entry Form</h2>
+            <div class="clearfix match_entry">
+                
+               
+               
+                  		
+                  		<form class="form-inline" ng-submit="CricketForm()" >
+
+                          	<div class="form_row col-lg-12 col-md-12 col-sm-12 col-xs-12 clearfix">
+                  							<div class="form_box  col-lg-6 col-md-6 col-sm-6 col-xs-12">
+                    							<label>MID</label>
+                    							<input type="text" name="matchId" ng-model="matchId">
+                 						 	  </div>
+                  							<div class="form_box  col-lg-6 col-md-6 col-sm-6 col-xs-12">
+                     						 		<label >Match Date</label>
+                     						 	
+
+                                    <!-- start Date -->
+                                     <p class="input-group datepick-box">
+                                        <input type="text" class="form-control" datepicker-popup="{{format}}" ng-model="matchDate" is-open="opened" datepicker-options="dateOptions" ng-required="true" close-text="Close" datetime-picker="yyyy dd MM " />
+                                        <span class="input-group-btn">
+                                          <button type="button" class="btn btn-default datepick-btn" ng-click="open($event)"><i class="glyphicon glyphicon-calendar"></i></button>
+                                        </span>
+
+                                      </p>
+                                    <!-- End of Date -->
+                    						</div>
+                               
+            						    </div>
+                   
+                            <div class="form_row col-lg-12 col-md-12 col-sm-12 col-xs-12 clearfix">
+                            	<div class="form_box  col-lg-6 col-md-6 col-sm-6 col-xs-12">
+                            		<label>Time From</label>
+                            		<input ng-model="timeFrom" type="text" placeholder="HH:mm" min="08:00" max="17:00" required >
+                             	  </div>
+                               
+                            	<div class="form_box  col-lg-6 col-md-6 col-sm-6 col-xs-12">
+                            	 		<label >To</label>
+                            	 	<input ng-model="timeTo" type="text" placeholder="HH:mm" min="08:00" max="17:00" required >
+                            	</div>
+                            </div>
+                              
+                            
+                                  <div class="form_box  col-lg-6 col-md-6 col-sm-6 col-xs-12">
+                      							 <label>Match</label>
+                                      <select name="team1" ng-model="team1" ng-options="team1.name for team1 in sportsData.teamDropdown track by team1.id" >
+                                        <option value=''>Select Team1</option>
+                                      </select>
+                              		</div>
+                       
+                                  <div class="form_box  col-lg-6 col-md-6 col-sm-6 col-xs-12">
+                                      <label >VS</label>
+                                      <select name="team2" ng-model="team2" ng-options="team2.name for team2 in sportsData.teamDropdown track by team2.id" >
+                                        <option value=''>Select Team2</option>
+                                      </select>
+                                  </div>
+                                
+                        
+                             
+                              <div class="form_row col-lg-12 col-md-12 col-sm-12 col-xs-12 clearfix">
+                                <div class="form_box  col-lg-6 col-md-6 col-sm-6 col-xs-12">
+                                  <label>Match Type</label>
+                                  <select name="matchType1" ng-model="matchType1" ng-options="matchType1.Name for matchType1 in sportsData.matchType track by matchType1.ID" >
+                                    <option value=''>Select Match Type</option>
+                                  </select>
+                                </div>
+                  							<div class="form_box  col-lg-6 col-md-6 col-sm-6 col-xs-12">
+                   						 		<label >Match Overs</label>
+                                 
+                                  
+                                  
+                                  
+                   						 		  <input type="text" ng-model="matchOver" maxlength="2"  ng-pattern="integerval" required>
+                                  
+                  							</div>
+                  			     </div>
+                                    
+                              <div class="form_row col-lg-12 col-md-12 col-sm-12 col-xs-12 clearfix">
+                  							<div class="form_box  col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                    							<label>Match Series</label>
+                    							<select name="matchSeries" ng-model="matchSeries" ng-options="matchSeries.Name for matchSeries in sportsData.getseries track by matchSeries.ID" >
+                                    <option value=''>Select Series</option>
+                                  </select>
+                                </div>
+                  		 	      </div>
+                                    
+                              <div class="form_row col-lg-12 col-md-12 col-sm-12 col-xs-12 clearfix">
+                  							<div class="form_box  col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                    							<button type="submit" class="btn btn-primary">Create Match</button>
+                  							</div>
+                  			  </div>
+                              
+                              <div class="col-lg-12 col-md-12 col-sm-12 lst_top_table">
+                                  <div class="resp_table clearfix "> 	
+                      <!-- <table class="table table-bordered table-condensed table-responsive table_box match_td" style="max-width: 100%; margin-top: 10px;" >
+                        <thead>
+                          <tr >
+                              <th>S No.</th>
+                              <th>Date</th>
+                              <th>Team</th>
+                              <th>Odi</th>
+                              <th>Series</th>
+                          </tr>
+                        </thead>
+                        
+                        <tbody>
+                          <tr>
+                              <td data-label="S No.">001</td>
+                              <td data-label="Date">25/08/2016</td>
+                              <td data-label="Team">India Vs Pakistan</td>
+                              <td data-label="Odi">India Vs Pakistan</td>
+                              <td data-label="Series">Series 2016</td>
+                          </tr>
+                          <tr>
+                              <td data-label="S No.">002</td>
+                              <td data-label="Date">20/08/2016</td>
+                              <td data-label="Team">England Vs East Africa</td>
+                              <td data-label="Odi">India Vs Pakistan</td>
+                              <td data-label="Series">Series 2015</td>
+                          </tr>
+                                
+                           <tr>
+                              <td data-label="S No.">003</td>
+                              <td data-label="Date">15/08/2016</td>
+                              <td data-label="Team">Australia Vs Sri Lanka</td>
+                              <td data-label="Odi">India Vs Pakistan</td>
+                              <td data-label="Series">Series 2014</td>
+                          </tr>
+                       </tbody>
+                  </table> -->
+                </div>
+                              </div>             
+        						  </form>
+               
+                </div>          
+                    
+            </div>           	
+
+          
+        
+        
+        
+   

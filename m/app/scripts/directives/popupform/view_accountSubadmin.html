@@ -1,0 +1,56 @@
+﻿<md-dialog class="dial-width-650">
+    <md-toolbar>
+        <div class="md-toolbar-tools">
+            <h2>View Account For {{node.mstrname}}</h2>
+            <span flex></span>
+            <md-button class="md-icon-button" ng-click="hide()">
+                <md-icon md-svg-src="app/images/close.svg" aria-label="Close dialog"></md-icon>
+            </md-button>
+        </div>
+    </md-toolbar>
+    <md-dialog-content>
+        <div class="md-dialog-content">
+            <div class="clearfix">
+                <form name="updateAc" id="updateAc" method="post" ng-submit="UpdateViewAccount(node)">
+                    <div class="popup-form-box col-lg-12 col-md-12 col-sm-12 col-xs-12 clearfix">
+                        <div style="border-bottom:solid 2px GREEN; font-size:14px; padding-bottom:9px; margin-bottom:15px; color:GREEN; font-weight:bold; text-transform:uppercase;">User<!-- {{node}} --></div>
+                        <div class="popup-inp-box col-lg-3 col-md-3 col-sm-3 col-xs-12">
+                            <input type="text" class="popup-input" name="username" id="vewMod2ID" ng-value="node.mstruserid" readonly="readonly" ng-model="user.vewMod2ID" md-autofocus />
+                            <label>User ID</label>
+                        </div>
+                        <div class="popup-inp-box  col-lg-3 col-md-3 col-sm-3 col-xs-12">
+                            <input type="text" class="popup-input" name="Name" id="vewMod2Name" ng-value="node.mstrname" ng-model="user.vewMod2Name" />
+                            <label>Name</label>
+                        </div>
+                        <div class="col-sm-6 form-group">
+                            <label>Role Id </label>
+                            <select ng-model="node.HelperID">
+                                <option value="">Please select role</option>
+                                <option value="{{x.ID}}" ng-repeat="x in node.RoleList">{{x.name}}</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="popup-form-box col-lg-12 col-md-12 col-sm-12 col-xs-12 clearfix">
+
+                        <div class="popup-inp-box  col-lg-3 col-md-3 col-sm-3 col-xs-12">
+                            <textarea name="remarks" id="remarks" ng-value="node.mstrremarks"  ng-model="node.mstrremarks" class="popup-input"></textarea>
+                            <label>Remark</label>
+                        </div>
+
+                    </div>
+                    <div class="popup-inp-box col-lg-3 col-md-3 col-sm-3 col-xs-12 clearfix" style="text-align:center; margin-bottom:20px;" >
+                        <input type="submit" class="btn btn-primary"  value="Update" />
+                    </div>
+
+
+                    <div style="text-align:center;">
+                        <button type="button" class="btn btn-primary" name="updatePrtnerShip" ng-click="hide()">Close</button>
+                    </div>
+                </form>
+
+
+
+            </div>
+        </div>
+    </md-dialog-content>
+</md-dialog>

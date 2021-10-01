@@ -1,0 +1,142 @@
+<div class="col-sm-12 col-md-12">
+  <div class="clearfix sport-high ">
+    <!--<div class="box-heading" style="text-align:center;">Dashboard</div>-->
+   <!--  <div style="padding:8px;">
+      <div ng-click="showChart()" class="box-heading">
+        Chart
+        <span class="rigt-ref">
+          <i class="glyphicon glyphicon-plus"></i>
+        </span>
+      </div>
+      <div class="box-cont clearfix" ng-show="BoolshowChart">  
+        <c3chart bindto-id="chartGroupDataPoints" chart-data="datapoints" chart-columns="datacolumns" chart-x="datax" show-labels="true">
+          <chart-bar ratio="0.5"/>
+          <chart-axes values-x="matchName"/>
+          <chart-axis >
+            <chart-axis-x axis-position="outer-center" axis-label="Matches" axis-type="category"/>
+          </chart-axis>
+        </c3chart>
+      </div>
+    </div> -->
+
+    
+    <div class="clearfix dash-mark-box">
+      <!-- {{matchResult}} -->
+      <table class="table dash-mark-table">
+        <thead>
+          <tr >
+
+            <th style="background-color:#222;">
+              Match Name
+            </th>
+            <th style="width:10px; border:transparent !important;background:none; box-shadow:none;"></th>
+
+            <th>
+             Team A
+            </th>
+            <th style="width:10px; border:transparent !important;background:none; box-shadow:none;"></th>
+            <th>
+              Team B
+            </th>
+            <th style="width:10px; border:transparent !important;background:none; box-shadow:none;"></th>
+            <th>
+              Draw
+            </th>
+          </tr>
+        </thead>
+        <tr ng-repeat="mtchRs in matchResult">
+
+          <td data-label="Match Name" style="background-color:#ECF0F1;color:#222!important"  >
+           <a ng-if="mtchRs.SportID==4" href="" ui-sref="dashboard.Matchodds({MatchId: mtchRs.matchId,MarketId:mtchRs.marketId,matchName:mtchRs.matchName,date:mtchRs.date})">{{mtchRs.matchName}}</a>
+            <a ng-if="mtchRs.SportID!=4" href="" ui-sref="dashboard.Matchodds_user({MatchId: mtchRs.matchId,MarketId:mtchRs.marketId,matchName:mtchRs.matchName,date:mtchRs.date})">{{mtchRs.matchName}}</a>
+
+          </td>
+          <td style="width:10px; border:transparent !important;background:none; box-shadow:none;"></td>
+          <td data-label="Team A" class="txt-rgt">
+               <small>{{mtchRs.teamAt | limitTo: 3}}</small> 
+                <div ng-if="mtchRs.TeamA>0" style="color:#0cf30c;"> {{mtchRs.TeamA|number:2}}</div>
+                <div ng-if="mtchRs.TeamA<0" style="color:RED;">{{mtchRs.TeamA|number:2}}</div>
+                <div ng-if="mtchRs.TeamA==0" style="color:Black;">{{mtchRs.TeamA|number:2}}</div>
+          </td>
+          <td style="width:10px; border:transparent !important;background:none; box-shadow:none;"></td>
+          <td data-label="Team B" class="txt-rgt">
+                <small>{{mtchRs.teamBt | limitTo: 3}} </small> 
+                <div ng-if="mtchRs.TeamB>0" style="color:#0cf30c;">{{mtchRs.TeamB|number:2}}</div>
+                <div ng-if="mtchRs.TeamB<0" style="color:RED;">{{mtchRs.TeamB|number:2}}</div>
+                <div ng-if="mtchRs.TeamB==0" style="color:Black;">{{mtchRs.TeamB|number:2}}</div>
+          </td>
+          <td style="width:10px; border:transparent !important;background:none; box-shadow:none;"></td>
+          <td data-label="Draw" class="txt-rgt" >
+            <small>{{mtchRs.teamCt}} &emsp;</small> 
+            <div ng-if="mtchRs.theDraw>0" style="color:#0cf30c;">{{mtchRs.theDraw|number:2}}</div>
+            <div ng-if="mtchRs.theDraw<0" style="color:RED;"><br>{{mtchRs.theDraw|number:2}}</div>
+            <div ng-if="mtchRs.theDraw==0" style="color:Black;">{{mtchRs.theDraw|number:2}}</div>
+
+          </td>
+        </tr>
+      </table>
+    </div>
+
+    <!-- <div class="groth_wrapper clearfix col-md-12 col-sm-12 col-xs-12" style="padding:0px;">
+                <h3><span class="glyphicon glyphicon-align-left"> </span>Percentages</h3>
+                <div class="clearfix groth_box  col-md-3 col-sm-6 col-xs-12">
+                        <img src="app/images/groth_img1.png" class="img-responsive"/>
+                            <p>Cricket</p>
+                    </div>
+                   <div class="clearfix groth_box  col-md-3 col-sm-6 col-xs-12">
+                        <img src="app/images/groth_img3.png" class="img-responsive"/>
+                            <p> Football</p>
+                    </div>
+                    <div class="clearfix groth_box  col-md-3 col-sm-6 col-xs-12">
+                        <img src="app/images/groth_img4.png" class="img-responsive"/>
+                            <p>Tennis</p>
+                    </div>
+                    <div class="clearfix groth_box  col-md-3 col-sm-6 col-xs-12">
+                        <img src="app/images/groth_img2.png" class="img-responsive"/>
+                            <p>Horse Ridding</p>
+                    </div>
+            </div>
+            
+            
+         <div class="clearfix col-md-12 col-sm-12 col-xs-12">
+            
+                 <div class="clearfix col-md-6 col-sm-12 col-xs-12 none_padd games_view">
+                  <h3 class="games_h3"><span class="glyphicon glyphicon-align-left"></span>View Games </h3>
+                  <div class="clearfix  col-md-6 col-sm-6 col-xs-12 none_padd">
+                      <img src="app/images/prot_img5.jpg" class="img-responsive" width="100%" />
+                    </div>
+                    <div class="clearfix col-md-6 col-sm-6 col-xs-12 none_padd">
+                      <img src="app/images/prot_img6.jpg" class="img-responsive" width="100%" />
+                    </div>
+                    <div class="clearfix col-md-6 col-sm-6 col-xs-12 none_padd">
+                      <img src="app/images/prot_img7.jpg" class="img-responsive" width="100%" />
+                    </div> 
+                    <div class="clearfix col-md-6 col-sm-6 col-xs-12 none_padd">
+                      <img src="app/images/prot_img8.jpg" class="img-responsive" width="100%" />
+                    </div>
+                    <div class="clearfix col-md-12 col-sm-12 col-xs-12 none_padd earn_box">
+                      <h3 class="earning"> Earning</h3>
+                        <p>Lorem ipsum dolor sit amet, consecte tuer adipiscing elit, sed diam nonummy nibh euismod tincidunt. A wonderful serenity has taken possession of my entire soul, like these sweet mornings of spring which I enjoy with my whole heart sed diam nonummy nibh euismod tincidunt. A wonderful serenity has taken possession of my entire soul, like these sweet mornings of spring  heart.</p>
+                    </div>
+              </div>
+                
+                <div class="clearfix col-md-6 col-sm-12 col-xs-12">
+                <div class="clearfix col-md-12 col-sm-12 col-xs-12 boot_view">
+                      <h3 class="prof_top_bo1"><span class="glyphicon glyphicon-align-left"></span>Dealer Profit & Loss </h3>
+                        <img src="app/images/loss_prof2.jpg" class="img-responsive" width="100%" />
+                </div>
+                  <div class="clearfix col-md-12 col-sm-12 col-xs-12 boot_view">
+                      <h3 class="prof_top_bo2"><span class="glyphicon glyphicon-align-center"></span>Client  Profit & Loss </h3>
+                        <img src="app/images/loss_prof.jpg" class="img-responsive" width="100%" />
+                </div>
+            </div>
+            </div>
+            -->
+  </div>
+</div>
+
+
+
+
+
+

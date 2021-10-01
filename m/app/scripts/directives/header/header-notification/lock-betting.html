@@ -1,0 +1,32 @@
+﻿
+<md-dialog>
+            <form ng-cloak>
+                <md-toolbar>
+                    <div class="md-toolbar-tools"><h2>Lock Betting</h2></div>
+                </md-toolbar>
+                <md-dialog-content>
+                    <div class="md-dialog-content">
+
+
+                    <div class="clearfix lock_box">
+                        <p>{{btingcontent}} {{node.name}}</p>
+                        <form name="userLock" method="post">
+                          <input type="hidden" name="userId" id="userId" value="{{node.id}}"/>
+                          <input type="hidden" name="battinglockVal" id="battinglockVal" value="{{node.lgnusrlckbtng}}"/>
+                          <button type="submit" class="btn btn-primary"  name="lock_user" ng-click="HideLockBattingUserFrm()">CANCLE</button>
+                          <button type="submit" class="btn btn-primary focus" name="lock_user" ng-click="UpdateLockBatting(user)" md-autofocus>OK</button>
+                        </form>
+
+                        <!-- <button type="submit" class="btn btn-primary">CANCLE</button>
+                            <button type="submit" class="btn btn-primary">OK</button> -->
+                    </div>
+
+                    </div>
+                </md-dialog-content>
+                <!-- <md-dialog-actions layout="row">
+                    <md-button ng-click="hide()">
+                        Update Chips
+                    </md-button>
+                </md-dialog-actions> -->
+            </form>
+</md-dialog>

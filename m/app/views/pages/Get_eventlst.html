@@ -1,0 +1,65 @@
+
+
+<!-- {{events}} -->
+  <div class="col-lg-12 col-md-12 lst_master">
+              <div class="resp_table clearfix ">
+    		        <table class="table table-bordered table-condensed table-responsive" style="background-color:#fff;">
+		    		      <thead>
+			    		        <tr >
+			    		       
+			    		        	<th><i class="glyphicon glyphicon-sort"></i></a>Serial No</th>
+			    		            <th><i class="glyphicon glyphicon-sort"></i></a>Sport Id</th>
+			    		            <th><i class="glyphicon glyphicon-sort"></i></a>Sport Name</th>
+			    		            <th><i class="glyphicon glyphicon-sort"></i></a>marketCount</th>
+			    		            
+			    		            <th>Action</th>
+			    		        </tr>
+		    		            
+		    		        
+		    		      </thead>
+		    		     	<tr ng-repeat="getAllsports in events">
+								<td>{{$index+1}}</td>	
+								<td>{{getAllsports.eventType.id}}</td>
+								<td>{{getAllsports.eventType.name}}</td>
+								<td>{{getAllsports.marketCount}}</td>
+								<td><input type="checkbox" ng-model="checkboxModel.value2" ng-click="savesport(getAllsports.eventType.id,getAllsports.eventType.name,getAllsports.marketCount);" ></td>
+							</tr>
+
+    		        </table>
+              </div>
+
+    		        <div class="col-md-12" ng-show="filteredItems == 0">
+    		        <div class="col-md-12">
+    		            <h4>No Users found</h4>
+    		        </div>
+    		        </div>
+    		        <div class="col-md-12" ng-show="filteredItems > 0">    
+    		            <div pagination="" page="currentPage" on-select-page="setPage(page)" boundary-links="true" total-items="filteredItems" items-per-page="entryLimit" class="pagination-small" previous-text="&laquo;" next-text="&raquo;">
+    		                
+    		            </div>
+    		            
+    		            
+    		        </div>
+    		      </div>
+    		  </div>
+<table>
+	<!-- <form name="savesports" method="post" ng-click="saveSports();">
+	
+
+		<tr>
+			<td>Serial No</td>
+			<td>Sport Id</td>
+			<td>Sport Name</td>
+			<td>marketCount</td>
+			<td>Action</td>
+		</tr>
+
+		<tr ng-repeat="getAllsports in events">
+			<td>{{$index+1}}</td>	
+			<td>{{getAllsports.eventType.id}}</td>
+			<td>{{getAllsports.eventType.name}}</td>
+			<td>{{getAllsports.marketCount}}</td>
+			<td><input type="checkbox" ng-model="checkboxModel.value2" ng-true-value="'YES'" ng-false-value="'NO'"></td>
+		</tr>
+	</form> -->
+</table>

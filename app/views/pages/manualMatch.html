@@ -1,0 +1,103 @@
+<div class="content-wrapper ng-scope" style="min-height: 720px;" >
+    <div class="load-box" ng-show="loading"><img id="mySpinner" src="app/images/loading1.gif"/></div>
+    <div class="col-sm-12 col-md-12 master-cont">
+        <button class="btn btn-success client-btn" ui-sref="dashboard.Createfancy">Back</button>
+        <h2 style="text-align: center; font-size: 28px; margin-bottom: 15px;color:white">Create Manual Match</h2>
+        <div class="row">
+            <div class="clearfix creat_form">
+                <p ng-show="message" style="text-align: center; color:#FE5454; font-size: 18px; margin-bottom: 15px;">
+                    {{message}}</p>
+                <!--  <span ng-show="message" class="error"></span> -->
+                <form name="manualmatch">
+
+                    <div class="form_box  col-lg-6 col-md-6 col-sm-6 col-xs-12">
+
+                        <label>Sport Name</label>
+                        <select ng-model="SportID" ng-change="getSportList(SportID)" ngrequired>
+                            <option value="{{sports.id}}" ng-repeat="sports in sprtData">{{sports.name}}</option>
+
+                        </select>
+                    </div>
+                    <div class="form_box  col-lg-6 col-md-6 col-sm-6 col-xs-12">
+
+                        <label>Series Name </label>
+                        <select ng-model="SeriesID" ngrequired>
+                            <option value="">Please Select Series</option>
+                            <option value="{{series.seriesId}}" ng-repeat="series in GetSeriesData | filter:{SportID:SportID}">
+                                {{series.Name}}
+                            </option>
+
+                        </select>
+                    </div>
+                    <div class="form_box  col-lg-6 col-md-6 col-sm-6 col-xs-12">
+                        <label>Match Name</label>
+                        <p class="input-group datepick-box">
+                            <input type="text" class="form-control" ng-model="manualMatchName" ng-required="true"
+                                   placeholder="Enter match name"
+                            />
+
+                        </p>
+                    </div>
+ <div class="form_box  col-lg-6 col-md-6 col-sm-6 col-xs-12" >
+                        <label>Match Date </label>
+                        <p class="input-group datepick-box">
+                             <input type="text" id='manaualDateTime' class="form-control" placeholder="Please Select DateTime" datetime-picker="MM/dd/yyyy HH:mm" ng-model="date.value"  min-date="minDate"   is-open="date.showFlag"/>
+                <span class="input-group-btn">
+                    <button type="button" class="btn btn-default" ng-click="date.showFlag = true"><i class="fa fa-calendar"></i></button>
+                </span>
+
+                        </p>
+                    </div>
+    	 <div class="form_box  col-lg-6 col-md-6 col-sm-6 col-xs-12">
+                        <label>Runner Name1</label>
+                        <p class="input-group datepick-box">
+                            <input type="text" class="form-control" ng-model="runnerName1" ng-required="true"
+                                   placeholder="Enter Runner name"
+                            />
+
+                        </p>
+                    </div>
+    	 <div class="form_box  col-lg-6 col-md-6 col-sm-6 col-xs-12">
+                        <label>Runner Name2</label>
+                        <p class="input-group datepick-box">
+                            <input type="text" class="form-control" ng-model="runnerName2" ng-required="true"
+                                   placeholder="Enter Runner name"
+                            />
+
+                        </p>
+                    </div>
+    	 <div class="form_box  col-lg-6 col-md-6 col-sm-6 col-xs-12">
+                        <label>Runner Name3</label>
+                        <p class="input-group datepick-box">
+                            <input type="text" class="form-control" ng-model="runnerName3"
+                                   placeholder="Enter Runner name"
+                            />
+
+                        </p>
+                    </div>
+		
+            </div>
+
+
+            <div class="form_row col-lg-12 col-md-12 col-sm-12 col-xs-12 clearfix">
+                <div class="form_box  col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                    <button type="submit" class="btn btn-primary" ng-disabled="!manualmatch.$valid"  ng-click="createMatch()">Submit</button>
+                </div>
+            </div>
+
+
+            </form>
+
+
+        </div>
+    </div>
+</div>
+</div>
+
+
+
+
+
+
+
+

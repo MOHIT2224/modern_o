@@ -1,0 +1,636 @@
+
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>Ludo Money | Redeem Request List</title>
+    <!-- Tell the browser to be responsive to screen width -->
+    <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
+    <!-- Bootstrap 3.3.7 -->
+    <link rel="stylesheet" href="bower_components/bootstrap/dist/css/bootstrap.min.css">
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="bower_components/font-awesome/css/font-awesome.min.css">
+    <!-- Ionicons -->
+    <link rel="stylesheet" href="bower_components/Ionicons/css/ionicons.min.css">
+    <!-- DataTables -->
+    <link rel="stylesheet" href="bower_components/datatables.net-bs/css/dataTables.bootstrap.min.css">
+    <!-- Theme style -->
+    <link rel="stylesheet" href="dist/css/AdminLTE.min.css">
+    <!-- AdminLTE Skins. Choose a skin from the css/skins
+         folder instead of downloading all of them to reduce the load. -->
+    <link rel="stylesheet" href="dist/css/skins/_all-skins.min.css">
+
+    <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+    <!--[if lt IE 9]>
+    <script src="https://oss.maxcdn.com/html5shiv/3.7.3/html5shiv.min.js"></script>
+    <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
+    <![endif]-->
+
+    <!-- Google Font -->
+    <link rel="stylesheet"
+          href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,600,700,300italic,400italic,600italic">
+</head>
+<body class="hold-transition skin-blue sidebar-mini">
+<div class="wrapper">
+
+    <header class="main-header">
+
+    <!-- Logo -->
+
+    <a href="admin/welcome/dashboard" class="logo">
+
+        <!-- mini logo for sidebar mini 50x50 pixels -->
+
+        <span class="logo-mini">Ludo Money</span>
+
+        <!-- logo for regular state and mobile devices -->
+
+        <span class="logo-lg"><img src="" height="46" width="46" class="img-circle"><b>Ludo Money</b></span>
+
+    </a>
+
+    <!-- Header Navbar: style can be found in header.less -->
+
+    <nav class="navbar navbar-static-top">
+
+        <!-- Sidebar toggle button-->
+
+        <a href="#" class="sidebar-toggle" data-toggle="push-menu" role="button" style="position: absolute;">
+
+            <span class="sr-only">Toggle navigation</span>
+
+        </a>
+
+
+
+        <div class="navbar-custom-menu">
+
+            <ul class="nav navbar-nav">
+
+                <!-- User Account: style can be found in dropdown.less -->
+
+                <li class="dropdown user user-menu" style="left: 460px">
+
+                    <a href="#" class="dropdown-toggle" data-toggle="dropdown" >
+
+                        
+                            <img src="http://appdroidsolutions.com/uploads/user_images/default_user.png" class="user-image" alt="admin">
+
+                        
+                        <span class="hidden-xs">admin</span>
+
+                    </a>
+
+                    <ul class="dropdown-menu">
+
+                        <!-- User image -->
+
+                        <li class="user-header">
+
+                            
+                                <img src="http://appdroidsolutions.com/uploads/user_images/default_user.png" class="img-circle" alt="admin">
+
+                            
+                            <p>
+
+                                admin
+                            </p>
+
+                        </li>
+
+                        <!-- Menu Footer-->
+
+                        <li class="user-footer">
+
+                            <div class="pull-left">
+
+                                <a href="#" class="btn btn-default btn-flat">Profile</a>
+
+                            </div>
+
+                            <div class="pull-right">
+
+                                <a href="admin/welcome/logout" class="btn btn-default btn-flat">Sign out</a>
+
+                            </div>
+
+                        </li>
+
+                    </ul>
+
+                </li>
+
+                <!-- Control Sidebar Toggle Button -->
+
+               <!-- <li>
+
+                    <a href="#" data-toggle="control-sidebar"><i class="fa fa-gears"></i></a>
+
+                </li>-->
+
+            </ul>
+
+        </div>
+
+    </nav>
+
+</header><!-- Left side column. contains the logo and sidebar -->
+
+<aside class="main-sidebar">
+
+    <!-- sidebar: style can be found in sidebar.less -->
+
+    <section class="sidebar">
+
+        <!-- Sidebar user panel -->
+
+        <div class="user-panel">
+
+            <div class="text-center image">
+
+                
+                    <img src="http://appdroidsolutions.com/uploads/user_images/default_user.png" class="img-circle" alt="" height="80" width="80">
+
+                
+            </div>
+
+        </div>
+
+        
+
+        <ul class="sidebar-menu" data-widget="tree">
+
+            <li class="">
+
+                <a href="admin/Welcome/dashboard">
+
+                    <i class="fa fa-dashboard"></i> <span>Dashboard</span>
+
+                </a>
+
+            </li>
+        <li><a href="admin/UserManage/list_user"><i class="fa fa-user-circle "></i>Manage User</a></li>
+        <li><a href="admin/UserManage/list_redeem_history"><i class="fa fa-user-circle "></i>Redeem History</a></li>
+        <li><a href="admin/UserManage/list_redeem_transation"><i class="fa fa-user-circle "></i>Redeem Transation</a></li>
+        <li><a href="admin/UserManage/list_redeem_request"><i class="fa fa-user-circle "></i>Redeem Request</a></li>
+        <li><a href="#"><i class="fa fa-user-circle "></i>Game Details</a></li>
+        <li><a href="#"><i class="fa fa-user-circle "></i>Online Users</a></li>
+        <li><a href="admin/welcome/logout"><i class="fa fa-user-circle "></i>Log Out</a></li>
+            
+
+        </ul>
+
+    </section>
+
+    <!-- /.sidebar -->
+
+</aside>
+
+
+    <!-- Content Wrapper. Contains page content -->
+    <div class="content-wrapper">
+        <!-- Content Header (Page header) -->
+        <section class="content-header">
+            <h1>
+                Index
+                <!--<small>advanced tables</small>-->
+            </h1>
+            <ol class="breadcrumb">
+                <li><a href="admin/welcome/dashboard"><i class="fa fa-dashboard"></i> Home</a></li>
+                <li><a href="#">Redeem Request List</a></li>
+                <li class="active">Index</li>
+            </ol>
+        </section>
+
+        <!-- Main content -->
+        <section class="content">
+            <div class="row">
+                <div class="col-xs-12">
+                    <!--<button type="button" class="btn btn-info"  name="export" id="export_to_excel" onClick="exportexcel();">Export To Excel</button>-->
+                    <div class="box">
+                        <div class="box-header">
+                            <h3 class="box-title">&nbsp;</h3>
+                           <!--  <div class="box-tools"><a href="admin/UserManage/add_redeem_Request" class="btn btn-primary">Add Redeem Request</a></div> -->
+                            
+                            
+
+                                                    </div>
+                        <!-- /.box-header -->
+                        <div class="box-body table-responsive">
+                            <table id="example1" class="table table-bordered table-striped  table-hover">
+                                <thead>
+                                <tr>
+                                    <th>Request Id</th>
+                                    <th>User Id</th>
+                                    <th>User Name</th>
+                                    <th>Requested Coins</th>
+                                    <th>Current Coin</th>
+                                    <th>Request Type</th>
+                                    <th>Transfer Type</th>
+                                    <th>Transfer Details</th>
+                                    <th>Date</th>
+                                    <th>Status</th>
+
+                                </tr>
+                                </thead>
+                                <tbody>
+                                
+                                        <tr>
+                                            <td>1</td>
+                                            <td>LD1252</td>
+                                            <td>ludotest</td>
+                                            <td>15</td>
+                                            <td>910</td>
+                                            <td>0</td>
+                                            <td></td>
+                                             <td></td>
+                                              <td>2018-10-28 23:46:00</td>
+                                              <td>
+
+                                                <div class="btn-group">
+
+                                                    <button type="button" class="btn btn-success">Approved</button>
+                                                    
+                                                </div>
+
+                                            </td>
+                                            
+
+
+                                        </tr>
+
+
+                                    
+                                        <tr>
+                                            <td>2</td>
+                                            <td>LD2656</td>
+                                            <td>Naresh Test </td>
+                                            <td>213</td>
+                                            <td>3100</td>
+                                            <td>0</td>
+                                            <td></td>
+                                             <td></td>
+                                              <td>2018-10-29 23:17:36</td>
+                                              <td>
+
+                                                <div class="btn-group">
+
+                                                    <button type="button" class="btn btn-success">Approved</button>
+                                                    
+                                                </div>
+
+                                            </td>
+                                            
+
+
+                                        </tr>
+
+
+                                    
+                                        <tr>
+                                            <td>3</td>
+                                            <td>LD2656</td>
+                                            <td>Naresh Test </td>
+                                            <td>213</td>
+                                            <td>3100</td>
+                                            <td>1</td>
+                                            <td></td>
+                                             <td></td>
+                                              <td>2018-10-29 23:23:53</td>
+                                              <td>
+
+                                                <div class="btn-group">
+
+                                                    <button type="button" class="btn btn-warning">Pending</button>
+                                                                                                        <button type="button" class="btn btn-danger dropdown-toggle" data-toggle="dropdown">
+
+                                                        <span class="caret"></span>
+
+                                                        <span class="sr-only">Toggle Dropdown</span>
+
+                                                    </button>
+                                                                                                                    <ul class="dropdown-menu" role="menu">
+
+                                                                <li><a href="admin/userManage/points_request/1/3">approved</a></li>
+                                                                <li class="divider"></li>
+                                                                <li><a href="admin/userManage/points_request/2/3">Declined</a></li>
+
+                                                            </ul>
+                                                      
+
+                                                    
+                                                </div>
+
+                                            </td>
+                                            
+
+
+                                        </tr>
+
+
+                                    
+                                        <tr>
+                                            <td>4</td>
+                                            <td>LD1252</td>
+                                            <td>myname</td>
+                                            <td>100</td>
+                                            <td>905</td>
+                                            <td>1</td>
+                                            <td></td>
+                                             <td></td>
+                                              <td>2018-10-30 00:52:52</td>
+                                              <td>
+
+                                                <div class="btn-group">
+
+                                                    <button type="button" class="btn btn-warning">Pending</button>
+                                                                                                        <button type="button" class="btn btn-danger dropdown-toggle" data-toggle="dropdown">
+
+                                                        <span class="caret"></span>
+
+                                                        <span class="sr-only">Toggle Dropdown</span>
+
+                                                    </button>
+                                                                                                                    <ul class="dropdown-menu" role="menu">
+
+                                                                <li><a href="admin/userManage/points_request/1/4">approved</a></li>
+                                                                <li class="divider"></li>
+                                                                <li><a href="admin/userManage/points_request/2/4">Declined</a></li>
+
+                                                            </ul>
+                                                      
+
+                                                    
+                                                </div>
+
+                                            </td>
+                                            
+
+
+                                        </tr>
+
+
+                                    
+                                        <tr>
+                                            <td>5</td>
+                                            <td>LD6473</td>
+                                            <td>bhavesh</td>
+                                            <td>100</td>
+                                            <td>0</td>
+                                            <td>1</td>
+                                            <td></td>
+                                             <td></td>
+                                              <td>2018-10-30 08:48:31</td>
+                                              <td>
+
+                                                <div class="btn-group">
+
+                                                    <button type="button" class="btn btn-success">Approved</button>
+                                                    
+                                                </div>
+
+                                            </td>
+                                            
+
+
+                                        </tr>
+
+
+                                    
+                                        <tr>
+                                            <td>6</td>
+                                            <td>LD1193</td>
+                                            <td>bhavesh</td>
+                                            <td>200</td>
+                                            <td>620</td>
+                                            <td>1</td>
+                                            <td></td>
+                                             <td></td>
+                                              <td>2018-11-02 04:59:56</td>
+                                              <td>
+
+                                                <div class="btn-group">
+
+                                                    <button type="button" class="btn btn-success">Approved</button>
+                                                    
+                                                </div>
+
+                                            </td>
+                                            
+
+
+                                        </tr>
+
+
+                                    
+                                        <tr>
+                                            <td>7</td>
+                                            <td>LD2386</td>
+                                            <td>bhavesh</td>
+                                            <td>50</td>
+                                            <td>95</td>
+                                            <td>1</td>
+                                            <td></td>
+                                             <td></td>
+                                              <td>2018-11-05 11:52:39</td>
+                                              <td>
+
+                                                <div class="btn-group">
+
+                                                    <button type="button" class="btn btn-warning">Pending</button>
+                                                                                                        <button type="button" class="btn btn-danger dropdown-toggle" data-toggle="dropdown">
+
+                                                        <span class="caret"></span>
+
+                                                        <span class="sr-only">Toggle Dropdown</span>
+
+                                                    </button>
+                                                                                                                    <ul class="dropdown-menu" role="menu">
+
+                                                                <li><a href="admin/userManage/points_request/1/7">approved</a></li>
+                                                                <li class="divider"></li>
+                                                                <li><a href="admin/userManage/points_request/2/7">Declined</a></li>
+
+                                                            </ul>
+                                                      
+
+                                                    
+                                                </div>
+
+                                            </td>
+                                            
+
+
+                                        </tr>
+
+
+                                    
+                                        <tr>
+                                            <td>8</td>
+                                            <td>LD2386</td>
+                                            <td>bhavesh</td>
+                                            <td>50</td>
+                                            <td>95</td>
+                                            <td>0</td>
+                                            <td></td>
+                                             <td></td>
+                                              <td>2018-11-26 02:59:47</td>
+                                              <td>
+
+                                                <div class="btn-group">
+
+                                                    <button type="button" class="btn btn-warning">Pending</button>
+                                                                                                        <button type="button" class="btn btn-danger dropdown-toggle" data-toggle="dropdown">
+
+                                                        <span class="caret"></span>
+
+                                                        <span class="sr-only">Toggle Dropdown</span>
+
+                                                    </button>
+                                                                                                                    <ul class="dropdown-menu" role="menu">
+
+                                                                <li><a href="admin/userManage/change_menu_status/1/8">approved</a></li>
+                                                                <li class="divider"></li>
+                                                                <li><a href="admin/userManage/change_menu_status/2/8">Declined</a></li>
+
+                                                            </ul>
+
+                                                      
+
+                                                    
+                                                </div>
+
+                                            </td>
+                                            
+
+
+                                        </tr>
+
+
+                                    
+                                        <tr>
+                                            <td>9</td>
+                                            <td>LD901</td>
+                                            <td>vishnu</td>
+                                            <td>1000</td>
+                                            <td>9485</td>
+                                            <td>0</td>
+                                            <td></td>
+                                             <td></td>
+                                              <td>2018-11-30 01:24:56</td>
+                                              <td>
+
+                                                <div class="btn-group">
+
+                                                    <button type="button" class="btn btn-warning">Pending</button>
+                                                                                                        <button type="button" class="btn btn-danger dropdown-toggle" data-toggle="dropdown">
+
+                                                        <span class="caret"></span>
+
+                                                        <span class="sr-only">Toggle Dropdown</span>
+
+                                                    </button>
+                                                                                                                    <ul class="dropdown-menu" role="menu">
+
+                                                                <li><a href="admin/userManage/change_menu_status/1/9">approved</a></li>
+                                                                <li class="divider"></li>
+                                                                <li><a href="admin/userManage/change_menu_status/2/9">Declined</a></li>
+
+                                                            </ul>
+
+                                                      
+
+                                                    
+                                                </div>
+
+                                            </td>
+                                            
+
+
+                                        </tr>
+
+
+                                                                    </tbody>
+                                <!-- <tfoot>
+                                 <tr>
+                                   <th>Rendering engine</th>
+                                   <th>Browser</th>
+                                   <th>Platform(s)</th>
+                                   <th>Engine version</th>
+                                   <th>CSS grade</th>
+                                 </tr>
+                                 </tfoot>-->
+                            </table>
+                        </div>
+                        <!-- /.box-body -->
+                    </div>
+                    <!-- /.box -->
+                </div>
+                <!-- /.col -->
+            </div>
+            <!-- /.row -->
+        </section>
+        <!-- /.content -->
+
+
+    </div>
+
+    <footer class="main-footer">
+
+    <div class="pull-right hidden-xs">
+
+        <b>Version</b> 2.0
+
+    </div>
+
+    <strong>Copyright &copy; 2017-2018 <a href="#">LudoGame</a>.</strong> All rights
+
+    reserved.
+
+</footer>
+    <!-- ./wrapper -->
+
+    <!-- jQuery 3 -->
+    <script src="bower_components/jquery/dist/jquery.min.js"></script>
+    <!-- Bootstrap 3.3.7 -->
+    <script src="bower_components/bootstrap/dist/js/bootstrap.min.js"></script>
+    <!-- DataTables -->
+    <script src="bower_components/datatables.net/js/jquery.dataTables.min.js"></script>
+    <script src="bower_components/datatables.net-bs/js/dataTables.bootstrap.min.js"></script>
+    <!-- SlimScroll -->
+    <script src="bower_components/jquery-slimscroll/jquery.slimscroll.min.js"></script>
+    <!-- FastClick -->
+    <script src="bower_components/fastclick/lib/fastclick.js"></script>
+    <!-- AdminLTE App -->
+    <script src="dist/js/adminlte.min.js"></script>
+    <!-- AdminLTE for demo purposes -->
+    <script src="dist/js/demo.js"></script>
+    <!-- page script -->
+    <script>
+        $(function () {
+            $('#example1').DataTable()
+            $('#example2').DataTable({
+                'paging'      : true,
+                'lengthChange': false,
+                'searching'   : true,
+                'ordering'    : true,
+                'info'        : true,
+                'autoWidth'   : false
+            })
+        })
+    </script>
+    <script src="js/export_to_excel.js"></script>
+    <script type="text/javascript">
+        function exportexcel() {
+            $("#example1").table2excel({
+                name: "Table2Excel",
+                filename: "facilities_list",
+                fileext: ".xls"
+            });
+        }
+    </script>
+
+</body>
+</html>

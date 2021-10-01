@@ -1,0 +1,98 @@
+  <h1 class="page-heading">Player Master</h1>
+
+        <div class="col-sm-12 col-md-12 master-cont"> 
+        			<!-- <h2 style="text-align: center; font-size: 28px; margin-bottom: 15px;"> Player Master </h2> -->
+              <p ng-show="message" style="text-align: center; color:#FE5454; font-size: 18px; margin-bottom: 15px;">{{message}}</p>
+            <form class="form-inline" ng-submit="submitForm()">
+              <div class="clearfix creat_form">    		
+              		<div class="form_row col-lg-12 col-md-12 col-sm-12 col-xs-12 clearfix">
+                      <div class="form_box  col-lg-6 col-md-6 col-sm-6 col-xs-12">
+                        <label>id</label>
+                        <input type="text" name="playerId" ng-model="playerId" >
+                      </div>
+                      <div class="form_box  col-lg-6 col-md-6 col-sm-6 col-xs-12">
+                        <label >Sport Name.</label>
+                           <!--  <select name="Sport_id" ng-model="Sport_id" ng-options="sport.name for sport in playerData.sportDropdown track by sport.id"  >
+                              
+                            </select> -->
+                            <select ng-model="Sport_id" name="Sport_id">
+                             <option ng-repeat="sport in playerData.sportDropdown track by sport.id" ng-value="1" selected="selected" ng-model="Sport_id">
+                               {{sport.name}}
+                             </option>
+                            </select>
+                      </div>
+                      <div class="form_box  col-lg-6 col-md-6 col-sm-6 col-xs-12">
+                        <label>Team Name</label>
+                              <select name="team_id" ng-model="team_id" ng-options="team.name for team in playerData.teamDropdown track by team.id" >
+                                  <option value=''>Select Team</option>
+                              </select>
+                      </div>
+                      <div class="form_box  col-lg-4 col-md-4 col-sm-4 col-xs-12">
+                        <label >Player Name.</label>
+                        <input type="text" name="player_name" ng-model="player_name"  required="required" >
+                      </div>
+                     <!--  <div class="form_box  col-lg-2 col-md-2 col-sm-2 col-xs-12">
+                        <label >age.</label>
+                        <input type="text" name="age" ng-model="age" maxlength="2" minlength="2" required="required" >
+                      </div> -->
+                  </div>                        
+                  <div class="form_row col-lg-12 col-md-12 col-sm-12 col-xs-12 clearfix">
+      							<div class="form_box  col-lg-12 col-md-12 col-sm-12 col-xs-12">
+        							<button type="submit" class="btn btn-primary">Create Player</button>
+      							</div>
+      						</div>
+
+        <div class="lst_master_top clearfix">
+            <div class="form_row col-lg-12 col-md-12 col-sm-12 col-xs-12 clearfix top_table_form" style="padding: 0px;">
+                <div class="form_box  col-lg-4 col-md-4 col-sm-4 col-xs-12" style="padding: 0px;">
+                    <div class="file-icons">
+                     <a href=""><img src="app/images/file1.png" /></a>
+                     <a href=""><img src="app/images/file2.png" /></a>
+                     <a href=""><img src="app/images/file3.png" /></a>
+                    </div>
+                </div>               
+            </div>            
+        </div>
+
+                  <div class="listdata-table clearfix ">
+                      <table class="table table-bordered table-condensed table-responsive match_td"  border="1" bordercolor="#ccc" cellpadding="0" cellspacing="0">
+                        <thead>
+                          <tr>
+                              <th>S No.</th>
+                              <th>Sports Name</th>
+                              <th>Team Name</th>
+                              <th>Player Name</th>
+                             
+                              <th>Action</th>
+                              
+                          </tr>
+                        </thead>
+                            
+                        <tbody>
+                        
+                          <tr ng-repeat="item in playerData.data ">
+                              <td data-label="S No.">{{$index+1}}</td>
+                              <td data-label="Sports Name">{{item.name}}</td>
+                              <td data-label="Team Name">{{item.teamName}}</td>
+                              <td data-label="Player Name">{{item.Name}}</td>
+                             
+                              <td data-label="Action">Edit</td>                
+                          </tr>
+                      
+                        </tbody>
+                      </table>
+                  </div>              	
+              </div>
+            
+            </form>
+           
+                
+                      
+            
+                
+          
+          
+        </div>
+       
+        
+   

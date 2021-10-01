@@ -1,0 +1,64 @@
+<div class="content-wrapper">
+<h1 class="page-heading">Create Helper</h1>
+<form name="setPermition" method="post">
+<div class="col-sm-12 col-md-12">
+    <div class="helper-name clearfix">
+        Helper Name -<span>{{adminName}}</span>
+        <button type="button" class="helper-save-btn" name="save" ng-click="SavePermition()"> Save Permission </button>
+        <a ui-sref="dashboard.CrtSubAdminCntr" class="helper-save-btn" name="backtopage">Back To Page</a>
+    </div>
+</div>
+<div class="col-sm-12 col-md-12">
+    <div class="col-sm-5 col-md-4">
+        <div class="master-box">
+        <div class="help-head">Master</div>
+        <div style="padding:8px;">
+            <table class="table table-bordered table-condensed table-responsive" style="background-color: #fff;margin:0;">
+                <thead>
+                    <tr>
+                        <th><a ng-click="sort_by('id');"><i class="glyphicon glyphicon-sort"></i></a>Sr.No.</th>
+                        <th><a ng-click="sort_by('label');"><i class="glyphicon glyphicon-sort"></i></a>Master Name</th>
+                    </tr>
+                </thead>
+                <tr ng-repeat="username in MasterCountries">
+                    <td data-label="Serial No">{{$index + 1}}</td>
+                    <td data-label="Match Name">
+                        <input type="checkbox" ng-click="toggleSelectItem(username)" ng-model="username.chkUserName" ng-checked="{{(MasterCountries|filter:{'HelperID':adminId,'id':username.id})[0].id==username.id}}">{{username.label}}<!--170210-->
+                    </td>
+                </tr>
+            </table>
+        </div>
+        </div>
+    </div>
+    <div class="col-sm-7 col-md-8 ">
+        <div class="rights-box clearfix">
+        <div class="help-head">Rights</div>
+        <div style="padding:8px;">
+            <div class="col-lg-4 col-md-4 col-sm-6 col-xs-12 clearfix">           
+                <div class="rig-inp-box"><input type="checkbox" id="addMatch" name="addMatch" ng-model="addMatch" ng-true-value="1" ng-false-value="0" />Match Add</div>
+                <div class="rig-inp-box"><input type="checkbox" id="chkAddUser" name="chkAddUser" ng-model="chkAddUser" ng-true-value="1" ng-false-value="0" />Add User</div>
+                <div class="rig-inp-box"><input type="checkbox" id="chkUpdateUser" name="chkUpdateUser" ng-model="chkUpdateUser" ng-true-value="1" ng-false-value="0" />Update User</div> 
+                <div class="rig-inp-box"><input type="checkbox" id="chkChangePassword" name="chkChangePassword" ng-model="chkChangePassword" ng-true-value="1" ng-false-value="0" />Change Pwd</div>
+                <div class="rig-inp-box"><input type="checkbox" id="chkChipDeposite" name="chkChipDeposite" ng-model="chkChipDeposite" ng-true-value="1" ng-false-value="0" />Chip In Out (Deposite)</div>
+            </div>
+            <div class="col-lg-4 col-md-4 col-sm-6 col-xs-12 clearfix">
+                <div class="rig-inp-box"><input type="checkbox" id="chkChipWithdraw" name="chkChipWithdraw" ng-model="chkChipWithdraw" ng-true-value="1" ng-false-value="0" />Chip In Out (Withdraw)</div>
+                <div class="rig-inp-box"><input type="checkbox" id="chkUserLock" name="chkUserLock" ng-model="chkUserLock" ng-true-value="1" ng-false-value="0" />User Lock</div>
+                <div class="rig-inp-box"><input type="checkbox" id="chkBettingLock" name="chkBettingLock" ng-model="chkBettingLock" ng-true-value="1" ng-false-value="0" />Betting Lock</div>
+                <div class="rig-inp-box"><input type="checkbox" id="chkCloseAc" name="chkCloseAc" ng-model="chkCloseAc" ng-true-value="1" ng-false-value="0" />Close A/c</div>
+                <div class="rig-inp-box"><input type="checkbox" id="createFancy" name="createFancy" ng-model="createFancy" ng-true-value="1" ng-false-value="0" />Add Fancy</div>
+            </div>
+            <div class="col-lg-4 col-md-4 col-sm-6 col-xs-12 clearfix">
+                <div class="rig-inp-box"><input type="checkbox" id="chkEditFancy" name="chkEditFancy" ng-model="chkEditFancy" ng-true-value="1" ng-false-value="0" />Edit Fancy</div>
+                <div class="rig-inp-box"><input type="checkbox" id="setResult" name="setResult" ng-model="setResult" ng-true-value="1" ng-false-value="0" />Result</div>
+                <div class="rig-inp-box"><input type="checkbox" id="chkChipHistory" name="chkChipHistory" ng-model="chkChipHistory" ng-true-value="1" ng-false-value="0" />Chip History</div>
+                <div class="rig-inp-box"><input type="checkbox" id="chkChipSummary" name="chkChipSummary" ng-model="chkChipSummary" ng-true-value="1" ng-false-value="0" />Chip Summary</div>
+            </div>
+        </div>
+        </div>
+    </div>
+</div>
+<div class="col-sm-12 col-md-12" style="text-align:center;">
+</div>
+</form>
+</div>

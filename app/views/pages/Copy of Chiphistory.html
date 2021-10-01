@@ -1,0 +1,80 @@
+<h1 class="page-heading">Chip History</h1>
+<!-- {{chip_data}} -->
+    
+    
+
+      <div class="col-sm-12 col-md-12 master-cont">
+
+          <div class="col-lg-12 col-md-12 col-sm-12 " style="padding: 0px;">
+            <div class="lst_master_top clearfix">
+                <div class="form_row col-lg-12 col-md-12 col-sm-12 col-xs-12 clearfix top_table_form" style="padding: 0px;">
+                    
+                    <div class="form_box  col-lg-2 col-md-2 col-sm-2 col-xs-12" style="padding: 0px;">
+                        <!--<label>Date From</label>
+                        <input type="text" ng-model="search.usetype" ng-change="filter()" placeholder="Search By usetype" />-->
+
+                        <p class="input-group datepick-box">
+                <label>Date From</label>
+                <!--<input ng-init="user.dt = (getDate | date:'yyyy-MM-dd')" type="text" dis class="popup-input" id="reg_date" datepicker-popup="{{format}}" ng-model="user.dt" is-open="opened" min-date="user.dt" datepicker-options="dateOptions" ng-required="true" close-text="Close" datetime-picker="yyyy dd MM " style="box-shadow:none;" ng-disabled="getDate"/>-->
+                
+                <!--<span class="input-group-btn">
+                  <button type="button" style="border-radius:50%; padding:3px 8px; margin-top:23px; margin-left:5px; font-size:17px;" class="btn btn-default" ng-click="open($event)">
+                    <i class="glyphicon glyphicon-calendar"></i>
+                  </button>
+                </span>-->
+                            <md-content>
+                            <md-datepicker ng-model="from_date" md-open-on-focus></md-datepicker>
+                        </md-content>
+              </p>
+                    </div>
+                    <div class="form_box  col-lg-2 col-md-2 col-sm-2 col-xs-12" style="padding: 0px;">
+                        <label>Date To</label>
+                         <md-content>
+                            <md-datepicker ng-model="to_date" md-open-on-focus></md-datepicker>
+                        </md-content>
+                    </div>
+                    <div class="form_box  col-lg-2 col-md-2 col-sm-2 col-xs-12" style="padding: 0px;">
+                        <!--<label>Type</label>
+                        <input type="text" ng-model="search.usetype" ng-change="filter()" placeholder="Search By usetype" />-->
+
+                        <label>Type</label>
+                              <select name="slctType" ng-model="slctType" ng-options="typeDropDown.label for typeDropDown in typeDropDown track by typeDropDown.value" >
+                                <!--  <option value=''>Select Type</option>
+                                  <option value=''>Chip</option>
+                                  <option value=''>Free Chip</option>
+                                  <option value=''>Win</option>
+                                  <option value=''>Lose</option>
+                                  <option value=''>All</option>-->
+                              </select>
+                    </div>
+                    <div class="form_box  col-lg-2 col-md-2 col-sm-2 col-xs-12" style="padding: 0px;">
+                        <label>With Parent</label>
+                        <div ng-controller="SwitchDemoCtrl" ng-cloak>
+                          <md-switch ng-model="data.cb1" aria-label="Switch 1">
+                            <!--Switch 1: {{ data.cb1 }}-->
+                          </md-switch>
+                        </div>
+                    </div>
+                    <div class="form_box  col-lg-4 col-md-4 col-sm-4 col-xs-12" style="padding: 0px;">
+                        <div class="file-icons">
+                         <a href="" ng-click="getChipHistoryData()"><img src="app/images/search.png"/></a>
+                         <a href=""><img src="app/images/file1.png" /></a>
+                         <a href=""><img src="app/images/file2.png" /></a>
+                         <a href=""><img src="app/images/file3.png" /></a>
+                        </div>
+                    </div>
+                </div>
+                
+            </div>
+          </div>
+  			
+    		  <div class="col-lg-12 col-md-12 lst_master">
+
+	              <div class="resp_table clearfix ">
+
+	              		<div id="myGrid" class="ag-blue" style="height: 450px; margin-top: 4px;"></div>
+	    		        
+	              </div>
+   		    
+    		  </div>
+      </div>

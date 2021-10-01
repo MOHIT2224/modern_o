@@ -1,0 +1,85 @@
+<div class="content-wrapper ng-scope" style="min-height: 720px;">
+    <div class="load-box" ng-show="loading"><img id="mySpinner" src="app/images/loading1.gif" /></div>
+    <div class="msg-alerts alert alert-success" role="alert" ng-show="oddEvenFancyMsg==true"><strong>{{oddEvenFancymessage}}</strong></div>
+    <div class="msg-alerts alert alert-success" role="alert" ng-show="SessionFancyMsg==true"><strong>{{SessionFancyForm}}</strong></div>
+    <div class="msg-alerts alert alert-success" role="alert" ng-show="KhaddalFancyMsg==true"><strong>{{KhaddalFancyForm}}</strong></div>
+    <div class="msg-alerts alert alert-success" role="alert" ng-show="LastDigitFancyMsg==true"><strong>{{LastDigitFancymessage}}</strong></div>
+    <div class="msg-alerts alert alert-success" role="alert" ng-show="UpDownFancyMsg==true"><strong>{{UpDownMessage}}</strong></div>
+    <h5>Filtered {{ filtered.length }} of {{ totalItems}} total Matchs</h5>
+    <div class="col-lg-12 col-md-12 col-sm-12 " style="padding: 0px;" ng-init="search.active=1">
+        <div class="lst_master_top clearfix">
+            <div class="form_row col-lg-12 col-md-12 col-sm-12 col-xs-12 clearfix top_table_form" style="padding: 0px;">
+                <div class="form_box  col-lg-2 col-md-2 col-sm-2 col-xs-12" style="padding: 0px;">
+                    <label>Status</label>
+                    <select ng-model="search.active" ngrequired>
+                        <option value="">All</option>
+                        <option value="1" ng-selected="true">Active</option>
+                        <option value="0">Inactive</option>
+                    </select>
+                </div>
+                <div class="form_box  col-lg-2 col-md-2 col-sm-2 col-xs-12" style="padding: 0px;">
+                    <label>Sport Name</label>
+                    <select ng-model="search.SportID" ngrequired >
+                        <option value="">All</option>
+                        <option value="{{sports.id}}"  ng-repeat="sports in sprtData">{{sports.name}}</option>
+
+                    </select>
+                </div>
+                <div class="form_box  col-lg-2 col-md-2 col-sm-2 col-xs-12" style="padding: 0px;">
+                    <label>Match Name</label>
+                    <input type="text" ng-model="search.matchName" ng-change="filter()" placeholder="Search By matchName" />
+                </div>
+                <div class="form_box  col-lg-2 col-md-2 col-sm-2 col-xs-12" style="padding: 0px;">
+                    <label>Date</label>
+                    <input type="text" ng-model="search.MstDate" ng-change="filter()" placeholder="Search By Date" />
+                </div>
+                
+            </div>
+            <div class="col-lg-12 col-md-12 col-sm-12 lst_top_table">
+            </div>
+        </div>
+        <div class="col-lg-12 col-md-12 lst_master">
+            <div class="listdata-table clearfix ">
+				<div class="table-responsive member_listing">
+    <div class="widget-content login_table">
+          
+          <table class="table table-striped my-market">
+               
+                    <thead>
+                        <tr>
+                            <th><a ng-click="sort_by('');"><i class="glyphicon glyphicon-sort"></i></a>SNo</th>
+                            <th><a ng-click="sort_by('matchName');"><i class="glyphicon glyphicon-sort"></i></a>Name</th>
+                            <th><a ng-click="sort_by('name');"><i class="glyphicon glyphicon-sort"></i></a>Sport Name</th>
+                            <th><a ng-click="sort_by('MstDate');"><i class="glyphicon glyphicon-sort"></i></a>Date</th>
+                            
+                            <th>Action</th>
+                            <th>Session</th>
+                        </tr>
+                    </thead>
+                    <tr ng-repeat="matche in filtered = (match_data | exact:search | orderBy : predicate :reverse) | startFrom:(currentPage-1)*entryLimit | limitTo:entryLimit">
+                        <td data-label="Serial No">{{(currentPage-1)*entryLimit +$index+1}}</td>
+                        <td data-label="Match">{{matche.matchName}}</td>
+                        <td data-label="name">{{matche.name}}</td>
+                        <td data-label="MstDate">{{matche.MstDate | date : "dd-MM-yyyy HH:mm"}}</td>
+                         <td data-label="Action" style="background-color: {{matche.SportID==4?'#736089':'#FDF9D6'}}" class="switch-icon">
+                            <div ng-hide="true">{{matche.active==1?switch=true:switch=false}}</div>
+                            <md-switch ng-model="switch" aria-label="Switch 1" ng-click='changeMatchStatus(matche.MstCode,switch)'><!--{{ switch }}--></md-switch>
+                           
+                        </td>
+ <td style="cursor: pointer;" ><a ui-sref="dealerDashboard.sessionSetting({MatchId:matche.MstCode})" ng-show="matche.SportID == 4"><img src="app/images/sportsicon/Cricket.png"></a></td>
+                    </tr>
+                </table>
+		 </div>
+					 </div>
+            </div>
+            <div class="col-md-12" ng-show="filteredItems == 0">
+                <div class="col-md-12">
+                    <h4 class="notfound">No Match found</h4>
+                </div>
+            </div>
+            <div class="col-md-12" ng-show="filteredItems > 0">
+                <pagination total-items="filtered.length" ng-model="currentPage" max-size="5" class="pagination-sm" boundary-links="true" rotate="false" num-pages="noOfPages" items-per-page="entryLimit"></pagination>
+            </div>
+        </div>
+    </div>
+</div>

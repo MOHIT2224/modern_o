@@ -1,0 +1,87 @@
+
+  <div class="col-sm-12 col-md-12 master-cont">
+      <h2 style="text-align: center; font-size: 28px; margin-bottom: 15px;">Create Fancy Heading</h2>
+      <div class="row">
+          <div class="clearfix creat_form">
+            <p ng-show="message" style="text-align: center; color:#FE5454; font-size: 18px; margin-bottom: 15px;">{{message}}</p>
+               <!--  <span ng-show="message" class="error"></span> -->
+              <form name="userForm" ng-submit="submitForm()">
+
+                <div class="form_row col-lg-12 col-md-12 col-sm-12 col-xs-12 clearfix">
+                  <div class="form_box  col-lg-6 col-md-6 col-sm-6 col-xs-12">
+                    <label>Fancy HeadName</label>
+                   <input type="text" name="headName" class="input-box" ng-model="HeadName" required="required" >
+                  </div>
+                  <div class="form_box  col-lg-3 col-md-3 col-sm-3 col-xs-6">
+                    <label >Date</label>
+                    <!-- <input type="text" name="master_date" ng-model="FromDate" date-format="yyyy-MM-dd" > -->
+                    <p class="input-group datepick-box">
+                      <input type="text" class="form-control" datepicker-popup="{{format}}" ng-model="dt" is-open="opened" datepicker-options="dateOptions" ng-required="true" close-text="Close" datetime-picker="yyyy dd MM " />
+                      <span class="input-group-btn">
+                        <button type="button" class="btn btn-default datepick-btn" ng-click="open($event)"><i class="glyphicon glyphicon-calendar"></i></button>
+                      </span>
+                    </p>
+                    
+
+                  </div>
+                  <div class="form_box  col-lg-3 col-md-3 col-sm-3 col-xs-6">
+                      <label>Fancy Type</label>
+                     <input type="text" name="fancyType" class="input-box" ng-model="fancyType" required="required" >
+                  </div>
+                </div>
+                        
+                
+                                     
+                <div class="form_row col-lg-12 col-md-12 col-sm-12 col-xs-12 clearfix">
+                
+                  <div class="form_box  col-lg-6 col-md-6 col-sm-6 col-xs-12">
+                    <label >Remark</label>
+                    <textarea name="remarks" ng-model="remarks"  class="input-box"></textarea>
+                  </div>
+                </div>
+                        
+                <div class="form_row col-lg-12 col-md-12 col-sm-12 col-xs-12 clearfix">
+                  <div class="form_box  col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                    <button type="submit" class="btn btn-primary">Submit</button>
+                  </div>
+                </div>
+              
+              
+              </form>
+             <div class="resp_table clearfix ">
+                <table class="table table-bordered table-condensed table-responsive match_td"  border="1" bordercolor="#ccc" cellpadding="0" cellspacing="0">
+                  <thead>
+                    <tr>
+                        <th>S No.</th>
+                        <th>Date</th>
+                        <th>Heading Name</th>
+                        <th>Heading Description</th>
+                       <!--  <th>Action</th> -->
+                        
+                    </tr>
+                  </thead>
+                      
+                  <tbody>
+                  
+                    <tr ng-repeat="item in Details.getFancyHeader ">
+                      <td data-label="S No.">{{$index+1}}</td>
+                      <td data-label="Date">{{item.MstDate}}</td>
+                      <td data-label="Name">{{item.MstName}}</td>
+                      <td data-label="Description">{{item.Desc}}</td>
+                     <!--  <td data-label="Action">Edit</td>           -->      
+                    </tr>
+                
+                  </tbody>
+                </table>
+            </div>       
+                      
+            </div>
+
+      </div>
+  </div>
+
+
+
+
+
+  

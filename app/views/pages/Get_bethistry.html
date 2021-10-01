@@ -1,0 +1,79 @@
+ <script src="https://unpkg.com/ag-grid-enterprise@17.1.1/dist/ag-grid-enterprise.min.js"></script>
+<div class="content-wrapper" style="min-height: 720px;">    
+<div class="load-box" ng-show="loading">
+                <img id="mySpinner" src="app/images/loading1.gif" />
+            </div>
+<div class="col-sm-12 padding heading">
+    <div class="row">
+        <div class="col-sm-9">
+            <h1  class="page-heading">Bet History</h1>
+        </div>
+        <div class="col-sm-3 file-icons">
+            <a ng-click="onBtExport()"><img src="app/images/file2.png" /></a>
+            <button type="button" class="btn btn-primary btn-sm" ng-click="Reset();">Reset</button>
+        </div>
+    </div>
+</div>
+
+
+
+	<div class="col-sm-12 col-md-12 master-cont mastercontrol">
+    <!-- START -->
+        
+<form name="Master">
+        <div class="form-group  col-lg-2 col-md-2 col-sm-12 col-xs-12 padding">
+            <label>Master</label>
+
+    <select name="MasterID"  class="form-control" ng-model="formData.MasterID" ng-change="GetDealer(formData.MasterID,1)" ng-options="Master.mstrid as Master.mstrname for Master in MasterList">    
+        <option value="">Please Select Master</option>
+    </select>
+        </div> 
+
+        <div class="form-group  col-lg-2 col-md-2 col-sm-12 col-xs-12 padding" >
+            <label>Dealer</label>
+            <select name="DealerID" ng-model="formData.DealerId" ng-change="GetDealer(formData.DealerId,2)" class="form-control">
+<option value="" >Please Select Dealer</option>  
+                <option ng-repeat="Dealer in DealerData" value="{{Dealer.mstrid}}">{{Dealer.mstruserid}}</option>           
+            </select>
+        </div>
+        <div class="form-group  col-lg-2 col-md-2 col-sm-12 col-xs-12 padding" >
+            <label>User</label>
+            <select name="UserId" ng-model="formData.UserId" ng-change="GetDealer(formData.UserId,3)" class="form-control">
+<option value="">Please Select User</option>  
+                <option ng-repeat="User in userData" value="{{User.mstrid}}">{{User.mstruserid}}</option>           
+            </select>
+        </div>
+ <div class="form-group  col-lg-2 col-md-2 col-sm-12 col-xs-12 padding" >
+                  <label>From</label>
+                    <md-content>
+                        <md-datepicker ng-model="from_date" ng-disabled="datedisable"  onkeydown="return false" ng-change="setDateFun(1)" md-min-date="minDate" md-max-date="MaxDate1" md-open-on-focus></md-datepicker>
+                    </md-content>    
+                    </div>
+               <div class="form-group  col-lg-2 col-md-2 col-sm-12 col-xs-12 padding" >
+                  <label>To</label>
+                 <md-content>
+                        <md-datepicker ng-model="to_date"  ng-disabled="datedisable"  onkeydown="return false" ng-change="setDateFun(2)" md-min-date="minDate1"  md-max-date="MaxDate2" md-open-on-focus></md-datepicker>
+                    </md-content>
+                </div>
+        <div class="form-group  col-lg-2 col-md-2 col-sm-12 col-xs-12 padding">
+           <button type="button" class="btn btn-primary btnsearch" ng-click="GetSearch();">Submit</button>
+        </div>   
+     
+    </div>
+</form>
+        <div class="col-lg-12 col-md-12 col-sm-12 " style="padding: 0px;">
+                
+            
+            <div class="lst_master">
+                <div class="resp_table clearfix ">
+                    <div id="myGrid" class="ag-blue" style="height: 420px; margin-top: 4px;"></div>
+                        <div class="total-box clearfix">
+                        <h1 class="total-green">Total P&L: <span ng-class="{'green':SumOfP_L>0,'red':SumOfP_L<0}">{{SumOfP_L | number:2}}</span></h1>
+                        <h1 class="total-green">Total Profit: <span ng-class="{'green':SumOfProfit>0,'red':SumOfProfit<0}">{{SumOfProfit | number:2}}</span></h1>
+                        <h1 class="total-red">Total Liability: <span ng-class="{'green':SumOfLiability>0,'red':SumOfLiability<0}">{{SumOfLiability | number:2}}</span></h1>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

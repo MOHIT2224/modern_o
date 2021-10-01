@@ -1,0 +1,91 @@
+  <div class="right-nav col-lg-4 col-md-4 col-sm-4 col-xs-5">
+
+
+    <div class="user-stat">
+      <span class="dropdown">
+        <button type="button" class="btn user-btn">
+          <img src="app/images/user-icon.png"> <span class="glyphicon glyphicon-menu-down"></span>
+          <div class="user-name"><div class="user-name">
+          </div></div>
+        </button>
+        <label>
+          <input type="checkbox">
+            <ul class="drop-rgt user-links" ng-if="usertype==0"><!--for admin-->
+                <li><a href=""><span class="glyphicon glyphicon-user"></span>My Account</a></li>
+                <li ui-sref-active="active"><a href="" ui-sref="dashboard.Chiphistorycntr"><span class="glyphicon glyphicon-briefcase"></span>Chip History<!-- {{usertype}} --></a></li>
+                <li ui-sref-active="active"><a href="" ui-sref="dashboard.Profitlosscntr"><span class="glyphicon glyphicon-briefcase"></span>Profit & Loss</a></li>
+                
+                <li ui-sref-active="active"><a href="" ui-sref="dashboard.changePasswordUser"><span class="glyphicon glyphicon-briefcase"></span>Change Pwd</a></li>
+                <li ui-sref-active="active"><a href="" ui-sref="dashboard.Onlineusersctrl"><span class="glyphicon glyphicon-briefcase"></span>Online Users</a></li>
+                <li ui-sref-active="active"><a href="" ui-sref="dashboard.Chipsummerycntr"><span class="glyphicon glyphicon-briefcase"></span>Chip Summary</a></li>
+                <li ui-sref-active="active"><a href="" ui-sref="dashboard.Bethistory"><span class="glyphicon glyphicon-briefcase"></span>Bet History</a></li>
+                <li ui-sref-active="active"><a href="" ui-sref="dashboard.Userlist"><span class="glyphicon glyphicon-briefcase"></span>User List</a></li>
+                 <li ui-sref-active="active"><a href="" ui-sref="dashboard.Get_actMtchUsersCntr"><span class="glyphicon glyphicon-briefcase"></span>Actve Users</a></li>
+                 <!-- <li ui-sref-active="active"><a href="" ui-sref="" ng-click="showSetPassword();"><span class="glyphicon glyphicon-briefcase"></span>Set Password</a></li> -->
+                 <!-- <li ui-sref-active="active"><a href="" ui-sref="dashboard.Get_bethistryCntr"><span class="glyphicon glyphicon-briefcase"></span>Bet History</a></li> -->
+                <li><a href="" ng-click="logout();"><span class="glyphicon glyphicon-log-out"></span>Logout</a></li>
+            </ul>
+            <ul class="drop-rgt user-links" ng-if="usertype==1"><!--for master-->
+                <li><a href=""><span class="glyphicon glyphicon-user"></span>My Account</a></li>
+                <li ui-sref-active="active"><a href="" ui-sref="dashboard.Chiphistorycntr"><span class="glyphicon glyphicon-briefcase"></span>Chip History</a></li>
+                <li ui-sref-active="active"><a href="" ui-sref="dashboard.Profitlosscntr"><span class="glyphicon glyphicon-briefcase"></span>Profit & Loss</a></li>
+                <li ui-sref-active="active"><a href="" ui-sref="dashboard.changePasswordUser"><span class="glyphicon glyphicon-briefcase"></span>Change Pwd</a></li>
+                <li><a href=""><span class="glyphicon glyphicon-info-sign"></span>Online User</a></li>
+               <li ui-sref-active="active"><a href="" ui-sref="dashboard.Get_bethistryCntr"><span class="glyphicon glyphicon-briefcase"></span>Bet History</a></li>
+                 <li ui-sref-active="active"><a href="" ui-sref="dashboard.Chipsummerycntr"><span class="glyphicon glyphicon-briefcase"></span>Chip Summary</a></li>
+                <li><a href="" ng-click="showChipSetting();"><span class="glyphicon glyphicon-log-out"></span>Chip Setting</a></li>
+                <li><a href="" ng-click="logout();"><span class="glyphicon glyphicon-log-out"></span>Logout</a></li>
+            </ul>
+            <ul class="drop-rgt user-links" ng-if="usertype==2"><!--for dealer-->
+                <li><a href=""><span class="glyphicon glyphicon-user"></span>My Account</a></li>
+                <li ui-sref-active="active"><a href="" ui-sref="dashboard.Chiphistorycntr"><span class="glyphicon glyphicon-briefcase"></span>Chip History</a></li>
+                <li ui-sref-active="active"><a href="" ui-sref="dashboard.Profitlosscntr"><span class="glyphicon glyphicon-briefcase"></span>Profit & Loss</a></li>
+                <li ui-sref-active="active"><a href="" ui-sref="dashboard.changePasswordUser"><span class="glyphicon glyphicon-briefcase"></span>Change Pwd</a></li>
+                <li ui-sref-active="active"><a href="" ui-sref="dashboard.Get_bethistryCntr"><span class="glyphicon glyphicon-briefcase"></span>Bet History</a></li>
+                <li><a href="" ng-click="showChipSetting();"><span class="glyphicon glyphicon-log-out"></span>Chip Setting</a></li>
+                <li><a href="" ng-click="logout();"><span class="glyphicon glyphicon-log-out"></span>Logout</a></li>
+            </ul>
+            <ul class="drop-rgt user-links" ng-if="usertype==3"><!--for User-->
+                <li><a href=""><span class="glyphicon glyphicon-user"></span>My Account</a></li>
+                <li ui-sref-active="active"><a href="" ui-sref="dashboard.Chiphistorycntr"><span class="glyphicon glyphicon-briefcase"></span>Chip History</a></li>
+                <!-- <li><a href=""><span class="glyphicon glyphicon-sort"></span>ProfitLoss</a></li> -->
+                <li ui-sref-active="active"><a href="" ui-sref="dashboard.Profitlosscntr"><span class="glyphicon glyphicon-briefcase"></span>Profit & Loss</a></li>
+                <li ui-sref-active="active"><a href="" ui-sref="dashboard.changePasswordUser"><span class="glyphicon glyphicon-briefcase"></span>Change Pwd</a></li>
+                
+                <li ui-sref-active="active"><a href="" ui-sref="dashboard.Get_bethistryCntr"><span class="glyphicon glyphicon-briefcase"></span>Bet History</a></li>
+                <li><a href="" ng-click="showChipSetting();"><span class="glyphicon glyphicon-log-out"></span>Chip Setting</a></li>
+                <li><a href="" ng-click="logout();"><span class="glyphicon glyphicon-log-out"></span>Logout</a></li>
+            </ul>
+        </label>
+      </span>
+        <span ng-model="usertype1" class="user_name" ng-if="usertype==0?userNameType='Admin':usertype==1?userNameType='Master':usertype==2?userNameType='Dealer':userNameType='User'">{{ userNameType }}</span>
+       <!--  <span ng-model="slctUseName" class="user_name">{{slctUseName}}</span> --><!--sourabh 7-oct-2016-->
+         <span ng-model="name" class="user_name mast-name">[{{name}}]</span>
+        <a href="" ng-click="logout();" class="log-btn"><img src="app/images/logout-icon.png"></a>
+       
+    </div>
+
+
+    <div class="wallet" >
+                            <span class="dropdown">
+                                <button type="button" class="btn wallet-btn">
+                                    <img src="app/images/wallet-icon.png">
+                                    <span class="glyphicon glyphicon-menu-down"></span>
+                                </button>
+                                <label>
+                                    <input type="checkbox">
+                                   <ul class="drop-rgt">
+                                      <li ui-sref-active="active"><a><span class="badge">106,474</span> PL/C  </a></li>
+                                      <li ui-sref-active="active"><a><span class="badge" >{{ChipInOut==null?0:ChipInOut}}</span> Chips  </a></li>
+                                      <li ui-sref-active="active"><a><span class="badge badge-info"> {{FreeChips==null?0:FreeChips}}</span> Free Chips  </a></li>
+                                      <li ui-sref-active="active"><a><span class="badge badge-danger">{{Liability==null?0:Liability}}</span>Liability </a></li>
+                                      <li ui-sref-active="active"><a><span class="badge badge-danger">{{Balance==null?0:Balance}}</span>Balance </a></li>
+                                      <li ui-sref-active="active"><a><span class="badge badge-danger">0</span>Risk </a></li>
+                                    </ul>
+                                </label>
+                            </span>
+                        </div>
+                        
+               
+  </div>
+

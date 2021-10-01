@@ -1,0 +1,161 @@
+
+		  <div class="content-wrapper ng-scope" style="min-height: 720px;">
+	<div class="innerbox">
+    <div class="load-box" ng-show="loading"><img id="mySpinner" src="app/images/loading1.gif" /></div>
+    <div class="msg-alerts alert alert-success" role="alert" ng-show="oddEvenFancyMsg==true"><strong>{{oddEvenFancymessage}}</strong></div>
+    <div class="msg-alerts alert alert-success" role="alert" ng-show="SessionFancyMsg==true"><strong>{{SessionFancyForm}}</strong></div>
+    <div class="msg-alerts alert alert-success" role="alert" ng-show="KhaddalFancyMsg==true"><strong>{{KhaddalFancyForm}}</strong></div>
+    <div class="msg-alerts alert alert-success" role="alert" ng-show="LastDigitFancyMsg==true"><strong>{{LastDigitFancymessage}}</strong></div>
+    <div class="msg-alerts alert alert-success" role="alert" ng-show="UpDownFancyMsg==true"><strong>{{UpDownMessage}}</strong></div>
+    <h5>Filtered {{ filtered.length }} of {{ totalItems}} total Matches</h5>
+    <div class="col-lg-12 col-md-12 col-sm-12 " style="padding: 0px;" ng-init="search.active=1">
+        <div class="row lst_master_top five_box clearfix">
+            <div class="form_row col-lg-12 col-md-12 col-sm-12 col-xs-12 clearfix top_table_form" style="padding: 0px;">
+				<div class="row">
+                <div class="form_box  col-lg-2 col-md-2 col-sm-2 col-xs-12" style="padding: 0px;">
+                    <label>Status</label>
+                    <select ng-model="search.active" class="form-control" ngrequired>
+                        <option value="">All</option>
+                        <option value="1" ng-selected="true">Active</option>
+                        <option value="0">Inactive</option>
+                    </select>
+                </div>
+					
+                <div class="form_box  col-lg-2 col-md-2 col-sm-2 col-xs-12" style="padding: 0px;">
+                    <label>Sport Name</label>
+                    <input type="text" ng-model="search.name" ng-change="filter()" class="form-control" placeholder="Search By Sport name" />
+                </div>
+                <div class="form_box  col-lg-2 col-md-2 col-sm-2 col-xs-12" style="padding: 0px;">
+                    <label>Match Name</label>
+                    <input type="text" ng-model="search.matchName" ng-change="filter()" class="form-control" placeholder="Search By matchName" />
+                </div>
+                <div class="form_box  col-lg-2 col-md-2 col-sm-2 col-xs-12" style="padding: 0px;">
+                    <label>Date</label>
+                    <input type="text" ng-model="search.MstDate" ng-change="filter()" class="form-control" placeholder="Search By Date" />
+                </div>
+                <div class="form_box  col-lg-2 col-md-2 col-sm-2 col-xs-12" style="padding: 0px;">
+                    <label>Country Code</label>
+                    <input type="text" ng-model="search.countryCode" ng-change="filter()" class="form-control" placeholder="Search By countryCode" />
+                </div>
+                <div class="form_box  col-lg-2 col-md-2 col-sm-2 col-xs-12" style="padding: 0px;">
+                    <label>Market Count</label>
+                    <input type="text" ng-model="search.marketCount" ng-change="filter()" class="form-control" placeholder="Search By marketCount" />
+                </div>
+      <div class="form_box  col-lg-2 col-md-2 col-sm-2 col-xs-12" style="padding: 0px;color:white">
+                    <a class="btn btn-primary" ui-sref="dashboard.manualMatch">Manual  Match</a>
+
+                </div>
+           </div>
+			</div>
+			
+            <div class="col-lg-12 col-md-12 col-sm-12 lst_top_table">
+            </div>
+        </div>
+        <div class="col-lg-12 col-md-12 lst_master">
+            <div class="listdata-table clearfix ">
+                <table class="table table-bordered table-condensed table-responsive" style="background-color: #fff;">
+                    <thead>
+                        <tr>
+                            <th><a ng-click="sort_by('');"><i class="glyphicon glyphicon-sort"></i></a>SNo</th>
+                            <th><a ng-click="sort_by('matchName');"><i class="glyphicon glyphicon-sort"></i></a>Name</th>
+                            <th><a ng-click="sort_by('MstDate');"><i class="glyphicon glyphicon-sort"></i></a>Date</th>
+                            <th><a ng-click="sort_by('countryCode');"><i class="glyphicon glyphicon-sort"></i></a>Max Stack</th>
+                            <th><a ng-click="sort_by('maxStack');"><i class="glyphicon glyphicon-sort"></i></a>Min Stack</th>
+                            <th><a ng-click="sort_by('VolumeLimit');"><i class="glyphicon glyphicon-sort"></i></a>VolumeLimit</th>
+                            <th><a ng-click="sort_by('OddsLimit');"><i class="glyphicon glyphicon-sort"></i></a>OddsLimit</th>
+                            <th>ScoreSetting</th>
+
+                            <th>Action</th>
+                        </tr>
+                    </thead>
+                    <tr ng-repeat="matche in filtered = (match_data | exact:search | orderBy : predicate :reverse) | startFrom:(currentPage-1)*entryLimit | limitTo:entryLimit">
+                        <td data-label="Serial No">{{(currentPage-1)*entryLimit +$index+1}}</td>
+                        <td data-label="Match">{{matche.matchName}}</td>
+                        <td data-label="MstDate">{{matche.MstDate | date : "dd-MM-yyyy HH:mm"}}</td>
+                        <td data-label="maxStack">
+                            <input type="text" ng-model="matche.maxStack" class="form-control" ng-blur='changeStake(matche.maxStack,matche.MstCode,"max")' value="{{matche.maxStack}}" style="width: 100px" />
+                        </td>
+                        <td data-label="minStack"> <input type="text" ng-model="matche.minStack" class="form-control" ng-blur='changeStake(matche.minStack,matche.MstCode,"min")' value="{{matche.minStack}}" style="width: 100px" /></td>
+                        <td data-label="VolumeLimit">
+                            <input type="text" ng-model="matche.volumeLimit" class="form-control" ng-blur='changeVolumeLimit(matche.volumeLimit,matche.MstCode)' value="{{matche.volumeLimit}}" style="width: 100px" />
+                        </td>
+                        <td data-label="OddsLimit">
+                            <input type="text" ng-model="matche.oddsLimit" class="form-control" ng-blur='changeOddsLimit(matche.oddsLimit,matche.MstCode)' value="{{matche.oddsLimit}}" style="width: 100px" />
+                        </td>
+                        <td data-label="VolumeLimit">
+                            <input type="text" ng-model="matche.scoreboard_id"  class="form-control" ng-blur='addScorekey(matche.MstCode,matche.scoreboard_id)'  style="width: 100px" />
+                        </td>
+                        <td data-label="Action" style="background-color: {{matche.SportID==4?'#736089':'#FDF9D6'}}" class="switch-icon">
+                            <div ng-hide="true">{{matche.active==1?switch=true:switch=false}}</div>
+                            <md-switch ng-model="switch" aria-label="Switch 1" ng-click='changeMatchStatus(matche.MstCode,switch)'><!--{{ switch }}--></md-switch>
+                            <div class="action-btns" ng-if="false" ng-show="matche.SportID==4 && matche.active ==1">
+                                <button ng-show="$root.HelperAllRights==angular.isUndefinedOrNull || $root.HelperAllRights.AddFancy==1" ng-click="showCreateFancy($event,matche,1)" id="{{matche.MstCode}}" class="toolt">O/E<span class="tooltiptext">Odd Even</span></button>
+                                <button ng-show="$root.HelperAllRights==angular.isUndefinedOrNull || $root.HelperAllRights.AddFancy==1" ui-sref="dashboard.CntrAdminSesssionFancy({matchId: matche.MstCode,sportId:matche.SportID})" id="Button1" class="toolt">S<span class="tooltiptext">Session</span></button>
+                                <button ng-show="$root.HelperAllRights==angular.isUndefinedOrNull || $root.HelperAllRights.AddFancy==1" ng-click="showCreateFancy($event,matche,3)" id="Button2" class="toolt">K<span class="tooltiptext">Khaddal</span></button>
+                                <button ng-show="$root.HelperAllRights==angular.isUndefinedOrNull || $root.HelperAllRights.AddFancy==1" ng-click="showCreateFancy($event,matche,4)" id="Button3" class="toolt">LD<span class="tooltiptext">Last Digit</span></button>
+                                <button ng-show="$root.HelperAllRights==angular.isUndefinedOrNull || $root.HelperAllRights.AddFancy==1" ng-click="showCreateFancy($event,matche,5)" id="Button4" class="toolt">UD<span class="tooltiptext">Up Down</span></button>
+                                <button ng-show="$root.HelperAllRights==angular.isUndefinedOrNull || $root.HelperAllRights.AddFancy==1" class="toolt" ui-sref="dashboard.Fancylist({matchId: matche.MstCode})">D<span class="tooltiptext">Display Fancy</span></button>
+                                <button ng-show="$root.HelperAllRights==angular.isUndefinedOrNull || $root.HelperAllRights.AddFancy==1" class="toolt" ui-sref="dashboard.MatchBetList({matchId: matche.MstCode})">D<span class="tooltiptext">Display BetList</span></button>
+                                 <button ng-show="$root.HelperAllRights==angular.isUndefinedOrNull || $root.HelperAllRights.AddFancy==1" class="toolt" ui-sref="dashboard.EditMultifancycntr({MatchName: matche.matchName,MatchId: matche.MstCode})">MF<span class="tooltiptext">Display Fancy</span></button>
+                            </div>
+                        </td>
+                    </tr>
+                </table>
+            </div>
+			
+
+            <div class="col-md-12" ng-show="filteredItems == 0">
+                <div class="col-md-12">
+                    <h4>No Match found</h4>
+                </div>
+            </div>
+						<div class="row">
+            <div class="col-md-12" ng-show="filteredItems > 0">
+                <pagination total-items="filtered.length" ng-model="currentPage" max-size="5" class="pagination-sm" boundary-links="true" rotate="false" num-pages="noOfPages" items-per-page="entryLimit"></pagination>
+            </div>
+			</div>
+        </div>
+    </div>
+        <div class="lst_master_top clearfix">
+
+            <div class="col-lg-12 col-md-12 col-sm-12 lst_top_table">
+
+                <div class="col-lg-12 col-md-12 lst_master" >
+                    <div class="listdata-table clearfix ">
+                        <table class="table table-bordered table-condensed table-responsive" style="background-color: #fff;">
+                            <thead>
+                            <tr>
+                                <th>SNo</th>
+                                <th>Match Key</th>
+                                <th>Date</th>
+                                <th>Match Name</th>
+                                <!--
+                                                                <th>Action</th>
+                                -->
+
+                            </tr>
+                            </thead>
+                            <tr  ng-repeat="(key, value) in scoredata">
+                                <td data-label="Serial No">{{$index+1}}</td>
+                                <td data-label="Match">{{key}}</td>
+                                <td data-label="MstDate">{{value.date | date : "dd-MM-yyyy HH:mm"}}</td>
+                                <td data-label="FromTime">{{value.title}}</td>
+                                <!--  <td data-label="FromTime"><button ng-click="addScorekey(key)">Add</button></td>-->
+
+                            </tr>
+                        </table>
+                    </div>
+                    <div class="col-md-12" ng-show="scoredata.length == 0">
+                        <div class="col-md-12">
+                            <h4>No Match found</h4>
+                        </div>
+                    </div>
+
+                </div>
+
+
+            </div>
+        </div>
+
+    </div>
+</div>

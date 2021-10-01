@@ -1,0 +1,51 @@
+
+    <ul class="nav navbar-nav">
+        <li>
+          <a class="top_text">
+                Balance :<span ng-class="{'green':$root.Balance>0,'red':$root.Balance<0}">{{$root.Balance}}</span>
+          </a>
+      </li>
+     <li>
+          <a class="top_text">
+               Liability :<span ng-class="{'green':$root.Liability>0,'red':$root.Liability<0}">{{$root.Liability}}</span>
+          </a>
+      </li>
+
+
+    <li>
+
+         <div>
+          <md-menu md-position-mode="target-right target" md-offset="0 58">
+              <a ng-click="$mdOpenMenu()"> 
+                        <span class="UsernamefixSize"><i class="fa fa-cog"></i>&nbsp;{{$root.user}}<span>
+              </a>
+                <md-menu-content class="user-links top-menu-cont">
+                   <!-- <md-button ui-sref="userDashboard.anctStatementCntr"><span class="drp-txt">Account Statement</span></md-button>-->
+                    <md-button ui-sref-active="active" ui-sref="userDashboard.Get_bethistryCntr"><span class="drp-txt">Bet History</span></md-button>
+                    <md-button ui-sref-active="active" ui-sref="userDashboard.myMarketCntr"><span class="drp-txt">Running Market</span></md-button>
+                    <md-button ui-sref-active="active" ui-sref="userDashboard.Chiphistorycntr"><span class="drp-txt">Chip History</span></md-button>
+                    <md-button ui-sref-active="active" ui-sref="userDashboard.Profitlosscntr"><span class="drp-txt">Profit & Loss</span></md-button>
+                    <md-button ui-sref-active="active" ui-sref="userDashboard.Term&Condition"><span class="drp-txt">T & C</span></md-button>
+                    <md-button ui-sref-active="active" ui-sref="userDashboard.changePasswordUser"><span class="drp-txt">Change Password</span></md-button>
+                    <md-button ng-click="logout();"> <span>Logout</span></md-button>
+                </md-menu-content>
+          </md-menu>
+          </div>
+
+
+          <!-- <div class="col-sm-6 col-xs-12 text-center visible-xs">
+          <a>
+            <div class="wal-lia-box">
+                <div class="wall-bal-head"> <span>Balance :</span> {{$root.Balance}}</div><div class="liab-bal-head"><span> Liability
+                 :</span> {{$root.Liability}} </div>
+            </div>
+          </a>
+        </div> -->
+ 
+
+     
+
+
+
+
+

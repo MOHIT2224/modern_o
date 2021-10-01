@@ -1,0 +1,89 @@
+<div class="content-wrapper" style="min-height: 720px;">
+    <div class="load-box" ng-show="loading">
+        <img id="mySpinner" src="app/images/loading1.gif" />
+    </div>
+    <h1 class="binding">Make Bet</h1>
+    <div class="container-fluid" ng-init="GetApkInfo()">
+
+        <form method="post" name="makebetForm" ng-submit="makebet(apk)">
+            <div class="col-sm-12 client-form">
+           <div  class="form-group  col-lg-3 col-md-3 col-sm-12 col-xs-12 padding" >
+            <label>Master</label>
+            <select name="MasterID" ng-model="formData.MasterId" ng-change="GetDealer(formData.MasterId,1)" class="form-control">
+<option value="" >Please Select Master</option>  
+                <option ng-repeat="Master in MasterData" value="{{Master.mstrid}}">{{Master.mstruserid}}</option>           
+            </select>
+        </div>
+        <div  class="form-group  col-lg-3 col-md-3 col-sm-12 col-xs-12 padding"  >
+            <label>Dealer</label>
+            <select name="DealerID" ng-model="formData.DealerId" ng-change="GetDealer(formData.DealerId,2)" class="form-control">
+<option value="" >Please Select Dealer</option>  
+                <option ng-repeat="Dealer in DealerData" value="{{Dealer.mstrid}}">{{Dealer.mstruserid}}</option>           
+            </select>
+        </div>
+        <div  class="form-group  col-lg-3 col-md-3 col-sm-12 col-xs-12 padding" >
+            <label>User</label>
+            <select name="UserId" ng-model="formData.UserId" ng-change="GetDealer(formData.UserId,3)" class="form-control">
+<option value="">Please Select User</option>  
+                <option ng-repeat="User in userData" value="{{User.mstrid}}">{{User.mstruserid}}</option>           
+            </select>
+        </div>
+            <div class="col-sm-12 client-form">
+	<div class="form_box  col-lg-3 col-md-3 col-sm-3 col-xs-12">
+				<label>Select Sport</label>
+
+					<select name="Sport_id" class="form-control" ng-model="Sport_id" ng-options="sport.name for sport in sportLst track by sport.id" ng-change="GetMatch(Sport_id)" >
+
+						<option ng-disabled="Sport_id" value=''>Select Sport</option>
+					
+					</select>
+					
+					<!-- {{matchLst}} -->
+		</div>
+		<div class="form_box  col-lg-3 col-md-3 col-sm-3 col-xs-12">
+				<label>Select Match</label>
+					
+					<select name="Match_id" class="form-control" ng-model="Match_id" ng-options="match.matchName for match in matchLst track by match.MstCode" ng-change="GetMarket(Match_id.MstCode,Sport_id.id,Fancy)" >
+
+						<option ng-disabled="Match_id" value=''>Select Market</option>
+					
+					</select>
+					
+		</div>
+		<div  class="clearfix">
+		 
+				<div class="form_box  col-lg-6 col-md-6 col-sm-6 col-xs-12" >
+
+					<label>Select Market</label>
+					
+					<select name="market_id" class="form-control" ng-model="market_id" ng-options="market.Name for market in MatchMarket track by market.Id" ng-change="Getodds(market_id.Id,market_id.Name)" >
+
+						<option ng-disabled="market_id" value=''>Select Odds</option>
+					
+					</select>
+							
+				</div>
+				</div>
+		    <div class="form_box  col-lg-2 col-md-2 col-sm-2 col-xs-12" >
+				    <label>Odds</label>
+				    <input type="number" class="form-control" ng-model="search.MatchName"  placeholder="Enter Odds" />
+				</div>
+				<div class="form_box  col-lg-2 col-md-2 col-sm-2 col-xs-12" >
+				    <label>Stake</label>
+				    <input type="number" class="form-control" ng-model="search.MarketName"  placeholder="Enter Stake" />
+				</div>
+
+				<div class="form_box  col-lg-2 col-md-2 col-sm-2 col-xs-12" >
+				    <label>Profit</label>
+				    <input type="number" class="form-control" ng-model="search.sportName" readonly />
+				</div>
+                    <div class="col-sm-12 form-group">
+
+                        <button type="submit" ng-disabled="!makebetForm.$valid" class="btn btn-primary">Make Bet</button>
+                    </div>
+
+                </div>
+            </div>
+        </form>
+    </div>
+</div>

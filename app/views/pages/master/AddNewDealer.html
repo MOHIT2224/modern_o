@@ -1,0 +1,70 @@
+<div class="container-fluid">
+  <div class="row text-center">
+    <h4 class="well well-sm">Client Detail</h4>
+  </div>
+  <div class="container">
+    <div class="row client-detail">
+      <form method="post" ng-submit="submitForm_Users(user)">
+        <div class="col-sm-12 client-form">
+          <div class="row">
+            <div class="col-sm-4 form-group">
+              <label>User Name</label>
+              <input type="text" ng-model="user.master_name" required="required"  class="form-control"  md-autofocus>
+            </div>
+            <div class="col-sm-4 form-group">
+              <label>User ID
+              <span ng-show="errorMsg" style="text-align: center; color:GREEN; font-size: 14px; margin-bottom: 15px;">{{errorMsg}}</span>
+              <span ng-show="errorMsg1" style="text-align: center; color:RED; font-size: 14px; margin-bottom: 15px;">{{errorMsg1}}</span>
+              </label>
+              <input type="text" ng-model="user.username" ng-change="checkUserName(user.username)" ng-minlength="4" required="required"  class="form-control">
+            </div>
+            <div class="col-sm-4 form-group">
+              <label>Password</label>
+              <input type="password" ng-init="user.password=''" ng-model="user.password" required="required"   class="form-control">
+            </div> 
+          </div>  <!-- row -->        
+            
+          <div class="row">
+            <div class="col-sm-4 form-group">
+              <label>Odds Commision</label>
+              <input type="text"  ng-init="user.Commission=0" ng-minlength="1" ng-maxlength="3" step=".1" ng-model="user.Commission" required="required" class="form-control">
+            </div> 
+
+             <div class="col-sm-4 form-group">
+              <label>Session Commision</label>
+              <input ng-init="user.sessionCommission=0" type="number" ng-model="user.sessionCommission" max="100"  class="form-control">
+            </div>
+            <div class="col-sm-4 form-group">
+              <label>Other Commission</label>
+              <input ng-init="user.otherCommission=0" type="number"  ng-model="user.otherCommission" max="100" class="form-control" >
+            </div>  
+              
+          </div><!-- row -->
+
+          <div class="row"> 
+            <div class="col-sm-4 form-group">
+              <label>Registration Date</label>
+              <input type="text" ng-init="user.dt = (getDate | date:'yyyy-MM-dd')" ng-model="user.dt"  class="form-control" disabled="disabled">
+            </div>
+            <div class="col-sm-4 form-group">
+              <label>Max Profit</label>
+              <input type="number" ng-init="user.maxProfit=0" ng-model="user.maxProfit"  class="form-control" disabled="disabled">
+            </div>    
+            <div class="col-sm-4 form-group">
+              <label>Max Loss</label>
+              <input ng-init="user.maxLoss=0" type="number" ng-model="user.maxLoss"  class="form-control" disabled="disabled">
+            </div>  
+              
+         
+          </div> <!-- row -->
+
+          
+          <div class="col-sm-12 form-group">  
+             <button type="button" class="btn btn-primary" ng-click="goBack()">Back</button>  
+               <button type="submit" class="btn btn-primary">Submit</button>  
+            </div>    
+        </div>
+      </form> 
+    </div>
+  </div>
+</div>

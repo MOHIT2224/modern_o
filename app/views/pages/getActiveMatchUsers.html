@@ -1,0 +1,72 @@
+<div class="content-wrapper" style="min-height: 720px;">
+ <div class="load-box" ng-show="loading">
+                <img id="mySpinner" src="app/images/loading1.gif" />
+            </div>
+<h1 class="page-heading">Active Users</h1>
+<!-- {{online_user}} -->
+
+
+	<div class="col-sm-12 col-md-12 master-cont">
+    <!-- START -->
+    <h5>Filtered {{ filtered.length }} of {{ totalItems}} total Active Users</h5>
+    <div class="col-lg-12 col-md-12 col-sm-12 " style="padding: 0px;">
+        <div class="lst_master_top clearfix">
+            <div class="form_row col-lg-12 col-md-12 col-sm-12 col-xs-12 clearfix top_table_form" style="padding: 0px;">
+                <div class="form_box  col-lg-2 col-md-2 col-sm-2 col-xs-12" style="padding: 0px;">
+                    <label>User ID</label>
+                    <select name="Match_id" ng-model="Match_id" ng-options="match.matchName for match in getActiveMatches track by match.MstCode" ng-change="Get_activeUsers(Match_id.MstCode)" >
+					    <option value=''>Select Match</option>
+					</select>
+                </div>
+
+                <div class="form_box  col-lg-4 col-md-4 col-sm-4 col-xs-12" style="padding: 0px;">
+                    <div class="file-icons">
+                     <!-- <a href=""><img src="app/images/file1.png" /></a>
+                     <a href=""><img src="app/images/file2.png" /></a>
+                     <a href=""><img src="app/images/file3.png" /></a> -->
+                    </div>
+                </div>
+               
+            </div>
+
+            
+        </div>
+
+        <!-- END -->
+        <div class="col-lg-12 col-md-12 lst_master">
+            <div class="listdata-table clearfix ">
+                <table class="table table-bordered table-condensed table-responsive" style="background-color: #fff;">
+                    <thead>
+                        <tr>
+
+                            <th><a ng-click="sort_by('mstrid');"><i class="glyphicon glyphicon-sort"></i></a>Serial No</th>
+                            <th><a ng-click="sort_by('UserName');"><i class="glyphicon glyphicon-sort"></i></a>User Name</th>
+                            <th><a ng-click="sort_by('mstruserid');"><i class="glyphicon glyphicon-sort"></i></a>Bet Count</th>
+                           
+                        </tr>
+
+
+                    </thead>
+                    <tr ng-repeat="user in filtered = (activeUsers | filter:search | orderBy : predicate :reverse) | startFrom:(currentPage-1)*entryLimit | limitTo:entryLimit">
+                        <td data-label="Serial No">{{$index + 1}}</td>
+                        <td data-label="Master Name">{{user.UserName}}</td>
+                        <td data-label="User ID">{{user.cntBetting}}</td>
+   
+                    </tr>
+
+                </table>
+            </div>
+
+            <div class="col-md-12" ng-show="filteredItems == 0">
+                <div class="col-md-12">
+                    <h4>No Users found</h4>
+                </div>
+            </div>
+            <div class="col-md-12" ng-show="filteredItems > 0">
+                <div pagination="" page="currentPage" on-select-page="setPage(page)" boundary-links="true" total-items="filteredItems" items-per-page="entryLimit" class="pagination-small" previous-text="&laquo;" next-text="&raquo;">
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+</div>

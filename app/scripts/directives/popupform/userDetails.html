@@ -1,0 +1,118 @@
+<md-dialog class="dial-width-650">
+    <md-toolbar>
+        <div class="md-toolbar-tools">
+            <h2>User details of {{UserData.mstruserid}}</h2>
+            <span flex></span>
+            <md-button class="md-icon-button" ng-click="hide()">
+                <md-icon md-svg-src="app/images/close.svg" aria-label="Close dialog"></md-icon>
+            </md-button>
+        </div>
+    </md-toolbar>
+    <md-dialog-content>
+        <div class="md-dialog-content">
+        <!-- {{cipsData}} -->
+            <div class="clearfix">
+                <div class="popup-form-box col-lg-12 col-md-12 col-sm-12 col-xs-12 clearfix">
+                                 
+                    <div class="popup-inp-box  col-lg-3 col-md-3 col-sm-3 col-xs-12"">
+                        <label>Credit Limit</label>
+                        <span class="input-group-btn">
+                            <input type="text" class="popup-input pwd-inp" ng-model="cipsData.FreeChip" readonly="readonly" />
+                        </span>
+                    </div>
+                    
+                    <div class="popup-inp-box  col-lg-3 col-md-3 col-sm-3 col-xs-12"">
+                        <label>Total Liability</label>
+                        <span class="input-group-btn">
+                            <input type="text" class="popup-input pwd-inp" ng-model="cipsData.Liability" readonly="readonly" />
+                        </span>
+                    </div>
+                    <div class="popup-inp-box  col-lg-3 col-md-3 col-sm-3 col-xs-12">
+                        <label>Session Liability</label>
+                        <span class="input-group-btn">
+                            <input type="text" class="popup-input pwd-inp" ng-model="cipsData.sessionLiability" readonly="readonly" />
+                        </span>
+                    </div>
+                    <div class="popup-inp-box  col-lg-3 col-md-3 col-sm-3 col-xs-12">
+                        <label>Market Liability</label>
+                        <span class="input-group-btn">
+                            <input type="text" class="popup-input pwd-inp" ng-model="cipsData.marketliability" readonly="readonly" />
+                        </span>
+                    </div>
+
+                </div>
+                <div class="popup-form-box col-lg-12 col-md-12 col-sm-12 col-xs-12 clearfix">
+                                 
+                    <div class="popup-inp-box  col-lg-3 col-md-3 col-sm-3 col-xs-12"">
+                        <label>Credit Limit</label>
+                        <span class="input-group-btn">
+                            <input type="text" class="popup-input pwd-inp" ng-model="cipsData.FreeChip" readonly="readonly" />
+                        </span>
+                    </div>
+                    
+                    <div class="popup-inp-box  col-lg-3 col-md-3 col-sm-3 col-xs-12"">
+                        <label>Total Liability</label>
+                        <span class="input-group-btn">
+                            <input type="text" class="popup-input pwd-inp" ng-model="cipsData.Liability" readonly="readonly" />
+                        </span>
+                    </div>
+                    <div class="popup-inp-box  col-lg-3 col-md-3 col-sm-3 col-xs-12">
+                        <label>Session Liability</label>
+                        <span class="input-group-btn">
+                            <input type="text" class="popup-input pwd-inp" ng-model="cipsData.sessionLiability" readonly="readonly" />
+                        </span>
+                    </div>
+                    <div class="popup-inp-box  col-lg-3 col-md-3 col-sm-3 col-xs-12">
+                        <label>Market Liability</label>
+                        <span class="input-group-btn">
+                            <input type="text" class="popup-input pwd-inp" ng-model="cipsData.marketliability" readonly="readonly" />
+                        </span>
+                    </div>
+
+                </div>
+                <div class="popup-form-box col-lg-12 col-md-12 col-sm-12 col-xs-12 clearfix">
+                                 
+                    <div class="popup-inp-box  col-lg-3 col-md-3 col-sm-3 col-xs-12"">
+                        <label>Credit Limit</label>
+                        <span class="input-group-btn">
+                            <input type="text" class="popup-input pwd-inp" ng-model="cipsData.FreeChip" readonly="readonly" />
+                        </span>
+                    </div>
+                    
+                    <div class="popup-inp-box  col-lg-3 col-md-3 col-sm-3 col-xs-12"">
+                        <label>Total Liability</label>
+                        <span class="input-group-btn">
+                            <input type="text" class="popup-input pwd-inp" ng-model="cipsData.Liability" readonly="readonly" />
+                        </span>
+                    </div>
+                    <div class="popup-inp-box  col-lg-3 col-md-3 col-sm-3 col-xs-12">
+                        <label>Session Liability</label>
+                        <span class="input-group-btn">
+                            <input type="text" class="popup-input pwd-inp" ng-model="cipsData.sessionLiability" readonly="readonly" />
+                        </span>
+                    </div>
+                    <div class="popup-inp-box  col-lg-3 col-md-3 col-sm-3 col-xs-12">
+                        <label>Market Liability</label>
+                        <span class="input-group-btn">
+                            <input type="text" class="popup-input pwd-inp" ng-model="cipsData.marketliability" readonly="readonly" />
+                        </span>
+                    </div>
+
+                </div>
+                <div class="popup-form-box col-lg-12 col-md-12 col-sm-12 col-xs-12 clearfix">
+                    <table class="responsive">
+                        
+                        <tr ng-repeat="Team in TeamData">
+                            <td>{{Team.matchName}}</td>
+                            <td ng-style =  "{color: styleColor(Team.TeamA)}">{{Team.teamAt}} {{Team.TeamA}} </td>
+                            <td ng-style =  "{color: styleColor(Team.TeamB)}">{{Team.teamBt}} {{Team.TeamB}} </td>
+                            <td ng-style =  "{color: styleColor(Team.TeamC)}">{{Team.teamCt}} {{Team.theDraw}} </td>
+                        </tr>
+                    </table>
+                </div>
+            </div>
+
+           
+        </div>
+    </md-dialog-content>
+</md-dialog>

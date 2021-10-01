@@ -1,0 +1,235 @@
+<div class="content-wrapper ng-scope" style="min-height: 720px;" ng-init="getSportDetail(0)"> 
+   <div class="load-box" ng-show="loading">
+            <img id="mySpinner" src="app/images/loading1.gif" />
+        </div>
+<div class="row padding">
+<div class="col-md-12 inplay">
+ <div class="sport_blk newdesign">
+          <h2>Sports Highlights</h2>
+          <ul class="nav nav-tabs">
+	
+		
+		<li  ng-class="{'active':inplaytab==1}" ng-click='inplaytab=1;'><a data-toggle="tab"  href="javascript:void();">Today</a></li>
+		<li  ng-class="{'active':inplaytab==2}" ng-click='inplaytab=2;'><a data-toggle="tab"  href="javascript:void();">Tomorrow</a></li>
+		<li ng-class="{'active':inplaytab==3}" ng-click='inplaytab=3;'><a data-toggle="tab"  href="javascript:void();">Future</a></li>
+          
+
+          </ul>
+
+            
+
+
+ <div class="sport_blk newdesign" id="menuinplay" ng-show="inplaytab == 1">
+           <h1 class="binding">Cricket</h1>
+          <div class="bet_table  table-bordered">
+          <table class="table table-responsive">
+          
+  <tr ng-repeat="match in cricketSportDetail   | orderBy : 'eventDate'"   ng-if="calculateDateToday(match.eventDate,match.EventTypeId)">
+
+    <td class="betboxtd"> <a >{{match.SeriesName}} </a> </td>
+           <td class=""> <a >{{match.eventName}} </a> </td>
+
+                     
+             <td class="betboxtd"><span  >{{match.eventDate | date : 'medium'}} </span></td>
+                     
+                  <td data-label="Action" ng-show="$root.HelperAllRights==angular.isUndefinedOrNull || $root.HelperAllRights.addMatch==1"><input type="checkbox" ng-model="checkboxModel.value2" ng-click="saveMatch(match);" ng-checked="{{match.active}}" ><!--sourabh 170105 check--></td>
+
+                  </tr>
+                <tr ng-show="(countTodayCricket==0)">
+		<td colspan="7">No Record Found.</td>
+		</tr>
+			  
+			  
+			     <tr  ng-show="inplaytab == 1" style="background: #2a2f45!important;">
+		<td colspan="7">   <h1 class="binding" style="text-align: left">Soccer </h1></td>
+		</tr>
+			  
+			   <tr ng-repeat="match in soccerSportDetail  | orderBy : 'eventDate'"  ng-if="calculateDateToday(match.eventDate,match.EventTypeId)">
+ 
+    <td class="betboxtd"> <a >{{match.SeriesName}} </a> </td>
+           <td class=""> <a >{{match.eventName}} </a> </td>
+
+                     
+             <td class="betboxtd"><span  >{{match.eventDate | date : 'medium'}} </span></td>
+                     
+                  <td data-label="Action" ng-show="$root.HelperAllRights==angular.isUndefinedOrNull || $root.HelperAllRights.addMatch==1"><input type="checkbox" ng-model="checkboxModel.value2" ng-click="saveMatch(match);" ng-checked="{{match.active}}"><!--sourabh 170105 check--></td>
+                  </tr>
+                <tr ng-show="(countTodaySoccer==0)">
+		<td colspan="7">No Record Found.</td>
+		</tr>
+			   
+                    <tr ng-show="inplaytab == 1" style="background: #2a2f45!important;">
+		<td colspan="7"> <h1 class="binding" style="text-align: left">Tennis </h1></td>
+		</tr>
+               
+                  <tr ng-repeat="match in tennisSportDetail | orderBy : 'eventDate'" ng-if="calculateDateToday(match.eventDate,match.EventTypeId)">
+        
+    <td class="betboxtd"> <a >{{match.SeriesName}} </a> </td>
+           <td class=""> <a >{{match.eventName}} </a> </td>
+
+                     
+             <td class="betboxtd"><span  >{{match.eventDate | date : 'medium'}} </span></td>
+                     
+                  <td data-label="Action" ng-show="$root.HelperAllRights==angular.isUndefinedOrNull || $root.HelperAllRights.addMatch==1"><input type="checkbox" ng-model="checkboxModel.value2" ng-click="saveMatch(match);" ng-checked="{{match.active}}"><!--sourabh 170105 check--></td>
+                  </tr>
+                <tr ng-show="(countTodayTennis==0)">
+		<td colspan="7">No Record Found. </td>
+		</tr>
+			  
+			  
+			  
+			  
+                </table>
+          </div>
+</div> 
+
+ <div class="sport_blk newdesign" id="menuinplay" ng-show="inplaytab == 2">
+           <h1 class="binding">Cricket</h1>
+          <div class="bet_table  table-bordered">
+          <table class="table table-responsive">
+          
+  <tr ng-repeat="match in cricketSportDetail   | orderBy : 'eventDate'"  ng-if="calculateDateTomorrow(match.eventDate,match.EventTypeId)">
+           
+    <td class="betboxtd"> <a >{{match.SeriesName}} </a> </td>
+           <td class=""> <a >{{match.eventName}} </a> </td>
+
+                     
+             <td class="betboxtd"><span  >{{match.eventDate | date : 'medium'}} </span></td>
+                     
+                  <td data-label="Action" ng-show="$root.HelperAllRights==angular.isUndefinedOrNull || $root.HelperAllRights.addMatch==1"><input type="checkbox" ng-model="checkboxModel.value2" ng-click="saveMatch(match);" ng-checked="{{match.active}}"><!--sourabh 170105 check--></td>
+                  </tr>
+                <tr ng-show="(countTomorrowCricket==0)">
+		<td colspan="7">No Record Found.</td>
+		</tr>
+			  
+			  
+		  <tr ng-show="inplaytab == 2" style="background: #2a2f45!important;">
+		<td colspan="7"> <h1 class="binding" style="text-align: left">Soccer </h1></td>		
+		</tr>            
+        
+			  <tr ng-repeat="match in soccerSportDetail  | orderBy : 'eventDate'"  ng-if="calculateDateTomorrow(match.eventDate,match.EventTypeId)">
+           
+    <td class="betboxtd"> <a >{{match.SeriesName}} </a> </td>
+           <td class=""> <a >{{match.eventName}} </a> </td>
+
+                     
+             <td class="betboxtd"><span  >{{match.eventDate | date : 'medium'}} </span></td>
+                     
+                  <td data-label="Action" ng-show="$root.HelperAllRights==angular.isUndefinedOrNull || $root.HelperAllRights.addMatch==1"><input type="checkbox" ng-model="checkboxModel.value2" ng-click="saveMatch(match);" ng-checked="{{match.active}}"><!--sourabh 170105 check--></td>
+                  </tr>
+                <tr ng-show="(countTomorrowSoccer==0)">
+		<td colspan="7">No Record Found.</td>
+		</tr>
+			  
+			  
+			  
+			    <tr ng-show="inplaytab == 2" style="background: #2a2f45!important;">
+		<td colspan="7"> <h1 class="binding" style="text-align: left">Tennis </h1></td>		
+		</tr> 
+			  
+			  
+			         <tr ng-repeat="match in tennisSportDetail  | orderBy : 'eventDate'"  ng-if="calculateDateTomorrow(match.eventDate,match.EventTypeId)">
+                
+    <td class="betboxtd"> <a >{{match.SeriesName}} </a> </td>
+           <td class=""> <a >{{match.eventName}} </a> </td>
+
+                     
+             <td class="betboxtd"><span  >{{match.eventDate | date : 'medium'}} </span></td>
+                     
+                  <td data-label="Action" ng-show="$root.HelperAllRights==angular.isUndefinedOrNull || $root.HelperAllRights.addMatch==1"><input type="checkbox" ng-model="checkboxModel.value2" ng-click="saveMatch(match);" ng-checked="{{match.active}}"><!--sourabh 170105 check--></td>
+                  </tr>
+                <tr ng-show="(countTomorrowTennis==0)">
+		<td colspan="7">No Record Found. </td>
+		</tr>
+			  
+			  
+			  
+			  
+                </table>
+          </div>
+</div>
+ 
+
+
+
+     
+    
+ <div class="sport_blk newdesign" id="menuinplay" ng-show="inplaytab == 3">
+           <h1 class="binding">Cricket</h1>
+          <div class="bet_table  table-bordered">
+          <table class="table table-responsive">
+          
+  <tr ng-repeat="match in cricketSportDetail  | orderBy : 'eventDate'"  ng-if="calculateDate(match.eventDate,match.EventTypeId)">
+<td class="betboxtd"> <a >{{match.SeriesName}} </a> </td>
+           <td class=""> <a >{{match.eventName}} </a> </td>
+
+                     
+             <td class="betboxtd"><span  >{{match.eventDate | date : 'medium'}} </span></td>
+                     
+                     
+                  <td data-label="Action" ng-show="$root.HelperAllRights==angular.isUndefinedOrNull || $root.HelperAllRights.addMatch==1"><input type="checkbox" ng-model="checkboxModel.value2" ng-click="saveMatch(match);" ng-checked="{{match.active}}"><!--sourabh 170105 check--></td>
+                  </tr>
+                <tr ng-show="( countFutureCricket==0)">
+		<td colspan="7">No Record Found.</td>
+		</tr>
+			  
+			  
+			  
+			  
+	 <tr ng-show="inplaytab == 3" style="background: #2a2f45!important;">
+		<td colspan="7"> <h1 class="binding" style="text-align: left">Soccer </h1></td>		
+		</tr> 
+			       
+		        <tr ng-repeat="match in soccerSportDetail  | orderBy : 'eventDate'"  ng-if="calculateDate(match.eventDate,match.EventTypeId)">
+       <td class="betboxtd"> <a >{{match.SeriesName}} </a> </td>
+           <td class=""> <a >{{match.eventName}} </a> </td>
+
+                     
+             <td class="betboxtd"><span  >{{match.eventDate | date : 'medium'}} </span></td>
+                     
+                  <td data-label="Action" ng-show="$root.HelperAllRights==angular.isUndefinedOrNull || $root.HelperAllRights.addMatch==1"><input type="checkbox" ng-model="checkboxModel.value2" ng-click="saveMatch(match);" ng-checked="{{match.active}}"><!--sourabh 170105 check--></td>
+                  </tr>
+                <tr ng-show="( countFutureSoccer==0)">
+		<td colspan="7">No Record Found.</td>
+		</tr>	
+			  
+			  
+			  
+			  <tr ng-show="inplaytab == 3" style="background: #2a2f45!important;">
+		<td colspan="7"> <h1 class="binding" style="text-align: left">Tennis </h1></td>		
+		</tr> 
+			  
+			      
+			                   
+  <tr ng-repeat="match in tennisSportDetail  | orderBy : 'eventDate'"  ng-if="calculateDate(match.eventDate,match.EventTypeId)">
+<td class="betboxtd"> <a >{{match.SeriesName}} </a> </td>
+           <td class=""> <a >{{match.eventName}} </a> </td>
+
+                     
+             <td class="betboxtd"><span  >{{match.eventDate | date : 'medium'}} </span></td>
+                     
+                     
+                  <td data-label="Action" ng-show="$root.HelperAllRights==angular.isUndefinedOrNull || $root.HelperAllRights.addMatch==1"><input type="checkbox" ng-model="checkboxModel.value2" ng-click="saveMatch(match);" ng-checked="{{match.active}}"><!--sourabh 170105 check--></td>
+                  </tr>
+                <tr ng-show="( countFuturetenis==0  )" >
+		<td colspan="7">No Record Found. </td>
+		</tr>
+			  
+			  
+			  
+			  
+                </table>
+          </div>
+</div>
+ 
+
+
+       
+
+
+          </div>
+        </div>
+      </div>
+
+      </div>  
+</div>

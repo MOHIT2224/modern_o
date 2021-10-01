@@ -1,0 +1,51 @@
+
+
+    <ul class="nav navbar-nav">
+	  <div  class="load-box" ng-show="loading">
+            <img id="mySpinner" src="app/images/loading1.gif" />
+        </div>
+        <li>
+          <a class="top_text">
+                Balance :<span ng-class="{'green':$root.Balance>0,'red':$root.Balance<0}">{{$root.Balance}}</span>
+          </a>
+      </li>
+     <li>
+          <a class="top_text">
+               Liability :<span ng-class="{'green':$root.Liability>0,'red':$root.Liability<0}">{{$root.Liability}}</span>
+          </a>
+      </li>
+
+
+    <li>
+
+         <div>
+          <md-menu md-position-mode="target-right target" md-offset="0 58">
+              <a ng-click="$mdOpenMenu()"> 
+                        <span class="UsernamefixSize"><i class="fa fa-cog"></i>&nbsp;{{$root.user}}</span>
+              </a>
+                <md-menu-content class="user-links top-menu-cont">
+                    <md-button ui-sref-active="active" ui-sref="masterDashboard.changePasswordUser"><span class="drp-txt">Change Password</span></md-button>
+                    <md-button ui-sref-active="active" ui-sref="masterDashboard.OnePageRprt({typeId:1})"><span class="drp-txt">Bet History</span></md-button>
+                     <md-button ui-sref-active="active" ui-sref="masterDashboard.Profitlosscntr"><span class="drp-txt">Profit & Loss</span></md-button>
+                     <md-button ui-sref-active="active" ng-click="logout();"> <a>Logout</a></md-button>
+                </md-menu-content>
+          </md-menu>
+          </div>
+          </li>
+
+          <!-- <div class="col-sm-6 col-xs-12 text-center visible-xs">
+          <a>
+            <div class="wal-lia-box">
+                <div class="wall-bal-head"> <span>Balance :</span> {{$root.Balance}}</div><div class="liab-bal-head"><span> Liability :</span> {{$root.Liability}} </div>
+            </div>
+          </a>
+        </div>
+      </div>
+
+    </div> -->
+
+     
+
+
+
+

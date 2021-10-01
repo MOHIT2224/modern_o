@@ -1,0 +1,34 @@
+<div class="fancy_wrapper clearfix" style="border:solid 2px #ddd; padding-bottom:20px; min-height:213px;">
+    <!--  {{GetSesFancyUserLst}} -->
+    <div class="resp_table user-list-table clearfix ">
+        <table class="table-bordered table-responsive">
+            <thead>
+            <tr>
+                <th>Info</th>
+                <th>M-Distrbutor</th>
+                <th>Type</th>
+                <th>Rate</th>
+                <th>Amount</th>
+                <th>Time</th>
+            </tr>
+            </thead>
+
+            <tbody>
+            <tr ng-repeat="userList in GetSesFancyUserLst">
+                <td data-label="Info" ng-class="userList.OddValue==1 ? 'back-head' : 'lay-head'">
+                    <a class="toolt-rgt">
+                        <i class="glyphicon glyphicon-list-alt" aria-hidden="true"></i>
+                        <span class="tooltiptext-rgt">IP ADDRESS :{{userList.ip}}<br />{{userList.DeviceDesc}} </span>
+                    </a>
+                </td>
+                <td data-label="M-Distrbutor" ng-class="userList.OddValue==1 ? 'back-head' : 'lay-head'">{{userList.MasterName}} |{{userList.ParantName}}|{{userList.userName}}</td>
+                <td data-label="Type" ng-class="userList.OddValue==1 ? 'back-head' : 'lay-head'" ng-show="userList.OddValue==1?StVal='UP[BACK]:':StVal='DOWN[LAY]'">{{StVal}}</td>
+                <td data-label="Rate" ng-class="userList.OddValue==1 ? 'back-head' : 'lay-head'">{{userList.OddsNumber}}</td>
+                <td data-label="Amount" ng-class="userList.OddValue==1 ? 'back-head' : 'lay-head'">{{userList.bet_value}}</td>
+                <td data-label="Time" ng-class="userList.OddValue==1 ? 'back-head' : 'lay-head'">{{userList.dateTime}}</td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
+</div>
+   

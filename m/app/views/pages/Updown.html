@@ -1,0 +1,182 @@
+<div class="col-sm-8 col-md-9 col-md-12 clearfix">
+    <div class="clearfix ">
+        <div class="box-heading clearfix">
+            <div style="float:left;">
+                {{FancyData[0].HeadName}}
+                <p class="head_min">{{FancyData[0].date | date:'fullDate'}} {{FancyData[0].time}}</p>
+            </div>
+            <div style="float: right; margin-top: 9px;">{{MatchName}}</div>
+        </div>
+        <div class="fancy_wrapper clearfix ">
+            <div class="fancy_top clearfix ">
+                <a href="" class="rules-btn" style="background-color: #333333;border-radius: 2px;">
+                    Rules
+                </a>
+                <span>
+                    Risk : 00
+                </span>
+            </div>
+            <p class="info-ex">
+                {{FancyData[0].Remarks}}
+            </p>
+            <div style="position: relative; min-height:104px;">
+                <!--<div class="clearfix doni_name">{{FancyData[0].HeadName}}</div>-->
+                <div class="up-down-click col-lg-4 col-md-12 col-sm-12 clearfix">
+                    <ul>
+                        <li style="cursor:pointer;" class="col-lg-12 col-md-6 col-sm-6 col-xs-6 clearfix">
+                            <a class="lay-cell clearfix" ng-click="display_Lay();" id="clock-large" style="background-color: #ce8483;color: #000000; border:solid 2px #333;">
+                                <div class="doni_left clearfix">Down[Lay]</div>
+                                <div class="doni_right clearfix"> {{FancyData[0].upDwnLay}}</div>
+                            </a>
+                        </li>
+                        <li style="cursor:pointer;" class="col-lg-12 col-md-6 col-sm-6 col-xs-6 clearfix">
+                            <a class="back-cell clearfix" ng-click="display_Back();" id="clock-large" style="background-color: #5bc0de;color: #3d4051; border:solid 2px #333;">
+                                <div class="doni_left clearfix">Up[Back]</div>
+                                <div class="doni_right clearfix">{{FancyData[0].upDwnBack}}</div>
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+                <div class="bet_stake_box col-lg-8 col-md-12 col-sm-12 clearfix" style="margin-top:8px;">
+                    <div ng-show="showOdd1==true && (userType==3 || UserTypeId==3)" class="check-element animate-show back-ele-box" style="padding-top:10px;">
+                        <div class="even_top clearfix">
+                            <form name="oddForm" method="post">
+                                <div class="clearfix" style="display:inline-block; float:left; margin-right:10px; margin-bottom:8px;">
+                                    <label style="margin-right:10px;color:#333;">Bet On Up[Back]</label>
+                                    <div class="col">
+                                        <input type="number" class="textbox" min="0" ng-model="betValue" id="betValue" name="betValue">
+
+                                        <span class="focus-border"></span>
+                                    </div>
+                                    <input type="hidden" name="odd" value="1" ng-model="OddValue">
+                                    <input type="hidden" name="BackVal" id="BackVal" value="{{FancyData[0].upDwnBack}}" ng-model="OddValue">
+                                </div>
+                                <div class="clearfix" style="display:inline-block; float:right;">
+                                    <button class="eve_but place-btn" ng-click="Save_updownFancy(1,FancyData[0].upDwnBack)" ng-disabled="btnPlaceDis">PLACE</button>
+                                    <button class="odd_but cancel-btn" ng-click="showOdd1=false;showEven1=false;betValue=0;">CANCEL </button>
+                                    <button class="eve_but clear-btn" ng-click="betValue=0">CLEAR </button>
+                                </div>
+                            </form>
+                        </div>
+                        <div ng-hide="true">
+                            {{$root.userPlcBtn[0].Name1==''?name1=50:name1=$root.userPlcBtn[0].Name1}}
+                            {{$root.userPlcBtn[0].Value1==0?Value1=50:Value1=$root.userPlcBtn[0].Value1}}
+                            {{$root.userPlcBtn[0].Name2==''?name2=100:name2=$root.userPlcBtn[0].Name2}}
+                            {{$root.userPlcBtn[0].Value2==0?Value2=100:Value2=$root.userPlcBtn[0].Value2}}
+                            {{$root.userPlcBtn[0].Name3==''?name3=500:name3=$root.userPlcBtn[0].Name3}}
+                            {{$root.userPlcBtn[0].Value3==0?Value3=500:Value3=$root.userPlcBtn[0].Value3}}
+                            {{$root.userPlcBtn[0].Name4==''?name4=1000:name4=$root.userPlcBtn[0].Name4}}
+                            {{$root.userPlcBtn[0].Value4==0?Value4=1000:Value4=$root.userPlcBtn[0].Value4}}
+                            {{$root.userPlcBtn[0].Name5==''?name5=5000:name5=$root.userPlcBtn[0].Name5}}
+                            {{$root.userPlcBtn[0].Value5==0?Value5=5000:Value5=$root.userPlcBtn[0].Value5}}
+                            {{$root.userPlcBtn[0].Name6==''?name6=10000:name6=$root.userPlcBtn[0].Name6}}
+                            {{$root.userPlcBtn[0].Value6==0?Value6=10000:Value6=$root.userPlcBtn[0].Value6}}
+                        </div>
+                        <div ng-if="$root.MyLenth==0" class="clearfix" style="text-align:right;">
+                            <button ng-click="GetBetValue(betValue,50)" class="DigitButton">50</button>
+                            <button ng-click="GetBetValue(betValue,100)" class="DigitButton">100</button>
+                            <button ng-click="GetBetValue(betValue,250)" class="DigitButton">250</button>
+                            <button ng-click="GetBetValue(betValue,500)" class="DigitButton">500</button>
+                            <button ng-click="GetBetValue(betValue,1000)" class="DigitButton">1000</button>
+                            <button ng-click="GetBetValue(betValue,5000)" class="DigitButton">5000</button>
+                        </div>
+                        <div ng-if="$root.MyLenth==1" class="clearfix" style="text-align:right;">
+                            <button type="button" ng-click="GetBetValue(betValue,Value1)" class="DigitButton">{{name1}}</button>
+                            <button type="button" ng-click="GetBetValue(betValue,Value2)" class="DigitButton">{{name2}}</button>
+                            <button type="button" ng-click="GetBetValue(betValue,Value3)" class="DigitButton">{{name3}}</button>
+                            <button type="button" ng-click="GetBetValue(betValue,Value4)" class="DigitButton">{{name4}}</button>
+                            <button type="button" ng-click="GetBetValue(betValue,Value5)" class="DigitButton">{{name5}}</button>
+                            <button type="button" ng-click="GetBetValue(betValue,Value6)" class="DigitButton">{{name6}}</button>
+                        </div>
+
+                    </div>
+                    <div ng-show="showEven1==true && (userType==3 || UserTypeId==3)" class="check-element animate-show lay-ele-box" style="padding-top:10px;">
+                        <div class="even_top clearfix">
+                            <form name="oddForm" method="post">
+                                <div class="clearfix" style="display:inline-block; float:left; margin-right:10px; margin-bottom:8px;">
+                                    <label style="margin-right:10px;color:#333;">Bet On Down[Lay]</label>
+                                    <div class="col">
+                                        <input class="textbox" type="number" min="0" ng-model="betValue" id="betValueEven" name="betValue">
+
+                                        <span class="focus-border"></span>
+                                    </div>
+                                    <input type="hidden" name="even" value="0" ng-model="EvenValue">
+                                    <input type="hidden" name="layVal" id="layVal" value="{{FancyData[0].upDwnLay}}" ng-model="OddValue">
+                                </div>
+                                <div class="clearfix" style="display:inline-block; float:right;">
+                                    <button class="eve_but place-btn" ng-click="Save_updownFancy(0,FancyData[0].upDwnLay)" ng-disabled="btnPlaceDis">PLACE</button>
+                                    <button class="odd_but cancel-btn" ng-click="showOdd1=false;showEven1=false;betValue=0;">CANCEL </button>
+                                    <button class="eve_but clear-btn" ng-click="betValue=0">CLEAR </button>
+                                </div>
+                            </form>
+                        </div>
+                        <div ng-if="$root.MyLenth==0" class="clearfix" style="text-align:right;">
+                            <button ng-click="GetBetValue(betValue,50)" class="DigitButton">50</button>
+                            <button ng-click="GetBetValue(betValue,100)" class="DigitButton">100</button>
+                            <button ng-click="GetBetValue(betValue,250)" class="DigitButton">250</button>
+                            <button ng-click="GetBetValue(betValue,500)" class="DigitButton">500</button>
+                            <button ng-click="GetBetValue(betValue,1000)" class="DigitButton">1000</button>
+                            <button ng-click="GetBetValue(betValue,5000)" class="DigitButton">5000</button>
+                        </div>
+                        <div ng-if="$root.MyLenth==1" class="clearfix" style="text-align:right;">
+                            <button type="button" ng-click="GetBetValue(betValue,Value1)" class="DigitButton">{{name1}}</button>
+                            <button type="button" ng-click="GetBetValue(betValue,Value2)" class="DigitButton">{{name2}}</button>
+                            <button type="button" ng-click="GetBetValue(betValue,Value3)" class="DigitButton">{{name3}}</button>
+                            <button type="button" ng-click="GetBetValue(betValue,Value4)" class="DigitButton">{{name4}}</button>
+                            <button type="button" ng-click="GetBetValue(betValue,Value5)" class="DigitButton">{{name5}}</button>
+                            <button type="button" ng-click="GetBetValue(betValue,Value6)" class="DigitButton">{{name6}}</button>
+                        </div>
+                    </div>
+                </div>
+                <!-- <div ng-if="FancyData[0].active==0" class="ball-msg-box">
+                    <h1>Inactive</h1>
+                </div>
+                <div ng-show="ngValue==true;" class="place-alert fade in ">
+                    {{ngMessage}}
+                </div> -->
+                <div ng-if="FancyData[0].active==0" class="ball-msg-box" style="min-height:104px;">
+                    <h1>Inactive</h1>
+                </div>
+                <div ng-if="FancyData[0].active==4 || FancyData[0].active==2" class="ball-msg-box" style="min-height:104px;">
+                    <h1>{{FancyData[0].DisplayMsg}}</h1>
+                </div>
+               <!--  <div ng-if="FancyData[0].active==4 || FancyData[0].active==2" class="ball-msg-box" style="min-height:104px;">
+                    <h1>{{FancyData[0].DisplayMsg}}</h1>
+                </div> -->
+            </div>
+        </div>
+    </div>
+    <div class="clearfix fancy_bot col-lg-12 col-md-12 col-sm-12 lst_top_table">
+        <div class="box-heading"> Fancy Bets  </div>
+        <div class="resp_table clearfix ">
+            <div id="myGrid" class="ag-fresh" style="height: 300px; margin-top: 4px;"></div>
+        </div>
+    </div>
+</div>
+<div class="col-sm-4 col-md-3 " style="padding-right:0px;">
+    <div>
+        <div class="">
+            <div class="box-heading"> Score Position 
+                <span class="rigt-ref" style="margin-right:5px;">
+                    <i class="glyphicon glyphicon-refresh" style="font-size:15px;"></i>
+                </span>
+            </div>
+            <div class="bet-cont tab_container score-pos-box" id="topPas">
+                <table class="table bets-table">
+                    <thead>
+                        <tr>
+                            <th style="text-align:center;">Score</th>
+                            <th style="text-align:center;">Amount</th>
+                        </tr>
+                    </thead>
+                    <tbody align="center">
+                        <tr ng-repeat="score in scorePosition" id="number_{{score.a}}">
+                            <td class="back-txt">{{score.RunValue}}</td>
+                            <td class="amou_no amt-txt">{{score.a}}</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,49 @@
+
+<div class="content-wrapper ng-scope" style="min-height: 720px;">
+<div class="innerbox">
+<h1 class="page-heading">Remove Old Bet Data</h1>
+    <div>
+        <div class="clearfix creat_form"> 
+		<p ng-show="message" style="text-align: center; color:#FE5454; font-size: 18px; margin-bottom: 15px;">{{message}}</p>
+            <form name="userForm" ng-submit="submitForm()" method="post">  
+                    <div class="form_box1  col-lg-8 col-md-8 col-sm-8 col-xs-12"> 
+                        <input type="checkbox"  value="delete" name="name" class="input-box" required="required"><p>Are You Sure You Want to do this Action</p>
+                    </div>
+                    <div class="form_box  col-lg-12 col-md-12 col-sm-12 col-xs-12" style="text-align:left;">
+                        <button type="submit" class="btn btn-primary" style="margin-top:21px;">Submit</button> 
+                </div>
+            </form>  
+        </div>
+    </div>
+<div class="col-lg-12 col-md-12 lst_master member_listing">
+            <div class="listdata-table clearfix login_table taking_list">
+                <table class="table  table-responsive">
+                    <thead>
+                        <tr>
+                            <th>   Match Name</th>
+                            <th> Market Name</th>
+
+                           
+                            <th>Created Date</th>
+                            <th>Sport Name</th>
+
+                           
+                        </tr>
+
+
+                    </thead>
+                           <tr ng-repeat="deletedata in deleteDta">
+                        <td data-label="Serial No" >           {{deletedata.MatchName}}</td>
+                        <td data-label="Master Name">                         {{deletedata.MarketName}}</td>
+                        <td data-label="User ID">{{deletedata.MstDate}}</td>
+                       
+                        <td data-label="IP Address">{{deletedata.sport_name}}</td>
+                       
+                  
+                    </tr>
+
+                </table>
+            </div>
+</div>
+ 
+</div></div>

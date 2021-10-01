@@ -1,0 +1,73 @@
+
+Live Base Url : http://betdip.com/
+
+
+1. market favourite
+Test Url : Apiusercontroller/favourite
+Method : POST
+Header Params - username (mandatory), password (mandatory)
+Params : {"market_id":"1.146533144"}
+
+2. market unfavourite
+Test Url : Apiusercontroller/unfavourite
+Method : POST
+Header Params - username (mandatory), password (mandatory)
+Params : {"market_id":"1.146533144"}
+
+3. Get Active Favourite Match listing
+Test Url : Apiusercontroller/getUserFavouriteMatchLst/:sport_id
+Method : GET
+Header Params - username (mandatory), password (mandatory)
+Note : (sport_id = 0 for all , sport_id = 4 for Cricket, sport_id = 2 for Tennis , sport_id = 1 for Soccer)
+
+4. Get User Favourite Match listing
+Test Url : Apiusercontroller/getUserFavouriteMatchLst/:sport_id
+Method : GET
+Header Params - username (mandatory), password (mandatory)
+Note : (sport_id = 0 for all , sport_id = 4 for Cricket, sport_id = 2 for Tennis , sport_id = 1 for Soccer)
+
+5. Get Favourite Match listing
+Test Url : Apiusercontroller/getFavouriteMatchLst
+Method : GET
+Header Params - username (mandatory), password (mandatory)
+Note : (sport_id = 0 for all , sport_id = 4 for Cricket, sport_id = 2 for Tennis , sport_id = 1 for Soccer)
+
+6. Save multi bet
+Test Url : Apiusercontroller/save_multi_bet
+Method : POST
+Header Params - username (mandatory), password (mandatory)
+Params : [{"unique_id":"1","is_session_fancy":"N","selectionId":"414464","matchId":"28844828","isback":"0","stake":1000,"priceVal":1.1,"p_l":100,"MarketId":"1.146701355","isMatched":1,"placeName":"India","MatchName":"England v India (3rd Test)","deviceInfo":" browser: chrome browser_version :68.0.3440.106  device: Desktop  OS : windows os_version: windows-7","inplay":true,"ApiVal":0},{"unique_id":"2","is_session_fancy":"Y","MarketId":"1.146701355","ind_fancy_selection_id":2,"stake":"500","FancyID":"290","matchId":"28844828","OddValue":1,"type":"3","priceVal":"99","TypeID":"2","HeadName":"virat kohli 1st inning runs","SessInptNo":"99","SessInptYes":"100","sportId":"4","FancyId":"108","pointDiff":"10.00","deviceInformation":"browser: chrome browser_version :68.0.3440.106  device: Desktop  OS : windows os_version: windows-7"}]
+
+7. Save match odd stake
+Test Url : Apiusercontroller/stake_setting
+Method : POST
+Header Params - username (mandatory), password (mandatory)
+Params : {"match_stake":[500,1000,1500,2000,2500]}
+
+8. Save one click stake
+Test Url : Apiusercontroller/one_click_stake_setting
+Method : POST
+Header Params - username (mandatory), password (mandatory)
+Params : {"one_click_stake":[500,1000,1500,2000,2500]}
+
+9. Get stake setting
+Test Url : Apiusercontroller/get_stake_setting
+Method : GET
+Header Params - username (mandatory), password (mandatory)
+
+10. Confirm bets
+Test Url : Apiusercontroller/confirm_bet
+Method : POST
+Header Params - username (mandatory), password (mandatory)
+Params : {"is_confirm_bet":"Y"}
+
+11. Get User confirm bets status
+Test Url : /Chipscntrl/getChipDataById/:user_id
+Method : GET
+Header Params - username (mandatory), password (mandatory)
+
+
+
+
+
+

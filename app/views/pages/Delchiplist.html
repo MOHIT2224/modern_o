@@ -1,0 +1,68 @@
+
+<div class="content-wrapper ng-scope" style="min-height: 720px;">
+<div class="load-box" ng-show="loading">
+                <img id="mySpinner" src="app/images/loading1.gif" />
+            </div>
+<h1 class="page-heading">Settlement History</h1>
+    <!--<h5>Filtered {{ filtered.length }} of {{totalItems}} total Cash Entry</h5>-->
+    <div class="col-lg-12 col-md-12 col-sm-12 " style="padding: 0px;">
+        <!--<div class="lst_master_top clearfix"> add aggrid
+            <div class="form_row col-lg-12 col-md-12 col-sm-12 col-xs-12 clearfix top_table_form" style="padding: 0px;">
+                <div class="form_box  col-lg-2 col-md-2 col-sm-2 col-xs-12" style="padding: 0px;">
+                    <label>Parent Name</label>
+                    <input type="text" ng-model="search.parentUser" ng-change="filter()" placeholder="Search By UserName" />
+                </div>
+                <div class="form_box  col-lg-2 col-md-2 col-sm-2 col-xs-12" style="padding: 0px;">
+                    <label>Child Name</label>
+                    <input type="text" ng-model="search.childUser" ng-change="filter()" placeholder="Search By Name" />
+                </div>
+
+                <div class="form_box  col-lg-2 col-md-2 col-sm-2 col-xs-12" style="padding: 0px;">
+                    <label>DateTime</label>
+                    <input type="text" ng-model="search.onDate" ng-change="filter()" placeholder="Search By IPaddress" />
+                </div>
+                <div class="form_box  col-lg-2 col-md-2 col-sm-2 col-xs-12" style="padding: 0px;">
+                    <label>Amount</label>
+                    <input type="text" ng-model="search.amountV" ng-change="filter()" placeholder="Search By usetype" />
+                </div>
+            </div>
+        </div>-->
+        <div ag-grid="CurrentAllBetsUn" class="ag-blue" style="height: 300px; margin-top: 4px;"></div>
+        <!--<div class="col-lg-12 col-md-12 lst_master">add aggrid
+            <div class="userlist-table clearfix ">
+                {{delChipData}}
+                <table class="table table-bordered table-condensed table-responsive" style="background-color: #fff;">
+                    <thead>
+                        <tr>
+                            <th><a ng-click="sort_by('mstrid');"><i class="glyphicon glyphicon-sort"></i></a>SNo</th>
+                            <th><a ng-click="sort_by('parentUser');"><i class="glyphicon glyphicon-sort"></i></a>Parent Name</th>
+                            <th><a ng-click="sort_by('childUser');"><i class="glyphicon glyphicon-sort"></i></a>Child Name</th>
+                            <th><a ng-click="sort_by('onDate');"><i class="glyphicon glyphicon-sort"></i></a>DateTime</th>
+                            <th><a ng-click="sort_by('amountV');"><i class="glyphicon glyphicon-sort"></i></a>Amount</th>
+                            <th><a ng-click="sort_by('remarkV');"><i class="glyphicon glyphicon-sort"></i></a>Remark</th>
+                            <th><a></a>Action</th>
+                        </tr>
+                    </thead>
+                    <tr ng-repeat="user in filtered = (chipData.delChipData | filter:search | orderBy : predicate :reverse) | startFrom:(currentPage-1)*entryLimit | limitTo:entryLimit">
+                        <td data-label="Serial No">{{$index + 1}}</td>
+                        <td data-label="Parant Name">{{user.parentUser}}</td>
+                        <td data-label="User ID">{{user.childUser}}</td>
+                        <td data-label="onDate">{{user.onDate}}</td>
+                        <td data-label="typeId">{{user.amountV}}</td>
+                        <td data-label="typeId">{{user.remarkV}}</td>
+                        <td data-label="Reset Password"><button class="btn btn-primary res-btn" ng-click="del_record(user.rowId)">Delete</button></td>
+                    </tr>
+                </table>
+            </div>
+            <div class="col-md-12" ng-show="filteredItems == 0">
+                <div class="col-md-12">
+                    <h4>No Users found</h4>
+                </div>
+            </div>
+            <div class="col-md-12" ng-show="filteredItems > 0">
+                <div pagination="" page="currentPage" on-select-page="setPage(page)" boundary-links="true" total-items="filteredItems" items-per-page="entryLimit" class="pagination-small" previous-text="&laquo;" next-text="&raquo;">
+                </div>
+            </div>
+        </div>-->
+    </div>
+</div>

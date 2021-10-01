@@ -1,0 +1,66 @@
+      
+<div class="content-wrapper ng-scope" style="min-height: 720px;">
+        			 <h2> Series Master </h2>
+                <p ng-show="message" style="text-align: center; color:#FE5454; font-size: 18px; margin-bottom: 15px;">{{message}}</p>
+                <form class="form-inline" ng-submit="submitForm()">
+                  <div class="clearfix creat_form">    		
+                    		<div class="form_row col-lg-12 col-md-12 col-sm-12 col-xs-12 clearfix">
+                          <div class="form_box  col-lg-6 col-md-6 col-sm-6 col-xs-12">
+                            <label>id</label>
+                            <input type="text" name="seriesId" ng-model="seriesId" >
+                          </div>
+            							<div class="form_box  col-lg-6 col-md-6 col-sm-6 col-xs-12">
+              							<label>Select Sport</label>
+                							<select name="Sport_id" ng-model="Sport_id" ng-options="sport.name for sport in seriesData.sportDropdown track by sport.id" >
+                                  <option value=''>Select Sport</option>
+                                   <!-- <option ng-repeat="facility in sportData.data1" value="{{facility.id}}">{{facility.name}}</option> -->
+                              </select>
+           						 	  </div>
+            							<div class="form_box  col-lg-6 col-md-6 col-sm-6 col-xs-12">
+             						 		<label >Name.</label>
+             						 		<input type="text" name="Series_name" ng-model="Series_name" >
+            							</div>
+        					</div>                        
+                  <div class="form_row col-lg-12 col-md-12 col-sm-12 col-xs-12 clearfix">
+      							<div class="form_box  col-lg-12 col-md-12 col-sm-12 col-xs-12">
+        							<button type="submit" class="btn btn-primary">Create Series </button>
+      							</div>
+      						</div>
+
+
+                  <div class="resp_table clearfix ">
+              <table class="table table-bordered table-condensed table-responsive match_td"  border="1" bordercolor="#ccc" cellpadding="0" cellspacing="0">
+                <thead>
+                  <tr>
+                      <th>S No.</th>
+                      <th>Sports Name </th>
+                      <th>Series Name</th>
+                      <th>Action</th>
+                      
+                  </tr>
+                </thead>
+                    
+                <tbody>
+                
+                  <tr ng-repeat="item in seriesData.data ">
+                      <td data-label="S No.">{{($index+1)}}</td>
+                      <td data-label="Series Name">{{item.Name}}</td>
+                      <td data-label="Sports Name">{{item.name}}</td>                   
+                      <td data-label="Action">Edit</td>                
+                  </tr>
+              
+                </tbody>
+              </table>
+            </div>
+                	
+                </div>
+              
+              </form>
+           
+                
+                      
+            
+        </div>
+        
+        
+   

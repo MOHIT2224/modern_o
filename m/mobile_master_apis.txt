@@ -1,0 +1,20 @@
+Base Url : http://betdip.com/
+
+1. User login
+Test URL : Mintmasterapicontroller/chkLoginUser
+Method : POST
+Params : {"username1":"client_11","password1":"123456"}
+Response: {"code":0,"error":false,"message":"successfully login","data":{"User":{"type":"3","user_name":"jaswant_dev","user_id":"751","betfair_session_token":"XuhYXUdfiBHa6HM0arwzz18hmugNMvfecdlEF\/uQ86Q=","betfair_app_key":"sifRr3FO1b0G7DV5","mstrpassword":"7c4a8d09ca3762af61e59520943dc26494f8941b"},"UserBalance":{"Liability":"-21720.00","Balance":"25180.00"},"UserSetting":{"mstruserid":"jaswant_dev","usetype":"3","mstrlock":"1","lgnusrlckbtng":"1","lgnusrCloseAc":"1","stakeLimit":"0","lgnUserMaxProfit":"0","lgnUserMaxLoss":"0","GoingInplayStakeLimit":"0","set_timeout":"0"}}}
+
+2. Get User Balance
+Test Url : Mintmasterapicontroller/getChipDataById
+Method : GET
+Header Params - username (mandatory), password (mandatory)
+Response: {"code":0,"error":false,"message":"user balance","data":{"Liability":"0","Balance":"83000.00"}}
+
+3. Change password
+Test URL : Mintmasterapicontroller/changePassword
+Method : POST
+Header Params - username (mandatory), password (mandatory)
+Params : {"old_password":"123456","newpassword":"12345678","Renewpassword":"12345678"}
+Response: {"code":0,"error":false,"message":"Password Change Successfully","data":{"mstrpassword":"7c222fb2927d828af22f592134e8932480637c0d"}}

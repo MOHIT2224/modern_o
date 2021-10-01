@@ -1,0 +1,196 @@
+<div class="right-nav col-lg-4 col-md-4 col-sm-4 col-xs-5">
+    <!--<div class="sel-user-det"><span style="margin-right:3px;" class="sele-user"><img src="app/images/selected-user.png"> {{$root.user}} </span>
+       <div class="wal-lia-box"><div class="wall-bal-head"> <span><img src="app/images/wallet-sm.png"></span> {{$root.Balance}}</div><div class="liab-bal-head"><span> <img src="app/images/liab-sm.png"></span> {{$root.Liability}} </div></div>
+    </div>-->
+    <div class="sel-user-det">
+        <span style="margin-right:3px;" class="sele-user"><img src="app/images/selected-user.png"> {{$root.user}} </span>
+        <div class="wal-lia-box">
+            <div class="wall-bal-head"> <span>Wallet :</span> {{$root.Balance}}</div><div class="liab-bal-head"><span> Liability :</span> {{$root.Liability}} </div>
+        </div>
+    </div>
+    <div class="clearfix">
+        <div class="top-rgt-use-det">
+            <span ng-model="usertype1" class="user_name" ng-if="usertype==0?userNameType='Admin':usertype==1?userNameType='Master':usertype==2?userNameType='Dealer':userNameType='User'">{{ userNameType }}</span>
+            <span ng-model="name" class="user_name mast-name">[{{name}}]</span>
+            <a href="" ng-click="logout();" class="log-btn"><img src="app/images/logout-icon.png"></a>
+        </div>
+        <div ng-app="ApsilonApp" class="top-rgt-menu">
+            <md-toolbar>
+                <md-menu-bar>
+                    <md-menu md-position-mode="target-right target" md-offset="0 58" ng-if="true" ng-click="showMenuChip()">
+                        <button type="button" md-menu-origin="" class="btn wallet-btn" ng-click="$mdOpenMenu()">
+                            <img src="app/images/wallet-icon.png">
+                            <span class="glyphicon glyphicon-menu-down"></span>
+                        </button>
+                        <md-menu-content class="top-menu-cont">
+                            <!--  <md-menu-item>
+                                 <md-button><span class="badge">{{P_L}}</span> <span class="txt-badge">Chips/PL/C</span> </md-button>
+                             </md-menu-item> -->
+                            <md-menu-item>
+                                <md-button><span class="badge">{{ChipInOut==null?0:ChipInOut}}</span> <span class="txt-badge">Chips PL</span></md-button>
+                            </md-menu-item>
+                            <md-menu-item>
+                                <md-button><span class="badge badge-info"> {{FreeChips==null?0:FreeChips}}</span> <span class="txt-badge">Free Chips</span></md-button>
+                            </md-menu-item>
+                            <md-menu-item>
+                                <md-button><span class="badge badge-danger">{{Liability==null?0:Liability}}</span> <span class="txt-badge">Liability</span></md-button>
+                            </md-menu-item>
+                            <md-menu-item>
+                                <md-button><span class="badge badge-danger">{{Balance==null?0:Balance}}</span> <span class="txt-badge">Balance</span></md-button>
+                            </md-menu-item>
+                            <!--  <md-menu-item>
+                                 <md-button><span class="badge badge-danger">0</span> <span class="txt-badge">Risk</span></md-button>
+                             </md-menu-item> -->
+                        </md-menu-content>
+                    </md-menu>
+                    <md-menu md-position-mode="target-right target" md-offset="0 58" ng-if="usertype==0">
+                        <button type="button" md-menu-origin="" class="btn user-btn" ng-click="$mdOpenMenu()">
+                            <img src="app/images/user-icon.png">
+                            <span class="glyphicon glyphicon-menu-down"></span>
+                        </button>
+                        <md-menu-content class="user-links top-menu-cont">
+                            <md-menu-item>
+                                <md-button ui-sref="dashboard.myAccountCntr" ui-sref-opts="{reload: true}"><span class="glyphicon glyphicon-user"></span><span class="drp-txt">My Account</span></md-button>
+                            </md-menu-item>
+                            <md-menu-item ng-show="$root.HelperAllRights==angular.isUndefinedOrNull || $root.HelperAllRights.ChipHistory==1">
+                                <md-button ui-sref="dashboard.Chiphistorycntr" ui-sref-opts="{reload: true}"><span class="glyphicon glyphicon-briefcase"></span><span class="drp-txt">Chip History</span></md-button>
+                            </md-menu-item>
+                            <md-menu-item>
+                                <md-button ui-sref="dashboard.Profitlosscntr" ui-sref-opts="{reload: true}"><span class="glyphicon glyphicon-sort"></span><span class="drp-txt">Profit & Loss</span></md-button>
+                            </md-menu-item>
+                            <md-menu-item>
+                                <md-button ui-sref="dashboard.changePasswordUser" ui-sref-opts="{reload: true}"><span class="glyphicon glyphicon-eye-open"></span><span class="drp-txt">Change Pwd</span></md-button>
+                            </md-menu-item>
+                            <md-menu-item>
+                                <md-button ui-sref="dashboard.Onlineusersctrl" ui-sref-opts="{reload: true}"><span class="glyphicon glyphicon-info-sign"></span><span class="drp-txt">Online Users</span></md-button>
+                            </md-menu-item>
+                            <md-menu-item ng-show="$root.HelperAllRights==angular.isUndefinedOrNull || $root.HelperAllRights.ChipHistory==1">
+                                <!-- <md-button ui-sref="dashboard.Chipsummerycntr"><span class="glyphicon glyphicon-briefcase"></span>Chip Summary</md-button> -->
+                                <md-button ui-sref="dashboard.newChipHistory" ui-sref-opts="{reload: true}" ><span class="glyphicon glyphicon-list-alt"></span><span class="drp-txt">Chip Summary</span></md-button>
+                            </md-menu-item>
+                            <md-menu-item>
+                                <md-button ui-sref="dashboard.Get_bethistryCntr" ui-sref-opts="{reload: true}"><span class="glyphicon glyphicon-record"></span><span class="drp-txt">Bet History</span></md-button>
+                            </md-menu-item>
+                            <md-menu-item>
+                                <md-button ui-sref="dashboard.Userlist" ui-sref-opts="{reload: true}"><span class="glyphicon glyphicon-th-list"></span><span class="drp-txt">User List</span></md-button>
+                            </md-menu-item>
+                            <md-menu-item>
+                                <md-button ui-sref="dashboard.Get_actMtchUsersCntr" ui-sref-opts="{reload: true}"><span class="glyphicon glyphicon-user"></span><span class="drp-txt">Active Users</span></md-button>
+                            </md-menu-item>
+                            <md-menu-item>
+                                <md-button ng-click="showSetPassword();" ><span class="glyphicon glyphicon-asterisk"></span><span class="drp-txt">Set Password</span></md-button>
+                            </md-menu-item>
+                            <md-menu-item>
+                                <md-button ng-click="logout();"><span class="glyphicon glyphicon-log-out"></span><span class="drp-txt">Logout</span></md-button>
+                            </md-menu-item>
+                        </md-menu-content>
+                    </md-menu>
+                    <md-menu md-position-mode="target-right target" md-offset="0 58" ng-if="usertype==1">
+                        <button type="button" md-menu-origin="" class="btn user-btn" ng-click="$mdOpenMenu()">
+                            <img src="app/images/user-icon.png">
+                            <span class="glyphicon glyphicon-menu-down"></span>
+                        </button>
+                        <md-menu-content class="user-links top-menu-cont">
+                            <md-menu-item>
+                                <md-button><span class="glyphicon glyphicon-user"></span><span class="drp-txt">My Account</span></md-button>
+                            </md-menu-item>
+                            <md-menu-item>
+                                <md-button ui-sref="dashboard.Chiphistorycntr" ui-sref-opts="{reload: true}"><span class="glyphicon glyphicon-briefcase"></span><span class="drp-txt">Chip History</span></md-button>
+                            </md-menu-item>
+                            <md-menu-item>
+                                <md-button ui-sref="dashboard.Profitlosscntr" ui-sref-opts="{reload: true}"><span class="glyphicon glyphicon-sort"></span><span class="drp-txt">Profit & Loss</span></md-button>
+                            </md-menu-item>
+                            <md-menu-item>
+                                <md-button ui-sref="dashboard.changePasswordUser" ui-sref-opts="{reload: true}"><span class="glyphicon glyphicon-eye-open"></span><span class="drp-txt">Change Pwd</span></md-button>
+                            </md-menu-item>
+                            <md-menu-item>
+                                <md-button ui-sref="dashboard.Onlineusersctrl" ui-sref-opts="{reload: true}"><span class="glyphicon glyphicon-info-sign"></span><span class="drp-txt">Online Users</span></md-button>
+                            </md-menu-item>
+                            <md-menu-item>
+                                <!-- <md-button ui-sref="dashboard.Chipsummerycntr"><span class="glyphicon glyphicon-briefcase"></span>Chip Summary</md-button> -->
+                                <md-button ui-sref="dashboard.newChipHistory" ui-sref-opts="{reload: true}"><span class="glyphicon glyphicon-list-alt"></span><span class="drp-txt">Chip Summary</span></md-button>
+                            </md-menu-item>
+                            <md-menu-item>
+                                <md-button ui-sref-active="active" ui-sref="dashboard.Get_bethistryCntr" ui-sref-opts="{reload: true}"><span class="glyphicon glyphicon-record"></span><span class="drp-txt">Bet History</span></md-button>
+                            </md-menu-item>
+                            <!--  <md-menu-item>
+                                 <md-button ng-click="showChipSetting();"><span class="glyphicon glyphicon-cog"></span><span class="drp-txt">Chip Setting</span></md-button>
+                             </md-menu-item> -->
+                            <md-menu-item>
+                                <md-button ng-click="logout();"><span class="glyphicon glyphicon-log-out"></span><span class="drp-txt">Logout</span></md-button>
+                            </md-menu-item>
+                        </md-menu-content>
+                    </md-menu>
+                    <md-menu md-position-mode="target-right target" md-offset="0 58" ng-if="usertype==2">
+                        <button type="button" md-menu-origin="" class="btn user-btn" ng-click="$mdOpenMenu()">
+                            <img src="app/images/user-icon.png">
+                            <span class="glyphicon glyphicon-menu-down"></span>
+                        </button>
+                        <md-menu-content class="user-links top-menu-cont">
+                            <md-menu-item>
+                                <md-button><span class="glyphicon glyphicon-user"></span><span class="drp-txt">My Account</span></md-button>
+                            </md-menu-item>
+                            <md-menu-item>
+                                <md-button ui-sref="dashboard.Chiphistorycntr" ui-sref-opts="{reload: true}"><span class="glyphicon glyphicon-briefcase"></span><span class="drp-txt">Chip History</span></md-button>
+                                <!-- <md-button ui-sref="dashboard.newChipHistory"><span class="glyphicon glyphicon-briefcase"></span>Chip History</md-button> -->
+                            </md-menu-item>
+                            <md-menu-item>
+                                <md-button ui-sref="dashboard.Profitlosscntr" ui-sref-opts="{reload: true}"><span class="glyphicon glyphicon-sort"></span><span class="drp-txt">Profit & Loss</span></md-button>
+                            </md-menu-item>
+                            <md-menu-item>
+                                <md-button ui-sref="dashboard.changePasswordUser" ui-sref-opts="{reload: true}"><span class="glyphicon glyphicon-eye-open"></span><span class="drp-txt">Change Pwd</span></md-button>
+                            </md-menu-item>
+                            <md-menu-item>
+                                <md-button ui-sref="dashboard.Get_bethistryCntr" ui-sref-opts="{reload: true}"><span class="glyphicon glyphicon-record"></span><span class="drp-txt">Bet History</span></md-button>
+                            </md-menu-item>
+                            <!--  <md-menu-item>
+                                 <md-button ng-click="showChipSetting();"><span class="glyphicon glyphicon-cog"></span><span class="drp-txt">Chip Setting</span></md-button>
+                             </md-menu-item> -->
+                            <md-menu-item>
+                                <!-- <md-button ui-sref="dashboard.Chipsummerycntr"><span class="glyphicon glyphicon-briefcase"></span>Chip Summary</md-button> -->
+                                <md-button ui-sref="dashboard.newChipHistory" ui-sref-opts="{reload: true}"><span class="glyphicon glyphicon-list-alt"></span><span class="drp-txt">Chip Summary</span></md-button>
+                            </md-menu-item>
+                            <md-menu-item>
+                                <md-button ng-click="logout();"><span class="glyphicon glyphicon-log-out"></span><span class="drp-txt">Logout</span></md-button>
+                            </md-menu-item>
+                        </md-menu-content>
+                    </md-menu>
+                    <md-menu md-position-mode="target-right target" md-offset="0 58" ng-if="usertype==3">
+                        <button type="button" md-menu-origin="" class="btn user-btn" ng-click="$mdOpenMenu()">
+                            <img src="app/images/user-icon.png">
+                            <span class="glyphicon glyphicon-menu-down"></span>
+                        </button>
+                        <md-menu-content class="user-links top-menu-cont">
+                            <md-menu-item>
+                                <md-button><span class="glyphicon glyphicon-user"></span><span class="drp-txt">My Account</span></md-button>
+                            </md-menu-item>
+                            <md-menu-item>
+                                <md-button ui-sref="dashboard.Chiphistorycntr" ui-sref-opts="{reload: true}"><span class="glyphicon glyphicon-briefcase"></span><span class="drp-txt">Chip History</span></md-button>
+                                <!-- <md-button ui-sref="dashboard.newChipHistory"><span class="glyphicon glyphicon-briefcase"></span>Chip History</md-button> -->
+                            </md-menu-item>
+                            <md-menu-item>
+                                <md-button ui-sref="dashboard.Profitlosscntr" ui-sref-opts="{reload: true}"><span class="glyphicon glyphicon-sort"></span><span class="drp-txt">Profit & Loss</span></md-button>
+                            </md-menu-item>
+                            <md-menu-item>
+                                <md-button ui-sref="dashboard.changePasswordUser" ui-sref-opts="{reload: true}"><span class="glyphicon glyphicon-eye-open"></span><span class="drp-txt">Change Pwd</span></md-button>
+                            </md-menu-item>
+                            <md-menu-item>
+                                <md-button ui-sref="dashboard.Get_bethistryCntr" ui-sref-opts="{reload: true}"><span class="glyphicon glyphicon-record"></span><span class="drp-txt">Bet History</span></md-button>
+                            </md-menu-item>
+                            <md-menu-item>
+                                <md-button ng-click="showChipSetting();"><span class="glyphicon glyphicon-cog"></span><span class="drp-txt">Chip Setting</span></md-button>
+                            </md-menu-item>
+                            <!--  <md-menu-item>
+                                 <md-button ui-sref="dashboard.Chipsummerycntr"><span class="glyphicon glyphicon-briefcase"></span>Chip Summary</md-button>
+                                <md-button ui-sref="dashboard.newChipHistory"><span class="glyphicon glyphicon-briefcase"></span>Chip Summary</md-button>
+                             </md-menu-item> -->
+                            <md-menu-item>
+                                <md-button ng-click="logout();"><span class="glyphicon glyphicon-log-out"></span><span class="drp-txt">Logout</span></md-button>
+                            </md-menu-item>
+                        </md-menu-content>
+                    </md-menu>
+                </md-menu-bar>
+            </md-toolbar>
+        </div>
+    </div>
+</div>

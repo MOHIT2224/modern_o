@@ -1,0 +1,86 @@
+<div class="content-wrapper" ng-init="GetSettlementBetList(1)">
+<div class="innerbox">
+<div class="binding"> <h1>Trash Bets</h1> </div>
+<!-- {{events}} -->
+	
+  <div class="col-lg-12 col-md-12 lst_master"><!-- ng-show="loading" -->
+  			<div class="load-box" ng-show="loading">
+  				<img id="mySpinner" src="app/images/loading1.gif" />
+  			</div>
+            <div class="form_row col-lg-12 col-md-12 col-sm-12 col-xs-12 clearfix top_table_form" style="padding: 0px;">
+    	  <div class="form_box  col-lg-2 col-md-2 col-sm-2 col-xs-12" style="padding: 0px;">
+                    <label>Sport Name</label>
+                    <select ng-model="search.SportID" ngrequired >
+                        <option value="">All</option>
+                        <option value="{{sports.id}}"  ng-repeat="sports in sprtData">{{sports.name}}</option>
+
+                    </select>
+                </div>
+                <div class="form_box  col-lg-2 col-md-2 col-sm-2 col-xs-12" style="padding: 0px;">
+                    <label>Match Name</label>
+                    <input type="text" ng-model="search.Name" ng-change="filter()" placeholder="Search By Match Name" />
+                </div>
+<div class="form-group  col-lg-2 col-md-2 col-sm-2 col-xs-12 padding" >
+                  <label>From Date</label>
+                    <md-content>
+                        <md-datepicker class="form-control" md-placeholder="Enter Start date" ng-model="search.from_date"   onkeydown="return false" md-max-date="MaxDate1" ng-change="search.from_date.toISOString();setDateFun(1)" md-open-on-focus></md-datepicker>
+                    </md-content>    
+                    </div>
+               <div class="form-group  col-lg-2 col-md-2 col-sm-2 col-xs-12 padding" >
+                  <label>To Date</label>
+                 <md-content>
+                        <md-datepicker class="form-control" md-placeholder="Enter End date" ng-model="search.to_date" md-min-date="minDate1"  md-max-date="MaxDate2" onkeydown="return false" ng-change="search.to_date.toISOString();setDateFun(2)" md-open-on-focus></md-datepicker>
+                    </md-content>
+                </div>
+		<div class="form_box  col-lg-2 col-md-2 col-sm-2 col-xs-12" style="padding: 0px;">
+                    <div class="file-icons" style="margin-top:12px;">
+                     <a href="javascript:void(0)"  ng-click="GetSettlementBetList(1)"><img src="app/images/search.png"></a>
+                     <button type="button" ng-click="Reset()">Reset</button>
+                    </div>
+                </div>
+            </div>
+              <div class="resp_table clearfix ">
+              <!-- {{GetSeriesData}} -->
+    		        <table class="table table-bordered table-condensed table-responsive">
+		    		      <thead>
+			    		        <tr >
+			    		       
+			    		        	<th>Serial No</th>
+			    		            <th><a ng-click="sort_by('matchName');"><i class="glyphicon glyphicon-sort"></i></a>Match</th>
+			    		            <th><a ng-click="sort_by('MstDate');"><i class="glyphicon glyphicon-sort"></i></a>Open Date</th>
+			    		           <th>Action </th>
+			    		        </tr>
+		    		            
+		    		        
+		    		      </thead><!-- | date: 'yyyy-MM-dd HH:mm:ss' -->
+                          <tbody id="tblData1">
+		    		     	<tr ng-repeat="sbet in lstSettlementBet | orderBy : predicate :reverse"><!--sourabh 170105-->
+								<td data-label="Serial No">{{(currentPage-1)*entryLimit +$index+1}}</td>	
+								<td data-label="Match Id">{{sbet.matchName}}</td>
+			<td data-label="Open Date">{{sbet.createdOn}}<!-- | date: 'yyyy-MM-dd HH:mm:ss' --></td>
+								<td data-label="Action">
+								<span ng-if="sbet.hard_bet_deleted==0">
+									
+<span ng-if="sbet.bet_deleted==1" class="fa fa-undo" ng-click="undoBet(sbet)" role="button" tabindex="0"></span>
+<span style="background:red" class="fa fa-trash" ng-click="deleteBet(sbet,1)" title="Permanent Delete" role="button" tabindex="0"></span>
+</span>
+<span ng-if="sbet.hard_bet_deleted==1">Bet Deleted</span>
+                                							</td>
+							</tr>
+                        </tbody>
+    		        </table>
+              </div>
+
+    		        <div class="col-md-12" ng-show="lstSettlementBet.length == 0">
+    		        <div class="col-md-12">
+    		            <h4>No records found</h4>
+    		        </div>
+    		        </div>
+		   <div class="col-md-12" ng-show="lstSettlementBet.length > 0">
+ <pagination total-items="totalCount" ng-model="currentPage" ng-click="GetSettlementBetList(currentPage)" max-size="maxSize" class="pagination-sm" boundary-links="true" rotate="false" num-pages="noOfPages" items-per-page="entryLimit"></pagination>
+
+            </div>
+    		      </div>
+    		  </div>
+          </div>
+

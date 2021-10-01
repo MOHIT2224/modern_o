@@ -1,0 +1,26 @@
+﻿<md-dialog>
+    <form ng-cloak>
+        <md-toolbar>
+            <div class="md-toolbar-tools">
+                <h2>Lock User For {{node.name}}</h2>
+                <span flex></span>
+                <md-button class="md-icon-button" ng-click="hide()">
+                    <md-icon md-svg-src="app/images/close.svg" aria-label="Close dialog"></md-icon>
+                </md-button>
+            </div>
+        </md-toolbar>
+        <md-dialog-content>
+            <div class="md-dialog-content">
+                <div class="clearfix lock_box">
+                    <p>{{content}} {{node.name}}?</p>
+                    <form name="userLock" method="post">
+                        <input type="hidden" name="userId" id="userId" value="{{node.id}}" />
+                        <input type="hidden" name="lockVal" id="lockVal" value="{{lockValue}}" />
+                        <button type="submit" class="btn btn-primary" name="lock_user" ng-click="hide()">CANCEL</button>
+                        <button type="submit" class="btn btn-primary focus" name="lock_user" ng-click="UpdateUserLock(user)">OK</button>
+                    </form>
+                </div>
+            </div>
+        </md-dialog-content>
+    </form>
+</md-dialog>

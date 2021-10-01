@@ -1,0 +1,129 @@
+﻿<div>
+        <div class="load-box" ng-show="loading">
+            <img id="mySpinner" src="app/images/loading11.gif" />
+        </div>
+        <!-- <div>
+            <h1 class="sessionHeadingTitle">{{FancyMessage}}</h1>
+        </div> -->
+        <div ng-repeat="FancyObject in FancyData">
+            <div ng-hide="FancyObject.active==2 || FancyData.length==0">
+                
+                <div class="fancy">
+                    <ul class="sport-high fancyListDiv">
+                        <li>
+                            <div class="fancy-heading fancy-head" ng-click="$parent.accBet(3);showSessionFancy(FancyObject.TypeID,FancyObject.ID);" ng-show="FancyData.length>0">
+                                {{FancyObject.HeadName}} <!-- || {{FancyObject.active}} -->
+                                <span class="rigt-ref">
+                                    <i class="glyphicon " class="glyphicon-minus"></i>
+                                </span>
+                            </div>
+                        </li>
+                        <li class="clearfix">
+                            <div class="ses-fan-box clearfix">
+                                <!--sourabh 170125-->
+                                <div style="position: relative; min-height:60px;">
+                                    <div ng-hide="true">
+                                        {{$root.userPlcBtn[0].Name1==''?name1=50:name1=$root.userPlcBtn[0].Name1}}
+                                        {{$root.userPlcBtn[0].Value1==0?Value1=50:Value1=$root.userPlcBtn[0].Value1}}
+                                        {{$root.userPlcBtn[0].Name2==''?name2=100:name2=$root.userPlcBtn[0].Name2}}
+                                        {{$root.userPlcBtn[0].Value2==0?Value2=100:Value2=$root.userPlcBtn[0].Value2}}
+                                        {{$root.userPlcBtn[0].Name3==''?name3=500:name3=$root.userPlcBtn[0].Name3}}
+                                        {{$root.userPlcBtn[0].Value3==0?Value3=500:Value3=$root.userPlcBtn[0].Value3}}
+                                        {{$root.userPlcBtn[0].Name4==''?name4=1000:name4=$root.userPlcBtn[0].Name4}}
+                                        {{$root.userPlcBtn[0].Value4==0?Value4=1000:Value4=$root.userPlcBtn[0].Value4}}
+                                        {{$root.userPlcBtn[0].Name5==''?name5=5000:name5=$root.userPlcBtn[0].Name5}}
+                                        {{$root.userPlcBtn[0].Value5==0?Value5=5000:Value5=$root.userPlcBtn[0].Value5}}
+                                        {{$root.userPlcBtn[0].Name6==''?name6=10000:name6=$root.userPlcBtn[0].Name6}}
+                                        {{$root.userPlcBtn[0].Value6==0?Value6=10000:Value6=$root.userPlcBtn[0].Value6}}
+                                    </div>
+                                    <div style="display:block; vertical-align:top; margin-right:0; border:solid 2px #666; margin-bottom:0;min-height:60px;">
+                                        <div style="display:inline-block;min-height: 50px;width: 25%;vertical-align:middle;">
+                                            <div class="head-ses-fan" style="     line-height: 25px;margin-right:3px; margin-left:5px; text-align:center; margin-top:0;min-height:55px;"><span style="color:#FCA4B7; font-size:15px;">Lay</span><br />[NO]</div>
+                                        </div>
+                                        <div style="display:inline-block;min-height: 60px;width: 25%;vertical-align:middle;">
+                                            <button style="min-height:30px;" class="lay-cell cell-btn" ng-disabled="FancyObject.active==0" ng-click="display_Yesfancy(FancyObject.SessInptNo, FancyObject.ID,$index);">{{FancyObject.SessInptNo}}</button>
+                                            <button style="min-height:30px;" disabled class="disab-btn">{{FancyObject.NoValume}} </button>
+                                        </div>
+                                        <div style="display:inline-block;width: 24%;min-height: 60px;vertical-align:middle;">
+                                            <div class="head-ses-fan" style="     line-height: 25px;margin-right:3px; margin-left:3px; text-align:center; margin-top:6px;"><span style="color:#7CC4F7; font-size:15px;">Back</span><br />[Yes]</div>
+                                        </div>
+                                        <div style="display:inline-block;width: 20.4%;vertical-align:middle;min-height: 60px;float: right;">
+                                            <button style="min-height:30px;" class="back-cell cell-btn" ng-disabled="FancyObject.active==0" ng-click="display_Nofancy(FancyObject.SessInptYes, FancyObject.ID,$index);">{{FancyObject.SessInptYes}}</button>
+                                            <button style="min-height:30px;" disabled class="disab-btn">{{FancyObject.YesValume}}</button>
+                                        </div>
+                                    </div>
+                                    <div style="display:inline-block;padding: 5px 4px 1px;box-shadow: 0 0 2px #ccc; margin-bottom:5px;" ng-show="(userType==3 || $root.NodeCntUsrDetails.usetype==3) && (userType!=0) && (openfancy[FancyObject.ID].open)" class="check-element animate-show" ng-class="{true:'lay-ele-box',false:'back-ele-box'}[openfancy[FancyObject.ID].yes]">
+
+                                        <div class="betOverlaypre{{$index}}" >
+                                            <img src="app/images/loader.gif">
+                                        </div>
+                                        <!--<form name="oddForm" method="post" style="">-->
+                                        <div style="display:inline-block; vertical-align:top; margin-right:7px;">
+                                            <div class="head-ses-fan">{{({true:'Lay[NO]',false:'Back[Yes]'}[openfancy[FancyObject.ID].yes])}}</div>
+                                             <input type="text" class="bet-on" ng-model="FancyObject.SessInptNo" readonly="readonly" ng-if="openfancy[FancyObject.ID].yes"/>
+                                            <input type="text" class="bet-on" ng-model="FancyObject.SessInptYes" ng-if="!openfancy[FancyObject.ID].yes"/>
+                                        </div>
+                                        <div style="display:inline-block; vertical-align:top; margin-right:7px;">
+                                            <div class="head-ses-fan">Stake</div>
+                                            <input type="number" class="stake-inp size" min="0" ng-model="betValue[FancyObject.ID]" id="betValueLay{{$index}}" name="betValue" autofocus>
+                                            <input type="hidden" name="odd" value="1" ng-model="OddValue">
+                                            
+                                        </div>
+                                        <!--</form>-->
+                                        <div ng-if="$root.MyLenth==0"  class="fancy-btn" style="display:inline-block; margin-right:4px;">
+                                            <div style="display:inline-block; vertical-align:top;">
+                                                <button ng-click="GetBetValue(2000, FancyObject.ID)" class="btn btn-primary btn-sm">2000</button><br />
+                                                <button ng-click="GetBetValue(15000, FancyObject.ID)" class="btn btn-primary btn-sm">15000</button>
+                                            </div>
+
+                                            <div style="display:inline-block; vertical-align:top;">
+                                                <button ng-click="GetBetValue(5000, FancyObject.ID)" class="btn btn-primary btn-sm">5000</button><br />
+                                                <button ng-click="GetBetValue(25000, FancyObject.ID)" class="btn btn-primary btn-sm">25000</button>
+                                            </div>
+
+                                            <div style="display:inline-block; vertical-align:top;">
+                                                <button ng-click="GetBetValue(10000, FancyObject.ID)" class="btn btn-primary btn-sm">10000</button><br />
+                                                <button ng-click="GetBetValue(50000, FancyObject.ID)" class="btn btn-primary btn-sm">50000</button>
+                                            </div>
+                                            <div style="display:inline-block; vertical-align:top;">
+                                            <button class="btn btn-danger btn-sm" ng-click="GetBetValueReset(0,true, FancyObject.ID)">Cancel </button><br>
+                                            <button class="btn btn-info btn-sm" ng-disabled="FancyObject.active==0" ng-click="saveSessionBet(FancyObject.pointDiff, FancyObject,$index)">Place</button>
+                                        </div>
+                                        </div>
+                                        <div ng-if="$root.MyLenth==1" class="fancy-btn" style="display:inline-block; margin-right:4px;">
+                                            <div style="display:inline-block; vertical-align:top;">
+                                                <button type="button" ng-click="GetBetValue(Value1, FancyObject.ID)" class="btn btn-primary btn-sm">{{name1}}</button><br />
+                                                <button type="button" ng-click="GetBetValue(Value4, FancyObject.ID)" class="btn btn-primary btn-sm">{{name4}}</button>
+                                            </div>
+                                            <div style="display:inline-block; vertical-align:top;">
+                                                <button type="button" ng-click="GetBetValue(Value2, FancyObject.ID)" class="btn btn-primary btn-sm">{{name2}}</button><br />
+                                                <button type="button" ng-click="GetBetValue(Value5, FancyObject.ID)" class="btn btn-primary btn-sm">{{name5}}</button>
+                                            </div>
+                                            <div style="display:inline-block; vertical-align:top;">
+                                                <button type="button" ng-click="GetBetValue(Value3, FancyObject.ID)" class="btn btn-primary btn-sm">{{name3}}</button><br />
+                                                <button type="button" ng-click="GetBetValue(Value6, FancyObject.ID)" class="btn btn-primary btn-sm">{{name6}}</button>
+                                            </div>
+                                            <div style="display:inline-block; vertical-align:top;">
+                                            <button class="btn btn-danger btn-sm" ng-click="GetBetValueReset(0,true, FancyObject.ID)">Cancel </button><br>
+                                            <button class="btn btn-info btn-sm" ng-disabled="FancyObject.active==0" ng-click="saveSessionBet(FancyObject.pointDiff, FancyObject,$index)">Place</button>
+                                        </div>
+
+                                        </div>
+                                        
+                                    </div>
+                                    <div ng-if="FancyObject.active==0" class="ball-msg-box">
+                                        <h1>Ball Started</h1>
+                                    </div>
+                                    <div ng-if="FancyObject.active==4 || FancyObject.active==2" class="ball-msg-box">
+                                        <h1>{{FancyObject.DisplayMsg}}</h1>
+                                    </div>
+
+                                </div>
+                            </div>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+    </div> 
+</div>
+

@@ -1,0 +1,358 @@
+<div class="col-sm-8 col-md-8">
+    <!-- {{$root.userPlcBtn}} -->
+    <div>
+        <div class="box-heading">
+            <div class="clearfix">
+                {{matchName}}<div class="wall-liab">
+                    <div class="wall-bal">Wallet ::<span>{{Balance}}</span></div>
+                    <div class="liab-bal">Liability ::<span>{{Liability}}</span></div>
+                </div>
+            </div>
+            <!--<h6>{{date.slice(0,10) | date:'fullDate'}} &emsp;{{date.slice(10,20)}}</h6>-->
+            <h6>{{dateForm|date:'EEEE dd MMM, hh:mm a'}} 
+                <div class="rem-dt">{{sysDateTimeDiff}}</div>
+            </h6>
+        </div>
+
+        <div class="fancy_wrapper market-cont box-cont">
+            <div class="mark-head clearfix">
+                {{GetMarketInfo.MarketName}}<div class="cur-dt">{{sysDateTime}}</div>
+            </div>
+
+
+            <div class="mark-info-cont clearfix">
+                <div class="mark-info-lft">
+                    <span class="goin-play"><i class="glyphicon glyphicon-ok"></i>{{GetMarketBackLayData.status=='OPEN'?GetMarketBackLayData.inplay?"In-Play":"Going In-Play":GetMarketBackLayData.status}}</span>
+                    <a href="" class="rules-btn"><i class="glyphicon glyphicon-info-sign"></i>Rules</a>
+                </div>
+                <div class="mark-info-rgt">
+                    Matched : <b>GLC {{GetMarketBackLayData.totalMatched|number:0}}</b>
+                    <button class="eve_but" ng-click="callOddsFunc()">Refresh</button>
+                </div>
+            </div>
+
+            <div class="market-wrapper">
+                <!--   {{GetMarketBackLayData.runners}} -->
+                <!--<table class="table market-table">-->
+                <table class="table table-bordered table-condensed table-responsive market-table" border="1" bordercolor="#ccc" cellpadding="0" cellspacing="0" style="background-color: #fff;" ng-show="GetMarketBackLayData.status=='OPEN'">
+                    <thead>
+                        <tr>
+                            <th class="sele-title">Selections</th>
+                            <th class="port-hide"></th>
+                            <th class="port-hide"></th>
+                            <th class="back-all">Back All</th>
+                            <th class="lay-all">Lay All</th>
+                            <th class="port-hide"></th>
+                            <th class="port-hide"></th>
+                        </tr>
+
+                        <tr ng-repeat="marketInfo in GetMarketBackLayData.runners">
+                            <td class="running-cell">
+                                <div class="text-bold">{{GetMarketBackLayDataSelectionName[$index].runnerName}}</div>
+                                <div class="text-small" style='{{getValColor((getSumValPnL((RunnerValue|filter: {"SelectionId":marketInfo.selectionId})[0].winValue,(RunnerValue|filter:{"SelectionId":marketInfo.selectionId})[0].lossValue)+(marketInfo.selectionId==selectionId?(formStatus==0?+((priceVal*stake)-stake):-(priceVal*stake)+stake):(formStatus==0?-stake:+stake))))}}'>
+                                    {{(
+                                    getSumValPnL((RunnerValue|filter:{"SelectionId":marketInfo.selectionId})[0].winValue,
+                                    (RunnerValue|filter:{"SelectionId":marketInfo.selectionId})[0].lossValue)
+                                    +(marketInfo.selectionId==selectionId?(formStatus==0?+((priceVal*stake)-stake):-(priceVal*stake)+stake):(formStatus==0?-stake:+stake))
+                                    )|number:2}}
+                                </div>
+                            </td>
+                            <td class="odds port-hide" ng-class="{'callYlCss':marketInfo.ex.availableToBack[2].SELECTED}">
+
+                                <span class="text-bold" id="Span1" data-id="2.7">{{getOddCalcVal(marketInfo.ex.availableToBack[2].price,1)}}</span>
+                                <div class="text-small">{{getOddCalcVal(marketInfo.ex.availableToBack[2].size,2)}}</div>
+                            </td>
+                            <td class="odds port-hide" ng-class="{'callYlCss':marketInfo.ex.availableToBack[1].SELECTED}">
+
+                                <div class="text-bold">{{getOddCalcVal(marketInfo.ex.availableToBack[1].price,1)}}</div>
+                                <div class="text-small">{{getOddCalcVal(marketInfo.ex.availableToBack[1].size,2)}}</div>
+                            </td>
+                            <td class="odds mark-back" ng-class="{'callYlCss':marketInfo.ex.availableToBack[0].SELECTED}" ng-click="getOddValue($event,marketInfo.ex.availableToBack[0].price+oddsLimit,marketInfo.MstCode,0,GetMarketBackLayDataSelectionName[$index].runnerName,marketInfo.selectionId)">
+
+                                <div class="text-bold" id="Div1" data-id="{{(marketInfo.ex.availableToBack[0].price+oddsLimit)}}">{{getOddCalcVal(marketInfo.ex.availableToBack[0].price,1)}}</div>
+
+                                <div class="text-small">{{getOddCalcVal(marketInfo.ex.availableToBack[0].size,2)}}</div>
+
+                            </td>
+                            <td class="odds mark-lay" ng-class="{'callYlCss':marketInfo.ex.availableToLay[0].SELECTED}" ng-click="getOddValue($event,marketInfo.ex.availableToLay[0].price+oddsLimit,marketInfo.MstCode,1,GetMarketBackLayDataSelectionName[$index].runnerName,marketInfo.selectionId)">
+
+                                <div class="text-bold" ng-model="testModel" id="Div2" data-id="{{(marketInfo.ex.availableToLay[0].price+oddsLimit)}}">{{getOddCalcVal(marketInfo.ex.availableToLay[0].price,1)}}</div>
+                                <div class="text-small">{{getOddCalcVal(marketInfo.ex.availableToLay[0].size,2)}}</div>
+                            </td>
+                            <td class="odds port-hide" ng-class="{'callYlCss':marketInfo.ex.availableToLay[1].SELECTED}">
+
+                                <div class="text-bold" ng-model="testModel">{{getOddCalcVal(marketInfo.ex.availableToLay[1].price,1)}}</div>
+                                <div class="text-small">{{getOddCalcVal(marketInfo.ex.availableToLay[1].size,2)}}</div>
+                            </td>
+                            <td class="odds port-hide" ng-class="{'callYlCss':marketInfo.ex.availableToLay[2].SELECTED}">
+
+                                <div class="text-bold" ng-model="testModel">{{getOddCalcVal(marketInfo.ex.availableToLay[2].price,1)}}</div>
+                                <div class="text-small">{{getOddCalcVal(marketInfo.ex.availableToLay[2].size,2)}}</div>
+                            </td>
+                        </tr>
+                    </thead>
+                </table>
+            </div>
+        </div>
+    </div>
+
+    <div class="big-odd-stat" ng-show="GetMarketBackLayData.status!='OPEN'">
+        <!--sourabh 161217-->
+        <span>{{GetMarketBackLayData.status}}</span>
+    </div>
+
+
+
+
+    <div class="betsl-mob-box">
+        <div class="box-heading" ng-click="accBet(1)">
+            Betslip<!--  {{slctUseTypeID}} -->
+            <!-- {{UserId}}/{{UserTypeId}}/{{ParantId}}/{{loginId}}/{{selectionId}}/{{MatchId}}/{{MarketId}} -->
+            <span class="rigt-ref">
+                <i class="glyphicon " ng-class="{true:'glyphicon-minus',false:'glyphicon-plus'}[acc]"></i>
+            </span>
+        </div>
+        <!-- <div ng-show="acc=false;">Click on the odds to add selections to the betslip.</div> -->
+        <div class="box-cont clearfix" ng-init="acc1=true;acc=false;">
+
+            <!-- <div class="bet-place-msg fade in" ng-show="ngMessage !=''">{{ngMessage}}</div> -->
+
+            <!-- <div class="head-bord">
+                Place Bets 
+            </div> -->
+            <!-- marketInfo.ex.availableToBack[2].price -->
+            <!-- (UserTypeId==3 || UserId !=null) &&-->
+
+            <div class="act-mess" ng-show="(UserTypeId==3 || slctUseTypeID ==3) && acc==1 && (UserTypeId!=0)">
+                <div ng-repeat="marketInfo in GetMarketBackLayData.runners">
+                    <div ng-if="(formStatus == 0 && marketInfo.selectionId==selectionId)">
+                        <!--  {{marketInfo.ex.availableToBack[2].price}} -->
+                        <input type="hidden" name="BackMatchVal" id="Hidden1" ng-model="chkValPrice" ng-value="marketInfo.ex.availableToBack[0].price+oddsLimit">
+                    </div>
+                    <div ng-if="(formStatus == 1 && marketInfo.selectionId==selectionId)">
+                        <!--  {{marketInfo.ex.availableToLay[0].price}} -->
+                        <input type="hidden" name="LayMatchVal" id="Hidden2" ng-model="chkValPrice" ng-value="marketInfo.ex.availableToLay[0].price+oddsLimit">
+                    </div>
+
+
+                </div>
+                <form name="betUserSubmit" method="post">
+                    <table class="table bets-table" ng-show="displayTable">
+                        <thead ng-if="formStatus==0" class="back-head">
+                            <tr>
+                                <th>Back (Bet For)</th>
+                                <th>Odds</th>
+                                <th>Stake</th>
+                                <th>Profit</th>
+                            </tr>
+                        </thead>
+                        <thead ng-if="formStatus==1" class="lay-head">
+                            <tr>
+                                <th>Lay (Bet Against)</th>
+                                <th>Backer's odds</th>
+                                <th>Backer's Stake</th>
+                                <th>Liability</th>
+                            </tr>
+                        </thead>
+
+                        <tbody>
+                            <!-- <tr>
+                                <td colspan="4" class="facing-teams">{{priceVal}}</td>
+                            </tr> -->
+
+                            <tr>
+                                <td class="bet-head">
+                                    <div ng-click="stakeValReset(0)"><span class="glyphicon glyphicon-remove-sign"></span></div>
+                                    <div class="bet-name">
+                                        <span>{{placeName}}</span>
+                                        <!-- <span>Match Odds</span> -->
+                                    </div>
+                                </td>
+                                <td>
+                                    <!-- {{priceVal}} -->
+                                    <input type="number" ng-pattern="/^[0-9]+(\.[0-9]{1,2})?$/" min="1" step="0.01" ng-model="priceVal" class="odds-input" /></td>
+                                <td ng-init="stake=0"><!--priceVal,stake-->
+                                    <input type="number" min="1" ng-model="stake" class="stake-input" ng-change="getCalculation()" />{{stake}}
+                                    <input type="hidden" name="userId" id="Hidden3" value="{{UserId}}">
+                                    <input type="hidden" name="ParantId" id="Hidden4" value="{{ParantId}}">
+                                    <input type="hidden" name="loginId" id="Hidden5" value="{{loginId}}">
+                                    <input type="hidden" name="selectionId" id="Hidden6" value="{{selectionId}}">
+                                    <input type="hidden" name="matchId" id="Hidden7" value="{{MatchId}}">
+                                    <input type="hidden" name="isback" id="Hidden8" ng-value="formStatus">
+                                    <input type="hidden" name="MarketId" id="Hidden9" value="{{MarketId}}">
+                                    <input type="hidden" name="placeName" id="Hidden10" value="{{placeName}}">
+                                </td>
+                                <td>{{sumOfVal}}</td>
+                            </tr>
+                            <tr>
+                                <td colspan="4">
+                                    <div ng-hide="true">
+                                        {{$root.userPlcBtn[0].Name1==''?name1=50:name1=$root.userPlcBtn[0].Name1}}
+                                        {{$root.userPlcBtn[0].Value1==0?Value1=50:Value1=$root.userPlcBtn[0].Value1}}
+                                        {{$root.userPlcBtn[0].Name2==''?name2=100:name2=$root.userPlcBtn[0].Name2}}
+                                        {{$root.userPlcBtn[0].Value2==0?Value2=100:Value2=$root.userPlcBtn[0].Value2}}
+                                        {{$root.userPlcBtn[0].Name3==''?name3=500:name3=$root.userPlcBtn[0].Name3}}
+                                        {{$root.userPlcBtn[0].Value3==0?Value3=500:Value3=$root.userPlcBtn[0].Value3}}
+                                        {{$root.userPlcBtn[0].Name4==''?name4=1000:name4=$root.userPlcBtn[0].Name4}}
+                                        {{$root.userPlcBtn[0].Value4==0?Value4=1000:Value4=$root.userPlcBtn[0].Value4}}
+                                        {{$root.userPlcBtn[0].Name5==''?name5=5000:name5=$root.userPlcBtn[0].Name5}}
+                                        {{$root.userPlcBtn[0].Value5==0?Value5=5000:Value5=$root.userPlcBtn[0].Value5}}
+                                        {{$root.userPlcBtn[0].Name6==''?name6=10000:name6=$root.userPlcBtn[0].Name6}}
+                                        {{$root.userPlcBtn[0].Value6==0?Value6=10000:Value6=$root.userPlcBtn[0].Value6}}
+                                    </div>
+                                    <div ng-if="$root.MyLenth==0">
+
+                                        <button type="button" ng-click="stakeVal(50,selectionId,priceVal)" class="btn num-btns">50 </button>
+                                        <button type="button" ng-click="stakeVal(100,selectionId,priceVal)" class="btn num-btns">100</button>
+                                        <button type="button" ng-click="stakeVal(500,selectionId,priceVal)" class="btn num-btns">500</button>
+                                        <button type="button" ng-click="stakeVal(1000,selectionId,priceVal)" class="btn num-btns">1000</button>
+                                        <button type="button" ng-click="stakeVal(5000,selectionId,priceVal)" class="btn num-btns">5000</button>
+                                        <button type="button" ng-click="stakeVal(10000,selectionId,priceVal)" class="btn num-btns">10000</button>
+                                        <button type="button" ng-click="stakeValReset(0)" class="btn clr-btn">Clear</button>
+                                    </div>
+                                    <div ng-if="$root.MyLenth==1">
+                                        <button type="button" ng-click="stakeVal(Value1,selectionId,priceVal)" class="btn num-btns">{{name1}}-{{stake}}</button>
+                                        <button type="button" ng-click="stakeVal(Value2,selectionId,priceVal)" class="btn num-btns">{{name2}}</button>
+                                        <button type="button" ng-click="stakeVal(Value3,selectionId,priceVal)" class="btn num-btns">{{name3}}</button>
+                                        <button type="button" ng-click="stakeVal(Value4,selectionId,priceVal)" class="btn num-btns">{{name4}}</button>
+                                        <button type="button" ng-click="stakeVal(Value5,selectionId,priceVal)" class="btn num-btns">{{name5}}</button>
+                                        <button type="button" ng-click="stakeVal(Value6,selectionId,priceVal)" class="btn num-btns">{{name6}}</button>
+                                        <button type="button" ng-click="stakeValReset(0)" class="btn clr-btn">Clear</button>
+                                    </div>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td colspan="4" class="facing-teams">
+                                    <!--<button type="button" class="btn cancel-sel" ng-click="reset_all_selection()">Cancel all selections</button>-->
+                                    <button type="submit" ng-disabled="(!betUserSubmit.$valid) || btnPlaceDis" class="btn place-bet" ng-click="place_bet()">Place bets</button>
+
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </form>
+            </div>
+
+
+        </div>
+
+    </div>
+
+
+
+    <!--sourabh 170103 new-->
+
+    <!--sourabh 170103 new-->
+    <betslist></betslist>
+</div>
+<div class="col-sm-4 col-md-4">
+    <div class="betsl-desk-box">
+        <div class="box-heading">
+            Betslip
+        </div>
+        <div class="box-cont clearfix" ng-init="acc1=true;acc=false;">
+            <div class="head-bord" >
+                Place Bets <span class="rigt-ref">
+                    <i class="glyphicon " ></i>
+                </span>
+            </div>
+            <div class="act-mess" ng-show="(UserTypeId==3 || slctUseTypeID ==3) && acc==1 && (UserTypeId!=0)">
+                <div ng-repeat="marketInfo in GetMarketBackLayData.runners">
+                    <div ng-if="(formStatus == 0 && marketInfo.selectionId==selectionId)">
+                        <!--  {{marketInfo.ex.availableToBack[2].price}} -->
+                        <input type="hidden" name="BackMatchVal" id="chkValPrice" ng-model="chkValPrice" ng-value="marketInfo.ex.availableToBack[0].price+oddsLimit">
+                    </div>
+                    <div ng-if="(formStatus == 1 && marketInfo.selectionId==selectionId)">
+                        <!--  {{marketInfo.ex.availableToLay[0].price}} -->
+                        <input type="hidden" name="LayMatchVal" id="chkValPrice" ng-model="chkValPrice" ng-value="marketInfo.ex.availableToLay[0].price+oddsLimit">
+                    </div>
+
+
+                </div>
+                <form name="betUserSubmit" method="post">
+                    <table class="table bets-table" ng-show="displayTable">
+                        <thead ng-if="formStatus==0" class="back-head">
+                            <tr>
+                                <th>Back (Bet For)</th>
+                                <th>Odds</th>
+                                <th>Stake</th>
+                                <th>Profit</th>
+                            </tr>
+                        </thead>
+                        <thead ng-if="formStatus==1" class="lay-head">
+                            <tr>
+                                <th>Lay (Bet Against)</th>
+                                <th>Backer's odds</th>
+                                <th>Backer's Stake</th>
+                                <th>Liability</th>
+                            </tr>
+                        </thead>
+
+                        <tbody>
+                            <tr>
+                                <td class="bet-head">
+                                    <a href="" ng-click="reset_all_selection()"><span class="glyphicon glyphicon-remove-sign"></span></a>
+                                    <div class="bet-name">
+                                        <span>{{placeName}}</span>
+                                    </div>
+                                </td>
+                                <td>
+                                    <input type="number" ng-pattern="/^[0-9]+(\.[0-9]{1,2})?$/" min="1" step="0.01" ng-model="priceVal" class="odds-input" /></td>
+                                <td ng-init="stake=0">
+
+                                    <input type="number" id="stake" ng-model="stake" class="stake-input" ng-change="getCalculation(priceVal,stake)" />
+
+                                    <input type="hidden" name="userId" id="userId" value="{{UserId}}">
+                                    <input type="hidden" name="ParantId" id="ParantId" value="{{ParantId}}">
+                                    <input type="hidden" name="loginId" id="loginId" value="{{loginId}}">
+                                    <input type="hidden" name="selectionId" id="selectionId" value="{{selectionId}}">
+                                    <input type="hidden" name="matchId" id="matchId" value="{{MatchId}}">
+                                    <input type="hidden" name="isback" id="isback" ng-value="formStatus">
+                                    <input type="hidden" name="MarketId" id="MarketId" value="{{MarketId}}">
+                                    <input type="hidden" name="placeName" id="placeName" value="{{placeName}}">
+                                </td>
+                                <td>{{sumOfVal}}</td>
+                            </tr>
+                            <tr>
+                                <td colspan="4">
+                                    <div ng-if="$root.MyLenth==0">
+                                        <button type="button" ng-click="stakeVal(50,selectionId,priceVal)" class="btn num-btns">50</button>
+                                        <button type="button" ng-click="stakeVal(100,selectionId,priceVal)" class="btn num-btns">100</button>
+                                        <button type="button" ng-click="stakeVal(500,selectionId,priceVal)" class="btn num-btns">500</button>
+                                        <button type="button" ng-click="stakeVal(1000,selectionId,priceVal)" class="btn num-btns">1000</button>
+                                        <button type="button" ng-click="stakeVal(5000,selectionId,priceVal)" class="btn num-btns">5000</button>
+                                        <button type="button" ng-click="stakeVal(10000,selectionId,priceVal)" class="btn num-btns">10000</button>
+                                        <button type="button" ng-click="stakeValReset(0)" class="btn clr-btn">Clear</button>
+
+                                    </div>
+                                    <div ng-if="$root.MyLenth==1">
+                                        <button type="button" ng-click="stakeVal(Value1,selectionId,priceVal)" class="btn num-btns">{{name1}}</button>
+                                        <button type="button" ng-click="stakeVal(Value2,selectionId,priceVal)" class="btn num-btns">{{name2}}</button>
+                                        <button type="button" ng-click="stakeVal(Value3,selectionId,priceVal)" class="btn num-btns">{{name3}}</button>
+                                        <button type="button" ng-click="stakeVal(Value4,selectionId,priceVal)" class="btn num-btns">{{name4}}</button>
+                                        <button type="button" ng-click="stakeVal(Value5,selectionId,priceVal)" class="btn num-btns">{{name5}}</button>
+                                        <button type="button" ng-click="stakeVal(Value6,selectionId,priceVal)" class="btn num-btns">{{name6}}</button>
+                                        <button type="button" ng-click="stakeValReset(0)" class="btn clr-btn">Clear</button>
+                                    </div>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td colspan="4" class="facing-teams">
+                                   <!-- <button type="button" class="btn cancel-sel" ng-click="reset_all_selection()">Cancel all selections</button>-->
+                                    <button type="submit" ng-disabled="(!betUserSubmit.$valid) || btnPlaceDis" class="btn place-bet" ng-click="place_bet()">Place bets</button>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </form>
+            </div>
+        </div>
+    </div>
+    <crntusrpsn></crntusrpsn>
+</div>
+
+
+
+
+
+

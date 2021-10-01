@@ -1,0 +1,88 @@
+<div class="content-wrapper" style="min-height: 720px;">
+    <div class="load-box" ng-show="loading">
+        <img id="mySpinner" src="app/images/loading1.gif" />
+    </div>
+    <div class="container-fluid" >
+
+
+
+        <div ng-init="GetUserRoleType();GetUserRole()">
+            <div class="text-center">
+                <h4 class="well well-sm">Sub Admin Role</h4>
+            </div>
+
+            <div class="client-detail">
+                <form method="post" ng-submit="submitForm_Role(user)">
+                    <div class="col-sm-12 client-form">
+                        <div class="col-lg-6 col-sm-6 form-group">
+                            <label>Role Name</label>
+                            <input type="text" ng-model="user.RoleName" required="required"  class="form-control"  md-autofocus>
+                        </div>
+                        <div class="col-lg-12 col-sm-12 form-group">
+                        <div class="checkbox checkbox-inline col-sm-12" ng-repeat="roleType in RoleTypeList">
+                          
+							<div class="row">
+							
+							<h1 class="page-heading">{{roleType.label}} <span ng-if="roleType.fields.length!=1" class="pull-right"> <input   type="checkbox" name="role" id="chk-{{roleType.label}}" ng-model="options1[roleType.label]" ng-value="roleType.label" ng-change="toggleRoleAll(roleType.fields,options1[roleType.label])"> <label for="chk-{{roleType.label}}">All</label></span> </h1>
+							</div>
+							
+                            <div ng-hide="$index==0 && roleType.fields.length!=1"  class="col-sm-4" ng-repeat="role in roleType.fields">
+
+                            <input ng-disabled="$index==0 && roleType.fields.length!=1"  type="checkbox" name="role" id="chk-{{role.key}}" ng-model="options[role.key]" ng-value="role" ng-checked="IsRoleChecked(role.key)" ng-change="toggleRole(role.key,options[role.key],roleType.fields,roleType.label)">
+                            <label for="chk-{{role.key}}">{{role.value}}</label>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="col-sm-12 form-group">
+
+                            <button type="submit" ng-disabled="SubAdminRole.length==0 || user.RoleName==angular.isUndefinedOrNull" class="btn btn-primary">Submit</button>
+                            <button type="button" ng-click="Reset()" class="btn btn-primary">Reset</button>
+                        </div>
+                    </div>
+                    </div>
+                </form>
+
+            </div>
+
+        </div>
+
+
+        <div class="">
+            <table class="table table-bordered table-striped dealerclient">
+                <thead>
+                <tr class="row-name">
+                    <th>S No</th>
+                    <th>Name</th>
+                    <th>Edit</th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr class="row-content" ng-repeat="users in RoleList" >
+                    <td>{{$index+1}} </td>
+                    <td>{{users.name}}</td>
+                    <td>
+                        <button type="button" class="btn btn-primary btn-sm" ng-click="showRoleSetting(users);"><i class="fa fa-pencil"></i></button>
+
+                    </td>
+
+                </tr>
+
+
+                </tbody>
+            </table>
+        </div>
+        <div class="col-md-12" ng-show="RoleList.length == 0">
+            <div class="col-md-12">
+                <h4 class="page-heading">No records found</h4>
+            </div>
+        </div>
+        <div class="col-md-12" ng-show="RoleList.length  > 0">
+            <pagination total-items="RoleList.length" ng-model="currentPage" max-size="5" class="pagination-sm" boundary-links="true" rotate="false" num-pages="noOfPages" items-per-page="entryLimit"></pagination>
+
+
+        </div>
+
+    </div>
+</div>

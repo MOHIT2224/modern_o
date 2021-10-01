@@ -1,0 +1,37 @@
+<md-dialog class="dial-width-500">
+    <md-toolbar>
+        <div class="md-toolbar-tools">
+            <h2>Settlement {{node.mstrname}}</h2>
+            <span flex></span>
+            <md-button class="md-icon-button" ng-click="hide()">
+                <md-icon md-svg-src="app/images/close.svg" aria-label="Close dialog"></md-icon>
+            </md-button>
+        </div>
+    </md-toolbar>
+    <md-dialog-content>
+        <div class="md-dialog-content">
+            <div class="clearfix">
+                <form name="freechips" method="post" novalidate>
+                    <div class="popup-form-box col-lg-12 col-md-12 col-sm-12 col-xs-12 clearfix">
+                        <div class="popup-inp-box col-lg-12 col-md-12 col-sm-12 col-xs-12" ng-init="inptfrchp=0">
+                            <input type="number" id="Free_chip" name="Chips" min="1" step="1" ng-model="Chip.ChipVal" ng-value="inptfrchp" class="popup-input" required="required" md-autofocus />
+                            <label>Current Chips : {{pchips}} </label>
+                        </div>
+                        <div class="popup-inp-box  col-lg-12 col-md-2 col-sm-12 col-xs-12">
+                            <input type="text" name="Reference" id="Free_chip_Reference" ng-model="Chip.Ref" class="popup-input" />
+                            <label>Remarks</label>
+                            <input type="hidden" name="parantChpLimit" ng-model="pFreeChipVal" ng-value="pFreeChipVal" />
+                            <input type="hidden" name="UserBalLimit" ng-model="pChipBalance" ng-value="pChipBalance" />
+                            <input type="hidden" name="UserChpLimit" ng-model="UFreeChipVal" ng-value="UFreeChipVal" />
+                        </div>
+                    </div>
+                    <div class="popup-form-box  col-lg-12 col-md-12 col-sm-12 col-xs-12 clearfix" style="text-align:center;">
+                        <!-- ng-disabled="!freechips.$valid" -->
+                        <input type="submit" class="btn btn-primary" ng-show="$root.HelperAllRights==angular.isUndefinedOrNull || $root.HelperAllRights.ChipCr==1" ng-disabled="!freechips.$valid" ng-click="MainChipsSubmit(Chip,1,node.usecode,0,2)" value="DEPOSIT" />
+                        <input type="submit" class="btn btn-primary" ng-show="$root.HelperAllRights==angular.isUndefinedOrNull || $root.HelperAllRights.ChipDr==1" ng-disabled="!freechips.$valid" ng-click="MainChipsSubmit(Chip,2,node.usecode,0,2)" value="WITHDRAWAL" />
+                    </div>
+                </form>
+            </div>
+        </div>
+    </md-dialog-content>
+</md-dialog>

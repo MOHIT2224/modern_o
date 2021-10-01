@@ -1,0 +1,17 @@
+
+<div class="content-wrapper ng-scope" style="min-height: 720px;">
+<h1 class="page-heading">Remove Old Game + Users Data</h1>
+    <div>
+        <div class="clearfix creat_form"> 
+		<p ng-show="message" style="text-align: center; color:#FE5454; font-size: 18px; margin-bottom: 15px;">{{message}}</p>
+            <form name="userForm" ng-submit="submitForm()" method="post">  
+                    <div class="form_box1  col-lg-8 col-md-8 col-sm-8 col-xs-12"> 
+                        <input type="checkbox" value="delete" name="name" class="input-box" required="required"><p>Are You Sure You Want to do this Action</p>
+                    </div>
+                    <div class="form_box  col-lg-12 col-md-12 col-sm-12 col-xs-12" style="text-align:left;">
+                        <button type="submit" class="btn btn-primary" style="margin-top:21px;">Submit</button> 
+                </div>
+            </form>  
+        </div>
+    </div>
+</div>

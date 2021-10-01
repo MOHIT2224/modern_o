@@ -1,0 +1,104 @@
+     <div class="content-wrapper chipsummary" style="min-height: 720px;">
+   <div class="load-box" ng-show="loading">
+            <img id="mySpinner" src="app/images/loading1.gif" />
+        </div>
+         <div class="clearfix">
+<div class="panel panel-default">
+  <div class="panel-heading">Chip Summary of {{GTUserName}}</div>
+  <div class="panel-body">
+<div class="row padding">
+        <div class="col-sm-6 padding">
+           <div class="panel panel-green">
+            <div class="panel-heading">Plus Account <span class="nav-header" ng-show="backopti"  ng-click="doTheBack(GTuserType,GTUseruserId,GTUserName)" style="float:right;">
+                         <i class="glyphicon glyphicon-chevron-left"></i>Back</span></div>
+            <div class="panel-body">
+                <table class="table chip-table">
+                  <thead>
+                    <tr>
+                        <th>Name</th>
+                        <th>Account</th>
+                        <th>Chip</th>
+                        <th>Htry|Clr</th>
+                    </tr> 
+                  </thead>
+                  <tbody>
+                         <tr ng-repeat="userP in user_chipsP.result_array">
+                            <td ui-sref-active="active">{{userP.mstruserid}}</td>
+                            <td>
+                                <div ng-if='(userP.msttype=="6" || userP.usetype=="3" || userP.ChildID==0)'>{{userP.mstrname}}</div>
+                                 <div ng-if='(userP.msttype!="6" && userP.usetype!="3" && userP.ChildID!=0)'>
+                                     <a href="" ng-click="Get_chipSummery(userP.usetype,userP.UserID,userP.mstruserid)" >{{userP.mstrname}}</a>
+                                 </div>
+                            </td>
+                            <td class="green"><strong>{{userP.PUsum | number:2}}</strong></td>
+                            <td>
+                                 <a ng-show="$root.HelperAllRights==angular.isUndefinedOrNull || $root.HelperAllRights.ChipHistory==1" href="" ui-sref="dealerDashboard.ChiphistorycntrByuId({UserID:userP.UserID,usetype:userP.usetype,userName:userP.mstruserid,parentId:GTUseruserId})" ng-if="userP.ChildID!=0 || userP.mstrname=='Parent A/c'"><img src="app/images/histtory3.png" /> </a>
+
+                                 <!--170201_3-->
+                                 <a ng-click="showClearchip(userP,1)" ng-if="userP.ChildID!=0 && $root.IsSettlementBtn=='Y'" ><img src="app/images/clear.png" /></a>
+                                         </td>
+                          </tr>
+                        </tbody>
+                        <tfoot>
+                            <tr class="plus_total">
+                                         <td><strong>Total</strong></td>
+                                         <td> </td>
+                                         <td colspan="2" class="green"><strong>{{totalSumP| number:2}}</strong></td>
+                                     </tr>
+                        </tfoot>
+                </table>
+            </div>
+          </div>
+        </div>
+        <div class="col-sm-6 padding">
+           <div class="panel panel-pink">
+            <div class="panel-heading">Minus Account <span class="nav-header" ng-show="backopti"  ng-click="doTheBack(GTuserType,GTUseruserId,GTUserName)" style="float:right;">
+                         <i class="glyphicon glyphicon-chevron-left"></i>Back</span></div>
+            <div class="panel-body">
+                 <table class="table chip-table">
+                  <thead>
+                    <tr>
+                        <th>Name</th>
+                        <th>Account</th>
+                        <th>Chip</th>
+                        <th> Htry|Clr </th>
+                    </tr> 
+                  </thead>
+                  <tbody>
+                            <tr ng-repeat="userM in user_chipsM.result_array">
+                            <td ui-sref-active="active">{{userM.mstruserid}}</td>
+                            <td>
+                                <div ng-if='(userM.msttype=="6" || userM.usetype=="3"  || userM.ChildID==0)'>{{userM.mstrname}}</div>
+                                <div ng-if='(userM.msttype!="6" && userM.usetype!="3"  && userM.ChildID!=0)'>
+                                    <a href="" ng-click="Get_chipSummery(userM.usetype,userM.UserID,userM.mstruserid)" >{{userM.mstrname}}</a>
+                                </div>
+                            </td>
+                            <td class="red"><strong>{{userM.Musum | number:2}}</strong></td>
+                            <td>
+                                 <a ng-show="$root.HelperAllRights==angular.isUndefinedOrNull || $root.HelperAllRights.ChipHistory==1" href="" ui-sref="dealerDashboard.ChiphistorycntrByuId({UserID:userM.UserID,usetype:userM.usetype,userName:userM.mstruserid,parentId:GTUseruserId})" ng-if="userM.ChildID!=0 || userM.mstrname=='Parent A/c'"><!--170201_3-->
+                                            <img src="app/images/histtory3.png" /> </a>
+                                            
+                                <a href=""  ng-click="showClearchip(userM,2)" ng-if="userM.ChildID!=0 && $root.IsSettlementBtn=='Y'" >
+                                <img src="app/images/clear.png" /></a>
+                                         </td>
+                          </tr>
+                        </tbody>
+                        <tfoot>
+                            <tr class="minus_total">
+                                         <td><strong>Total</strong></td>
+                                         <td> </td>
+                                         <td colspan="2" class="red"><strong>{{totalSumM | number:2}}</strong></td>
+                                     </tr>
+                        </tfoot>
+                </table>
+            </div>
+          </div>
+        </div>
+
+</div>
+</div>
+</div>
+
+         </div>
+
+    </div>

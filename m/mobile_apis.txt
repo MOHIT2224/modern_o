@@ -1,0 +1,196 @@
+Live Base Url : http://betdip.com/
+
+1. User login
+Test URL : Mintapicontroller/chkLoginUser
+Method : POST
+Params : {"username1":"client_11","password1":"123456"}
+Response: {"code":0,"error":false,"message":"successfully login","data":{"User":{"type":"3","user_name":"jaswant_dev","user_id":"751","betfair_session_token":"XuhYXUdfiBHa6HM0arwzz18hmugNMvfecdlEF\/uQ86Q=","betfair_app_key":"sifRr3FO1b0G7DV5","mstrpassword":"7c4a8d09ca3762af61e59520943dc26494f8941b"},"UserBalance":{"Liability":"-21720.00","Balance":"25180.00"},"UserSetting":{"mstruserid":"jaswant_dev","usetype":"3","mstrlock":"1","lgnusrlckbtng":"1","lgnusrCloseAc":"1","stakeLimit":"0","lgnUserMaxProfit":"0","lgnUserMaxLoss":"0","GoingInplayStakeLimit":"0","set_timeout":"0"}}}
+
+2. Get User Balance
+Test Url : Mintapicontroller/getChipDataById
+Method : GET
+Header Params - username (mandatory), password (mandatory)
+Response: {"code":0,"error":false,"message":"user balance","data":{"Liability":"0","Balance":"83000.00"}}
+
+3. Change password
+Test URL : Mintapicontroller/changePassword
+Method : POST
+Header Params - username (mandatory), password (mandatory)
+Params : {"old_password":"123456","newpassword":"12345678","Renewpassword":"12345678"}
+Response: {"code":0,"error":false,"message":"Password Change Successfully","data":{"mstrpassword":"7c222fb2927d828af22f592134e8932480637c0d"}}
+
+4. Get Active Match listing
+Test Url : Mintapicontroller/getUserMatchLst
+Method : GET
+Header Params - username (mandatory), password (mandatory)
+Note : (sport_id = 0 for all , sport_id = 4 for Cricket, sport_id = 2 for Tennis , sport_id = 1 for Soccer)
+
+5.Refresh betfair token
+Test Url : Mintapicontroller/getBetfairSessionToken
+Method : GET
+Header Params - username (mandatory), password (mandatory)
+
+6.Get Market Listing
+Test Url : Mintapicontroller/getMarketLst/:match_id
+Method : GET
+Header Params - username (mandatory), password (mandatory)
+Note : (match_id Betfair match id)
+
+7. Get Market Selection name
+Test Url : Mintapicontroller/getBackLaysOfMarketSelectionName
+Method : POST
+Params : {"filter":{"marketIds":["1.144156561","1.144156560"]},"maxResults":"100","marketProjection":["MARKET_START_TIME", "RUNNER_DESCRIPTION"]}
+Header Params - username (mandatory), password (mandatory)
+
+8. Get Market back lay
+Test Url : Mintapicontroller/getBackLaysOfMarket
+Method : POST
+Params : {"marketIds":["1.144156561","1.144156560"],"bspMarket":false, "priceProjection":{"priceData":["EX_BEST_OFFERS"],"virtualise":true},"orderProjection":"EXECUTABLE","matchProjection":"ROLLED_UP_BY_AVG_PRICE"}
+Header Params - username (mandatory), password (mandatory)
+
+9. Save Place bet
+Test Url : Mintapicontroller/Save_bet
+Method : POST
+Params : {"selectionId":"10301","matchId":"28730361","isback":"1","stake":2000,"priceVal":1.95,"p_l":910,"MarketId":"1.143907104","isMatched":1,"placeName":"England","MatchName":"England v Pakistan (1st Test)","deviceInfo":" browser: chrome browser_version :66.0.3359.181  device: Desktop  OS : windows os_version: windows-7","inplay":false}
+Header Params - username (mandatory), password (mandatory)
+Note : (isback : back=>1 , lay=>0  , isMatched : matched => 1 , unmatched => 0 , inplay is boolean )
+
+
+10. Matched and Unmatched bets
+Test Url : Mintapicontroller/marketBets/:match_id/:market_id
+Method : GET
+Header Params - username (mandatory), password (mandatory)
+Response : {"code":0,"error":false,"message":"Matched\/Unmatched bets listing","data":{"matched":[{"mstcode":"9765","Description":"Cricket>England v Pakistan (2nd Test)>Match Odds","IsMatched":"1","selectionName":"England","Type":"Back","Odds":"1.61","Stack":"1000","MstDate":"1527533952","P_L":"610.00","Profit":"0.00","Liability":"1000.00","STATUS":"Open"}],"unmatched":[{"mstcode":"9767","Description":"Cricket>England v Pakistan (2nd Test)>Match Odds","IsMatched":"0","selectionName":"England","Type":"Back","Odds":"1.91","Stack":"5000","MstDate":"1527533973","P_L":"4550.00","Profit":"0.00","Liability":"5000.00","STATUS":"Open"},{"mstcode":"9766","Description":"Cricket>England v Pakistan (2nd Test)>Match Odds","IsMatched":"0","selectionName":"England","Type":"Back","Odds":"1.71","Stack":"1000","MstDate":"1527533961","P_L":"710.00","Profit":"0.00","Liability":"1000.00","STATUS":"Open"}]}}
+
+11. Delete Unmatched bets
+Test Url : Mintapicontroller/deleteGetbetting/:bet_id
+Method : GET
+Header Params - username (mandatory), password (mandatory)
+Note : (bet_id will be mstcode recevied from Api No 10 )
+
+12. Match Unmatched bets
+Test Url : Mintapicontroller/updateUnMatchedData/:bet_id
+Method : GET
+Header Params - username (mandatory), password (mandatory)
+Note : (bet_id will be mstcode recevied from Api No 10 )
+
+13. User setting
+Test Url : Mintapicontroller/getUserSetting
+Method : GET
+Header Params - username (mandatory), password (mandatory)
+
+14. User All Unmatched bets
+Test Url : Mintapicontroller/allUnmatchedBets
+Method : GET
+Header Params - username (mandatory), password (mandatory)
+
+15. User bets
+Test Url : Mintapicontroller/mybets/:bet_type/:page_no/:limit
+Method : GET
+Header Params - username (mandatory), password (mandatory)
+Note : (bet_type = 'O' for open 'S' for settle)
+
+16 User Account statement
+Test Url : Mintapicontroller/acStatement/:page_no/:limit
+Method : GET
+Header Params - username (mandatory), password (mandatory)
+Response: {"code":0,"error":false,"message":"Acount statement listing","data":[{"user_id":"751","Sdate":"1527591910","type":"D\/W Coins","Chips":"30000","Narration":"Deposit 30000 Coins by dixitdealer","Credit":"30000","Debit":"0","IsBack":"-1","isFancy":"-1","matchId":"0","MarketId":"0","fancyId":"0"},{"user_id":"751","Sdate":"1527260682","type":"D\/W Coins","Chips":"12000","Narration":"Deposit 12000 Coins by dixitdealer","Credit":"12000","Debit":"0","IsBack":"-1","isFancy":"-1","matchId":"0","MarketId":"0","fancyId":"0"}]}
+
+17 Session fancy 
+Test Url : Mintapicontroller/matchMarketLst/:match_id
+Method : GET
+Header Params - username (mandatory), password (mandatory)
+
+18 Market Profit Loss
+Test Url : Mintapicontroller/market_win_loss
+Method : POST
+Params : {"matchId":"28746418","MarketId":"1.144271625,1.144271626"}
+Header Params - username (mandatory), password (mandatory)
+
+19 Save fancy bets
+Test Url : Mintapicontroller/save_session_bet
+Method : POST
+Params : {"betValue":"2002","FancyID":"170","matchId":"28746418","OddValue":0,"type":"3","OddsNumber":"121","TypeID":"2","HeadName":"10 overs ","SessInptNo":"120","SessInptYes":"121","sportId":"4","FancyId":"9706","pointDiff":"10.00","deviceInformation":"\" browser: firefox browser_version :60.0 device: Desktop OS : windows os_version: windows-7\""}
+Header Params - username (mandatory), password (mandatory)
+Note: OddValue = 0 for Back and OddValue = 1 for lay
+
+20 Get Score api
+Test Url : Mintapicontroller/GetScoreApi/:match_id
+Method : GET
+Header Params - username (mandatory), password (mandatory)
+
+21 getBackLaysOfMarketSetting
+Test Url : Mintapicontroller/getBackLaysOfMarketSetting
+Method : POST
+Params : {"betfair":{"marketIds":["1.144156561","1.144156560"],"bspMarket":false, "priceProjection":{"priceData":["EX_BEST_OFFERS"],"virtualise":true},"orderProjection":"EXECUTABLE","matchProjection":"ROLLED_UP_BY_AVG_PRICE"},"matchId":"28763538"}
+Header Params - username (mandatory), password (mandatory)
+
+22 getBackLaysOfMarketMatchVolume
+Test Url : Mintapicontroller/getBackLaysOfMarketMatchVolume
+Method : POST
+Params : {"betfair":{"marketIds":["1.144661164","1.144661165","1.144661166"],"bspMarket":false, "priceProjection":{"priceData":["EX_BEST_OFFERS"],"virtualise":true},"orderProjection":"EXECUTABLE","matchProjection":"ROLLED_UP_BY_AVG_PRICE"},"matchId":["28765190","28755539"]}
+Header Params - username (mandatory), password (mandatory)
+
+23. Session fancy bet listing
+Test Url : Mintapicontroller/sessionBets/:fancy_id 
+Method : GET
+Header Params - username (mandatory), password (mandatory)
+Response : {"code":0,"error":false,"message":"Matched session fancy bets listing","data":{"matched":[{"mstcode":"3859","Description":"Cricket>India v Afghanistan>12 over","MatchName":"India v Afghanistan","MarketName":"12 over","IsMatched":"1","MarketId":"","selectionName":"No","TYPE":"Lay","Odds":"100","Stack":"500","MstDate":"1528972589","P_L":"0","Profit":"0","Liability":"0","STATUS":"Open"},{"mstcode":"3858","Description":"Cricket>India v Afghanistan>12 over","MatchName":"India v Afghanistan","MarketName":"12 over","IsMatched":"1","MarketId":"","selectionName":"No","TYPE":"Lay","Odds":"100","Stack":"500","MstDate":"1528972589","P_L":"0","Profit":"0","Liability":"0","STATUS":"Open"}],"unmatched":[]}}
+Note : fancy_id will recevied from (17 Session fancy) resposne in 'ID' key
+
+24 Profit and loss listing
+Test Url : Mintapicontroller/profit_lossAll
+Method : POST
+Params : {"sport_id": "4","event_name": "","from_date": "2017-08-11","to_date": "2017-08-11","page_no": "1"}
+Header Params - username (mandatory), password (mandatory)
+Note sports_id 0 -> All , -1 -> Session fancy , 1 -> soccer , 2 -> tennis 
+
+25. User bets filters
+Test Url : Mintapicontroller/mybets_filters
+Method : POST
+Params : {"from_date": "2017-08-11","to_date": "2018-08-11","page_no": "1"}
+Header Params - username (mandatory), password (mandatory)
+Note : from_date,to_date example 2017-08-11
+
+26. profit and loss settled bets listing
+Test Url : Mintapicontroller/BetHistoryPL/:match_id/:market_id/:fancy_id 
+Method : GET
+Header Params - username (mandatory), password (mandatory)
+Note : For session fancy send fancy_id and market_id 0 , For match odds send market_id and fancy_id 0
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

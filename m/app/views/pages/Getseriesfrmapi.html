@@ -1,0 +1,49 @@
+<div class="content-wrapper">
+	<div class="innerbox">
+<div class="col-lg-12 col-md-12 lst_master">
+    <div class="load-box" ng-show="loading">
+        <img id="mySpinner" src="app/images/loading1.gif" />
+    </div>
+    
+    <div class="member_listing">
+    <div class="resp_table clearfix login_table">
+    <!-- <button ng-click="show()">open</button> -->
+        <table class="table table-striped my-market" >
+            <thead>
+                <tr>
+                    <th><a ng-click="sort_by('id');"><i class="glyphicon glyphicon-sort"></i></a>Serial No</th>
+                    <th><a ng-click="sort_by('seriesId');"><i class="glyphicon glyphicon-sort"></i></a>Series ID</th>
+                    <th><a ng-click="sort_by('SeriesName');"><i class="glyphicon glyphicon-sort"></i></a>Series Name</th>
+                    <th ng-show="$root.HelperAllRights==angular.isUndefinedOrNull || $root.HelperAllRights.addMatch==1">Action
+              <!--  <span> All<input type="checkbox" ng-model="selectAll" ng-click="allChk()" ng-checked="{{selectAll}}" id="select_all" ></span> -->
+		    </th>
+                </tr>
+            </thead>
+
+            <tbody id="tblData">
+                <tr ng-repeat="sportsSeries in filtered = (GetSeriesData.seriesfrmApi | filter:search | orderBy : predicate :reverse) | startFrom:(currentPage-1)*entryLimit | limitTo:entryLimit" repeat-end="onEnd()">
+
+                    <td data-label="Serial No">{{$index+1}}</td>
+                    <td data-label="Series ID">{{sportsSeries.seriesId}}</td>
+                    <td data-label="Series Name">{{sportsSeries.SeriesName}}</td>
+                   
+                    <td data-label="Action" ng-show="$root.HelperAllRights==angular.isUndefinedOrNull || $root.HelperAllRights.addMatch==1">
+                        <input type="checkbox" class="checkbox" id="mid_{{sportsSeries.seriesId}}" ng-model="checkboxModel.value2"  ng-click="saveSeries(sportsSeries.seriesId,sportsSeries.SeriesName);" ng-checked="{{(GetSeriesData.seriesfrmDataBase|filter:{'seriesId':sportsSeries.seriesId})[0].seriesId!=angular.isUndefinedOrNull  && sportsSeries.seriesId==(GetSeriesData.seriesfrmDataBase|filter:{'seriesId':sportsSeries.seriesId})[0].seriesId}}" ng-change="CheckUncheckHeader()" >
+                        <label for="mid_{{sportsSeries.seriesId}}"></label>
+                        </td>
+                </tr>
+            </tbody>
+        </table>
+        </div>
+    </div>
+    <div class="col-md-12" ng-show="totalitem == 0">
+        <div class="col-md-12">
+            <h4>No Users found</h4>
+        </div>
+    </div>
+    <div class="col-md-12" ng-show="totalitem > 0">
+           <pagination total-items="totalitem" ng-model="currentPage" max-size="5" class="pagination-sm" boundary-links="true" rotate="false" num-pages="noOfPages" items-per-page="entryLimit"></pagination>
+    </div>
+</div>
+</div>
+</div>

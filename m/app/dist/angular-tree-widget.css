@@ -1,0 +1,166 @@
+﻿/*
+    ---------------- Tree style ---------------------
+*/
+
+tree {
+    white-space: nowrap;
+}
+
+treenode {
+}
+
+    treenode ul {
+        list-style-type: none;
+        -webkit-padding-start: 16px;
+        padding-left: 16px;
+        margin-bottom: 0;
+    }
+
+        treenode ul li {
+            margin-right: 5px;            
+        }
+
+    treenode .node-title {
+    }
+
+    treenode .pointer {
+        cursor: pointer;
+    }
+
+    treenode .node-name {
+    }
+
+    treenode .selected {
+        background: #BEEBFF none repeat scroll 0% 0%;
+        border-radius: 2px;
+        box-shadow: 0px 0px 1px #999 inset;
+    }
+
+    treenode .disabled {
+        color: darkgray;
+        cursor: not-allowed;
+    }
+
+/*
+   --------------- Icon Style -----------------------
+*/
+
+.tree-node-ico:empty {
+    display: inline-block;
+    width: 16px;
+    height: 14px;
+    background: transparent no-repeat scroll 50% 50%;
+    background-size: contain;
+}
+
+.tree-node-ico.tree-node-expanded {
+    background-image: url('img/arrow-down.png');
+}
+
+.tree-node-ico.tree-node-collapsed {
+    background-image: url('img/arrow-right.png');
+}
+
+span > .tree-node-ico {
+    margin-right: 5px;
+}
+
+    span > .tree-node-ico.tree-node-image {
+        background-image: url('img/folder-open.png');
+    }
+
+    span > .tree-node-ico.tree-node-leaf {
+        background-image: url('img/file.png');
+    }
+
+
+
+/*
+    ----------------- Animation --------------------
+*/
+
+treenode {
+    opacity: 1;
+    max-height: 2000px;
+    overflow: hidden;
+}
+
+    treenode.ng-hide-add, treenode.ng-hide-remove {
+        -webkit-transition: all linear .5s;
+        -moz-transition: all linear .5s;
+        -o-transition: all linear .5s;
+        transition: all linear .5s;
+        display: block !important;
+    }
+
+    treenode.ng-hide {
+        opacity: 0;
+        max-height: 0;
+    }
+
+    /*------------------------New Code 5-oct-2016---------------------------*/
+    
+div[data-angular-treeview] {
+  /* prevent user selection */
+  -moz-user-select: -moz-none;
+  -khtml-user-select: none;
+  -webkit-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+
+  /* default */
+  font-family: Tahoma;
+  font-size:13px;
+  color: #555;
+  text-decoration: none;
+}
+
+div[data-tree-model] ul {
+  margin: 0;
+  padding: 0;
+  list-style: none; 
+  border: none;
+  overflow: hidden;
+}
+
+div[data-tree-model] li {
+  position: relative;
+  padding: 0 0 0 15px;
+  line-height: 22px;
+}
+
+div[data-tree-model] li .expanded {
+  padding: 1px 10px;
+  background-image: url('img/arrow-down.png');
+  background-repeat: no-repeat;
+
+}
+
+div[data-tree-model] li .collapsed {
+  padding: 1px 10px;
+  background-image: url('img/arrow-right.png');
+  background-repeat: no-repeat;
+
+}
+
+div[data-tree-model] li .normal {
+  padding: 1px 10px;
+  /*background-image: url('img/arrow-right.png');*/
+  background-repeat: no-repeat;
+}
+
+div[data-tree-model] li i, div[data-tree-model] li span {
+  cursor: pointer;
+  font-family:'Open Sans', sans-serif;
+}
+
+
+
+div[data-tree-model] li .selected {
+  /*background-color: #aaddff;*/
+  /*font-weight: bold;*/
+  /*padding: 1px 5px;*/
+  color:#05b4cf;
+  
+}
+/*--------------------}New Code Tree 5-oct-2016 sourabh---------------------------*/

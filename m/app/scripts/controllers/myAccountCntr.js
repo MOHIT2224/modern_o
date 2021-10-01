@@ -1,0 +1,1 @@
+app.controller("myAccountCntr",["$scope","$http","sessionService",function(t,c,e){c.get(BASE_URL+"Chipscntrl/getChipDataById/"+e.get("user_id")).success(function(c,e,i,s){t.cipsData=c.betLibility,t.UserBalance=t.cipsData[0].Balance})}]);

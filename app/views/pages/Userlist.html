@@ -1,0 +1,111 @@
+<div class="content-wrapper nobgtbl" style="min-height: 720px;">
+<h1 class="page-heading">User List</h1>
+
+<div class="col-sm-12 col-md-12 master-cont">
+    <!-- START -->
+    <h5>Filtered {{ filtered.length }} of {{ totalItems}} total Masters</h5>
+    <div class="col-lg-12 col-md-12 col-sm-12 " style="padding: 0px;">
+        <div class="lst_master_top clearfix">
+ <div class="load-box" ng-show="loading">
+            <img id="mySpinner" src="app/images/loading1.gif" />
+         </div>
+            <div class="form_row col-lg-12 col-md-12 col-sm-12 col-xs-12 clearfix top_table_form" style="padding: 0px;">
+                <div class="form_box  col-lg-2 col-md-2 col-sm-2 col-xs-12" style="padding: 0px;">
+                    <label>User ID</label>
+                    <input type="text" ng-model="search.usename" ng-change="filter()" placeholder="Search By UserName" />
+                </div>
+                <div class="form_box  col-lg-2 col-md-2 col-sm-2 col-xs-12" style="padding: 0px;">
+                    <label>User Name</label>
+                    <input type="text" ng-model="search.mstrname" ng-change="filter()" placeholder="Search By Name" />
+                </div>
+
+                <div class="form_box  col-lg-2 col-md-2 col-sm-2 col-xs-12" style="padding: 0px;">
+                    <label>IP Address</label>
+                    <input type="text" ng-model="search.ipadress" ng-change="filter()" placeholder="Search By IPaddress" />
+                </div>
+                <div class="form_box  col-lg-2 col-md-2 col-sm-2 col-xs-12" style="padding: 0px;">
+                    <label>User Type</label>
+                    <input type="text" ng-model="search.usetype" ng-change="filter()" placeholder="Search By usetype" />
+                </div>
+                <div class="form_box  col-lg-4 col-md-4 col-sm-4 col-xs-12" style="padding: 0px;">
+                    <div class="file-icons">
+                    <!--  <a href=""><img src="app/images/file1.png" /></a>
+                     <a href=""><img src="app/images/file2.png" /></a>
+                     <a href=""><img src="app/images/file3.png" /></a> -->
+                    </div>
+                </div>
+                
+            </div>
+        </div>
+        <!-- END -->
+        <div class="col-lg-12 col-md-12  lst_master">
+            <div class="userlist-table clearfix ">
+                <table class="table table-condensed table-responsive">
+                    <thead>
+                        <tr>
+                            <th><a ng-click="sort_by('mstrid');"><i class="glyphicon glyphicon-sort"></i></a>SNo</th>
+                            <th><a ng-click="sort_by('mstrname');"><i class="glyphicon glyphicon-sort"></i></a>UserName</th>
+                            <th><a ng-click="sort_by('mstruserid');"><i class="glyphicon glyphicon-sort"></i></a>UserID</th>        
+			    <th><a ng-click="sort_by('ipadress');"><i class="glyphicon glyphicon-sort"></i></a>Ip Address</th>                   
+                            <th><a ng-click="sort_by('usecrdt');"><i class="glyphicon glyphicon-sort"></i></a>CreatedDate</th>
+   			    <th><a ng-click="sort_by('balance');"><i class="glyphicon glyphicon-sort"></i></a>Balance</th>
+                            <th><a ng-click="sort_by('usetype');"><i class="glyphicon glyphicon-sort"></i></a>UserType</th>
+                            <th>Action</th>
+                            <th><a ng-click="sort_by('stakeLimit');"><i class="glyphicon glyphicon-sort"></i></a>StakePlayLimit</th>
+                            <th><a ng-click="sort_by('Commission');"><i class="glyphicon glyphicon-sort"></i></a>Commission</th>
+                            <th><a ng-click="sort_by('lgnUserMaxProfit');"><i class="glyphicon glyphicon-sort"></i></a>MaxProfit</th>
+                            <th><a ng-click="sort_by('lgnUserMaxLoss');"><i class="glyphicon glyphicon-sort"></i></a>MaxLoss</th>
+                            <th><a ng-click="sort_by('lgnUserMaxStake');"><i class="glyphicon glyphicon-sort"></i></a>MaxStake</th>
+                          <!--  <th><a ng-click="sort_by('lgnUserMaxStake');"><i class="glyphicon glyphicon-sort"></i></a>ResetPass</th> -->
+                        </tr>
+                    </thead>
+                    <tr ng-repeat="user in filtered = (users | filter:search | orderBy : predicate :reverse) | startFrom:(currentPage-1)*entryLimit | limitTo:entryLimit">
+                        <td data-label="Serial No">{{(currentPage-1)*entryLimit +$index+1}}</td>
+                        <td data-label="Master Name">{{user.mstrname}}</td>
+                        <td data-label="User ID">{{user.usename}}</td>
+ 			<td data-label="IP Address">{{user.ipadress}}</td>
+                       
+                        <td data-label="IP Address">{{user.usecrdt}}</td>
+			  <td data-label="Balance"  ng-class="{'green':user.balance>0,'red':user.balance<0}">{{user.balance}}</td>
+                        <td data-label="User Type">{{user.usetype}}</td>
+                        <td data-label="Action" style="text-align:left;" class="switch-icon">
+                            <div ng-hide="true">{{user.active==1?switch=true:switch=false}}</div>
+                            <md-switch ng-model="switch" aria-label="Switch 1" ng-hide="user.usetype=='Admin'"  ng-click='getStatus(user,switch)'><!--{{ switch }}--></md-switch>
+                           <!--<div> <input type="radio" name="{{user.usecode}}" value="{{user.active}}}" ng-checked="user.active == 1" ng-click="getStatus(user.usecode,user.active)" />Active</div>
+    		               <div> <input type="radio" name="{{user.usecode}}" value="{{user.active}}}" ng-checked="user.active == 0" ng-click="getStatus(user.usecode,user.active)" />Inactive</div>-->
+                        </td>
+                        <td data-label="StakeLimit">
+                            <input type="text" ng-model="user.stakeLimit" ng-blur='changeStakeLimit(user.stakeLimit,user.usecode)' value="{{user.stakeLimit}}" style="width: 100px" /><!--sourabh 15-nov-2016-->
+                        </td>
+                  <td data-label="Commission" ng-if="user.usetype != 'Master'"><!-- changeStakeLimit -->
+                            <input type="text"   ng-model="user.Commission" ng-blur='changeCommission(user.Commission,user.usecode)' value="{{user.Commission}}" style="width: 100px" /><!--Manish 25-nov-2016-->
+                        </td>
+                         <td data-label="Commission"  ng-if="user.usetype == 'Master'"><!-- changeStakeLimit -->
+                            <input type="text" min="0" max="2" limit-to-max  oninput="this.value = this.value.replace(/[^0-9.]/g, '').replace(/(\..*)\./g, '$1');"  ng-model="user.Commission" ng-blur='changeCommission(user.Commission,user.usecode)' value="{{user.Commission}}" style="width: 100px" /><!--Manish 25-nov-2016-->
+                        </td>
+                         <td data-label="Max Profit"> <input type="text" ng-model="user.lgnUserMaxProfit" ng-blur='UpdateMaxProfit(user.lgnUserMaxProfit,user.usecode)' value="{{user.lgnUserMaxProfit}}" style="width: 100px" /><!--Manish 25-nov-2016--></td>
+                        <td data-label="Max Loss"> <input type="text" ng-model="user.lgnUserMaxLoss" ng-blur='UpdateMaxLoss(user.lgnUserMaxLoss,user.usecode)' value="{{user.lgnUserMaxLoss}}" style="width: 100px" /><!--Manish 25-nov-2016--></td>
+                        <td data-label="Max Stake"> <input type="text" ng-model="user.lgnUserMaxStake" ng-blur='UpdateMaxStake(user.lgnUserMaxStake,user.usecode)' value="{{user.lgnUserMaxStake}}" style="width: 100px" /><!--Manish 25-nov-2016--></td>
+                     <!--   <td data-label="Reset Password"> 
+                            <button class="btn btn-primary res-btn" ng-click="ResetGloPass(node.id)">Reset</button>
+                        </td> -->
+                    </tr>
+
+                </table>
+            </div>
+
+            <div class="col-md-12" ng-show="filteredItems == 0">
+                <div class="col-md-12">
+                    <h4>No Users found</h4>
+                </div>
+            </div>
+            <div class="col-md-12" ng-show="filteredItems > 0">
+ 
+    <pagination total-items="filtered.length" ng-model="currentPage" max-size="maxSize" class="pagination-sm" boundary-links="true" rotate="false" num-pages="noPages" items-per-page="entryLimit"></pagination>
+
+      
+            </div>
+        </div>
+    </div>
+</div>
+</div>

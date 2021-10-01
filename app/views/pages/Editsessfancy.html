@@ -1,0 +1,266 @@
+<style>
+.switch {
+  position: relative;
+  display: inline-block;
+  width: 60px;
+  height: 34px;
+}
+
+.switch input {display:none;}
+
+.slider {
+  position: absolute;
+  cursor: pointer;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: #ccc;
+  -webkit-transition: .4s;
+  transition: .4s;
+}
+
+.slider:before {
+  position: absolute;
+  content: "";
+  height: 26px;
+  width: 26px;
+  left: 4px;
+  bottom: 4px;
+  background-color: white;
+  -webkit-transition: .4s;
+  transition: .4s;
+}
+
+input:checked + .slider {
+  background-color: #2196F3;
+}
+
+input:focus + .slider {
+  box-shadow: 0 0 1px #2196F3;
+}
+
+input:checked + .slider:before {
+  -webkit-transform: translateX(26px);
+  -ms-transform: translateX(26px);
+  transform: translateX(26px);
+}
+
+/* Rounded sliders */
+.slider.round {
+  border-radius: 34px;
+}
+
+.slider.round:before {
+  border-radius: 50%;
+}
+div.disabled
+{
+  pointer-events: none;
+
+  /* for "disabled" effect */
+  opacity: 0.5;
+  background: #CCC;
+}
+</style>
+<div class="content-wrapper" ng-init="get_fancyData()">
+<div id="messageEq"></div>
+<div class="alert alert-success" role="alert" ng-show="message">
+    <strong>{{message}}</strong>
+</div>
+<div ng-show="false">
+    sum={{sumUsrBet=myVar}}
+    {{totalStke=SessionData[0].MaxStake*(SessionData[0].RateChange )| number}}
+    stak={{totalStke1=SessionData[0].MaxStake}}
+</div>
+<div class="ses-fancy-cont col-lg-12 col-md-12 col-sm-12 col-xs-12 clearfix" style="text-align:center;">
+<a class="btn btn-default" ui-sref="dashboard.ManageFancy" style="float:right">Back</a>
+<div ng-if="true">
+
+            <div ng-if="IsIndian">
+    
+                <div class="fancy">
+                    <div class="row sport-high fancyListDiv" style="margin-bottom:1px;">
+                        <div class="ses-fan-box clearfix">
+                            <div class="row">
+                                <div class="fancy-heading fancy-head"  >
+                                    {{GetindianfancysessionData.HeadName}}
+                                    <!-- || {{FancyObject.active}} -->
+                                    <span class="rigt-ref">
+                                    <i class="glyphicon " class="glyphicon-minus"></i>
+                                </span>
+                                </div>
+    
+                                <div style="display:block; vertical-align:top; margin-right:0; border:solid 2px #666; margin-bottom:0;min-height:40px;">
+                                    <div style="display:inline-block;min-height: 40px;width: 25%;vertical-align:middle;">
+                                        <div class="head-ses-fan" style=" line-height: 20px;margin-right:3px; margin-left:5px; text-align:center; margin-top:0;min-height:40px;"><span style="color:#FCA4B7; font-size:15px;">Lay</span>
+                                            <br />[NO]</div>
+                                    </div>
+                                    <div style="display:inline-block;min-height: 40px;width: 25%;vertical-align:middle;">
+                                        <button style="min-height:20px;" class="lay-cell cell-btn" ng-disabled="FancyObject.active==0">{{GetindianfancysessionData.SessInptNo}}</button>
+                                        <button style="min-height:20px;" disabled class="disab-btn">{{GetindianfancysessionData.NoValume}} </button>
+                                    </div>
+                                    <div style="display:inline-block;width: 24%;min-height: 40px;vertical-align:middle;">
+                                        <div class="head-ses-fan" style="     line-height: 20px;margin-right:3px; margin-left:3px; text-align:center; margin-top:0px;"><span style="color:#7CC4F7; font-size:15px;">Back</span>
+                                            <br />[Yes]</div>
+                                    </div>
+                                    <div style="display:inline-block;width: 20.4%;vertical-align:middle;min-height: 40px;float: right;">
+                                        <button style="min-height:20px;" class="back-cell cell-btn" ng-disabled="FancyObject.active==0 || SessionbtnPlaceDis" >{{GetindianfancysessionData.SessInptYes}}</button>
+                                        <button style="min-height:20px;" disabled class="disab-btn">{{GetindianfancysessionData.YesValume}}</button>
+                                    </div>
+                                </div>
+                            </div>
+                       
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    <div class="box-heading clearfix">
+        <div style="float:left;">
+            {{MatchName}}&emsp;>>&emsp; <span ng-if="!IsEditFancy">{{headName}} <button class="btn btn-primary" ng-click="EditFancy(true)">Edit</button></span>
+            <input ng-if="IsEditFancy" type="text" ng-init="FormFancy.FancyName=headName" class="form-control" name="FancyName" ng-model="FormFancy.FancyName" required>
+            <!-- {{sumUsrBet >=totalStke1-500}} --> <span>({{ToggleTitle}})</span>
+            <div ng-if="IsEditFancy">
+                <button type="button" ng-click="SaveFancy()" class="btn btn-success">Save</button>
+                <button type="button" ng-click="EditFancy(false)" class="btn btn-primary    ">Cancel</button>
+            </div>
+        </div>
+	<div ng-if="IsIndian" style="float:right">
+		<label class="switch">
+  <input type="checkbox" ng-checked="!IsToggle" ng-click="callToggle()">
+  <span class="slider round"></span>
+</label>	
+	</div>
+        <!-- <div class="rate-box" ng-if="sumUsrBet >= totalStke1-500"> 
+            <button type="button" class="rate-blink-btn blink" name="changerate" ng-click="chnageRate(SessionData[0].RateChange);">RATE CHANGE
+
+            </button>
+
+        </div> -->
+    </div>
+    <div class="fancy_wrapper clearfix" ng-class="IsToggle==true ? 'disabled' : ''" style="border:solid 2px #ddd; padding-bottom:20px; margin-bottom:20px;">
+        <form name="userForm" method="post">
+            <div class="form_box col-lg-2 col-md-3 col-sm-3 col-xs-12">
+                <label>Max Stake</label>
+                <input type="number" name="MaxStake" ng-disabled="IsToggle" ng-model="MaxStake" ng-keypress="checkInput(this.value)" width="100px" />
+            </div>
+            <div class="form_box col-lg-2 col-md-3 col-sm-3 col-xs-12">
+                <label>Rate Different</label>
+                <input type="number" name="RateDiff" ng-disabled="IsToggle" ng-model="rateDiff" ng-keypress="RateDiffence(this.value)" width="100px" />
+            </div>
+            <div class="form_box col-lg-2 col-md-3 col-sm-3 col-xs-12">
+                <label>Point Different</label>
+                <input type="number" name="PointDiff" ng-disabled="IsToggle" ng-model="pointDiff" ng-keypress="PointDifference(this.value)" width="100px" />
+            </div>
+            <div class=" col-lg-6 col-md-3 col-sm-3 col-xs-12">
+            <div class="range-sm-box">
+                <div class="rang-head">
+                    Range
+                    <input type="number" name="rangeLimit" ng-model="rangeLimit" ng-keypress="checkInput(this.value)" class="rang-head-box">
+                </div>
+                <div class="form_box">
+                    <label>No</label>
+                    <input type="number" name="NoLayRange" ng-disabled="IsToggle" ng-model="NoLayRange" ng-keypress="checkInput(this.value)" class="range-boxs">
+
+                </div>
+                <div class="form_box">
+                    <label>Yes</label>
+                    <input type="number" name="YesLayRange" ng-disabled="IsToggle" ng-model="YesLayRange" ng-keypress="checkInput(this.value)" class="range-boxs">
+                </div>
+            </div></div>
+            <div class="form_box col-lg-12 col-md-12 col-sm-12 col-xs-12 padd-zero">
+                <div class="col-lg-2 col-md-3 col-sm-3 col-xs-6">
+                    <label>No:</label>
+                    <input type="number"  ng-keypress="checkInput(this.value)" class="yes-no-inp" id="inputNo" name="input" ng-model="example" ng-KeyUp="getVal(example)" ng-Click="getVal(example)" ng-disabled="IsToggle"/>
+                    <input type="number"   ng-class="IsToggle==false ? 'yes-no-inp' : 'disab-input'" name="input" ng-model="NoValume"  ng-disabled="IsToggle" />
+                </div>
+                <div class="col-lg-2 col-md-3 col-sm-3 col-xs-6">
+                    <label>YES:</label>
+                    <input type="number" ng-keypress="checkInput(this.value)" class="yes-no-inp" id="inputYes" name="input1" ng-model="example_1" ng-disabled="IsToggle" required>
+                    <input type="number" ng-class="IsToggle==false ? 'yes-no-inp' : 'disab-input'" name="input1" ng-model="YesValume"  ng-disabled="IsToggle" />
+                </div>
+                <div class="col-lg-3 col-md-3 col-sm-4 col-xs-12 form-sub-btns" style="padding-top:22px;">
+                    <button type="button" class="act-btn" ng-click="PressEnter(ID,0,example,example_1)" ng-if="active==1" style="background-color:GREEN;"><img src="app/images/active-1.png">Active</button>
+                    <button type="button" class="inact-btn" ng-click="PressEnter(ID,1,example,example_1)" ng-if="active==0 || active==4" style="background-color:RED;"><img src="app/images/deactive-1.png" />Deactive</button>
+                </div>
+                <div style="float:right;" class="col-lg-5 col-md-12 col-sm-12 col-xs-12">
+                    <div class="wick-btns" ng-if="false">
+                        <button type="button" name="wd" ng-click="setMessage(1)" class="wick-btn">Wicket Down</button>
+                        <button type="button" name="wd" ng-click="setMessage(2)" class="dec-pen-btn">Decision Pending</button>
+                    </div>
+                    <div class="other-cust-msg">
+                        <input type="text" name="OtherVal" ng-model="otherTxtMsg">
+                        <button type="button" ng-click="setMessage(3)">SET</button>
+                    </div>
+                    <div class="dec-stat">{{DisplayMsg}}</div>
+                </div>
+            </div>
+
+             <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 ">
+                   <button class="btn btn-primary btn-lg" ng-click="setMessage('Over')">Over</button>
+                   <button class="btn btn-primary btn-lg" ng-click="setMessage('SIX')">6</button> 
+                   <button class="btn btn-primary btn-lg" ng-click="setMessage('One Run')">1</button>
+                   <button class="btn btn-primary btn-lg" ng-click="setMessage('Two Runs')">2</button>
+                   <button class="btn btn-primary btn-lg" ng-click="setMessage('Three Runs')">3</button>
+                   <button class="btn btn-primary btn-lg" ng-click="setMessage('Four Runs')">4</button>
+                   <button class="btn btn-primary btn-lg" ng-click="setMessage('No Ball')">No ball</button>
+                   <button class="btn btn-primary btn-lg" ng-click="setMessage('Wide Ball')">Wide</button>
+                   <button class="btn btn-primary btn-lg" ng-click="setMessage('Wicket Down')">Wicket</button>
+                   <button class="btn btn-primary btn-lg" ng-click="setMessage('Free Hit')">FreeHit</button>
+                   <button class="btn btn-primary btn-lg" ng-click="setMessage('Third Umpire')">Third Umpire</button>
+                    <button class="btn btn-primary btn-lg" ng-click="setMessage('Ball start...')">LOCK ALL</button>
+
+            </div>
+
+        </form>
+    </div>
+    <div class="clearfix">
+        <div class="row">
+            <div class="col-md-5">
+                <div class="row">
+                    <h2 class="inner-head-form">Max Session bet Liability</h2>
+                    <!--   {{message}} -->
+                    <form name="bettingForm">
+
+                        <div class="col-md-12 form-group">
+                            <label style="display:inline-block; margin:0;">Bet Liability</label>
+                            <input type="number"  name="max_session_bet_liability" class="form-control" ng-model="max_session_bet_liability"  ng-value="adminLimit.max_session_bet_liability" required="required" >
+                        </div>
+                        <div class="col-md-12 form-group" style="text-align:left;">
+                            <button type="button" class="btn btn-primary" ng-disabled="max_session_bet_liability == Null" ng-click="UpdateSessionLiability(max_session_bet_liability,'bet')" style="margin-top:-1px; padding:2px 10px;">Set session bet liability</button>
+                        </div>
+
+                    </form>
+                </div>
+            </div>
+            <div class="col-md-2"></div>
+            <div class="col-md-5">
+                <div class="row">
+                    <h2 class="inner-head-form">Max Session Liability</h2>
+                    <!--   {{message}} -->
+                    <form name="bettingForm">
+
+                        <div class="col-md-12 form-group">
+                            <label style="display:inline-block; margin:0;">Session Liability</label>
+                            <input type="number"  name="max_session_liability" class="form-control" ng-model="max_session_liability"  ng-value="adminLimit.max_session_liability" required="required" >
+                        </div>
+                        <div class="col-md-12 form-group" style="text-align:left;">
+                            <button type="button" class="btn btn-primary" ng-disabled="max_session_liability == Null" ng-click="UpdateSessionLiability(max_session_liability,'session')" style="margin-top:-1px; padding:2px 10px;">Set session liability</button>
+                        </div>
+
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+</div>
+<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+    <div class="box-heading clearfix">
+        <div style="float:left;">User Bet List</div>
+    </div>
+    <userlist my-var="myVar"></userlist>
+</div>
+</div>

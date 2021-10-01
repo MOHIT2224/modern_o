@@ -1,0 +1,160 @@
+<div class="row">
+    <div class="col-sm-8 col-md-8 padding">
+        <div class="load-box" ng-show="loading">
+            <img id="mySpinner" src="app/images/loading1.gif" />
+        </div> 
+        <div class="row match-heading">
+            <div class="col-md-8 col-xs-12"> <h4>{{matchName}}</h4></div>
+        <div class="col-md-4 col-xs-12"><p>{{dateForm|date:'EEEE dd MMM, hh:mm a'}}</p></div>
+        </div>
+            <div class="fancy_wrapper market-cont box-cont" style="border-top: 2px solid #1a7051;">
+                <div class="mark-head clearfix">
+
+                    {{GetMarketInfo.MarketName}}<div class="cur-dt">{{sysDateTime}}</div>
+
+                </div>
+
+               <div class="matchodd-header">
+                <div class="row">
+                    <div class="col-sm-8">
+                        <div class="matchhead">{{GetMarketInfo.MarketName}} -</div>
+                         <div class="matchinfo">{{PLAYPAUSE}}_Matched : <b>GLC {{GetMarketBackLayData.totalMatched|number:0}}</b></div>
+                    </div>
+                    <div class="col-sm-4 text-right">
+                        <span class="goin-play"><span class="glyphicon glyphicon-ok"></span>{{GetMarketBackLayData.status=='OPEN'?GetMarketBackLayData.inplay?"In-Play":"Going In-Play":GetMarketBackLayData.status}}</span>
+                        <button class="btn btn-warning btn-sm" ng-click="callOddsFunc()">Refresh</button>
+                    </div>
+                </div>
+            </div>
+
+                 <div class="market-wrapper">
+                    <div class="matchodd_dis" ng-if="PLAYPAUSE==1"></div>
+                    <div class="table-overflow">
+                        <table class="table market-listing-table" ng-show="GetMarketBackLayData.status=='OPEN'">
+                            <thead>
+                                    <tr>
+                                    <th class="title"><i class="fa fa-star-o"></i> Match Odds</th>
+                                    <th class="back hidden-xs" colspan="2"></th>
+                                    <th class="back">Back</th>
+                                    <th class="lay">Lay</th>
+                                    <th class="lay hidden-xs" colspan="2"></th>
+                                 </tr>
+                            </thead>
+                            <tbody>
+                                 <tr ng-repeat="marketInfo in GetMarketBackLayData.runners">
+                                     <td class="running-cell">
+                                         <strong class="odds">{{(GetMarketBackLayDataSelectionName|filter:{"selectionId":marketInfo.selectionId})[0].runnerName}}
+                                        <div ng-hide="true">
+
+                                        {{testValue1=getSumValPnL((RunnerValue|filter: {"SelectionId":marketInfo.selectionId})[0].winValue,(RunnerValue|filter:{"SelectionId":marketInfo.selectionId})[0].lossValue)+(marketInfo.selectionId==selectionId?(formStatus==0?+((priceVal*stake)-stake):-(priceVal*stake)+stake):(formStatus==0?-stake:+stake))}} 
+
+                                        </div>
+                                        <input type="hidden" id="NewLiability_{{$index}}" name="NewLiability_" value="{{testValue1}}">
+
+                                         </strong>
+                                         <div class="size" style='{{getValColor((getSumValPnL((RunnerValue|filter: {"SelectionId":marketInfo.selectionId})[0].winValue,(RunnerValue|filter:{"SelectionId":marketInfo.selectionId})[0].lossValue)+(marketInfo.selectionId==selectionId?(formStatus==0?+((priceVal*stake)-stake):-(priceVal*stake)+stake):(formStatus==0?-stake:+stake))))}}'>
+                                            <span> {{(getSumValPnL((RunnerValue|filter:{"SelectionId":marketInfo.selectionId})[0].winValue,(RunnerValue|filter:{"SelectionId":marketInfo.selectionId})[0].lossValue)+(marketInfo.selectionId==selectionId?(formStatus==0?+((priceVal*stake)-stake):-(priceVal*stake)+stake):(formStatus==0?-stake:+stake)))|number:2}}</span>
+                                         </div> 
+                                    </td> 
+                                    <td class="back unhighlighted hidden-xs" ng-class="{'callYlCss':marketInfo.ex.availableToBack[2].SELECTED}">
+                                         <strong class="odds">{{getOddCalcVal(marketInfo.ex.availableToBack[2].price,1)}}</strong>
+                                         <div class="size">
+                                            <span>{{getOddCalcVal(marketInfo.ex.availableToBack[2].size,2)}}</span>
+                                        </div>
+                                     </td> 
+                                    <td class="back unhighlighted hidden-xs" ng-class="{'callYlCss':marketInfo.ex.availableToBack[1].SELECTED}"> 
+                                         <strong class="odds">{{getOddCalcVal(marketInfo.ex.availableToBack[1].price,1)}}</strong> 
+                                        <div class="size">
+                                            <span>{{getOddCalcVal(marketInfo.ex.availableToBack[1].size,2)}}</span>
+                                            </div>
+                                     </td>
+                                     <td class="back" ng-class="{'callYlCss':marketInfo.ex.availableToBack[0].SELECTED}" ng-click="getOddValue($event,marketInfo.ex.availableToBack[0].price+oddsLimit,marketInfo.MstCode,0,GetMarketBackLayDataSelectionName[$index].runnerName,marketInfo.selectionId)">
+                                          <strong class="odds">{{getOddCalcVal(marketInfo.ex.availableToBack[0].price,1)}}</strong>
+                                         <div class="size">
+                                            <span>{{getOddCalcVal(marketInfo.ex.availableToBack[0].size,2)}}</span>
+                                            </div>
+                                    </td>
+                                    <td class="lay" ng-class="{'callCYanCss':marketInfo.ex.availableToLay[0].SELECTED}" ng-click="getOddValue($event,marketInfo.ex.availableToLay[0].price+oddsLimit,marketInfo.MstCode,1,GetMarketBackLayDataSelectionName[$index].runnerName,marketInfo.selectionId)">
+
+                                        <strong class="odds" ng-model="testModel">{{getOddCalcVal(marketInfo.ex.availableToLay[0].price,1)}}</strong>
+                                        <div class="size">
+                                            <span>{{getOddCalcVal(marketInfo.ex.availableToLay[0].size,2)}}</span>
+                                        </div>
+                                     </td> 
+                                    <td class="lay unhighlighted hidden-xs" ng-class="{'callCYanCss':marketInfo.ex.availableToLay[1].SELECTED}" >
+                                        <strong class="odds" ng-model="testModel">{{getOddCalcVal(marketInfo.ex.availableToLay[1].price,1)}}</strong>
+                                        <div class="size">
+                                            <span>{{getOddCalcVal(marketInfo.ex.availableToLay[1].size,2)}}</span>
+                                         </div>
+                                    </td>
+                                    <td class="lay unhighlighted hidden-xs" ng-class="{'callCYanCss':marketInfo.ex.availableToLay[2].SELECTED}" >
+
+                                        <strong class="odds" ng-model="testModel">{{getOddCalcVal(marketInfo.ex.availableToLay[2].price,1)}}</strong>
+                                        <div class="size">
+                                            <span>{{getOddCalcVal(marketInfo.ex.availableToLay[2].size,2)}}</span>
+                                        </div>
+                                    </td>
+
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+                <div class="betOverlay" ng-if="PLAYPAUSE==1">
+                    
+                </div>
+
+            </div>
+
+        <div class="big-odd-stat" ng-show="GetMarketBackLayData.status!='OPEN'">
+            <span>{{GetMarketBackLayData.status}}</span>
+        </div>  
+       
+    </div>
+
+    <div class="col-sm-4 col-md-4">
+        <crntusrpsn></crntusrpsn>
+        <div ng-repeat="FancyObject in FancyData">
+            <div ng-hide="FancyObject.active==2 || FancyData.length==0">
+                
+                <div class="fancy">
+                    <div class="row sport-high fancyListDiv" style="margin-bottom:1px;">
+                        <div class="ses-fan-box clearfix">
+                            <div class="col-sm-12">
+                                <div class="fancy-heading fancy-head" ng-click="$parent.accBet(3);showSessionFancy(FancyObject.TypeID,FancyObject.ID);" ng-show="FancyData.length>0">
+                                    {{FancyObject.HeadName}} <!-- || {{FancyObject.active}} -->
+                                    <span class="rigt-ref">
+                                        <i class="glyphicon " class="glyphicon-minus"></i>
+                                    </span>
+                                </div>
+
+                                <div style="display:block; vertical-align:top; margin-right:0; border:solid 2px #666; margin-bottom:0;min-height:40px;">
+                                            <div style="display:inline-block;min-height: 40px;width: 25%;vertical-align:middle;">
+                                                <div class="head-ses-fan" style=" line-height: 20px;margin-right:3px; margin-left:5px; text-align:center; margin-top:0;min-height:40px;"><span style="color:#FCA4B7; font-size:15px;">Lay</span><br />[NO]</div>
+                                            </div>
+                                            <div style="display:inline-block;min-height: 40px;width: 25%;vertical-align:middle;">
+                                                <button style="min-height:20px;" class="lay-cell cell-btn" ng-disabled="FancyObject.active==0" ng-click="display_Yesfancy(FancyObject.SessInptNo, FancyObject.ID,$index);">{{FancyObject.SessInptNo}}</button>
+                                                <button style="min-height:20px;" disabled class="disab-btn">{{FancyObject.NoValume}} </button>
+                                            </div>
+                                            <div style="display:inline-block;width: 24%;min-height: 40px;vertical-align:middle;">
+                                                <div class="head-ses-fan" style="     line-height: 20px;margin-right:3px; margin-left:3px; text-align:center; margin-top:0px;"><span style="color:#7CC4F7; font-size:15px;">Back</span><br />[Yes]</div>
+                                            </div>
+                                            <div style="display:inline-block;width: 20.4%;vertical-align:middle;min-height: 40px;float: right;">
+                                                <button style="min-height:20px;" class="back-cell cell-btn" ng-disabled="FancyObject.active==0" ng-click="display_Nofancy(FancyObject.SessInptYes, FancyObject.ID,$index);">{{FancyObject.SessInptYes}}</button>
+                                                <button style="min-height:20px;" disabled class="disab-btn">{{FancyObject.YesValume}}</button>
+                                            </div>
+                                        </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="row padding" ng-if="gtTypeId !=3">
+    <matchunmatchlist></matchunmatchlist>
+</div>
+ <!-- <div class="row">
+    <betslist fancy="true" betslip="false" acc2="{{acc2}}"></betslist>
+</div> -->

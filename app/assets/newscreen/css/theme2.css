@@ -1,0 +1,282 @@
+.notuser input:-webkit-autofill, .notuser textarea:-webkit-autofill, .notuser select:-webkit-autofill{    -webkit-box-shadow: 0 0 0 1000px transparent inset !important;}
+
+.navbar-dark, .innercontent, .rightsidebar .right_sidebar, .show_betinfo .panel-title a, .main-sidebar, .left-side,.btn-info, .match-centre .event-header h1, .matchlistnew p,.backbutton,
+.container-login100::before,body.loginpage, .change_password .form-group [type="submit"], .top-menu-cont .md-button.active, .btn-primary, .rang-head, .main-header, .btn-warning, .actionbox i,.first_row li [type="button"],.tabsdemoDynamicHeight md-content md-tabs md-tabs-wrapper, .livetv_heading, .account_overview .credit, #menu2,#menu2 ul li, .edit_stakes .form_button a, #navbarResponsive .dropdown-menu-right .dropdown-item:hover,  .tab-label, .closebox .fa, .md-open-menu-container .md-button:hover, .content-wrapper .pagination>li>a, .report_page .form-group .btn-primary,
+.navbar-dark, .res-sub button, .form_box .file-icons button {background: #202020 !important}
+
+
+.tabsnew a{ background: #1c703b !important}
+.first_row li [type="button"], div[data-tree-model] li i, div[data-tree-model] li span,
+#alltabs a:focus, .tabsnew a.active{color:#000 !important;    border-color: #202020;}
+.backbtn, .searchbar{ background: #0a5f29;}
+.navbar-toggler-right{background:#525252;}
+
+#menu2 ul li:hover{background: #444343  !important;}
+#menu2 ul a:hover{ color:#fff;}
+.report_page .form-group .btn-primary{ border-color:#202020;}
+.report_page .form-group .btn-primary:hover{ background:#ffb80c  !important; border-color:#ffb80c  !important;}
+
+.md-datepicker-calendar-icon,
+.page-heading{color: #202020}
+
+html, body{ background: #fff;}
+#menu2 ul a i{ color:#fff;}
+.marqueeHead {background: #fff;}
+.content-wrapper .pagination>li>a, .chipsummary .panel-default>.panel-heading, .cur-user-pos .table-responsive, .btn-warning, .chipsummary .panel,.btn-info,
+.change_password .form-group [type="submit"]{ border-color: #202020 }
+
+.md-default-theme .md-datepicker-triangle-button .md-datepicker-expand-triangle, .md-datepicker-triangle-button .md-datepicker-expand-triangle{border-top-color:rgba(0,0,0,0.38) !important}
+
+.chipsummary .panel, .fancy-collapse-panel .panel-default, .panel-default,.fancy_wrapper.market-cont.box-cont .login_table .table tbody td{    border-color: #7f7f7f !important;}
+.md-icon-button+.md-datepicker-input-container{border-bottom: 1px solid #fff !important;}
+
+
+.form-control{ border: 1px solid #111}
+.wrap-login100{background: #101010;}
+
+.tab-label,.md-ink-ripple:hover a, .account-overview .menu-item .label, .othermenu a, .innercontent, .account-overview .login-name,.tabsnew a, .content-wrapper .pagination>li>a, .ag-fresh .ag-header-cell-label,#menu2 a{ color: #fff;}
+.load-box{    background: #000000bd !important;}
+
+.redio_section .selectpicker, .form-control{ padding-left: 12px;}
+
+md-content{   border-radius: 6px;}
+#menu2 ul a:hover{}
+h5.ng-binding, a.logout, a.logout i,
+.content-wrapper h1, .master-cont h5.ng-binding{ color: #202020 !important;}
+.binding{border-bottom: solid 1px #202020;}
+.content-wrapper .total-box h1{    color:#81c139}
+
+.chngpass .form_box input{ color: #111;}
+
+
+.member_listing,  div[data-tree-model] ul ul,
+.sidebar-menu>li{ background: none !important}
+
+
+.report_page .form-group .btn-primary, .report_page .form-group .btn-primary:hover,
+.content-wrapper .pagination>li>a{ border: none !importnt;}
+
+.lst_master_top .top_table_form .table-condensed>tbody>tr:nth-of-type(2n+1),
+.table-striped>tbody>tr:nth-of-type(2n+1){    background: rgba(0,0,0,0.1);}
+.sidebar-menu>li{border-top: 1px solid rgba(0,0,0,0.1);}
+
+.unmatchedScrollTable thead tr,
+.chipsummary .panel-default>.panel-heading, .resp_table table th{ background: #7f7f7f !important} 
+
+
+.form_box label, .md-default-theme .md-datepicker-input, .md-datepicker-input, .lst_master_top .table td, .form_box .form-control,  .market-cont, .chipsummary .market-cont .market-wrapper tr .running-cell *, .posi-table th, .posi-table td, .match-heading .whiteclor,
+.chipsummary .panel .panel-body .chip-table td a, .chipsummary .panel .panel-green .chip-table td a, .ag-blue .ag-ltr .ag-cell-no-focus, .ag-blue .ag-row-even a, .ag-blue .ag-row-odd a,
+ .login_table .table tbody td,.login_table a, .chipsummary .panel.panel-green .panel-body, .chipsummary .panel.panel-pink .panel-body, .login_table .table thead tr, .login_table tfoot.footer-table, .login_table .dealerclient a, #content2 ul li, .innerbox .table tbody td, .form_box1 p, .innerbox h4, .inner-head-form, .listdata-table .table input[type="text"], .sport_blk li a, .lst_master td, .nobgtbl .lst_master td, table.table.dealerclient thead tr{ color: #4c4c4c !important}
+.sport_blk.newdesign li a{ color:#fff !important;}
+.sport_blk.newdesign ul.nav-tabs li a{ color:#4c4c4c !important;}
+.sport_blk.newdesign ul.nav-tabs li.active a{ color:#fff !important;}
+.sport_blk li a{ background:#f5f5f5;}
+.posi-table tbody tr:nth-of-type(odd),
+.login_table .table thead tr, .onepagehitdiv .bg-primary {   background: rgba(0,0,0,0.4)!important;	color: #fff !important;}
+
+.login_table .table tbody tr:hover td a,
+.login_table .table tbody tr:hover td{ color: #fff !important}
+
+.redio_section .selectpicker, .form-control, .range-sm-box, .form_box select,
+.form_box input{    color: #111; background: #fff;}
+
+input:focus, textarea:focus, select:focus{border-bottom: 1px solid #000000 !important;}
+
+.edit-btn, .login_table .edit-btn,
+a.result-btn{    background: rgb(40, 146, 79);     color: #fff !important;}
+
+.member_listing thead th{ color: #fff !important}
+
+.main-sidebar, .left-side{    background: rgba(0,0,0,0.8);}
+
+.fancy_wrapper,
+.login_table .table thead tr.masterbalance{background: #fff !important;}
+
+.login_table .table td.red{    color: red !important;}
+.login_table .table td.green{  color: #00dc61 !important;}
+
+/*.box-heading{ background: none}*/
+.login_table .table tbody tr:hover{ background:#7f7f7f !important}
+
+#livesmatch .box-heading{ background: #fff !important}
+.report_page .bg-primary{background-color: rgb(127, 127, 127)!important;}
+
+.login_table .table thead tr,
+tr.row-name.client-rowthead th{ color: #fff}
+
+
+.chipsummary .panel.panel-green .panel-body, .chipsummary .panel.panel-pink .panel-body, .ag-blue .ag-row-even, .ag-blue .ag-row-odd,
+.content-wrapper{ background: #fff !important;}
+.text-right [style="color:Black;"]{    color: #505050!important;}
+.total-box {    background: rgb(82, 82, 82);    border: none;	color: #fff;}
+label{ color: #111;}
+.report_page .form-group .form-control{    border: 1px solid #333;       background: none;  color: #111;}
+.client-formset input,  .lst_master_top .form_box .form-control,
+option{ background: #fff !important; color: #111!important}
+
+.notuser input:-webkit-autofill{ -webkit-text-fill-color: #111!important}
+
+.md-calendar tbody, .md-calendar td, .md-calendar tr{ background: #fff !important;     color: #41495d!important;}
+.ag-layout-normal .ag-header-container, .ag-header-row{background-color: #333!important;}
+.ag-blue .ag-row-odd{    background-color: #ddebf7 !important;}
+.md-datepicker-input{    border-bottom: 1px solid;}
+
+
+button.btn-primary{ border-color: #202020 !important;}
+button.btn-primary:hover{ background:#1d1c1c !important; border-color: #1d1c1c !important;}
+.switch-input:checked ~ .switch-label{ background:#202020; border-color: #202020;}
+.switch-input:checked ~ .switch-handle{ border-color: #202020;}
+
+.innerbox{ background:rgba(0,0,0,0.1);}
+
+.sport_blk .nav-tabs > li.active > a, .nav-tabs > li.active > a:focus, .nav-tabs > li.active > a:hover{ background:#202020 !important; border-color: #202020 !important;}
+
+.newdesign .bet_table .table tbody tr:nth-of-type(2n+1){ background: #202020 !important;}
+.sidebar-menu .treeview-menu a{ background:rgba(0,0,0,0);}
+.sidebar-menu .treeview-menu > li{ border-top:1px solid #3a3a3a;}
+.sidebar-menu .treeview-menu a:hover{ background:rgba(0,0,0,0.15);}
+.sidebar-menu .treeview-menu > li.active > a{ background:rgba(0,0,0,0.25);}
+.skin-blue .sidebar-menu > li > .treeview-menu{ background: #1d1c1c !important;}
+.dealerclient a.btn{ color:#fff !important;}
+.btn-success{ background-color:#1d1c1c; border-color:#1d1c1c;}
+.btn-success:hover{ background-color:#202020; border-color:#202020;}
+.lst_master_top .form_box button{ background: none !important;}
+.lst_master_top .form_box .file-icons button{ background: #202020 !important;}
+md-tabs .md-tab.md-active{}
+
+
+.popup-form-box div{ color:#202020 !important; border-color:#202020 !important;}
+.popup-form-box div span{ color:#202020 !important;}
+.popup-form-box .btn-primary, .report_filter li:last-child .form-group [type="button"], .top-section .res-sub button{  background:#202020 !important; border-color:#202020 !important;}
+.popup-form-box .btn-primary:hover, .report_filter li:last-child .form-group [type="button"]:hover, .top-section .res-sub button:hover{  background:#1d1c1c !important; border-color:#1d1c1c !important;}
+.sidebar li a:hover{ background:#444343  !important;}
+
+
+.inplay .newdesign .bet_table .table.my-market tbody tr:nth-of-type(2n+1), 
+.inplay .newdesign .sport_blk.newdesign .bet_table .table tbody tr:nth-of-type(2n+1){ background:rgba(0,0,0,0.1) !important;}
+
+.inplay .newdesign .bet_table .table tbody tr:nth-of-type(2n+1){ background: #fff !important;}
+.inplay .newdesign .sport_blk.newdesign .bet_table .table tbody tr:nth-of-type(2n){ background: #1d1c1c !important;}
+
+
+
+.form_row input::placeholder {
+    color: #000 !important;
+}
+.sport_blk.newdesign h2 {
+    color: #000;
+}
+
+.md-datepicker-input-container input::placeholder {
+    color: #000 !important;
+}
+input.md-datepicker-input {
+    padding-left: 10px;
+}
+.login_table .table td div[style="color:#000;"] {
+    color: #000 !important;
+}
+
+
+
+.market-wrapper th, .market-wrapper td {color: #000;}
+
+.market-wrapper th, .market-wrapper td .size {
+    color: #000!important;
+}
+.cur-back {color: #fff;}
+.sport_blk .nav-tabs {padding-bottom: 3px;}
+
+ul.submenu li span {
+    color: #000 !important;
+}
+
+.md-datepicker-calendar {
+    background: #fff;
+}
+
+/****/
+.ag-blue .ag-cell-focus {
+    color: #332f2f;
+}
+
+.go-back { background-color: #931500;}
+.norecord {color: #000;}
+
+input::placeholder {color: #000 !important;}
+table.table.chip-table tr td.text-center {
+    text-align: left;
+}
+
+.box-heading .page-heading {
+    color: #fff !important;
+}
+.notfound {color: #000;}
+
+.userlist-table .glyphicon {font-size: 12px;}
+.master-cont h2 {
+    color: #000 !important;
+}
+.chipsummary .panel {
+    background-color: rgba(0,0,0,.05) !important;
+}
+.dealerclient {
+    color: #000;
+}
+.dealerclient a {
+    color: #000;
+}
+
+
+.betsilip_sec .nav-pills a {background: #000; color: #fff;}
+td.status-cont input {
+    color: #000 !important;
+}
+
+span.rigt-ref i {
+    color: #00a700;
+}
+.disab-btn {color: #fff;}
+.chipsummary .market-cont .market-wrapper tr .running-cell label {
+    color: #00e400 !important;
+}
+md-switch.md-default-theme .md-thumb, md-switch .md-thumb {
+    background-color: #05de05;
+}
+.goin-play {color: #000;}
+.match-centre .event-header h1 {
+    color: #fff !important;
+}
+table.plus-minus-table .green {
+    color: green !important;
+}
+
+
+.tabsdemoDynamicHeight .nav-tabs>li>a {
+    color: #000;
+}
+
+table.table.chip-table .green {
+    color: green !important;
+}
+
+
+ul.treeview.newtree li a {
+background: none;
+}
+.login_table .table tbody tr {background:inherit !important;}
+.score-table th, tr {background:inherit !important;}
+
+.content-wrapper .pagination>li.active > a {
+    background: #999999 !important;
+    color: #fff !important;
+}
+
+
+
+
+
+
+
+
+

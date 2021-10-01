@@ -1,0 +1,20 @@
+<div class="content-wrapper" style="min-height: 720px;">
+    <div class="load-box" ng-show="loading">
+        <img id="mySpinner" src="app/images/loading1.gif" />
+    </div>
+    <h1 class="binding">Term & Condition</h1>
+    <div class="container-fluid" ng-init="GetApkInfo()">
+        <form name="termForm" novalidate>
+            <div class="col-sm-6">
+                <div class="disclaimer_mainpart">
+                    <textarea ng-model="term_text" name="term_text" data-ck-editor required></textarea>
+                    <center> <span style="color:red; text-align:left; font-weight:bold;" ng-show="(termForm.term_text.$invalid && !termForm.term_text.$touched)"> Text is required.</span></center>
+                </div>
+                <div class="disclaimer_sumbitpart">
+                    <button type="submit" class="btn btn-success" ng-click="SaveTermCondition(termForm)"> Submit </button>
+                </div>
+            </div>
+
+        </form>
+    </div>
+</div>

@@ -1,0 +1,177 @@
+      <!-- <div id="myGrid" class="ag-blue" style="height: 450px; margin-top: 4px;"></div> -->
+       <!--  {{allData.browser}} -->
+        <div class="col-sm-8 col-md-8 col-md-12 clearfix" > 
+          <div class="clearfix ">
+            	  <div class="box-heading clearfix">
+                  <div style="float:left;">{{FancyData[0].HeadName}}
+						        <p class="head_min">{{FancyData[0].date | date:'fullDate'}} {{FancyData[0].time}}</p> 
+                  </div>
+                  <div style="float:right; margin-top:9px;">{{MatchName}}</div>
+                </div>
+                 
+                 <div class="fancy_wrapper clearfix ">
+                 		<h3 style="margin-top:10px; font-weight:bold;">{{FancyData[0].HeadName}} </h3> 
+                  		<div class="fancy_top clearfix "> <a href="" class="cell lay-cell" style="background-color: #333333;border-radius: 2px;">
+                        		Rules</a>
+                  			<span>Risk :  00</span>	
+                  		</div>
+                  	   <p>
+                        {{FancyData[0].NoValume}} || {{FancyData[0].YesValume}}
+                          <!-- {{$root.NodeCntUsrDetails}} -->
+                          {{FancyData[0].Remarks}}
+                          <div ng-if="FancyData[0].SessInptYes==FancyData[0].SessInptNo" class="alert alert-info" role="alert">
+                              90:11, Winning amount will be deduct by less {{FancyData[0].pointDiff |number}}% whereas lost amount will be charged by add {{FancyData[0].pointDiff |number}}% .
+                          </div>
+                         <!--  {{FancyData}} -->
+                      </p>
+
+                    <div style="position:relative;">	
+                  		<div class="down_up clearfix" style="margin:15px 0px;" > 
+                        	<ul>
+                              <li>Lay[NO] <!-- {{FancyData[0].active}} --><!-- || {{FancyData[0].NoValume}} --></li>
+                              <li>Back[Yes] <!-- || {{FancyData[0].YesValume}} --></li>
+                              <li><button class="cell lay-cell ball-cell" ng-disabled="FancyData[0].active==0" ng-click="display_Yesfancy(FancyData[0].SessInptNo);">{{FancyData[0].SessInptNo}}</button></li>
+                              <li><button class="cell back-cell ball-cell" ng-disabled="FancyData[0].active==0" ng-click="display_Nofancy(FancyData[0].SessInptYes);">{{FancyData[0].SessInptYes}}</button></li>
+
+                            </ul>
+                  		</div>
+                      <div ng-if="FancyData[0].active==0" class="ball-msg-box">
+                                <h1>Ball Started</h1>
+                      </div>
+                      <div ng-if="FancyData[0].active==4 || FancyData[0].active==2" class="ball-msg-box">
+                                <h1>{{FancyData[0].DisplayMsg}}</h1>
+                      </div>
+                        
+                      <div class="bet_stake_box clearfix">
+                                <!--Box 1 Start-->
+                               
+                                    <div ng-show="showOdd1==true && (userType==3 || $root.NodeCntUsrDetails.usetype==3) && (userType!=0)" class="check-element animate-show lay-ele-box"> 
+                                        <div class="even_top clearfix">
+                                          <form name="oddForm" method="post" >
+
+                                              <div class="on-bet-left clearfix"> 
+                                                <div class="bet-inp-des">
+                                                  <span>Bet On Lay[NO] </span>
+                                                  <input type="number" class="bet-on" name="sessionValueNo" ng-model="sessionValueNo" ng-value="FancyData[0].SessInptNo" readonly="readonly">
+                                                </div>
+                                                <div class="bet-inp-des">
+                                                  <span>Stake</span>
+                                                  <input type="number" class="stake-inp" min="0" ng-model="betValue" id="betValueLay" name="betValue" >
+                                                  <input type="hidden" name="odd" value="1" ng-model="OddValue">
+                                                </div>
+                                              </div>
+
+                                              <div class="on-bet_right clearfix"> 
+                                                  <button class="eve_but" ng-disabled="FancyData[0].active==0" ng-click="saveSessionBet(1,FancyData[0].SessInptNo,FancyData[0].pointDiff)">PLACE</button>
+                                                  <button class="odd_but" ng-click="showOdd1=false;showEven1=false;betValue=0;" >CANCEL </button>
+                                                  <button class="eve_but" ng-click="betValue=0" >CLEAR </button> 
+                                              </div>
+                                          </form>
+                                        </div>
+                                                        
+                                        <div class="even_bot clearfix">
+
+                                            <button ng-click="betValue=betValue+50" class="eve_but" >50</button>
+                                            <button ng-click="betValue=betValue+100" class="eve_but" >100</button>
+                                            <button ng-click="betValue=betValue+250" class="eve_but" >250</button>
+                                            <button ng-click="betValue=betValue+500" class="eve_but" >500</button>
+                                            <button ng-click="betValue=betValue+1000" class="eve_but" >1000</button>
+                                            <button ng-click="betValue=betValue+5000" class="eve_but" >5000</button>
+                                            
+                                        </div>
+                                       
+                                    </div>
+                                
+                                <!--Box 1 End-->
+                                
+                                            
+                                <!--Box 2 Start-->
+                                
+                                    <div ng-show="showEven1==true && (userType==3 || $root.NodeCntUsrDetails.usetype==3)" class="check-element animate-show back-ele-box"> 
+                                        <div class="even_top clearfix">
+                                          <form name="oddForm" method="post" >
+                                              <div class="on-bet-left clearfix"> 
+                                                <div class="bet-inp-des">
+                                                  <span>Bet On Back[Yes] </span>
+                                                  <input type="number" class="bet-on" name="sessionValueYes" ng-model="sessionValueYes" ng-value="FancyData[0].SessInptYes" readonly="readonly">
+                                                </div>
+
+                                                <div class="bet-inp-des">
+                                                  <span>Stake</span>
+                                                  <input type="number" class="stake-inp" min="0" ng-model="betValue" id="betValueBack" name="betValue" >
+                                                  <input type="hidden" name="even" value="0" ng-model="EvenValue">
+                                                </div>
+
+                                              </div>
+                                              <div class="on-bet_right clearfix"> 
+                                                  <button class="eve_but" ng-disabled="FancyData[0].active==0" ng-click="saveSessionBet(0,FancyData[0].SessInptYes,FancyData[0].pointDiff)">PLACE</button>
+                                                  <button class="odd_but" ng-click="showOdd1=false;showEven1=false;betValue=0;" >CANCEL </button>
+                                                  <button class="eve_but" ng-click="betValue=0" >CLEAR </button> 
+                                              </div>
+                                          </form>
+                                        </div>
+                                                        
+                                        <div class="even_bot clearfix">
+
+                                            <button ng-click="betValue=betValue+50" class="eve_but" >50</button>
+                                            <button ng-click="betValue=betValue+100" class="eve_but" >100</button>
+                                            <button ng-click="betValue=betValue+250" class="eve_but" >250</button>
+                                            <button ng-click="betValue=betValue+500" class="eve_but" >500</button>
+                                            <button ng-click="betValue=betValue+1000" class="eve_but" >1000</button>
+                                            <button ng-click="betValue=betValue+5000" class="eve_but" >5000</button>
+                                        </div>
+                                    </div>
+                                
+                                <!--Box 2 End-->
+                      </div>
+                    </div>
+                      </div>
+                       <div ng-show="ngValue==true;" class="place-alert">
+                              {{ngMessage}}
+                       </div>
+          </div>
+              <div class="clearfix fancy_bot col-lg-12 col-md-12 col-sm-12 lst_top_table">
+                <div class="box-heading"> Fancy Bets  </div>
+                 
+                  
+                  <div class="resp_table clearfix ">
+
+                      <div id="myGrid" class="ag-fresh" style="height: 450px; margin-top: 4px;"></div>
+                        
+                  </div>
+                </div>
+              </div>
+        
+              <div class="col-sm-4 col-md-4 " style="padding-right:0px;">
+                <div>
+                  <div class="">
+                    <div class="box-heading"> Score Position </div>
+                    	<div class="bet-cont tab_container">
+                      	<table class="table bets-table">
+                          <thead>
+                            <tr>
+                              <th style="text-align:center;">Score</th>
+                              <th style="text-align:center;">Amount</th>
+                              <!--  <th style="text-align:center;">Yes[Back]</th>
+                                <th style="text-align:center;">No[Lay]</th> -->
+                                <!--  <th style="text-align:center;">ResultValue</th> -->
+                            </tr>
+                          </thead>
+                          
+                          <tbody align="center"><!-- .ResultValue -->
+                            <tr ng-repeat="score in scorePosition"> 
+                                  <!-- <td>{{$index+1}}</td>  -->
+                                 
+                                  <td class="back-txt">{{score.SessInptYes}}</td>
+                                   <td class="amou_no amt-txt">{{score.ResultValue==null?0:score.ResultValue}}</td>
+                                  <!-- <td class="lay-txt">{{score.SessInptNo}}</td> -->
+                                 <!--  <td class="amou_no">{{score.ResultValue==null?0:score.ResultValue}}</td> -->
+                              </tr>
+                           
+                          </tbody>
+                        </table>
+                    	</div>
+                  </div>
+                </div>
+              </div>
+  

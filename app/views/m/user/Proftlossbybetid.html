@@ -1,0 +1,75 @@
+<div class="content-wrapper" style="min-height: 720px;">
+<h1 class="page-heading">Bet History<!--{{MarketId}}  || {{getMiusAc}} -->
+    <div class="file-icons" style="margin:0; float:right; display:inline-block;">
+        <a ng-click="onBtExport()"><img src="app/images/file2.png" style="margin-top:-5px;display:inline-block;" /></a>
+    </div></h1>
+
+     <div class="col-sm-12 col-md-12 padding chipsummary">
+         <div class="clearfix">
+            <div class="panel panel-default">
+               <div class="panel-heading">
+                   <div class="row">
+                       <div class="col-sm-4 col-md-5">{{Marketdata.EventName}}[ {{Marketdata.MarketName}} ] </div>
+                       <div class="col-sm-4  col-md-5"> A/C Of {{GTUserName}}</div>
+                       <div class="col-sm-4 col-md-2"><button type="button" class="btn btn-info btn-sm" ng-click="GetPreviousPage()"><i class="glyphicon glyphicon-arrow-left" style="margin-right:5px; font-size:11px;"></i>Go Back</button></div>
+                   </div>
+               </div>
+         </div>
+
+    </div>
+    <div class="col-lg-12 col-md-12 col-sm-12 " >
+        <div class="lst_master_top clearfix">
+            <div class=" col-lg-12 col-md-12 col-sm-12 col-xs-12 clearfix top_table_form" style="padding: 0px;">
+<div class="onepagehitdiv"> 
+
+ <table class="table onepagehit table-condensed table-responsive">  
+         <thead>
+            <tr class="bg-primary">
+               <th>SNo</th>
+               <th>Description</th>
+               <th>Selection Name</th>
+               <th>Type</th>
+               <th>Odds</th>
+               <th>Stack</th>
+               <th>Date</th>
+               <th>P | L</th>
+               <th>Profit</th>
+               <th>Liability</th>
+               <th>Status</th>
+	       <th>bet_id</th>
+
+            </tr>
+         </thead>   
+         <tbody>
+            <tr ng-repeat="GetbetData in BetHistory" >
+               <td>{{(currentPage-1)*entryLimit +$index+1}}</td>               
+              
+	 <td class="text-left">{{GetbetData.Description}}</td>
+               <td>{{GetbetData.selectionName}}</td>
+               <td><span class="badge " ng-class="{'badge-danger': GetbetData.Type == 'Lay' ,'badge-info': GetbetData.Type == 'Back' } ">{{GetbetData.Type}}</span></td>
+               <td>{{GetbetData.Odds}}</td>
+               <td>{{GetbetData.Stack}}</td>
+               <td>{{GetbetData.MstDate}}</td>
+               <td>{{GetbetData.P_L}}</td>
+               <td>{{GetbetData.Profit}}</td>
+               <td>{{GetbetData.Liability}}</td>
+               <td>{{GetbetData.STATUS}}</td>
+		 <td>{{GetbetData.mstcode}}</td>
+ 		
+            </tr>
+         </tbody>
+        </table>
+        
+     </div>   
+</div>
+        
+            <div id="myGrid" ng-show="false" class="ag-fresh" style="height: 450px; margin-top: 4px;"></div>
+            <div class="total-box clearfix">
+                <h1 class="total-green">Total P&L: {{SumOfP_L | number:2}}</h1>
+                <h1 class="total-green">Total Profit: {{SumOfProfit | number:2}}</h1>
+                
+                <h1 class="total-red">Total Liability: {{SumOfLiability | number:2}}</h1>
+            </div>
+        </div>
+    </div>
+</div>

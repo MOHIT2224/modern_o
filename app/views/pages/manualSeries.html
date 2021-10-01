@@ -1,0 +1,52 @@
+
+<div class="content-wrapper ng-scope" style="min-height: 720px;">
+    <div class="load-box" ng-show="loading"><img id="mySpinner" src="app/images/loading1.gif"/></div>
+    <div class="col-sm-12 col-md-12 master-cont">
+        <button class="btn btn-success client-btn" ui-sref="dashboard.SeriesActDact">Back</button>
+        <h2 style="text-align: center; font-size: 28px; margin-bottom: 15px;color:white">Create Manual Series</h2>
+        <div class="row">
+            <div class="clearfix creat_form">
+                <p ng-show="message" style="text-align: center; color:#FE5454; font-size: 18px; margin-bottom: 15px;">
+                    {{message}}</p>
+                <!--  <span ng-show="message" class="error"></span> -->
+                <form name="manualSeries" >
+
+                    <div class="form_box  col-lg-6 col-md-6 col-sm-6 col-xs-12">
+
+                    <label>Sport Name</label>
+                        <select ng-model="SportID" ngrequired>
+                            <option value="{{sports.id}}" ng-repeat="sports in sprtData">{{sports.name}}</option>
+
+                        </select>
+                    </div>
+                    <div class="form_box  col-lg-6 col-md-6 col-sm-6 col-xs-12">
+                        <label>Series Name</label>
+                        <p class="input-group datepick-box">
+                            <input type="text" class="form-control" ng-model="manualSeriesName" ng-required="true" placeholder="Enter series name"
+                            />
+
+                        </p>
+                    </div>
+            </div>
+
+
+            <div class="form_row col-lg-12 col-md-12 col-sm-12 col-xs-12 clearfix">
+                <div class="form_box  col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                    <button type="submit" class="btn btn-primary" ng-disabled="!manualSeries.$valid" ng-click="createSeries()">Submit</button>
+                </div>
+            </div>
+
+
+            </form>
+
+
+        </div>
+    </div>
+</div>
+</div>
+
+
+
+
+
+  

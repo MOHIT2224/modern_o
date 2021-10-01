@@ -1,0 +1,1642 @@
+<style>
+    .backcls {
+        background: #a7d8fd !important;
+    }
+
+    .laycls {
+        background: #f9c9d4 !important;
+    }
+</style>
+<div class="content-wrapper ng-scope" style="min-height: 720px;">
+    <div class="load-box" ng-show="loading">
+        <img id="mySpinner" src="app/images/loading1.gif"/>
+    </div>
+
+    <div class="">
+        <div class="col-sm-12 col-md-12 col-xs-12 padding" ng-init="GetMarketListId()">
+            <div class="row">
+                <div class="col-md-12 col-xs-12 padding border_none" ng-if="FinalArray.length>0">
+                    <div ng-if="ScoreResult==angular.isUndefinedOrNull" class="row match-heading" style="padding-top:25px; padding-bottom:25px;">
+                        <div class="col-lg-8 col-xs-12"><h4>{{matchName}} <span ng-if="Day>1" class="commonbtn">{{Day}} Day </span> </h4>  <span
+                                style="color:#ff0000;margin-left:5px" ng-if="false">Score is coming soon...</span></div>
+                        <div class="col-lg-4 col-xs-12"><p>{{dateForm|date:'EEEE dd MMM, hh:mm a'}}</p></div>
+
+                    </div>
+					
+					 </div>
+	
+	   <div class="row" style='width:100%; margin: 0; clear:both;'>
+	
+			<div class="col-md-8 padding" style='padding: 0;max-width: 62%;'>		
+ 
+<div class="livetv_heading collapsed" onclick="ChangeFrameN()"  data-toggle="collapse" data-target="#livescoregraphic" aria-expanded="true">Graphic Score</div>
+		
+		 <div class=" collapse" id="livescoregraphic" ng-if="$root.IsShowTv=='Y'">
+		   
+		  <div  id="dvPlayernew">
+             </div>
+		   </div>
+		   
+		   
+		   </div>
+		   
+		   <div class="col-md-5 padding" style="  max-width: 38%; padding: 0 0 0 5px;">	
+		   	
+        <div class="livetv_heading collapsed" data-toggle="collapse" data-target="#livetv" aria-expanded="true">Live TV</div>
+		
+		
+
+        <div class=" collapse" id="livetv" ng-if="$root.IsShowTv=='Y'">
+             <div >
+
+
+                                <input type="radio" name="TV" onclick="ChangeFrame(1)" />TV1
+                                <input type="radio" name="TV" onclick="ChangeFrame(2)" />TV2
+                                <input type="radio" name="TV" onclick="ChangeFrame(3)" />TV3
+                                <input type="radio" name="TV" onclick="ChangeFrame(4)" />TV4
+								 <input type="radio" name="TV" onclick="ChangeFrame(5)" />Tennis
+                                <a style="cursor:pointer;color:red;font-size:20px;" onclick="ChangeFrame(0)">X</a>
+                            </div>
+                            <div  id="dvPlayer" style=" height: 240px;">
+                            </div>
+           <!-- <canvas id="video-canvas" style="width:100% !important;height: 100% !important;"></canvas> -->
+        </div>
+		   </div>
+  
+  </div>
+  <div class='clearfix'></div>
+                    <div class="box-heading" style='width:100%; clear:both;   '>
+                        <!-- for Cricket -->
+                        <div class="row" ng-if="SPORTID==4">
+                            <div class="col-sm-12 tb">
+                                <div class="match-centre ng-scope" ng-if="false">
+                                    <div class="event-header">
+                                        <h1 class="ng-binding"><i class="apl-icon-custom-play fa fa-play-circle"></i>
+                                            {{matchName}}</h1>
+                                        <i analytics-on="" analytics-event="Expand" analytics-category="Match Stats"
+                                           analytics-label="Expand Match Centre"
+                                           class="match-stats-body-button apl-icon-chevron-up"
+                                           ng-click="vm.toggleStatsBody()"></i>
+                                        <i id="showmatchcenter" class="match-stats-body-button fa fa-chevron-up" ng-hide="ScoreResult.status!='InPlay' && ScoreResult.status=='BetweenInnings' || ScoreResult.status=='Completed'"></i>
+                                    </div>
+                                    <!-- ngIf: vm.isHeadVisible -->
+                                    <div class="match-centre-header ng-scope">
+                                        <div class="toss">
+                                            <h2 class="ng-binding ng-scope" ng-if="ScoreResult.battingTeam !== null">
+                                                {{ScoreResult.battingTeam.name}},
+                                                {{ScoreResult.battingTeam.score}}-{{ScoreResult.battingTeam.wickets}}
+                                                ({{ScoreResult.battingTeam.overs}}.{{ScoreResult.battingTeam.balls}} Ovs)  </h2>
+                                            <!-- end ngIf: vm.stats.battingTeam !== null -->
+                                            <p class="ng-binding"><span ng-class="vm.stats.decision.statusStyle"
+                                                                        class="ng-binding"></span>
+                                               <div ng-if="ScoreResult.currentInning==1 && ScoreResult.status!='Completed'"> {{ScoreResult.tossWinner.name}}
+
+                                                {{ScoreResult.tossWinner.decision=='optToBowl' ? 'opt To Bowl'                                                :ScoreResult.tossWinner.decision=='optToBat' ? 'opt To Bat' :ScoreResult.tossWinner.decision}}
+                                        </div>
+                                            <div ng-if="ScoreResult.status=='InPlay' || ScoreResult.status=='BetweenInnings'">
+                                                <div ng-if="ScoreResult.currentInning==2">
+                                                    {{ScoreResult.battingTeam.name}} need  {{ScoreResult.battingTeam.requiredRuns}} runs
+                                                </div>
+                                            </div>
+                                            <div ng-if="ScoreResult.status=='Completed'">
+                                                <div ng-if="ScoreResult.result.type=='Won'">
+                                                  Match {{ScoreResult.result.type.toLowerCase()}} by  {{ScoreResult.result.winnerName}}
+                                                </div>
+                                            </div>
+                                            </p>
+                                        </div>
+                                        <div ng-if="ScoreResult.battingTeam">
+                                            <table class="ng-scope">
+                                                <thead>
+                                                <tr ng-if="ScoreResult.currentInning==1">
+                                                    <th translate="" class="ng-scope ng-binding">PROJ SCR</th>
+                                                    <th translate="" class="ng-scope">P'SHIP</th>
+                                                    <th class="ng-binding">CRR</th>
+                                                    <th translate="" class="ng-scope">LAST WKT</th>
+                                                </tr>
+                                                <tr ng-if="ScoreResult.currentInning==2">
+                                                    <th translate="" class="ng-scope ng-binding">CRR</th>
+                                                    <th translate="" class="ng-scope">P'SHIP</th>
+                                                    <th class="ng-binding">RRR</th>
+                                                    <th translate="" class="ng-scope">LAST WKT</th>
+                                                </tr>
+                                                </thead>
+                                                <tbody>
+                                                <tr ng-if="ScoreResult.currentInning==1">
+                                                    <td class="_align-center ng-binding">
+                                                        {{ScoreResult.battingTeam.projScr}}
+                                                    </td>
+                                                    <td class="_align-center ng-binding">
+                                                        {{ScoreResult.battingTeam.partnerShipScore}}
+                                                    </td>
+                                                    <td class="_align-center ng-binding">
+                                                        {{ScoreResult.battingTeam.runRate}}
+                                                    </td>
+                                                    <td class="_align-center ng-binding">
+                                                        {{ScoreResult.lastBatsmanOut.name}}
+                                                        {{ScoreResult.lastBatsmanOut.batsManRuns}}
+                                                        ({{ScoreResult.lastBatsmanOut.balls}})
+                                                    </td>
+                                                </tr>
+                                                <tr ng-if="ScoreResult.currentInning==2">
+                                                    <td class="_align-center ng-binding">
+                                                        {{ScoreResult.battingTeam.runRate}}
+                                                    </td>
+                                                    <td class="_align-center ng-binding">
+                                                        {{ScoreResult.battingTeam.partnerShipScore}}
+                                                    </td>
+                                                    <td class="_align-center ng-binding">
+                                                        {{ScoreResult.battingTeam.requiredRunRate}}
+                                                    </td>
+                                                    <td class="_align-center ng-binding">
+                                                        {{ScoreResult.lastBatsmanOut.name}}
+                                                        {{ScoreResult.lastBatsmanOut.batsManRuns}}
+                                                        ({{ScoreResult.lastBatsmanOut.balls}})
+                                                    </td>
+                                                </tr>
+                                                </tbody>
+                                            </table><!-- end ngIf: vm.stats.battingTeam !== null -->
+                                        </div>
+                                    </div><!-- end ngIf: vm.isHeadVisible -->
+                                    <script>
+                                        $(document).ready(function () {
+                                            $("#showmatchcenter").click(function () {
+                                                $("#matchcenter").toggle();
+                                                $(this).toggleClass('active');
+                                            });
+                                        });
+                                    </script>
+                                    <!-- ngIf: vm.isBodyVisible -->
+                                    <div class="match-centre-body ng-scope" id="matchcenter" ng-hide="ScoreResult.status!='InPlay' && ScoreResult.status=='BetweenInnings' || ScoreResult.status=='Completed'">
+                                        <div class="overs">
+                                            <!-- ngIf: vm.stats.currentOver -->
+                                            <div ng-if="ScoreResult.currentOver" class="over ng-scope">
+                                                <p title="{{ScoreResult.currentOver.bowlerName}} to {{ScoreResult.currentOver.batsNames[0]}} {{ScoreResult.currentOver.batsNames.length==2 ? 'and' + ScoreResult.currentOver.batsNames[1] : ''}}"
+                                                   class="ng-binding">
+                                                    {{ScoreResult.currentOver.bowlerName}} to
+                                                    {{ScoreResult.currentOver.batsNames[0]}} {{ScoreResult.currentOver.batsNames.length==2 ? 'and' + ScoreResult.currentOver.batsNames[1] : ''}}</p>
+                                                <div class="over-detail">
+                                                    <div class="ng-binding">Ov{{ScoreResult.currentOver.overNumber}}:
+                                                    </div>
+                                                    <ol class="balls">
+                                                        <!-- ngRepeat: ball in vm.stats.currentOver.balls -->
+                                                        <li ng-repeat="ball in ScoreResult.currentOver.balls"
+                                                            class="ball"
+                                                            ng-class="(ball.value=='Wd' || ball.value=='2Wd' || ball.value=='W' || ball.value=='2B' || ball.value=='1L' || ball.value=='Nb' || ball.value=='1Nb') ? ball.type : (ball.type +'_' +ball.value)">
+                                                            {{ball.value}}
+                                                        </li>
+                                                    </ol>
+                                                    <div class="runs-score">
+                                                        <div class="ng-binding">{{ScoreResult.currentOver.runs}} runs
+                                                        </div>
+                                                        <div class="ng-binding">
+                                                            {{ScoreResult.currentOver.score}}-{{ScoreResult.currentOver.wickets}}
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div><!-- end ngIf: vm.stats.currentOver -->
+                                            <!-- ngIf: vm.stats.lastOver -->
+                                            <div ng-if="ScoreResult.lastOver" class="over ng-scope">
+                                                <p title="{{ScoreResult.lastOver.bowlerName}} to {{ScoreResult.lastOver.batsNames[0]}} {{ScoreResult.lastOver.batsNames.length==2 ? 'and' +ScoreResult.lastOver.batsNames[1] : ''}}"
+                                                   class="ng-binding">{{ScoreResult.lastOver.bowlerName}} to
+                                                    {{ScoreResult.lastOver.batsNames[0]}} {{ScoreResult.lastOver.batsNames.length==2 ? 'and' +ScoreResult.lastOver.batsNames[1] : ''}}</p>
+                                                <div class="over-detail">
+                                                    <div class="ng-binding">Ov{{ScoreResult.lastOver.overNumber}}:</div>
+                                                    <ol class="balls">
+                                                        <!-- ngRepeat: ball in vm.stats.lastOver.balls -->
+                                                        <li class="ball"
+                                                            ng-class="(ball.value=='Wd' || ball.value=='2Wd' || ball.value=='W' || ball.value=='2B' || ball.value=='1L' || ball.value=='Nb' || ball.value=='1Nb') ? ball.type : (ball.type +'_' +ball.value)"
+                                                            ng-repeat="ball in ScoreResult.lastOver.balls">
+                                                            {{ball.value}}
+                                                        </li>
+                                                    </ol>
+                                                    <div class="runs-score">
+                                                        <div class="ng-binding">{{ScoreResult.lastOver.runs}} runs</div>
+                                                        <div class="ng-binding">
+                                                            {{ScoreResult.lastOver.score}}-{{ScoreResult.lastOver.wickets}}
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div><!-- end ngIf: vm.stats.lastOver -->
+                                        </div>
+                                        <!-- ngIf: vm.stats.bowler && vm.stats.batsmen.length > 0 -->
+                                        <div ng-if="ScoreResult.bowler && ScoreResult.batsmen.length>0"
+                                             class="ng-scope">
+                                            <table>
+                                                <tbody>
+                                                <tr class="row-highlight">
+                                                    <td translate="" class="ng-scope">Batsmen</td>
+                                                    <td translate="" class="_align-center ng-scope">R</td>
+                                                    <td translate="" class="_align-center ng-scope">B</td>
+                                                    <td translate="" class="_align-center ng-scope">4s</td>
+                                                    <td translate="" class="_align-center ng-scope">6s</td>
+                                                    <td translate="" class="_align-center ng-scope">SR</td>
+                                                </tr>
+                                                <!-- ngRepeat: batsman in vm.stats.batsmen track by $index -->
+                                                <tr ng-repeat="batsman in ScoreResult.batsmen track by $index"
+                                                    class="ng-scope">
+                                                    <td class="ng-binding">{{batsman.name}} {{batsman.isOnStrike ? '*' :
+                                                        ''}}
+                                                    </td>
+                                                    <td class="_align-center ng-binding">{{batsman.batsmanRuns}}</td>
+                                                    <td class="_align-center ng-binding">{{batsman.balls
+                                                        }}
+                                                    </td>
+                                                    <td class="_align-center ng-binding">{{batsman.fours}}</td>
+                                                    <td class="_align-center ng-binding">{{batsman.sixes}}</td>
+                                                    <td class="_align-center ng-binding">{{batsman.strikeRate}}</td>
+                                                </tr>
+                                                <tr class="row-highlight">
+                                                    <td translate="" class="ng-scope">Bowler</td>
+                                                    <td class="_align-center ng-scope" translate="">O</td>
+                                                    <td class="_align-center ng-scope" translate="">M</td>
+                                                    <td class="_align-center ng-scope" translate="">R</td>
+                                                    <td class="_align-center ng-scope" translate="">W</td>
+                                                    <td class="_align-center ng-scope" translate="">ECO</td>
+                                                </tr>
+                                                <tr>
+                                                    <td class="ng-binding">{{ScoreResult.bowler.name}}</td>
+                                                    <td class="_align-center ng-binding">{{ScoreResult.bowler.overs}}
+                                                    </td>
+                                                    <td class="_align-center ng-binding">
+                                                        {{ScoreResult.bowler.maidens}}
+                                                    </td>
+                                                    <td class="_align-center ng-binding">
+                                                        {{ScoreResult.bowler.bowlerRuns}}
+                                                    </td>
+                                                    <td class="_align-center ng-binding">
+                                                        {{ScoreResult.bowler.wickets}}
+                                                    </td>
+                                                    <td class="_align-center ng-binding">
+                                                        {{ScoreResult.bowler.economy}}
+                                                    </td>
+                                                </tr>
+                                                </tbody>
+                                            </table>
+                                        </div><!-- end ngIf: vm.stats.bowler && vm.stats.batsmen.length > 0 -->
+                                    </div><!-- end ngIf: vm.isBodyVisible -->
+                                </div>
+                                <div class="match-centre ng-scope" ng-if="ScoreResult!=angular.isUndefinedOrNull && lastover1.length > 1  ">
+
+                                    <div class="event-header">
+                                        <h1 class="ng-binding"><i class="apl-icon-custom-play fa fa-play-circle"></i>
+                                            {{matchName}}</h1>
+                                        <i analytics-on="" analytics-event="Expand" analytics-category="Match Stats"
+                                           analytics-label="Expand Match Centre"
+                                           class="match-stats-body-button apl-icon-chevron-up"
+                                           ng-click="vm.toggleStatsBody()"></i>
+                                        <i id="showmatchcenter" class="match-stats-body-button fa fa-chevron-up" ng-hide="ScoreResult.status!='InPlay' && ScoreResult.status=='BetweenInnings' || ScoreResult.status=='Completed'"></i>
+                                    </div>
+                                    <!-- ngIf: vm.isHeadVisible -->
+                                    <div class="match-centre-header ng-scope">
+                                        <div class="toss" style="margin-left: 0px;">
+                                            <h2 class="ng-binding ng-scope" ng-if="ScoreResult[0] !== null">
+                                                {{ScoreResult[1].st}},
+                                                {{ScoreResult[0].s}}-{{ScoreResult[0].w}}
+                                                ({{(ScoreResult[0].bd-(ScoreResult[0].bd%6))/6}}.{{ScoreResult[0].bd%6}} Ovs) <span class="right_box">LAST WKT: {{ScoreResult[1].lw}}</span></h2>
+
+                                            <!-- end ngIf: vm.stats.battingTeam !== null -->
+                                            <p class="ng-binding"><span ng-class="vm.stats.decision.statusStyle"
+                                                                        class="ng-binding"></span>
+                                            <div ng-if="ScoreResult.currentInning==1 && ScoreResult.status!='Completed'"> {{ScoreResult.tossWinner.name}}
+
+                                                {{ScoreResult.tossWinner.decision=='optToBowl' ? 'opt To Bowl'                                                :ScoreResult.tossWinner.decision=='optToBat' ? 'opt To Bat' :ScoreResult.tossWinner.decision}}
+                                            </div>
+                                            <div ng-if="ScoreResult.status=='InPlay' || ScoreResult.status=='BetweenInnings'">
+                                                <div ng-if="ScoreResult.currentInning==2">
+                                                    {{ScoreResult.battingTeam.name}} need  {{ScoreResult.battingTeam.requiredRuns}} runs
+                                                </div>
+                                            </div>
+                                            <div ng-if="ScoreResult.status=='Completed'">
+                                                <div ng-if="ScoreResult.result.type=='Won'">
+                                                    Match {{ScoreResult.result.type.toLowerCase()}} by  {{ScoreResult.result.winnerName}}
+                                                </div>
+                                            </div>
+                                            </p>
+                                        </div>
+                                        <div ng-if="ScoreResult.battingTeam">
+                                            <table class="ng-scope">
+                                                <thead>
+                                                <tr ng-if="ScoreResult.currentInning==1">
+                                                    <th translate="" class="ng-scope ng-binding">PROJ SCR</th>
+                                                    <th translate="" class="ng-scope">P'SHIP</th>
+                                                    <th class="ng-binding">CRR</th>
+                                                    <th translate="" class="ng-scope">LAST WKT</th>
+                                                </tr>
+                                                <tr ng-if="ScoreResult.currentInning==2">
+                                                    <th translate="" class="ng-scope ng-binding">CRR</th>
+                                                    <th translate="" class="ng-scope">P'SHIP</th>
+                                                    <th class="ng-binding">RRR</th>
+                                                    <th translate="" class="ng-scope">LAST WKT</th>
+                                                </tr>
+                                                </thead>
+                                                <tbody>
+                                                <tr ng-if="ScoreResult.currentInning==1">
+                                                    <td class="_align-center ng-binding">
+                                                        {{ScoreResult.battingTeam.projScr}}
+                                                    </td>
+                                                    <td class="_align-center ng-binding">
+                                                        {{ScoreResult.battingTeam.partnerShipScore}}
+                                                    </td>
+                                                    <td class="_align-center ng-binding">
+                                                        {{ScoreResult.battingTeam.runRate}}
+                                                    </td>
+                                                    <td class="_align-center ng-binding">
+                                                        {{ScoreResult.lastBatsmanOut.name}}
+                                                        {{ScoreResult.lastBatsmanOut.batsManRuns}}
+                                                        ({{ScoreResult.lastBatsmanOut.balls}})
+                                                    </td>
+                                                </tr>
+                                                <tr ng-if="ScoreResult.currentInning==2">
+                                                    <td class="_align-center ng-binding">
+                                                        {{ScoreResult.battingTeam.runRate}}
+                                                    </td>
+                                                    <td class="_align-center ng-binding">
+                                                        {{ScoreResult.battingTeam.partnerShipScore}}
+                                                    </td>
+                                                    <td class="_align-center ng-binding">
+                                                        {{ScoreResult.battingTeam.requiredRunRate}}
+                                                    </td>
+                                                    <td class="_align-center ng-binding">
+                                                        {{ScoreResult.lastBatsmanOut.name}}
+                                                        {{ScoreResult.lastBatsmanOut.batsManRuns}}
+                                                        ({{ScoreResult.lastBatsmanOut.balls}})
+                                                    </td>
+                                                </tr>
+                                                </tbody>
+                                            </table><!-- end ngIf: vm.stats.battingTeam !== null -->
+                                        </div>
+                                    </div><!-- end ngIf: vm.isHeadVisible -->
+                                    <script>
+                                        $(document).ready(function () {
+                                            $("#showmatchcenter").click(function () {
+                                                $("#matchcenter").toggle();
+                                                $(this).toggleClass('active');
+                                            });
+                                        });
+                                    </script>
+                                    <!-- ngIf: vm.isBodyVisible -->
+                                    <div class="match-centre-body ng-scope" id="matchcenter" ng-hide="ScoreResult.status!='InPlay' && ScoreResult.status=='BetweenInnings' || ScoreResult.status=='Completed'">
+
+
+                                        <div class="overs" ng-if="overlast != angular.isUndefinedOrNull">
+                                            <div class="ng-binding ng-scope cbclass" ng-if="ScoreResult[0] !== null">
+                                                {{ScoreResult[1].c}}
+                                            </div>
+                                            <!-- ngIf: vm.stats.currentOver -->
+                                            <div  class="over ng-scope">
+
+                                                <div class="over-detail" >
+                                                    <div class="ng-binding">Ov{{overlast}}:
+                                                    </div>
+                                                    <ol class="balls newballcls">
+                                                        <!-- ngRepeat: ball in vm.stats.currentOver.balls -->
+                                                        <li
+                                                            class="ballnew" ng-class="{'wckball1':ball=='W ' , 'wckball2':ball=='W', 'wckball':ball==' W' , 'fourcolor':ball=='4','fourcolor1':ball==' 4','fourcolor2':ball=='4 ' , 'sixfourcolor':ball=='6','sixfourcolor1':ball==' 6','sixfourcolor2':ball=='6 ','zerocolor':ball=='0','zerocolor1':ball==' 0','zerocolor2':ball=='0 '}"
+                                                            ng-repeat="ball in lastover1 track by $index" ng-if="ball != ''">
+                                                            {{ball}}
+                                                        </li>
+                                                    </ol>
+                                                  <!--  <div class="runs-score">
+                                                        <div class="ng-binding">{{ScoreResult.currentOver.runs}} runs
+                                                        </div>
+                                                        <div class="ng-binding">
+                                                            {{ScoreResult.currentOver.score}}-{{ScoreResult.currentOver.wickets}}
+                                                        </div>
+                                                    </div>-->
+                                                </div>
+                                            </div><!-- end ngIf: vm.stats.currentOver -->
+                                            <div class="overs" ng-if="overlast1 != angular.isUndefinedOrNull">
+                                                <!-- ngIf: vm.stats.currentOver -->
+                                                <div  class="over ng-scope">
+
+                                                    <div class="over-detail" >
+                                                        <div class="ng-binding">Ov{{overlast1}}:
+                                                        </div>
+                                                        <ol class="balls newballcls">
+                                                            <!-- ngRepeat: ball in vm.stats.currentOver.balls -->
+                                                            <li
+                                                                    class="ballnew"
+                                                                    ng-class="{'wckball1':ball1=='W ' , 'wckball2':ball1=='W', 'wckball':ball1==' W' , 'fourcolor':ball1=='4','fourcolor1':ball1==' 4','fourcolor2':ball1=='4 ' , 'sixfourcolor':ball1=='6','sixfourcolor1':ball1==' 6','sixfourcolor2':ball1=='6 ','zerocolor':ball1=='0','zerocolor1':ball1==' 0','zerocolor2':ball1=='0 '}"
+                                                                    ng-repeat="ball1 in lastover2 track by $index" >
+                                                                {{ball1}}
+                                                            </li>
+                                                        </ol>
+                                                        <!--  <div class="runs-score">
+                                                              <div class="ng-binding">{{ScoreResult.currentOver.runs}} runs
+                                                              </div>
+                                                              <div class="ng-binding">
+                                                                  {{ScoreResult.currentOver.score}}-{{ScoreResult.currentOver.wickets}}
+                                                              </div>
+                                                          </div>-->
+                                                    </div>
+                                                </div><!-- end ngIf: vm.stats.currentOver -->
+                                                <!-- ngIf: vm.stats.lastOver -->
+                                                <div  class="over ng-scope" ng-if="false">
+                                                    <p title="{{ScoreResult.lastOver.bowlerName}} to {{ScoreResult.lastOver.batsNames[0]}} {{ScoreResult.lastOver.batsNames.length==2 ? 'and' +ScoreResult.lastOver.batsNames[1] : ''}}"
+                                                       class="ng-binding">{{ScoreResult.lastOver.bowlerName}} to
+                                                        {{ScoreResult.lastOver.batsNames[0]}} {{ScoreResult.lastOver.batsNames.length==2 ? 'and' +ScoreResult.lastOver.batsNames[1] : ''}}</p>
+                                                    <div class="over-detail">
+                                                        <div class="ng-binding">Ov{{ScoreResult.lastOver.overNumber}}:</div>
+                                                        <ol class="balls">
+                                                            <!-- ngRepeat: ball in vm.stats.lastOver.balls -->
+                                                            <li class="ball"
+                                                                ng-class="(ball.value=='Wd' || ball.value=='2Wd' || ball.value=='W' || ball.value=='2B' || ball.value=='1L' || ball.value=='Nb' || ball.value=='1Nb') ? ball.type : (ball.type +'_' +ball.value)"
+                                                                ng-repeat="ball in ScoreResult.lastOver.balls">
+                                                                {{ball.value}}
+                                                            </li>
+                                                        </ol>
+                                                        <div class="runs-score">
+                                                            <div class="ng-binding">{{ScoreResult.lastOver.runs}} runs</div>
+                                                            <div class="ng-binding">
+                                                                {{ScoreResult.lastOver.score}}-{{ScoreResult[1].lw}}
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div><!-- end ngIf: vm.stats.lastOver -->
+                                            </div>
+                                            <div class="overs" ng-if="overlast2 != angular.isUndefinedOrNull">
+                                                <!-- ngIf: vm.stats.currentOver -->
+                                                <div  class="over ng-scope">
+
+                                                    <div class="over-detail" >
+                                                        <div class="ng-binding">Ov{{overlast2}}:
+                                                        </div>
+                                                        <ol class="balls newballcls">
+                                                            <!-- ngRepeat: ball in vm.stats.currentOver.balls -->
+                                                            <li ng-class="{'wckball1':ball2=='W ' , 'wckball2':ball2=='W', 'wckball':ball2==' W' , 'fourcolor':ball2=='4','fourcolor1':ball2==' 4','fourcolor2':ball2=='4 ' , 'sixfourcolor':ball2=='6','sixfourcolor1':ball2==' 6','sixfourcolor2':ball2=='6 ','zerocolor':ball2=='0','zerocolor1':ball2==' 0','zerocolor2':ball2=='0 '}"
+                                                                    class="ballnew"
+                                                                    ng-repeat="ball2 in lastover3 track by $index">
+                                                                {{ball2}}
+                                                            </li>
+                                                        </ol>
+                                                        <!--  <div class="runs-score">
+                                                              <div class="ng-binding">{{ScoreResult.currentOver.runs}} runs
+                                                              </div>
+                                                              <div class="ng-binding">
+                                                                  {{ScoreResult.currentOver.score}}-{{ScoreResult.currentOver.wickets}}
+                                                              </div>
+                                                          </div>-->
+                                                    </div>
+                                                </div><!-- end ngIf: vm.stats.currentOver -->
+                                                <!-- ngIf: vm.stats.lastOver -->
+                                                <div  class="over ng-scope" ng-if="false">
+                                                    <p title="{{ScoreResult.lastOver.bowlerName}} to {{ScoreResult.lastOver.batsNames[0]}} {{ScoreResult.lastOver.batsNames.length==2 ? 'and' +ScoreResult.lastOver.batsNames[1] : ''}}"
+                                                       class="ng-binding">{{ScoreResult.lastOver.bowlerName}} to
+                                                        {{ScoreResult.lastOver.batsNames[0]}} {{ScoreResult.lastOver.batsNames.length==2 ? 'and' +ScoreResult.lastOver.batsNames[1] : ''}}</p>
+                                                    <div class="over-detail">
+                                                        <div class="ng-binding">Ov{{ScoreResult.lastOver.overNumber}}:</div>
+                                                        <ol class="balls">
+                                                            <!-- ngRepeat: ball in vm.stats.lastOver.balls -->
+                                                            <li class="ball"
+                                                                ng-class="(ball.value=='Wd' || ball.value=='2Wd' || ball.value=='W' || ball.value=='2B' || ball.value=='1L' || ball.value=='Nb' || ball.value=='1Nb') ? ball.type : (ball.type +'_' +ball.value)"
+                                                                ng-repeat="ball in ScoreResult.lastOver.balls">
+                                                                {{ball.value}}
+                                                            </li>
+                                                        </ol>
+                                                        <div class="runs-score">
+                                                            <div class="ng-binding">{{ScoreResult.lastOver.runs}} runs</div>
+                                                            <div class="ng-binding">
+                                                                {{ScoreResult.lastOver.score}}-{{ScoreResult[1].lw}}
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div><!-- end ngIf: vm.stats.lastOver -->
+                                            </div>
+
+
+                                            <!-- ngIf: vm.stats.lastOver -->
+                                            <div  class="over ng-scope" ng-if="false">
+                                                <p title="{{ScoreResult.lastOver.bowlerName}} to {{ScoreResult.lastOver.batsNames[0]}} {{ScoreResult.lastOver.batsNames.length==2 ? 'and' +ScoreResult.lastOver.batsNames[1] : ''}}"
+                                                   class="ng-binding">{{ScoreResult.lastOver.bowlerName}} to
+                                                    {{ScoreResult.lastOver.batsNames[0]}} {{ScoreResult.lastOver.batsNames.length==2 ? 'and' +ScoreResult.lastOver.batsNames[1] : ''}}</p>
+                                                <div class="over-detail">
+                                                    <div class="ng-binding">Ov{{ScoreResult.lastOver.overNumber}}:</div>
+                                                    <ol class="balls">
+                                                        <!-- ngRepeat: ball in vm.stats.lastOver.balls -->
+                                                        <li class="ball"
+                                                            ng-class="(ball.value=='Wd' || ball.value=='2Wd' || ball.value=='W' || ball.value=='2B' || ball.value=='1L' || ball.value=='Nb' || ball.value=='1Nb') ? ball.type : (ball.type +'_' +ball.value)"
+                                                            ng-repeat="ball in ScoreResult.lastOver.balls">
+                                                            {{ball.value}}
+                                                        </li>
+                                                    </ol>
+                                                    <div class="runs-score">
+                                                        <div class="ng-binding">{{ScoreResult.lastOver.runs}} runs</div>
+                                                        <div class="ng-binding">
+                                                            {{ScoreResult.lastOver.score}}-{{ScoreResult[1].lw}}
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div><!-- end ngIf: vm.stats.lastOver -->
+                                        </div>
+
+                                        <!-- ngIf: vm.stats.bowler && vm.stats.batsmen.length > 0 -->
+                                        <div
+                                             class="ng-scope">
+                                            <table>
+                                                <tbody>
+                                                <tr class="row-highlight">
+                                                    <td translate="" class="ng-scope">Batsmen</td>
+                                                    <td translate="" class="_align-center ng-scope">R</td>
+                                                    <td translate="" class="_align-center ng-scope">B</td>
+                                                    <td translate="" class="_align-center ng-scope">4s</td>
+                                                    <td translate="" class="_align-center ng-scope">6s</td>
+                                                    <td translate="" class="_align-center ng-scope">SR</td>
+                                                </tr>
+                                                <!-- ngRepeat: batsman in vm.stats.batsmen track by $index -->
+                                                <tr
+                                                    class="ng-scope">
+                                                    <td class="ng-binding">{{ScoreResult[1].p1}} {{ScoreResult[1].i==1 ? '*' :
+                                                        ''}}
+                                                    </td>
+                                                    <td class="_align-center ng-binding">{{ScoreResult[0].p1r}}</td>
+                                                    <td class="_align-center ng-binding">{{ScoreResult[0].p1b
+                                                        }}
+                                                    </td>
+                                                    <td class="_align-center ng-binding">{{ScoreResult[0].p14}}</td>
+                                                    <td class="_align-center ng-binding">{{ScoreResult[0].p16}}</td>
+                                                    <td class="_align-center ng-binding">{{ScoreResult[0].p1r/ScoreResult[0].p1b*100|number:2}}</td>
+                                                </tr>
+                                                <tr
+                                                        class="ng-scope">
+                                                    <td class="ng-binding">{{ScoreResult[1].p2}}{{ScoreResult[1].i==2 ? '*' :
+                                                        ''}}
+                                                    </td>
+                                                    <td class="_align-center ng-binding">{{ScoreResult[0].p2r}}</td>
+                                                    <td class="_align-center ng-binding">{{ScoreResult[0].p2b
+                                                        }}
+                                                    </td>
+                                                    <td class="_align-center ng-binding">{{ScoreResult[0].p24}}</td>
+                                                    <td class="_align-center ng-binding">{{ScoreResult[0].p26}}</td>
+                                                    <td class="_align-center ng-binding">{{ScoreResult[0].p2r/ScoreResult[0].p2b*100|number:2}}</td>
+                                                </tr>
+                                                <tr class="row-highlight">
+                                                    <td translate="" class="ng-scope">Bowler</td>
+                                                    <td class="_align-center ng-scope" translate="">O</td>
+                                                    <td class="_align-center ng-scope" translate="">M</td>
+                                                    <td class="_align-center ng-scope" translate="">R</td>
+                                                    <td class="_align-center ng-scope" translate="">W</td>
+                                                    <td class="_align-center ng-scope" translate="">ECO</td>
+                                                </tr>
+                                                <tr>
+                                                    <td class="ng-binding">{{ScoreResult[1].b}}</td>
+                                                    <td class="_align-center ng-binding">{{ScoreResult.bowler.overs}}
+                                                    </td>
+                                                    <td class="_align-center ng-binding">
+                                                        {{ScoreResult.bowler.maidens}}
+                                                    </td>
+                                                    <td class="_align-center ng-binding">
+                                                        {{ScoreResult.bowler.bowlerRuns}}
+                                                    </td>
+                                                    <td class="_align-center ng-binding">
+                                                        {{ScoreResult.bowler.wickets}}
+                                                    </td>
+                                                    <td class="_align-center ng-binding">
+                                                        {{ScoreResult.bowler.economy}}
+                                                    </td>
+                                                </tr>
+                                                </tbody>
+                                            </table>
+                                        </div><!-- end ngIf: vm.stats.bowler && vm.stats.batsmen.length > 0 -->
+                                    </div><!-- end ngIf: vm.isBodyVisible -->
+                                </div>
+                                <table class="table table matchOdsPlayList" style="margin-bottom:0px!important;"
+                                       ng-if="SPORTID==4 && ScoreResult==angular.isUndefinedOrNull && displayScore==true">
+                                    <!-- {{Documents.currentSet}} -->
+                                    <tr>
+                                        <td class="text-left">{{Documents.score.home.name}}</td>
+
+
+                                        <td class="text-center hidden-xs">Vs</td>
+
+                                        <td class="text-right">{{Documents.score.away.name}}</td>
+
+
+                                    </tr>
+                                    <tr>
+                                        <td class="text-left">{{Documents.score.home.inning1.runs}}
+                                            /{{Documents.score.home.inning1.wickets}}
+                                            ({{Documents.score.home.inning1.overs}})
+                                        </td>
+                                        <td class="hidden-xs"></td>
+                                        <td class="text-right">{{Documents.score.away.inning1.runs}}
+                                            /{{Documents.score.away.inning1.wickets}}
+                                            ({{Documents.score.away.inning1.overs}})
+                                        </td>
+                                    </tr>
+
+                                </table>
+                            </div>
+                            <div class="col-sm-12 tb" ng-if="Documents.currentSet==2">
+                                <table class="table table matchOdsPlayList" style="margin-bottom:0px!important;">
+
+                                    <tr>
+                                        <td class="text-left">{{Documents.score.home.name}}</td>
+                                        <td class="text-center hidden-xs">Vs</td>
+                                        <td class="text-right">{{Documents.score.away.name}}</td>
+                                    </tr>
+                                    <tr>
+
+                                        <td class="text-left">{{Documents.score.home.inning2.runs}}
+                                            /{{Documents.score.home.inning2.wickets}}
+                                            ({{Documents.score.home.inning2.overs}})
+                                        </td>
+                                        <td class="hidden-xs"></td>
+                                        <td class="text-right">{{Documents.score.away.inning2.runs}}
+                                            /{{Documents.score.away.inning2.wickets}}
+                                            ({{Documents.score.away.inning2.overs}})
+                                        </td>
+
+                                    </tr>
+
+                                </table>
+                            </div>
+                        </div>
+                        <!-- End of Cricket Api -->
+                        <!-- for Tenis -->
+                  
+                        <div class="livescorebord" ng-if="Documents.eventTypeId==2">
+					<div class="row">
+                            <div class="col-sm-4">
+								
+								<div class="macthhead">
+                                <span class="titlematch" style="color:#25dc25;">Set {{Documents.currentSet}} -  Game {{Documents.currentGame}} -   Point {{Documents.currentPoint}}</span>
+
+                                <h6 style="color:gold;font-size:13px;margin-top:5px;"> {{dateForm|date:"EEEE dd MMM,hh:mm a"}}</h6>
+									</div>
+                            </div>
+                            <div class="col-sm-8 tb">
+                                <table class="table" style="margin-bottom:0px!important;">
+
+                                    <tr>
+                                        <td>{{Documents.score.home.name}}&emsp;&emsp;
+                                            <i class="fa fa-circle" ng-if="Documents.score.home.isServing"
+                                               style="color:#09c309!important;font-size:10px;"></i>
+                                        </td>
+                                        <td ng-repeat="x in Home track by $index">{{x}}</td>
+                                        <td>
+                                            <div>{{Documents.score.home.games}}</div>
+                                        </td>
+                                        <td>{{Documents.score.home.doubleFaults}}</td>
+                                        <td>{{Documents.score.home.score}}</td>
+                                    </tr>
+                                    <tr>
+                                        <td>{{Documents.score.away.name}}&emsp;&emsp;<i class="fa fa-circle"
+                                                                                        ng-if="Documents.score.away.isServing"
+                                                                                        style="color:#09c309!important;font-size:10px;"></i>
+                                        </td>
+                                        <td ng-repeat="x in away track by $index">{{x}}</td>
+                                        <td>
+                                            <div>{{Documents.score.away.games}}</div>
+                                        </td>
+                                        <td>{{Documents.score.away.doubleFaults}}</td>
+                                        <td>{{Documents.score.away.score}}</td>
+
+                                    </tr>
+                                </table>
+                            </div>
+						</div>
+                        </div>
+					
+					
+					
+                        <!-- End of Tenis Api -->
+                        <!-- for Football -->
+                        <div class="livescorebord" ng-if="Documents.eventTypeId==1">
+							<div class="row">
+                            <div class="col-sm-4">
+								
+								<div class="macthhead">
+                                <span class="titlematch" style="color:#25dc25;"> {{Documents.timeElapsed}} </span>
+
+                                <h6 style="color:gold;font-size:13px;margin-top:5px;">
+                                    {{dateForm | date:"EEEE dd MMM,hh:mm a"}}</h6>
+								</div>
+                            </div>
+                            <div class="col-sm-8 tb">
+                                <table class="table" style="margin-bottom:0px!important;">
+
+                                    <tr>
+                                        <td>{{Documents.score.home.name}}&emsp;&emsp;
+                                            <i class="fa fa-circle" ng-if="Documents.score.home.isServing"
+                                               style="color:#09c309!important;font-size:10px;"></i>
+                                        </td>
+                                        <td ng-repeat="x in Home track by $index">{{x}}</td>
+                                        <td>
+                                            <div>{{Documents.score.home.games}}</div>
+                                        </td>
+                                        <td>{{Documents.score.home.doubleFaults}}</td>
+                                        <td>{{Documents.score.home.score}}</td>
+                                    </tr>
+                                    <tr>
+                                        <td>{{Documents.score.away.name}}&emsp;&emsp;<i class="fa fa-circle"
+                                                                                        ng-if="Documents.score.away.isServing"
+                                                                                        style="color:#09c309!important;font-size:10px;"></i>
+                                        </td>
+                                        <td ng-repeat="x in away track by $index">{{x}}</td>
+                                        <td>
+                                            <div>{{Documents.score.away.games}}</div>
+                                        </td>
+                                        <td>{{Documents.score.away.doubleFaults}}</td>
+                                        <td>{{Documents.score.away.score}}</td>
+
+                                    </tr>
+                                </table>
+                            </div>
+								</div>
+
+                        </div>
+                        <!-- End of Football Api -->
+					
+					
+					
+					
+                    </div>
+                </div>
+            </div>
+            <div class="clearfix"></div>
+            <div class="market_tr" ng-repeat="marketitem in FinalArray">
+                <div>
+                    <div>
+
+                        <div ng-class="{'css-suspendparent':(marketitem.status=='SUSPENDED' || match.status=='CLOSED')}">
+                            <div class="matchodd-header" ng-init="marketitem.IsOpen=true;DisMarketId=marketitem">
+                                <div class="row">
+                                    <div class="col-sm-8">
+                                        <div class="matchhead" ng-if="false">{{marketitem.name}}</div>
+                                        <!--   <div class="matchinfo hidden-xs">{{PLAYPAUSE}}_Matched : <b>GLC {{marketitem.totalMatched|number:0}}</b></div>-->
+                                    </div>
+                                    <div ng-if="marketitem.is_auto=='A'" class="col-sm-4 text-right">
+                                        <span class="goin-play"><span class="glyphicon glyphicon-ok"></span>{{marketitem.status=='OPEN'?marketitem.inPlay?"In-Play":"Going In-Play":marketitem.status}}</span>
+                                        <button class="btn btn-warning btn-sm hidden-xs" ng-if="false"
+                                                ng-click="GetMarketListId()">Refresh
+                                        </button>
+                                        <span class="rigt-ref" ng-if="marketitem.IsOpen==false"
+                                              ng-click="marketitem.IsOpen=true;ChangeMarketId(marketitem.id)">
+                                                                                <i class="glyphicon glyphicon-triangle-top"></i>
+                
+                                                                            </span>
+                                        <span class="rigt-ref" ng-if="marketitem.IsOpen==true"
+                                              ng-click="marketitem.IsOpen=false;ChangeMarketId(marketitem.id)">
+                                                                                <i class="glyphicon glyphicon-triangle-bottom"></i>
+                
+                                                                            </span>
+
+
+                                    </div>
+                                </div>
+                            </div>
+
+
+                            <div class="market-wrapper">
+
+                                <div class="matchodd_dis" ng-if="PLAYPAUSE==1"></div>
+                                <div class="table-overflow bet_table">
+                                    <table class="table market-listing-table">
+                                        <thead>
+                                        <tr class="top_xtow">
+                                            <th class="title" colspan="3"><i ng-if="marketitem.is_favourite=='N' && marketitem.is_auto=='A'"
+                                                                 class="fa fa-star-o" aria-hidden="true"
+                                                                 ng-click="setfavourite(marketitem,$index)"></i> <i
+                                                    ng-if="marketitem.is_favourite=='Y'"
+                                                    ng-click="setUnfavourite(marketitem,$index)" class="fa fa-star"
+                                                    aria-hidden="true"></i> {{marketitem.name}}<br>
+													<span class='nprofit'><span class='green'>Profit limit:500000</span>, Min:500, Max:{{marketitem.max_bet_liability}}</span>
+													 
+                                            </th>
+                                             
+                                            <th class="back">Back</th>
+                                            <th class="lay">Lay</th>
+                                            <th class="lay hidden-xs" colspan="2"></th>
+                                        </tr>
+                                        </thead>
+                                        <tbody>
+                                        <tr  ng-class="{'betting-disableds':(marketitem.visibility==0)}" ng-init="marketInfo.uniqueId=getRandomSpan();"
+                                            ng-repeat-start="marketInfo in marketitem.runners">
+
+                                            <td class="running-cell team_name">
+                                                <strong class="odds">{{marketInfo.name}}
+                                                    <div ng-hide="true">
+                                                        {{(MarketWinLossByMId(marketitem.id) |filter:
+                                                        {"selectionId":marketInfo.id})[0].winValue}}
+                                                        {{testValue1=getSumValPnL((RunnerValue|filter:
+                                                        {"selectionId":marketInfo.id})[0].winValue,(RunnerValue|filter:{"selectionId":marketInfo.id})[0].lossValue)+(marketInfo.id==selectionId['field_'
+                                                        + marketInfo.uniqueId]?(formStatus['field_' +
+                                                        marketInfo.uniqueId]==0?+((priceVal1['field_' +
+                                                        marketInfo.uniqueId]*stake1['field_' +
+                                                        marketInfo.uniqueId])-stake1['field_' +
+                                                        marketInfo.uniqueId]):-(priceVal1['field_' +
+                                                        marketInfo.uniqueId]*stake1['field_' +
+                                                        marketInfo.uniqueId])+stake1['field_' +
+                                                        marketInfo.uniqueId]):(formStatus['field_' +
+                                                        marketInfo.uniqueId]==0?-stake1['field_' +
+                                                        marketInfo.uniqueId]:+stake1['field_' + marketInfo.uniqueId]))}}
+
+                                                    </div>
+                                                    <input type="hidden" id="NewLiability_{{$index}}"
+                                                           name="NewLiability_" value="{{testValue1}}">
+
+                                                </strong>
+                                                <div class="size" style='{{getValColor(getSumValPnL((MarketWinLossByMId(marketitem.id)|filter:{"selectionId":marketInfo.id})[0].winValue,(MarketWinLossByMId(marketitem.id)|filter:{"selectionId":marketInfo.id})[0].lossValue)
++($root.stake2["field_" + marketInfo.id +"_"+ marketitem.matchid+"_"+marketitem.id]))}}'>
+                                                    <div ng-if="false">
+                                                        {{(getSumValPnL((MarketWinLossByMId(marketitem.id)|filter:{"selectionId":marketInfo.id})[0].winValue,(MarketWinLossByMId(marketitem.id)|filter:{"selectionId":marketInfo.id})[0].lossValue)+(marketInfo.id==selectionId['field_'
+                                                        + marketInfo.uniqueId]?(formStatus['field_' +
+                                                        marketInfo.uniqueId]==0?+((priceVal1['field_' +
+                                                        marketInfo.uniqueId]*stake1['field_' +
+                                                        marketInfo.uniqueId])-stake1['field_' +
+                                                        marketInfo.uniqueId]):-(priceVal1['field_' +
+                                                        marketInfo.uniqueId]*stake1['field_' +
+                                                        marketInfo.uniqueId])+stake1['field_' +
+                                                        marketInfo.uniqueId]):(formStatus['field_' +
+                                                        marketInfo.uniqueId]==0?-stake1['field_' +
+                                                        marketInfo.uniqueId]:+stake1['field_' +
+                                                        marketInfo.uniqueId])))|number:2}}
+                                                    </div>
+                                                    {{(getSumValPnL((MarketWinLossByMId(marketitem.id)|filter:{"selectionId":marketInfo.id})[0].winValue,(MarketWinLossByMId(marketitem.id)|filter:{"selectionId":marketInfo.id})[0].lossValue)+$root.stake2['field_'
+                                                    + marketInfo.id +'_'+ marketitem.matchid+"_"+marketitem.id])|number:2}}
+                                            <!--($root.stake2['field_' + marketInfo.uniqueId])-->
+                                                    </span>
+
+                                                    <!-- {{(marketInfo.id==selectionId['field_'  +  marketInfo.uniqueId]?
+                                                    (formStatus['field_'  +  marketInfo.uniqueId]==0
+                                                    ?+((priceVal1['field_' + marketInfo.uniqueId]*stake1['field_' + marketInfo.uniqueId])-stake1['field_' + marketInfo.uniqueId])
+                                                    :-(priceVal1['field_' + marketInfo.uniqueId]*stake1['field_' + marketInfo.uniqueId])+stake1['field_' + marketInfo.uniqueId])
+                                                    :(formStatus['field_'  +  marketInfo.uniqueId]==0
+                                                    ?-stake1['field_' + marketInfo.uniqueId]
+                                                    :+stake1['field_' + marketInfo.uniqueId]))}}
+                                                    <span>{{(getSumValPnL((MarketWinLossByMId(marketitem.id)|filter:{"selectionId":marketInfo.id})[0].winValue,(MarketWinLossByMId(marketitem.id)|filter:{"selectionId":marketInfo.id})[0].lossValue))|number:2}}</span> -->
+
+                                                </div>
+                                            </td>
+
+                                            <td class="back td_btn btn_gray unhighlighted hidden-xs"
+                                                ng-class="{'callYlCss':marketInfo.back[2].selected || priveobj['field_'+marketInfo.uniqueId+'a']}">
+                                                <strong class="odds">{{getOddCalcVal(marketInfo.back[2].price,1,marketitem.volumeLimit[0].oddsLimit,marketitem.volumeLimit[0].volumeLimit)}}</strong>
+                                                <div class="size">
+                                                    <span>{{getOddCalcVal(marketInfo.back[2].size,2,marketitem.volumeLimit[0].oddsLimit,marketitem.volumeLimit[0].volumeLimit)}}</span>
+                                                </div>
+                                            </td>
+
+                                            <td class="back td_btn btn_gray unhighlighted hidden-xs "
+                                                ng-class="{'callYlCss':marketInfo.back[1].selected}">
+                                                <strong class="odds" ng-init="prive=marketInfo.back[1]">{{getOddCalcVal(marketInfo.back[1].price,1,marketitem.volumeLimit[0].oddsLimit,marketitem.volumeLimit[0].volumeLimit)}}</strong>
+                                                <div class="size">
+                                                    <span>{{getOddCalcVal(marketInfo.back[1].size,2,marketitem.volumeLimit[0].oddsLimit,marketitem.volumeLimit[0].volumeLimit)}}</span>
+                                                </div>
+                                            </td>
+                                            <td ng-if="marketitem.is_auto=='M'"                                                ng-class="{'betting-disableds':(marketitem.isBetAllowedOnManualMatchOdds==0 ||  marketInfo.active==1),'callYlCss':marketInfo.back[0].selected || priveobj['field_'+marketInfo.uniqueId+'c']}"
+                                                class="back td_btn blue_btn"
+                                                ng-click="marketInfo.IsShow=true;getOddValueManual($event,marketInfo.back[0].price,marketitem.volumeLimit[0].oddsLimit,marketitem.matchid,0,marketInfo.name+'(B)',marketInfo.id,marketInfo.uniqueId,marketitem.marketid,$index,marketInfo.active,marketitem)">
+<!--marketitem.IsMatchDisable-->
+                                                <strong class="odds">
+                                                    {{(marketitem.isBetAllowedOnManualMatchOdds==0 ||  marketInfo.active==1) ? '' : getManulaPrice(marketInfo.back[0].price,marketitem.IsRs)}}</strong>
+                                                <div class="size">
+                                                    <span>{{getOddCalcVal(marketInfo.back[0].size,2,marketitem.volumeLimit[0].oddsLimit,marketitem.volumeLimit[0].volumeLimit)}}</span>
+                                                </div>
+                                                <span class="rowsuspend" ng-if="marketInfo.active==1 && marketitem.isBetAllowedOnManualMatchOdds!=0"><b>SUSPENDED</b></span>
+                                                <span ng-if="$index==0 && marketitem.isBetAllowedOnManualMatchOdds==0" class="fullSuspend"><b>SUSPENDED</b></span>
+                                            </td>
+                                            <td ng-if="marketitem.is_auto=='A'"                                                ng-class="{'betting-disableds':(marketitem.IsMatchDisable || (marketitem.status=='SUSPENDED' || marketitem.status=='CLOSED')),'callYlCss':marketInfo.back[0].selected || priveobj['field_'+marketInfo.uniqueId+'c']}"
+                                                class="back td_btn blue_btn"
+                                                ng-click="marketInfo.IsShow=true;getOddValue($event,marketInfo.back[0].price,marketitem.volumeLimit[0].oddsLimit,marketitem.event[0].id,0,marketInfo.name,marketInfo.id,marketInfo.uniqueId,marketitem.id,$index,marketitem.IsMatchDisable,marketitem)">
+                                                <!--marketitem.IsMatchDisable-->
+                                                <strong class="odds">{{getOddCalcVal(marketInfo.back[0].price,1,marketitem.volumeLimit[0].oddsLimit,marketitem.volumeLimit[0].volumeLimit)}}</strong>
+                                                <div class="size">
+                                                    <span>{{getOddCalcVal(marketInfo.back[0].size,2,marketitem.volumeLimit[0].oddsLimit,marketitem.volumeLimit[0].volumeLimit)}}</span>
+                                                </div>
+                                            </td>
+                                            <td ng-if="marketitem.is_auto=='A'"  ng-class="{'betting-disableds':(marketitem.IsMatchDisable || (marketitem.status=='SUSPENDED' || marketitem.status=='CLOSED')),'callCYanCss':marketInfo.lay[0].selected || priveobj['field_'+marketInfo.uniqueId+'d']}"
+                                                class="lay td_btn pink_btn"
+                                                ng-click="marketInfo.IsShow=true;getOddValue($event,marketInfo.lay[0].price,marketitem.volumeLimit[0].oddsLimit,marketitem.event[0].id,1,marketInfo.name,marketInfo.id,marketInfo.uniqueId,marketitem.id,$index,marketitem.IsMatchDisable,marketitem)">
+
+                                                <strong class="odds" ng-model="testModel">{{getOddCalcVal(marketInfo.lay[0].price,1)}}</strong>
+                                                <div class="size">
+                                                    <span>{{getOddCalcVal(marketInfo.lay[0].size,2,marketitem.volumeLimit[0].oddsLimit,marketitem.volumeLimit[0].volumeLimit)}}</span>
+                                                </div>
+                                            </td>
+                                            <td ng-if="marketitem.is_auto=='M'"  ng-class="{'betting-disableds':(marketitem.isBetAllowedOnManualMatchOdds==0 || marketInfo.active==1),'callCYanCss':marketInfo.lay[0].selected || priveobj['field_'+marketInfo.uniqueId+'d']}"
+                                                class="lay td_btn pink_btn"
+                                                ng-click="marketInfo.IsShow=true;getOddValueManual($event,marketInfo.lay[0].price,marketitem.volumeLimit[0].oddsLimit,marketitem.matchid,1,marketInfo.name+'(B)',marketInfo.id,marketInfo.uniqueId,marketitem.marketid,$index,marketInfo.active,marketitem)">
+
+                                                <strong class="odds" ng-model="testModel">{{(marketitem.isBetAllowedOnManualMatchOdds==0 ||  marketInfo.active==1) ? '' :getManulaPrice(marketInfo.lay[0].price,marketitem.IsRs)}}</strong>
+                                                <div class="size">
+                                                    <span>{{getOddCalcVal(marketInfo.lay[0].size,2,marketitem.volumeLimit[0].oddsLimit,marketitem.volumeLimit[0].volumeLimit)}}</span>
+                                                </div>
+
+                                            </td>
+                                            <td class="lay td_btn btn_gray unhighlighted hidden-xs"
+                                                ng-class="{'callCYanCss':marketInfo.lay[1].selected || priveobj['field_'+marketInfo.uniqueId+'e']}">
+                                                <strong class="odds" ng-model="testModel">{{getOddCalcVal(marketInfo.lay[1].price,1,marketitem.volumeLimit[0].oddsLimit,marketitem.volumeLimit[0].volumeLimit)}}</strong>
+                                                <div class="size">
+                                                    <span>{{getOddCalcVal(marketInfo.lay[1].size,2,marketitem.volumeLimit[0].oddsLimit,marketitem.volumeLimit[0].volumeLimit)}}</span>
+                                                </div>
+                                            </td>
+                                            <td class="lay td_btn btn_gray unhighlighted hidden-xs"
+                                                ng-class="{'callCYanCss':marketInfo.lay[2].selected || priveobj['field_'+marketInfo.uniqueId+'f']}">
+
+                                                <strong class="odds" ng-model="testModel">{{getOddCalcVal(marketInfo.lay[2].price,1,marketitem.volumeLimit[0].oddsLimit,marketitem.volumeLimit[0].volumeLimit)}}</strong>
+                                                <div class="size">
+                                                    <span>{{getOddCalcVal(marketInfo.lay[2].size,2,marketitem.volumeLimit[0].oddsLimit,marketitem.volumeLimit[0].volumeLimit)}}</span>
+                                                </div>
+                                            </td>
+
+                                        </tr>
+                                        <tr ng-repeat-end ng-show="marketInfo.IsShow">
+                                            <!--<td colspan="7">
+
+                                            </td>-->
+
+                                        </tr>
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                           <!-- <div class="market-wrapper" ng-if="Manualdata && isManualMatchOdds==1 && Manualdata.runners.length>0">
+
+                                <div class="matchodd_dis" ng-if="PLAYPAUSE==1"></div>
+                                <div class="table-overflow bet_table">
+                                    <table class="table market-listing-table">
+                                        <thead>
+                                        <tr class="top_xtow">
+                                            <th class="title">Manual Odds
+                                            </th>
+                                            <th class="back hidden-xs" colspan="2"></th>
+                                            <th class="back">Back</th>
+                                            <th class="lay">Lay</th>
+                                            <th class="lay hidden-xs" colspan="2"></th>
+                                        </tr>
+                                        </thead>
+                                        <tbody>
+                                        <tr ng-class="{'betting-disableds':marketitem.isBetAllowedOnManualMatchOdds==0}" ng-init="marketInfo.uniqueId=getRandomSpan();"
+                                            ng-repeat-start="marketInfo in Manualdata.runners">
+
+                                            <td class="running-cell team_name">
+                                                <strong class="odds">{{marketInfo.name}}
+                                                </strong>
+                                                <div class="size" style='{{getValColor(getSumValPnL((MarketWinLossByMId(Manualdata.marketid)|filter:{"selectionId":marketInfo.id})[0].winValue,(MarketWinLossByMId(Manualdata.marketid)|filter:{"selectionId":marketInfo.id})[0].lossValue)
++($root.stake2["field_" + marketInfo.id +"_"+ Manualdata.matchid]))}}'>
+                                                    <span>
+                                                                                                      {{(getSumValPnL((MarketWinLossByMId(Manualdata.marketid)|filter:{"selectionId":marketInfo.id})[0].winValue,(MarketWinLossByMId(Manualdata.marketid)|filter:{"selectionId":marketInfo.id})[0].lossValue)+$root.stake2['field_'+ marketInfo.id +'_'+ Manualdata.matchid])|number:2}}
+                                                    </span>
+                                                </div>
+                                            </td>
+
+                                            <td class="back td_btn btn_gray unhighlighted hidden-xs"
+                                                >
+
+
+                                            </td>
+
+                                            <td class="back td_btn btn_gray unhighlighted hidden-xs "
+                                                ng-class="{'callYlCss':marketInfo.back[1].selected}">
+
+
+                                            </td>
+                                            <td ng-init="SetCommonPropertyForManual(marketInfo.id,Manualdata)"
+                                                ng-class="{'betting-disableds':(marketInfo.active==1 || marketInfo.back==0),'callYlCss':marketInfo.back[0].selected || priveobj['field_'+marketInfo.uniqueId+'c']}"
+                                                class="back td_btn blue_btn"
+                                                ng-click="marketInfo.IsShow=true;getOddValueManual($event,marketInfo.back,Manualdata.volumeLimit[0].oddsLimit,Manualdata.matchid,0,marketInfo.name+'(B)',marketInfo.id,marketInfo.uniqueId,Manualdata.marketid,$index,marketInfo.active)">
+
+                                                <strong class="odds">{{getOddCalcVal(marketInfo.back,1,Manualdata.volumeLimit[0].oddsLimit,Manualdata.volumeLimit[0].volumeLimit)}}</strong>
+                                                <div class="size">
+                                                    <span>{{getOddCalcVal(marketInfo.back[0].size,2,marketitem.volumeLimit[0].oddsLimit,marketitem.volumeLimit[0].volumeLimit)}}</span>
+                                                </div>
+                                            </td>
+                                            <td ng-class="{'betting-disableds':(marketInfo.active==1 || marketInfo.lay==0),'callCYanCss':marketInfo.lay[0].selected || priveobj['field_'+marketInfo.uniqueId+'d']}"
+                                                class="lay td_btn pink_btn"
+                                                ng-click="marketInfo.IsShow=true;getOddValueManual($event,marketInfo.lay,Manualdata.volumeLimit[0].oddsLimit,Manualdata.matchid,1,marketInfo.name+'(B)',marketInfo.id,marketInfo.uniqueId,Manualdata.marketid,$index,marketInfo.active)">
+
+                                                <strong class="odds" ng-model="testModel">{{getOddCalcVal(marketInfo.lay,1)}}</strong>
+
+                                            </td>
+                                            <td class="lay td_btn btn_gray unhighlighted hidden-xs"
+                                                ng-class="{'callCYanCss':marketInfo.lay[1].selected || priveobj['field_'+marketInfo.uniqueId+'e']}">
+
+                                            </td>
+                                            <td class="lay td_btn btn_gray unhighlighted hidden-xs"
+                                                ng-class="{'callCYanCss':marketInfo.lay[2].selected || priveobj['field_'+marketInfo.uniqueId+'f']}">
+
+
+                                            </td>
+
+                                        </tr>
+                                        <tr ng-class="{'betting-disableds':marketitem.isBetAllowedOnManualMatchOdds==0}" ng-repeat-end="" ng-if="marketitem.isBetAllowedOnManualMatchOdds==0">
+                                            &lt;!&ndash;<td colspan="7">
+
+                                            </td>&ndash;&gt;
+                                            <div class="ballrunning"  ng-if="marketitem.isBetAllowedOnManualMatchOdds==0">
+                                                <h1>Ball Running</h1>
+                                            </div>
+                                        </tr>
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>-->
+                            <div class="betOverlay" ng-if="PLAYPAUSE==1">
+                                stakeVal
+                            </div>
+                        </div>
+
+                    </div>
+
+
+                    <div class="box-cont clearfix" ng-init="acc1=true;acc=false;">
+
+                        <div class="act-mess" ng-show="(UserTypeId==3 || slctUseTypeID ==3 ) && acc==1">
+
+                            <div ng-repeat="marketInfo in marketitem.runners">
+
+                                <div ng-if="(formStatus == 0 && marketInfo.id==selectionId['field_'  +  marketInfo.uniqueId])">
+
+                                    <input type="hidden" name="BackMatchVal" id="Hidden1" ng-model="chkValPrice"
+                                           ng-value="marketInfo.back[0].price+oddsLimit">
+
+                                </div>
+
+                                <div ng-if="(formStatus == 1 && marketInfo.id==selectionId['field_'  +  marketInfo.uniqueId])">
+
+                                    <input type="hidden" name="LayMatchVal" id="Hidden2" ng-model="chkValPrice"
+                                           ng-value="marketInfo.lay[0].price+oddsLimit">
+
+                                </div>
+
+                            </div>
+
+                            <form name="betUserSubmit" method="post">
+
+                                <table class="table bets-table" ng-show="displayTable">
+
+                                    <thead ng-if="formStatus==0" class="back-head">
+
+                                    <tr>
+
+                                        <th></th>
+
+                                        <th>yes (Bet For)</th>
+
+                                        <th>Odds</th>
+
+                                        <th>Stake</th>
+
+                                        <th>Profit</th>
+
+                                    </tr>
+
+                                    </thead>
+
+                                    <thead ng-if="formStatus==1" class="lay-head">
+
+                                    <tr>
+
+                                        <th></th>
+
+                                        <th>No (Bet Against)</th>
+
+                                        <th>Backer's odds</th>
+
+                                        <th>Backer's Stake</th>
+
+                                        <th>Liability</th>
+
+                                    </tr>
+
+                                    </thead>
+
+                                    <tbody>
+
+                                    <tr>
+
+                                        <td class="bet-head">
+
+                                            <a ng-click="reset_all_selection();"><span
+                                                    class="glyphicon glyphicon-remove-sign"></span></a>
+
+                                        </td>
+
+                                        <td>
+
+                                            <div class="bet-name">
+
+                                                <span>{{placeName}}</span>
+
+                                            </div>
+
+                                        </td>
+
+                                        <td>
+
+                                            <input type="number" ng-pattern="/^[0-9]+(\.[0-9]{1,2})?$/" min="1"
+                                                   step="0.01" ng-model="priceVal" class="odds-input"/>
+
+                                        </td>
+
+                                        <td ng-init="stake=0">
+
+                                            <input type="number" min="0" max="1000000" ng-model="stake"
+                                                   class="stake-input"/>
+
+                                            <input type="hidden" name="userId" id="Hidden3" value="{{UserId}}">
+
+                                            <input type="hidden" name="ParantId" id="Hidden4" value="{{ParantId}}">
+
+                                            <input type="hidden" name="loginId" id="Hidden5" value="{{loginId}}">
+
+                                            <input type="hidden" name="selectionId" id="Hidden6"
+                                                   value="{{selectionId['field_'  +  marketInfo.uniqueId]}}">
+
+                                            <input type="hidden" name="matchId" id="Hidden7" value="{{MatchId}}">
+
+                                            <input type="hidden" name="isback" id="Hidden8" ng-value="formStatus">
+
+                                            <input type="hidden" name="MarketId" id="Hidden9" value="{{MarketId}}">
+
+                                            <input type="hidden" name="placeName" id="Hidden10" value="{{placeName}}">
+
+                                        </td>
+
+                                        <td>{{(priceVal*stake)-stake | number:2}}</td>
+
+                                    </tr>
+
+                                    <tr>
+
+                                        <td colspan="5">
+
+                                            <div ng-hide="true">
+
+                                                {{$root.userPlcBtn[0].Name1==''?name1=50:name1=$root.userPlcBtn[0].Name1}}
+                                                {{$root.userPlcBtn[0].Value1==0?Value1=50:Value1=$root.userPlcBtn[0].Value1}}
+                                                {{$root.userPlcBtn[0].Name2==''?name2=100:name2=$root.userPlcBtn[0].Name2}}
+                                                {{$root.userPlcBtn[0].Value2==0?Value2=100:Value2=$root.userPlcBtn[0].Value2}}
+                                                {{$root.userPlcBtn[0].Name3==''?name3=500:name3=$root.userPlcBtn[0].Name3}}
+                                                {{$root.userPlcBtn[0].Value3==0?Value3=500:Value3=$root.userPlcBtn[0].Value3}}
+                                                {{$root.userPlcBtn[0].Name4==''?name4=1000:name4=$root.userPlcBtn[0].Name4}}
+                                                {{$root.userPlcBtn[0].Value4==0?Value4=1000:Value4=$root.userPlcBtn[0].Value4}}
+                                                {{$root.userPlcBtn[0].Name5==''?name5=5000:name5=$root.userPlcBtn[0].Name5}}
+                                                {{$root.userPlcBtn[0].Value5==0?Value5=5000:Value5=$root.userPlcBtn[0].Value5}}
+                                                {{$root.userPlcBtn[0].Name6==''?name6=10000:name6=$root.userPlcBtn[0].Name6}}
+                                                {{$root.userPlcBtn[0].Value6==0?Value6=10000:Value6=$root.userPlcBtn[0].Value6}}
+
+                                            </div>
+
+                                            <div ng-if="$root.MyLenth==0">
+
+                                                <button type="button" ng-click="stakeVal(1000,selectionId)"
+                                                        class="btn num-btns">1000
+                                                </button>
+                                                <button type="button" ng-click="stakeVal(5000,selectionId)"
+                                                        class="btn num-btns">5000
+                                                </button>
+
+                                                <button type="button" ng-click="stakeVal(10000,selectionId)"
+                                                        class="btn num-btns">10000
+                                                </button>
+
+                                                <button type="button" ng-click="stakeVal(25000,selectionId)"
+                                                        class="btn num-btns">25000
+                                                </button>
+
+                                                <button type="button" ng-click="stakeVal(50000,selectionId)"
+                                                        class="btn num-btns">50000
+                                                </button>
+
+                                                <button type="button" ng-click="stakeVal(100000,selectionId)"
+                                                        class="btn num-btns">100000
+                                                </button>
+
+                                                <button type="button" ng-click="stakeVal(150000,selectionId)"
+                                                        class="btn num-btns">150000
+                                                </button>
+
+                                                <button type="button" ng-click="stakeValReset(0)" class="btn clr-btn">
+                                                    Clear
+                                                </button>
+
+                                            </div>
+
+                                            <div ng-if="$root.MyLenth==1">
+
+                                                <button type="button" ng-click="stakeVal(Value1,selectionId)"
+                                                        class="btn num-btns">{{name1}}
+                                                </button>
+
+                                                <button type="button" ng-click="stakeVal(Value2,selectionId)"
+                                                        class="btn num-btns">{{name2}}
+                                                </button>
+
+                                                <button type="button" ng-click="stakeVal(Value3,selectionId)"
+                                                        class="btn num-btns">{{name3}}
+                                                </button>
+
+                                                <button type="button" ng-click="stakeVal(Value4,selectionId)"
+                                                        class="btn num-btns">{{name4}}
+                                                </button>
+
+                                                <button type="button" ng-click="stakeVal(Value5,selectionId)"
+                                                        class="btn num-btns">{{name5}}
+                                                </button>
+
+                                                <button type="button" ng-click="stakeVal(Value6,selectionId)"
+                                                        class="btn num-btns">{{name6}}
+                                                </button>
+
+                                                <button type="button" ng-click="stakeValReset(0)" class="btn clr-btn">
+                                                    Clear
+                                                </button>
+
+                                            </div>
+
+                                        </td>
+
+                                    </tr>
+
+                                    <tr>
+
+                                        <td colspan="5" class="facing-teams">
+
+                                            <button type="button" class="btn cancel-sel"
+                                                    ng-click="reset_all_selection()">Cancel all selections
+                                            </button>
+
+                                            <button type="submit" ng-disabled="(!betUserSubmit.$valid) || btnPlaceDis"
+                                                    class="btn place-bet" ng-click="place_bet()">Place bets
+                                            </button>
+
+                                        </td>
+
+                                    </tr>
+
+                                    </tbody>
+
+                                </table>
+
+                            </form>
+
+                        </div>
+
+                    </div>
+                    <div class="betOverlay" ng-if="loadingM">
+                        <img src="app/images/loader.gif">
+                    </div>
+                </div>
+
+                <div>
+                    <!-- app/timeline/matchodds_betslip -->
+                </div>
+
+            </div>
+
+
+            <div class="clearfix matchboxnew" ng-if="FancyData.length>0">
+                <h2 class="fancyhead">Fancy</h2>
+                <div class="fancylist clearfix">
+                    <div class="mtitle"> Session Runs - <span class='nprofit'>Min:500, Max:50000</span></div>
+                    <div class="blockn noblock"> No <span>Lay</span></div>
+                    <div class="blockn yesblock">Yes <span>Back</span></div>
+                </div>
+            </div>
+
+
+            <div ng-repeat-start="FancyObject in FancyData" class="fancyClass">
+
+
+                <div ng-hide="FancyObject.active==2 || FancyData.length==0">
+
+
+                    <div class="fancy">
+                        <div class="row sport-high fancyListDiv" style="margin-bottom:1px;">
+                            <div class="ses-fan-box clearfix">
+                                <div class="col-sm-12" ng-class="{'betting-disableds':FancyObject.DisplayMsg=='Result Awaiting' || FancyObject.isIndianShow==false}">
+
+                                    <div class="mtitle"> 
+                                    <div class="mtitletxt">
+                                    {{FancyObject.HeadName}}
+                                        <i style="color:black" class="fa fa-list" ng-click="LeaderShow($index,FancyObject)"></i>
+                                        <span  ng-if="FancyObject.fancy_position.length>0" >
+                                            Max exposure <span ng-class="{'red':FancyObject.max_exposure<0,'green':FancyObject.max_exposure>0}">{{FancyObject.max_exposure}}</span>
+                                        </span>
+
+                                       <!-- <i style="color:black" ng-if="FancyObject.fancy_position.length==0" class="fa fa-list betting-disableds"></i>-->
+									</div>
+                                    </div>
+
+
+                                    <!--    <div class="fancy-heading fancy-head" ng-click="$parent.accBet(3);showSessionFancy(FancyObject.TypeID,FancyObject.ID);" ng-show="FancyData.length>0">
+                                            {{FancyObject.HeadName}}
+
+                                            <span class="rigt-ref">
+                                            <i class="glyphicon " class="glyphicon-minus"></i>
+                                        </span>
+                                        </div>-->
+
+                                    <div class="blockn noblock" ng-class="{'betting-disableds':FancyObject.active==0}" ng-click="display_Yesfancy1(FancyObject.SessInptNo, FancyObject.ID,$index);CallSession(FancyObject,'sesion1'+$index,1)">
+
+
+                                        <button style="min-height:20px;" class="lay-cell cell-btn"
+                                                ng-disabled="FancyObject.active==0"
+                                                >
+                                            {{FancyObject.SessInptNo}}
+                                        </button>
+                                        <button style="min-height:20px;" class="disab-btn">
+                                            {{FancyObject.NoValume}}
+                                        </button>
+
+                                    </div>
+
+                                    <div ng-class="{'betting-disableds':(FancyObject.active==0 || SessionbtnPlaceDis)}" class="blockn yesblock" ng-click="display_Nofancy1(FancyObject.SessInptYes, FancyObject.ID,$index);CallSession(FancyObject,'sesion0'+$index,0)">
+                                        <button style="min-height:20px;" class="back-cell cell-btn"
+                                                ng-disabled="FancyObject.active==0 || SessionbtnPlaceDis"
+                                                >
+                                            {{FancyObject.SessInptYes}}
+                                        </button>
+                                        <button style="min-height:20px;" class="disab-btn" ng-disabled="FancyObject.active==0 || SessionbtnPlaceDis">
+                                            {{FancyObject.YesValume}}
+                                        </button>
+                                    </div>
+                                    <div class="max-bet-mrt">Max Bet :{{FancyObject.max_session_bet_liability}} <br>
+                                         Max Mkt :{{FancyObject.max_session_liability}}
+                                    </div>
+                                </div>
+
+
+                                <div class="col-sm-12 clearfix">
+                                    <!-- <div class="ses-fan-box clearfix"> -->
+                                    <!--sourabh 170125-->
+                                    <div style="position: relative;">
+                                        <div ng-hide="true">
+                                            {{$root.userPlcBtn[0].Name1==''?name1=50:name1=$root.userPlcBtn[0].Name1}}
+                                            {{$root.userPlcBtn[0].Value1==0?Value1=50:Value1=$root.userPlcBtn[0].Value1}}
+                                            {{$root.userPlcBtn[0].Name2==''?name2=100:name2=$root.userPlcBtn[0].Name2}}
+                                            {{$root.userPlcBtn[0].Value2==0?Value2=100:Value2=$root.userPlcBtn[0].Value2}}
+                                            {{$root.userPlcBtn[0].Name3==''?name3=500:name3=$root.userPlcBtn[0].Name3}}
+                                            {{$root.userPlcBtn[0].Value3==0?Value3=500:Value3=$root.userPlcBtn[0].Value3}}
+                                            {{$root.userPlcBtn[0].Name4==''?name4=1000:name4=$root.userPlcBtn[0].Name4}}
+                                            {{$root.userPlcBtn[0].Value4==0?Value4=1000:Value4=$root.userPlcBtn[0].Value4}}
+                                            {{$root.userPlcBtn[0].Name5==''?name5=5000:name5=$root.userPlcBtn[0].Name5}}
+                                            {{$root.userPlcBtn[0].Value5==0?Value5=5000:Value5=$root.userPlcBtn[0].Value5}}
+                                            {{$root.userPlcBtn[0].Name6==''?name6=10000:name6=$root.userPlcBtn[0].Name6}}
+                                            {{$root.userPlcBtn[0].Value6==0?Value6=10000:Value6=$root.userPlcBtn[0].Value6}}
+                                        </div>
+
+                                        <div class=" row bet-fancy"
+                                             ng-show="(userType==3 || $root.NodeCntUsrDetails.usetype==3) && (userType!=0) && (openfancy[FancyObject.ID].open)"
+                                             class="check-element animate-show"
+                                             ng-class="{true:'lay-ele-box',false:'back-ele-box'}[openfancy[FancyObject.ID].yes]">
+                                            <div class="betOverlaypre{{$index}} col-sm-12">
+                                                <!--  <img src="app/images/loader.gif"> -->
+                                            </div>
+                                            <!--<form name="oddForm" method="post" style="">-->
+                                            <div class="col-sm-5">
+                                                <div class="row">
+                                                    <div style="display:inline-block; vertical-align:top;">
+                                                        <span class="head-ses-fan">{{({true:'[NO]',false:'[Yes]'}[openfancy[FancyObject.ID].yes])}}</span>
+                                                        <input type="text" class="bet-on"
+                                                               ng-model="FancyObject.SessInptNo" readonly
+                                                               ng-if="openfancy[FancyObject.ID].yes"/>
+                                                        <input type="text" class="bet-on"
+                                                               ng-model="FancyObject.SessInptYes"
+                                                               ng-if="!openfancy[FancyObject.ID].yes"/>
+                                                    </div>
+                                                    <div style="display:inline-block; vertical-align:top;">
+                                                        <span class="head-ses-fan">Stake</span>
+                                                        <input type="number"
+                                                               ng-init="FancyObject.lstack=betValue[FancyObject.ID]"
+                                                               style="width:100px" class="stake-inp size" min="0"
+                                                               max="200000" ng-model="betValue[FancyObject.ID]"
+                                                               id="betValueLay{{$index}}"
+                                                               ng-blur="GetBetValue1(betValue[FancyObject.ID],FancyObject.ID)"
+                                                               name="betValue" autofocus>
+
+                                                        <input type="hidden" name="odd" value="1" ng-model="OddValue">
+                                                    </div>
+                                                </div>
+                                            </div>
+
+                                            <!--</form>-->
+                                            <div class="col-sm-7 fancy-button" ng-if="$root.MyLenth==0">
+                                                <button ng-click="GetBetValue(500, FancyObject.ID)"
+                                                        class="btn btn-primary btn-sm ">500
+                                                </button>
+                                                <button ng-click="GetBetValue(1000, FancyObject.ID)"
+                                                        class="btn btn-primary btn-sm ">1000
+                                                </button>
+                                                <button ng-click="GetBetValue(2000, FancyObject.ID)"
+                                                        class="btn btn-primary btn-sm ">2000
+                                                </button>
+                                                <button ng-click="GetBetValue(15000, FancyObject.ID)"
+                                                        class="btn btn-primary btn-sm ">15000
+                                                </button>
+
+                                                <button ng-click="GetBetValue(5000, FancyObject.ID)"
+                                                        class="btn btn-primary btn-sm ">5000
+                                                </button>
+                                                <button ng-click="GetBetValue(25000, FancyObject.ID)"
+                                                        class="btn btn-primary btn-sm">25000
+                                                </button>
+
+                                                <button ng-click="GetBetValue(10000, FancyObject.ID)"
+                                                        class="btn btn-primary btn-sm">10000
+                                                </button>
+                                                <button ng-click="GetBetValue(50000, FancyObject.ID)"
+                                                        class="btn btn-primary btn-sm">50000
+                                                </button>
+
+                                                <button class="btn btn-danger btn-sm"
+                                                        ng-click="GetBetValueReset(0,true, FancyObject.ID)">Cancel
+                                                </button>
+                                                <button class="btn btn-info btn-sm"
+                                                        ng-disabled="FancyObject.active==0 || !(FancyObject.MaxStake >= betValue[FancyObject.ID]) || btnPlaceDisSession"
+                                                        ng-click="saveSessionBet(FancyObject.pointDiff, FancyObject,$index,betValue[FancyObject.ID])">
+                                                    Place
+                                                </button>
+                                            </div>
+                                        </div>
+                                        <div ng-if="$root.MyLenth==1" class="fancy-btn"
+                                             style="display:inline-block; margin-right:4px;">
+                                            <div style="display:inline-block; vertical-align:top;">
+                                                <button type="button" ng-click="GetBetValue(Value1, FancyObject.ID)"
+                                                        class="btn btn-primary btn-sm">{{name1}}
+                                                </button>
+                                                <br/>
+                                                <button type="button" ng-click="GetBetValue(Value4, FancyObject.ID)"
+                                                        class="btn btn-primary btn-sm">{{name4}}
+                                                </button>
+                                            </div>
+                                            <div style="display:inline-block; vertical-align:top;">
+                                                <button type="button" ng-click="GetBetValue(Value2, FancyObject.ID)"
+                                                        class="btn btn-primary btn-sm">{{name2}}
+                                                </button>
+                                                <br/>
+                                                <button type="button" ng-click="GetBetValue(Value5, FancyObject.ID)"
+                                                        class="btn btn-primary btn-sm">{{name5}}
+                                                </button>
+                                            </div>
+                                            <div style="display:inline-block; vertical-align:top;">
+                                                <button type="button" ng-click="GetBetValue(Value3, FancyObject.ID)"
+                                                        class="btn btn-primary btn-sm">{{name3}}
+                                                </button>
+                                                <br/>
+                                                <button type="button" ng-click="GetBetValue(Value6, FancyObject.ID)"
+                                                        class="btn btn-primary btn-sm">{{name6}}
+                                                </button>
+                                            </div>
+                                            <div style="display:inline-block; vertical-align:top;">
+                                                <button class="btn btn-danger btn-sm"
+                                                        ng-click="GetBetValueReset(0,true, FancyObject.ID)">Cancel
+                                                </button>
+                                                <br>
+                                                <button class="btn btn-info btn-sm"
+                                                        ng-disabled="FancyObject.active==0 || btnPlaceDisSession"
+                                                        ng-click="saveSessionBet(FancyObject.pointDiff, FancyObject,$index)">
+                                                    Place
+                                                </button>
+                                            </div>
+
+                                        </div>
+
+                                    </div>
+
+                                    <!--  </div> -->
+                                </div>
+                            </div>
+                            <div ng-if="FancyObject.active==0" class="ball-msg-box">
+                                <h1>Ball Started</h1>
+                            </div>
+                            <div ng-if="FancyObject.active==4 || FancyObject.active==2" class="ball-msg-box">
+                                <h1>{{FancyObject.DisplayMsg}}</h1>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div ng-repeat-end="" ng-if="InClick==$index" class="ng-scope fancyleder">
+              <!--  <i style="color:black" class="fa fa-window-close"  ng-click="LeaderShow(-1)"></i>-->
+
+                <table class="table market-listing-table" ng-if="FancyObject.fancy_position.length>0">
+                    <thead>
+                    <tr>
+                        <th>Runs</th>
+                        <th>P&amp;L</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <tr ng-repeat="fancyP in FancyObject.fancy_position">
+                        <td>{{fancyP.SessInptYes}}</td>
+                        <td ng-class="{'red':fancyP.ResultValue<0,'green':fancyP.ResultValue>0}">{{fancyP.ResultValue}}</td>
+                    </tr>
+                    </tbody>
+                </table>
+            </div>
+            <div class="col-sm-4 col-md-4 col-xs-12 padding" ng-if="false">
+                <div>
+
+                    <div class="fancy-collapse-panel">
+                        <div class="panel panel-default match">
+                            <div class="panel-heading" role="tab" id="headingOne">
+                                <h3 class="panel-title">Matched Bets ({{(UserData | filter :
+                                    {"IsMatched":"1"}).length}})</h3>
+                            </div>
+                            <div class="panel-body unmatchedScrollTable"
+                                 ng-if='(UserData | filter : {"IsMatched":"1"}).length>0'>
+                                <table class="table betslip-table">
+                                    <thead>
+                                    <tr>
+                                        <th>Runner</th>
+                                        <th ng-if="USERTYPE==0">Master</th>
+                                        <th ng-if="USERTYPE==0 || USERTYPE==1">Dealer</th>
+                                        <th ng-if="USERTYPE==0 || USERTYPE==1 ||USERTYPE==2">Client</th>
+                                        <th>odds</th>
+                                        <th>stack</th>
+                                        <th>P&l</th>
+                                    </tr>
+                                    </thead>
+                                    <tbody>
+                                    <tr ng-repeat='unMatchedData in (UserData | filter : {"IsMatched":"1"})'
+                                        ng-class="{'lay-head': unMatchedData.isBack == 1 , 'back-head': unMatchedData.isBack == 0}">
+                                        <td>{{unMatchedData.selectionName}}</td>
+                                        <td ng-if="USERTYPE==0">{{unMatchedData.MasterName}}</td>
+                                        <td ng-if="USERTYPE==0 || USERTYPE==1">{{unMatchedData.ParantName}}</td>
+                                        <td ng-if="USERTYPE==0 || USERTYPE==1 ||USERTYPE==2">
+                                            {{unMatchedData.userName}}
+                                        </td>
+                                        <td>{{unMatchedData.Odds}}</td>
+                                        <td>{{unMatchedData.Stack}}</td>
+                                        <td>{{unMatchedData.P_L}}</td>
+                                    </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="fancy-collapse-panel">
+                        <div class="panel panel-default match">
+                            <div class="panel-heading" role="tab" id="headingOne">
+                                <h3 class="panel-title">Unmatched Bets ({{(UserData | filter :
+                                    {"IsMatched":"0"}).length}})</h3>
+                            </div>
+                            <div class="panel-body unmatchedScrollTable"
+                                 ng-if='(UserData | filter : {"IsMatched":"0"}).length>0'>
+                                <table class="table betslip-table">
+                                    <thead>
+                                    <tr>
+                                        <th></th>
+                                        <th>Runner</th>
+                                        <th ng-if="USERTYPE==0">Master</th>
+                                        <th ng-if="USERTYPE==0 || USERTYPE==1">Dealer</th>
+                                        <th ng-if="USERTYPE==0 || USERTYPE==1 ||USERTYPE==2">Client</th>
+                                        <th>odds</th>
+                                        <th>stack</th>
+                                        <th>P&l</th>
+                                    </tr>
+                                    </thead>
+                                    <tbody>
+                                    <tr ng-repeat='unMatchedData in (UserData | filter : {"IsMatched":"0"})'
+                                        ng-class="{'lay-head': unMatchedData.isBack == 1 , 'back-head': unMatchedData.isBack == 0}">
+                                        <td><span class="glyphicon glyphicon-trash"
+                                                  ng-click="deleteUser(unMatchedData.MstCode,unMatchedData.UserId)"></span>
+                                        </td>
+                                        <td>{{unMatchedData.selectionName}}</td>
+                                        <td ng-if="USERTYPE==0">{{unMatchedData.MasterName}}</td>
+                                        <td ng-if="USERTYPE==0 || USERTYPE==1">{{unMatchedData.ParantName}}</td>
+                                        <td ng-if="USERTYPE==0 || USERTYPE==1 ||USERTYPE==2">
+                                            {{unMatchedData.userName}}
+                                        </td>
+                                        <td>{{unMatchedData.Odds}}</td>
+                                        <td>{{unMatchedData.Stack}}</td>
+                                        <td>{{unMatchedData.P_L}}</td>
+                                    </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+                <!-- end the code of bet list -->
+
+            </div>
+        </div>
+
+
+        <!--  <userrightbar></userrightbar>-->
+        <!-- start code for Fancy -->
+
+
+        <!-- end the code of Fancy -->
+
+
+    </div>
+
+
+</div>
+
+
+</div>
+ 
+    
+    
+    
+    

@@ -1,0 +1,180 @@
+               
+<h1 class="page-heading">List of Client</h1>
+<div class="col-sm-12 col-md-12 master-cont">
+{{UserData}}11
+
+		<div class="top-section clearfix">
+		<div class="form_box  col-lg-12 col-md-12 col-sm-12 col-xs-12" data-ng-hide="true">
+			<div class="match-radio">
+				<span>Match Odds</span>
+				<input type="radio" name="fancyGrp" ng-model="Fancy" value="MatchOdds" ng-checked="true" >
+            </div>
+            <div class="match-radio">
+				<span>Fancy</span>
+				<input type="radio" name="fancyGrp" ng-model="Fancy" value="fancy"  >
+            </div>
+				<!-- {{Fancy}} -->
+		</div>
+		<div class="form_box  col-lg-6 col-md-6 col-sm-6 col-xs-12">
+				<label>Select Sport</label>
+
+					<select name="Sport_id" ng-model="Sport_id" ng-options="sport.name for sport in sportLst track by sport.id" ng-change="GetMatch(Sport_id)" >
+
+						<option value=''>Select Sport</option>
+					
+					</select>
+					
+					<!-- {{matchLst}} -->
+		</div>
+		<div class="form_box  col-lg-6 col-md-6 col-sm-6 col-xs-12">
+				<label>Select Match</label>
+					
+					<select name="Match_id" ng-model="Match_id" ng-options="match.matchName for match in matchLst track by match.MstCode" ng-change="GetMarket(Match_id.MstCode,Sport_id.id,Fancy)" >
+
+						<option value=''>Select Market</option>
+					
+					</select>
+					
+		</div>
+		<div ng-show="Fancy=='MatchOdds'">
+			<div class="form_box">
+				<div class="form_box  col-lg-6 col-md-6 col-sm-6 col-xs-12" >
+
+					<label>Select Market</label>
+					
+					<select name="market_id" ng-model="market_id" ng-options="market.Name for market in MatchMarket track by market.Id" ng-change="Getodds(market_id.Id)" >
+
+						<option value=''>Select Odds</option>
+					
+					</select>
+							
+				</div>
+
+				<div class="form_box  col-lg-6 col-md-6 col-sm-6 col-xs-12">
+
+					<label>Select Selection</label>
+					
+					<select name="Selection" ng-model="Selection" ng-options="selection.selectionName for selection in runner track by selection.selectionId" >
+
+						<option value=''>Select Selection</option>
+					
+					</select>
+
+							
+				</div>
+             </div>
+				<div class="res-sub col-lg-12 col-md-12 col-sm-12 col-xs-12">
+					<!-- <input type="text" name="result" ng-model="model_result1"> -->
+					<button ng-click="saveMatchoddsResult(Match_id.MstCode,Sport_id.id,market_id.Id,Selection.selectionId,Sport_id.name,Match_id.matchName,market_id.Name,Selection.selectionName)">
+                    Submit Result</button>
+				</div>
+			
+		</div>
+		<div ng-show="Fancy=='fancy'">
+				<div class="form_box  col-lg-6 col-md-6 col-sm-6 col-xs-12">
+
+							<label>Select Fancy</label>
+							
+							<select name="get_Fancy" ng-model="get_Fancy" ng-options="fancyData.HeadName for fancyData in getMatchFancy track by fancyData.ID" >
+
+								<option value=''>Select Fancy</option>
+							
+							</select>
+							<!-- {{getMatchFancy}} -->
+							
+				</div>
+                
+                <div class="res-sub col-lg-12 col-md-12 col-sm-12 col-xs-12">
+					<input type="text" name="result" ng-model="model_result">
+					<button ng-click="saveResult(Match_id.MstCode,Sport_id.id,get_Fancy.ID,model_result)">Submit Result</button>
+				</div>
+		</div>
+	</div>
+<!-- {{MatchOddsResult}}-->
+
+	<div class="col-lg-12 col-md-12 col-sm-12 creat_form">
+		 <h5>Filtered {{ filtered.length }} of {{ totalItems}} total Masters</h5>
+        <div class="lst_master_top clearfix">
+			<div class="form_row col-lg-12 col-md-12 col-sm-12 col-xs-12 clearfix top_table_form" style="padding: 0px;">
+                <div class="form_box  col-lg-2 col-md-2 col-sm-2 col-xs-12" style="padding: 0px;">
+                    <label>Match Name</label>
+                    <input type="text" ng-model="search.MatchName" ng-change="filter()" placeholder="Search By Match Name" />
+                </div>
+                <div class="form_box  col-lg-2 col-md-2 col-sm-2 col-xs-12" style="padding: 0px;">
+                    <label>Market Name</label>
+                    <input type="text" ng-model="search.MarketName" ng-change="filter()" placeholder="Search By Market Name" />
+                </div>
+
+                <div class="form_box  col-lg-2 col-md-2 col-sm-2 col-xs-12" style="padding: 0px;">
+                    <label>Sport Name</label>
+                    <input type="text" ng-model="search.sportName" ng-change="filter()" placeholder="Search By Sport Name" />
+                </div>
+                <div class="form_box  col-lg-2 col-md-2 col-sm-2 col-xs-12" style="padding: 0px;">
+                    <label>Selection Name</label>
+                    <input type="text" ng-model="search.SelectionName" ng-change="filter()" placeholder="Search By Selection Name" />
+                </div>
+                <div class="form_box  col-lg-2 col-md-2 col-sm-2 col-xs-12" style="padding: 0px;">
+                    <label>Date</label>
+                    <input type="text" ng-model="search.date" ng-change="filter()" placeholder="Search By Date" />
+                </div>
+                <div class="form_box  col-lg-2 col-md-2 col-sm-2 col-xs-12" style="padding: 0px;">
+                      <div class="file-icons">
+                         <a href=""><img src="app/images/file1.png" /></a>
+                         <a href=""><img src="app/images/file2.png" /></a>
+                         <a href=""><img src="app/images/file3.png" /></a>
+                      </div>
+                </div>
+            </div>
+			<div class="col-lg-12 col-md-12 lst_master">
+				<div class="listdata-table clearfix ">
+				    <table class="table table-bordered table-condensed table-responsive" style="background-color: #fff;">
+				        <thead>
+				            <tr>
+				                <th><a ng-click="sort_by('$index');"><i class="glyphicon glyphicon-sort"></i></a>Serial No</th>
+				                <th><a ng-click="sort_by('MatchName');"><i class="glyphicon glyphicon-sort"></i></a>Match Name</th>
+				                <th><a ng-click="sort_by('MarketName');"><i class="glyphicon glyphicon-sort"></i></a>Market Name</th>
+				                <th><a ng-click="sort_by('sportName');"><i class="glyphicon glyphicon-sort"></i></a>sport Name</th>
+				                <th><a ng-click="sort_by('SelectionName');"><i class="glyphicon glyphicon-sort"></i></a>Selection Name</th>
+				                <th><a ng-click="sort_by('date');"><i class="glyphicon glyphicon-sort"></i></a>Date</th>
+				                <th><a ng-click="sort_by('result');"><i class="glyphicon glyphicon-sort"></i></a>result</th>
+				                <th>Action</th>
+				            </tr>
+				        </thead>
+						<!--{{MatchOddsResult}}-->
+				        <tr ng-repeat="user in filtered = (UserData | filter:search | orderBy : predicate :reverse) | startFrom:(currentPage-1)*entryLimit | limitTo:entryLimit"><!-- user.resId -->
+				            <td data-label="Serial No">{{user.id}}</td>
+				            <td data-label="Match Name">{{user.mstrname}}</td>
+				            <!-- <td data-label="Market Name">{{user.MarketName}}</td>
+				            <td data-label="sport Name">{{user.sportName}}</td>
+				            <td data-label="Selection Name">{{user.SelectionName}}</td>
+				           	<td data-label=" Date">{{user.date}}</td>
+				           	<td data-label=" result">{{user.result}}</td>
+				            <td data-label="Action">
+				              <a href="javascript:;" ng-click="deleteRecord(user.resId,user.sportId,user.matchId,user.marketId,user.isFancy,user.selectionId)">Roll Back</a>
+				            </td> -->
+				           
+				        </tr>
+
+				    </table>
+				</div>
+
+				<div class="col-md-12" ng-show="filteredItems == 0">
+				    <div class="col-md-12">
+				        <h4>No Result found</h4>
+				    </div>
+				</div>
+				<div class="col-md-12" ng-show="filteredItems > 0">
+				    <div pagination="" page="currentPage" on-select-page="setPage(page)" boundary-links="true" total-items="filteredItems" items-per-page="entryLimit" class="pagination-small" previous-text="&laquo;" next-text="&raquo;">
+				    </div>
+
+
+				</div>
+			</div>
+		</div>
+	</div>
+</div>		
+		
+		
+
+
+		

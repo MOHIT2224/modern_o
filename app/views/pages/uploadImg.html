@@ -1,0 +1,47 @@
+
+<div class="col-sm-12 col-md-12 col-md-12 clearfix">
+    <div class="clearfix ">
+        <div class="box-heading clearfix">
+            Upload Image
+        </div>
+
+        <div class="fancy_wrapper clearfix ">
+
+            <div class="upload-form">
+                <form name="uploadImg" metchod="post" enctype="multipart/form-data">
+                    <input type = "file" file-model = "myFile" class="browse-btn" required="required"/>
+                    <button ng-click = "uploadFile()" class="upload-btn btn btn-primary">Upload File</button>
+                </form>
+            </div>
+
+            <div class="listdata-table clearfix">
+            <table class="table table-bordered table-condensed table-responsive upload-img-table">
+                <thead>
+                <tr>
+                    <th>Image Name</th>
+                    <th>Image </th>
+                    <th>Action</th>
+                </tr>
+                </thead>
+
+                <tbody>
+               <!-- {{sliderLst}}-->
+                <tr ng-repeat="slider in sliderLst">
+                    <td data-label="Image Name">{{slider.img_name}}</td>
+                    <td data-label="Image"><img src="app/images/slider/{{slider.img_name}}"> </td>
+                    <td data-label="Action">
+                        <input type="radio" name="{{slider.id}}" value="1" ng-checked="slider.active == 1" ng-click="getSliderStatus(slider.id,1)"  /><img src="app/images/active.png">
+                        <input type="radio" name="{{slider.id}}" value="0" ng-checked="slider.active == 0" ng-click="getSliderStatus(slider.id,0)" /><img src="app/images/inactive.png">
+                        <input type="radio" name="{{slider.id}}" value="2" ng-checked="slider.active == 2" ng-click="deleteImage(slider.id,slider.img_name)" /><img src="app/images/delete.png">
+                    </td>
+                </tr>
+                </tbody>
+            </table>
+        </div>
+        </div>
+        
+    </div>
+
+</div>
+
+

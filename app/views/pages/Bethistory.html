@@ -1,0 +1,132 @@
+<!-- {{user_chipsP}}
+    <br>
+     <br>
+{{user_chipsM}}  -->
+     <div class="content-wrapper" style="min-height: 720px;">
+<div class="load-box" ng-show="loading">
+            <img id="mySpinner" src="app/images/loading1.gif" />
+        </div>
+         <div class="clearfix">
+             <div class="box-heading diff-head">
+                 <h1 class="page-heading">Chip Summary of {{GTUserName}}  <!-- User_id={{GTUseruserId}} --></h1>
+
+                 <!-- <h3>Leicester U23 v Walsall [ Match Odds ]</h3>
+                    <h6>Winner : Walsall</h6>
+                    <h6>Settled Time : Wed 9 Nov, 03:12 AM</h6> -->
+             </div>
+
+             <div class="shadow-box clearfix bet_hist_flex">
+                 <div class="col-sm-12 col-md-6">
+                     <div class="green_panel">
+                        <!-- {{user_chipsP.result_array[0].usetype}} --><!-- ng-hide="user_chipsP.result_array[0].UserID==BackPrntId" -->
+                        <div class="gren-head">Plus Account <span class="nav-header" ng-show="backopti"  ng-click="doTheBack(GTuserType,GTUseruserId,GTUserName)" style="float:right;">
+                         <i class="glyphicon glyphicon-chevron-left"></i>Back</span>
+                        </div>
+
+                         <div class="gren_body">
+                             <table class="plus-minus-table">
+                                 <thead>
+                                     <tr>
+                                         <th colspan="2" style="width: 27%;">Name</th>
+                                         <th colspan="2">Account</th>
+                                         <th style="text-align:right;">Chips</th>
+                                         <th colspan="3" style="text-align:right;">
+                                         Htry|Clr
+                                        </th>
+
+                                     </tr>
+                                 </thead>
+                                 <tbody>
+                                     <tr ng-repeat="userP in user_chipsP.result_array" class="bot_border">
+                                         <td ui-sref-active="active" colspan="2">
+                                             {{userP.mstruserid}}
+                                          </td>
+                                         <td colspan="2">
+                                            <div ng-if='(userP.msttype=="6" || userP.usetype=="3" || userP.ChildID==0)'>
+                                             {{userP.mstrname}}
+                                            </div>
+                                             <div ng-if='(userP.msttype!="6" && userP.usetype!="3" && userP.ChildID!=0)'>
+                                                 <a href="" ng-click="Get_chipSummery(userP.usetype,userP.UserID,userP.mstruserid)" >{{userP.mstrname}}</a>
+                                             </div>
+                                         </td>
+                                         <td style="text-align:right; font-size:13px;" ng-class="{'green':userP.PUsum>0,'red':userP.PUsum<0}"><strong>{{userP.PUsum | number:2}}</strong></td>
+                                         <td style="text-align:right;">
+                                             <a ng-show="$root.HelperAllRights==angular.isUndefinedOrNull || $root.HelperAllRights.ChipHistory==1" href="" ui-sref="dashboard.ChiphistorycntrByuId({UserID:userP.UserID,usetype:userP.usetype,userName:userP.mstruserid,parentId:GTUseruserId})" ng-if="userP.ChildID!=0 || userP.mstrname=='Parent A/c'"><img src="app/images/histtory3.png" /> </a>
+
+                                             <!--170201_3-->
+                                             <a  href="" ng-click="showClearchip(userP,1)" ng-if="userP.ChildID!=0 && $root.IsSettlementBtn=='Y'" ><img src="app/images/clear.png" /></a>
+                                             <a  href="" ng-click="CompanySettlement(userP.UserID)" ng-if="userP.ChildID==0 && userP.mstrname=='Own'" title="Company Settlement" ><img src="app/images/clear.png" /></a>
+
+                                         </td>
+                                         
+                                     </tr>
+                                 </tbody>
+                                 <tfoot>
+                                     <tr class="plus_total">
+                                         <td><strong>Total</strong></td>
+                                         <td colspan="3"></td>
+                                         
+                                         <td style="text-align:right;"><strong ng-class="{'green':totalSumP>0,'red':totalSumP<0}">{{totalSumP| number:2}}</strong></td>
+                                         <td></td>
+                                         <td></td>
+                                     </tr>
+                                 </tfoot>
+                             </table>
+                         </div>
+                     </div>
+                 </div>
+                 <div class="col-sm-12 col-md-6">
+                     <div class="pich_panel">
+                         <div class="pich-head">Minus Account <span class="nav-header" ng-show="backopti"  ng-click="doTheBack(GTuserType,GTUseruserId,GTUserName)" style="float:right;">
+                         <i class="glyphicon glyphicon-chevron-left"></i>Back</span></div>
+                         <div class="pich_body">
+                             <table class="plus-minus-table">
+                                 <thead>
+                                     <tr>
+                                         <th style="width: 27%;">Name</th>
+                                         <th>Account</th>
+                                         <th style="text-align:right;">Chips</th>
+                                          <th colspan="3" style="text-align:right;">
+                                          <!--<img src="app/images/histtory.png" />--> Htry|Clr</th>
+                                     </tr>
+                                 </thead>
+                                 <tbody>
+                                    <tr ng-repeat="userM in user_chipsM.result_array" class="bot_border">
+                                        <td ui-sref-active="active">
+                                            {{userM.mstruserid}}
+                                            <!-- <a href="" ng-click="Get_chipSummery(userM.usetype,userM.UserID,userM.mstruserid)" >{{userM.mstrname}}</a> -->
+                                        </td>
+                                        <td>
+                                            <div ng-if='(userM.msttype=="6" || userM.usetype=="3"  || userM.ChildID==0)'>
+                                            {{userM.mstrname}}
+                                        </div>
+                                            <div ng-if='(userM.msttype!="6" && userM.usetype!="3"  && userM.ChildID!=0)'>
+                                                <a href="" ng-click="Get_chipSummery(userM.usetype,userM.UserID,userM.mstruserid)" >{{userM.mstrname}}</a>
+                                            </div></td>
+                                        <td  style="text-align:right;" class="red"><strong>{{userM.Musum | number:2}}</strong></td>
+                                        <td style="text-align:right;"> 
+                                            <a ng-show="$root.HelperAllRights==angular.isUndefinedOrNull || $root.HelperAllRights.ChipHistory==1" href="" ui-sref="dashboard.ChiphistorycntrByuId({UserID:userM.UserID,usetype:userM.usetype,userName:userM.mstruserid,parentId:GTUseruserId})" ng-if="userM.ChildID!=0 || userM.mstrname=='Parent A/c'"><!--170201_3-->
+                                            <img src="app/images/histtory3.png" /> </a>
+                                            
+                                            <a  href=""  ng-click="showClearchip(userM,2)" ng-if="userM.ChildID!=0 && $root.IsSettlementBtn=='Y'" >
+                                            <img src="app/images/clear.png" /> <!--class="toolt"<span class="tooltiptext">Clear</span>--> </a>
+                                         </td>
+                                     </tr>
+                                 </tbody>
+                                 <tfoot>
+                                     <tr class="minus_total">
+                                         <td><strong>Total</strong></td>
+                                         <td></td>
+                                         <td style="text-align:right;"><strong class="red">{{totalSumM | number:2}}</strong></td>
+                                         <td></td>
+                                         <td></td>
+                                     </tr>
+                                 </tfoot>
+                             </table>
+                         </div>
+                     </div>
+                 </div>
+             </div>
+         </div>
+
+    </div>

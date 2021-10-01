@@ -1,0 +1,204 @@
+﻿<md-dialog class="dial-width-650">
+<div class="load-box" ng-show="loading"><img id="mySpinner" src="app/images/loading1.gif" /></div>
+    <md-toolbar>
+        <div class="md-toolbar-tools">
+            <h2>{{fancyHeaderName}} Fancy</h2>
+            <span flex></span>
+            <md-button class="md-icon-button" ng-click="hide()">
+                <md-icon md-svg-src="app/images/close.svg" aria-label="Close dialog"></md-icon>
+            </md-button>
+        </div>
+    </md-toolbar>
+    <md-dialog-content>
+        <div class="md-dialog-content">
+            <div class="clearfix">
+                <form name="userForm" method="post" ng-submit="oddEvenFancy(formData)" ng-if="fancyType==1">
+                    <div class="form_box col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                        <label>Fancy HeadName</label>
+                        <input ng-init="formData.HeadName=fancyHeaderName" type="text" name="headName" class="input-box" ng-model="formData.HeadName" required="required">
+                    </div>
+                    <div class="form_box  col-lg-12 col-md-12 col-sm-12 col-xs-12" ng-init="formData.remarks='5% Commission Applied per winning bets, for eg. if you place 100chips and you win you will get 95chips otherwise lose 100chips. OddEven Means Score Last Digit, If it is ODD then ODD Win else EVEN, 0 is Even, 1 is Odd. Place bet and win. Market suspended before 4 over. Bets will be cancelled if there are bets after given suspend time. Good Luck.'">
+                        <label>Remark</label>
+                        <textarea name="remarks" ng-model="formData.remarks" class="input-box"></textarea>
+                    </div>
+                    <div class="form_box  col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                        <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
+                            <div class="form_box top-datepick" ng-hide="true">
+                                <label>Fancy Date and Time</label>
+                                <input type="text" name="date" ng-model="dt">
+                            </div>
+                        </div>
+                        <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
+                            <div style="margin-top:5px;">
+                                <!-- time -->
+                                <timepicker ng-model="mytime" name="mytime" show-meridian="ismeridian"></timepicker>
+                            </div>
+                        </div>
+                    </div>
+                    <input type="hidden" name="FancyTime" id="setFancyTime" value="{{mytime}}">
+                    <input type="hidden" name="mid" ng-model="mid">
+                    <input type="hidden" name="fancyType" ng-model="fancyType">
+                    <button type="submit" class="btn btn-primary" ng-disable="SubmitBtnDis">Submit</button>
+                </form>
+                <form name="userForm" method="post" ng-submit="SessionFancyForm(formData)" ng-if="fancyType==2">
+                    <!--  <p ng-show="message" style="text-align: center; color:#FE5454; font-size: 18px; margin-bottom: 15px;">{{SessionFancyFormmessage}}</p> -->
+                    <div class="form_box col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                        <label>Fancy Heading</label>
+                        <input ng-init="formData.HeadName=fancyHeaderName" type="text" name="headName" class="input-box" ng-model="formData.HeadName" required="required">
+                    </div>
+                    <div class="form_box col-lg-12 col-md-12 col-sm-12 col-xs-12 padd-zero">
+                        <div class="col-lg-4 col-md-4 col-sm-4 col-xs-12">
+                            <label>YES:</label>
+                            <input type="number" id="inputYes" name="input" ng-model="example" ng-KeyUp="getVal(example)" ng-Click="getVal(example)" />
+                        </div>
+                        <div class="col-lg-4 col-md-4 col-sm-4 col-xs-12 add-btn-box">
+                            <button type="button" class="add-btns" name="btn1" ng-Click="addPlusOne(example)"><img src="app/images/add-one.png" /></button>
+                            <button type="button" class="add-btns" name="btn1" ng-Click="addPlusTwo(example)"><img src="app/images/add-two.png" /></button>
+                            <button type="button" class="add-btns" name="btn1" ng-Click="addPlusThree(example)"><img src="app/images/add-three.png" /></button>
+                            <button type="button" class="add-btns" name="btn1" ng-Click="addPlusFour(example)"><img src="app/images/add-four.png" /></button>
+                            <button type="button" class="add-btns" name="btn1" ng-Click="addPlusFive(example)"><img src="app/images/add-five.png" /></button>
+                        </div>
+                        <div class="col-lg-4 col-md-4 col-sm-4 col-xs-12">
+                            <label>No:</label>
+                            <input type="number" id="inputNo" name="input1" ng-model="example_1" readonly="readonly" required>
+                        </div>
+                    </div>
+                    <div class="form_box  col-lg-12 col-md-12 col-sm-12 col-xs-12" ng-init="formData.remarks='5% Commission Applied per winning bets, for eg. if you place 100chips and you win you will get 95chips otherwise lose 100chips. OddEven Means Score Last Digit, If it is ODD then ODD Win else EVEN, 0 is Even, 1 is Odd. Place bet and win. Market suspended before 4 over. Bets will be cancelled if there are bets after given suspend time. Good Luck.'">
+                        <label>Description</label>
+                        <textarea name="remarks" ng-model="formData.remarks" class="input-box"></textarea>
+                    </div>
+                    <div class="form_box  col-lg-12 col-md-12 col-sm-12 col-xs-12" ng-hide="true">
+                        <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
+                            <div class="form_box datepick-box">
+                                <label>{{formData.dt}} Date </label>
+                                <!--  <input ng-init="formData.dt=dt | date:'yyyy-MM-dd'" type="text" id="date" class="form-control input-box" datepicker-popup="{{format}}" ng-model="formData.dt" is-open="opened" datepicker-options="dateOptions" ng-required="true" close-text="Close" datetime-picker="yyyy dd MM" /> -->
+                                <input type="text" name="date" ng-model="dt">
+                            </div>
+                        </div>
+                        <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
+                            <div style="margin-top:5px;">
+                                <!-- time -->
+                                <timepicker ng-model="mytime" name="mytime" show-meridian="ismeridian"></timepicker>
+                                <!-- end -->
+                            </div>
+                        </div>
+                    </div>
+                    <input type="hidden" name="FancyTime" id="setFancyTimeS" value="{{mytime | date:' HH:MM:'}}">
+                    <input type="hidden" name="mid" ng-model="mid">
+                    <input type="hidden" name="fancyType" ng-model="fancyType">
+                    <button type="submit" class="btn btn-primary">Submit</button>
+
+                </form>
+                <form name="KhaddalForm" method="post" ng-submit="KhaddalFancyForm(formData)" ng-if="fancyType==3">
+                    <div class="form_box col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                        <label>Khaddal Heading</label>
+                        <input ng-init="formData.HeadName=fancyHeaderName" type="text" name="headName" class="input-box" ng-model="formData.HeadName" required="required">
+                        <div role="alert">
+                            <span class="error" ng-show="KhaddalForm.input.$error.required">
+                                Required!
+                            </span>
+                            <span class="error" ng-show="KhaddalForm.input.$error.number">
+                                Not valid number!
+                            </span>
+                        </div>
+                    </div>
+                    <div class="form_box col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                        <label>Range</label>
+                        <input type="number" name="range" id="range" class="input-box" ng-model="formData.range" min="0" required="required">
+                    </div>
+                    <div class="form_box  col-lg-12 col-md-12 col-sm-12 col-xs-12" ng-init="formData.remarks='Score range is fancy market where you can select a score range of particular runner. for eg.Runner Range-30.
+                    then you can choose any range like 110 to 139,125 to 154 etc... if runner scored between given range then
+                    you win, otherwise you lose.you can place only one  bet on this market,then you can not place any more nore
+                    modify it. you have to enter only starting value of range. Market suspended before one hour of market start
+                    time,bets remover if its placed after given suspend time. place bet and win Good Luck... '">
+                        <label>Remark</label>
+                        <!-- -->
+                        <textarea name="remarks" ng-model="formData.remarks" class="input-box"></textarea>
+                    </div>
+                    <div class="form_box  col-lg-12 col-md-12 col-sm-12 col-xs-12" ng-hide="true">
+                        <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
+                            <div class="form_box datepick-box">
+                                <label>Fancy Date and Time</label>
+                                <!--  <input ng-init="formData.dt=dt | date:'yyyy-MM-dd'" type="text" class="form-control input-box" datepicker-popup="{{format}}" ng-model="formData.dt" is-open="opened" datepicker-options="dateOptions" ng-required="true" close-text="Close" datetime-picker="yyyy dd MM" /> -->
+                                <input type="text" name="date" ng-model="dt">
+                            </div>
+                        </div>
+                        <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
+                            <div style="margin-top:5px;">
+                                <!-- time -->
+                                <timepicker ng-model="mytime" name="mytime" show-meridian="ismeridian"></timepicker>
+                                <!-- end -->
+                            </div>
+                        </div>
+                    </div>
+                    <input type="hidden" name="FancyTime" id="setFancyTimeK" value="{{mytime | date:' HH:MM:'}}">
+                    <input type="hidden" name="mid" ng-model="mid">
+                    <input type="hidden" name="fancyType" ng-model="fancyType">
+                    <button type="submit" class="btn btn-primary">Submit</button>
+                </form>
+                <form name="userForm" method="post" ng-submit="LastDigitFancy(formData)" ng-if="fancyType==4">
+                    <!--  <p ng-show="message" style="text-align: center; color:#FE5454; font-size: 18px; margin-bottom: 15px;">{{LastDigitFancymessage}}</p> -->
+                    <div class="form_box col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                        <label>LastDigit Heading</label>
+                        <input ng-init="formData.HeadName=fancyHeaderName" type="text" name="headName" class="input-box" ng-model="formData.HeadName" required="required">
+                    </div>
+                    <div class="form_box  col-lg-12 col-md-12 col-sm-12 col-xs-12" ng-init="formData.remarks='In this market which last number comes in score.for eg, if score is 121, then it is 1, if score is 159, then it is 9 and so on., in this market if you place 100 chips. and you win you will get 800 chips otherwise lose 100 chips. Place bet and win. Market suspended before 4 over. Bets will be cancelled if there are bets after given suspend time. Good Luck. '">
+                        <label>Remark</label>
+                        <!-- -->
+                        <textarea name="remarks" ng-model="formData.remarks" class="input-box"></textarea>
+                    </div>
+                    <div>
+                        <!--label>Liability</label-->
+                        <input type="hidden" name="Back_lay" id="liabilityLstDigit" ng-model="liabilityLstDigit" style="width:100;" required="required" value="8">
+                    </div>
+                    <div class="form_box  col-lg-12 col-md-12 col-sm-12 col-xs-12 padd-zero" ng-hide="true">
+                        <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
+                            <div class="form_box datepick-box">
+                                <label>Fancy Date and Time</label>
+                                <!-- <input ng-init="formData.dt=dt | date:'yyyy-MM-dd'" type="text" class="form-control input-box" datepicker-popup="{{format}}" ng-model="formData.dt" is-open="opened" datepicker-options="dateOptions" ng-required="true" close-text="Close" datetime-picker="yyyy dd MM" /> -->
+                                <input type="text" name="date" ng-model="dt">
+                            </div>
+                        </div>
+                        <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
+                            <div style="margin-top:5px;">
+                                <timepicker ng-model="mytime" name="mytime" show-meridian="ismeridian"></timepicker>
+                            </div>
+                        </div>
+                    </div>
+                    <input type="hidden" name="FancyTime" id="setFancyTimeL" value="{{mytime | date:' HH:MM:'}}">
+                    <input type="hidden" name="mid" ng-model="mid">
+                    <input type="hidden" name="fancyType" ng-model="fancyType">
+                    <button type="submit" class="btn btn-primary">Submit</button>
+                </form>
+                <form name="userForm" method="post" ng-submit="UpDownFancy(formData)" ng-if="fancyType==5">
+                    <div class="form_box col-lg-12 col-md-12 col-sm-12 col-xs-12">
+
+                        <label>Fancy Heading</label>
+                        <input type="text" name="headName" id="upDownHead" class="input-box" ng-model="fancyHeaderName" required="required">
+                    </div>
+                    <div class="form_box col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                        <label>Liability</label>
+                        <input type="number" name="liability" id="liability" ng-model="liability" style="width:100;" required="required">
+                        <label>Rate Diffrance </label>
+                        <input type="number" name="ratediff" id="ratediffUpdwn" ng-model="ratediff" style="width:100" required>
+                        <label>Point Difference</label>
+                        <input type="number" name="pointDiff" id="pointDiffUpdwn" ng-model="pointDiff" style="width:100" required>
+                        <label>Max stake</label>
+                        <input type="number" name="maxStake" id="maxStakeUpdwn" ng-model="maxStake" style="width:100" required>
+                    </div>
+                    <div class="form_box  col-lg-12 col-md-12 col-sm-12 col-xs-12" ng-init="formData.remarks='In this market which last number comes in score.for eg, if score is 121, then it is 1, if score is 159, then it is 9 and so on., in this market if you place 100 chips. and you win you will get 800 chips otherwise lose 100 chips. Place bet and win. Market suspended before 4 over. Bets will be cancelled if there are bets after given suspend time. Good Luck. '">
+                        <label>Remark</label>
+                        <!-- -->
+                        <textarea name="remarks" ng-model="formData.remarks" class="input-box"></textarea>
+                    </div>
+
+                    <input type="hidden" name="FancyTime" id="setFancyTimeU" value="{{mytime | date:' HH:MM:'}}">
+                    <input type="hidden" name="mid" ng-model="mid">
+                    <input type="hidden" name="fancyType" ng-model="fancyType">
+                    <button type="submit" class="btn btn-primary">Submit</button>
+
+                </form>
+            </div>
+        </div>
+    </md-dialog-content>
+</md-dialog>

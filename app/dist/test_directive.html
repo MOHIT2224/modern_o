@@ -1,0 +1,24 @@
+<my-button someattr="'my text'"></my-button>
+<script type="text/javascript">
+  angular.module('test', []);
+
+angular.module('test').controller('testctrl', function($scope) {
+  $scope.someValue = '';
+});
+
+angular.module('test').directive('myButton', function() {
+  return {
+    restrict: 'E',
+    template: '<button>{{getText()}}</button>',
+    replace: true,
+    scope: {
+      someattr: '='
+    },
+    link: function(scope, elements, attrs){
+      scope.getText = function(){
+        return scope.someattr;
+      };
+    }
+  }
+});
+</script>

@@ -1,0 +1,532 @@
+<?php
+defined('BASEPATH') OR exit('No direct script access allowed');
+
+	class Modellstmaster extends CI_Model{
+		function __construct(){
+				
+		}
+		function getLstMaster(){
+			
+			$this->load->model('Chip_model');
+			$this->db->select("lgnUserMaxProfit,lgnUserMaxLoss,lgnUserMaxStake,Commission,stakeLimit,mstrid as usecode,mstrname,mstruserid as usename,active,ipadress,usecrdt,usemodt,case when usetype=0 then 'Admin' else case when usetype=1 then 'Master' else case when usetype=2 then 'Dealer' else case when usetype=3 then 'Client' else case when usetype=4 then 'Helper' end end end end end as usetype,balance");
+			$this->db->from('createmaster');
+			$this->db->where('lgnusrCloseAc != 0');
+			$this->db->order_by("usecrdt","desc");
+			$query = $this->db->get();
+			$response = $query->result_array();
+
+		/*	$response = array();
+			foreach($userList as $ulist){
+				$temp = $ulist;
+				$userId = $ulist['usecode'];
+				$res = $this->Chip_model->getLiability($userId);
+				$temp['balance'] = (!empty($res[0]['Balance']) ? $res[0]['Balance'] : 0);
+				$response[] = $temp;
+			} */
+			return $response;
+		}
+
+		function updateLstMaster($id,$status){
+			if ($status==0) {
+				$st=1;
+			}else{
+				$st=0;
+			}
+			$dataArray = array('active' => $st);
+    		$this->db->where('mstrid',$id);
+            $this->db->update('createmaster', $dataArray);
+            return $dataArray;  
+		}
+		function GetUserTree($id,$type,$helperid,$helperType){
+		  	$query =$this->db->query("call sp_MemberTree($id,$helperid)");
+			$res = $query->result_array();
+			$query->next_result();
+			$query->free_result();
+			return $res;
+		}
+		function getUserDataById($userId){
+			$this->db->select('*');
+			$this->db->from('createmaster');
+			$this->db->where('parentId', $userId);
+			$query = $this->db->get();
+			return $query->result_array();
+		}
+        function getUserInfo($userId){
+
+            $this->db->select('cm.mstrlock,cm.lgnusrlckbtng,cm.lgnusrCloseAc,cm.lgnUserMaxStake as stakeLimit,active,cm.usetype');
+            $this->db->from('createmaster cm');
+            
+            $this->db->where('mstrid', $userId);
+            $query = $this->db->get();
+            return $query->result_array();
+        }
+		function getMatch(){
+			
+			$this->db->select("se.Name,m.MstCode,m.MstDate,m.FromDt as FromTime,m.ToDt as ToTime,tm1.name as Team1,tm2.name as Team2,typeMst.Name as MatchType,m.Target as over,CASE WHEN m.active=1 
+							then 'Active' ELSE 'Inactive' end as status ,m.active");
+			$this->db->from('matchmst m');
+			$this->db->join('seriesmst se', 'm.SeriesID=se.ID', 'INNER');
+			$this->db->join('team tm1', 'm.Team1=tm1.id', 'INNER');
+			$this->db->join('team tm2', 'm.Team2=tm2.id', 'INNER');
+			$this->db->join('sporttypemst typeMst', 'typeMst.ID=m.TypeID', 'INNER');
+			$query = $this->db->get();
+			/*echo $this->db->queries[0];die();	*/	
+
+			return $query->result_array();
+		}
+		function getActivatedMatch(){
+			$this->db->select("se.Name,m.MstCode");
+			$this->db->from('matchmst m');
+			$this->db->join('seriesmst se', 'm.SeriesID=se.ID', 'INNER');
+			$this->db->where('m.active',1);
+			$query = $this->db->get();
+			return $query->result_array();	
+		}
+		function FancyItem(){
+			$this->db->select('*');
+			$this->db->from('matchfancy');
+			$this->db->order_by("TypeID","asc");
+			$query = $this->db->get();
+			return $query->result_array();	
+		}
+		function getFancyByMatchId($matchId,$fancyId){
+			$this->db->select("m.MstCode,mf.HeadName,mf.TypeID,mf.date,mf.time,mf.ID,mf.Remarks,mf.SessInptYes,mf.SessInptNo,mf.fancyRange,mf.PlayerId,mf.active,mf.result,mf.upDwnBack,mf.upDwnLay,mf.MFancyID as FncyId,mf.MaxStake,mf.NoValume,mf.YesValume,mf.pointDiff,mf.rateDiff,mf.DisplayMsg,mf.RateChange,mf.upDwnLimit");
+			$this->db->from('matchmst m');
+			/*$this->db->join('seriesmst se', 'm.SeriesID=se.ID', 'INNER');*/
+			$this->db->join('matchfancy mf', 'mf.MatchID=m.MstCode', 'INNER');
+			$this->db->where('m.MstCode',$matchId);
+			$this->db->where('mf.ID',$fancyId);
+			$this->db->where('m.active<>',2);
+			$this->db->where('mf.result',NULL);
+			$query = $this->db->get();
+			/*echo $this->db->queries[0];die();	*/	
+
+			return $query->result_array();	
+		}
+		function getFancyDataM($matchId,$TypeID){
+			$this->db->select("m.MstCode,mf.HeadName,mf.TypeID,mf.date,mf.time,mf.ID,mf.Remarks,mf.SessInptYes,mf.SessInptNo,mf.fancyRange,mf.PlayerId,mf.active,mf.result,mf.upDwnBack,mf.upDwnLay,mf.MFancyID as FncyId,mf.MaxStake,mf.NoValume,mf.YesValume,mf.pointDiff,mf.rateDiff,mf.DisplayMsg,mf.RateChange,mf.upDwnLimit");
+			$this->db->from('matchmst m');
+			/*$this->db->join('seriesmst se', 'm.SeriesID=se.ID', 'INNER');*/
+			$this->db->join('matchfancy mf', 'mf.MatchID=m.MstCode', 'INNER');
+			$this->db->where('m.MstCode',$matchId);
+			$this->db->where('mf.TypeID',$TypeID);
+			$this->db->where('m.active<>',2);
+			$this->db->where('mf.result',NULL);
+			$query = $this->db->get();
+			/*echo $this->db->queries[0];die();	*/	
+
+			return $query->result_array();	
+		}
+		function listFancy($matchId){
+			
+			$this->db->select("active,ID,HeadName,HeadName,Remarks,date,case when TypeID=1 then 'Odd/Even' else case when TypeID=2 then 'Session' else case when TypeID=3 then 'Khaddal' else case when TypeID=5 then 'UpDown' else case when TypeID=4 then 'LastDigit' end end end end end as TypeID");
+			$this->db->from('matchfancy');
+			$this->db->where('MatchID',$matchId);
+			$this->db->where('active!=','2');
+			$this->db->order_by('ID',"desc");
+
+			$query = $this->db->get();
+			//echo $this->db->queries[0];die();		
+
+			return $query->result_array();
+		}
+		function save_session_bet(){
+							
+				if($_POST['TypeID']==2){
+					$GetpId=$this->Get_ParantId($this->input->post('loginId'));
+					$ParantId=$GetpId[0]['parentId'];
+					$userId=$this->input->post('loginId');
+					$loginId=$this->input->post('loginId');
+
+					$parameter="".$this->input->post('betValue').",'".$this->input->post('OddValue')."',".$this->input->post('OddsNumber').",".$this->input->post('TypeID').",".$this->input->post('matchId').",".$this->input->post('FancyID').",".$ParantId.",".$userId.",'".date('Y-m-d H:i:s',now())."',".$loginId.",".$this->input->post('FancyId').",'".$this->input->post('HeadName')."',".$this->input->post('SessInptYes').",".$this->input->post('SessInptNo').",".$this->input->post('sportId').",'".$_SERVER["REMOTE_ADDR"]."',".$this->input->post('pointDiff').",".$this->input->post('deviceInformation').","."null";
+					//echo "call sp_PlaceBet_Fancy($parameter)";
+					$query =$this->db->query("call sp_PlaceBet_Fancy($parameter)");
+					$res = $query->result_array();
+					$query->next_result();
+					$query->free_result();
+					return $res;
+                }
+ 		}
+
+ 		function mbdip_save_session_bet($data){
+							
+				if($data['TypeID']==2){
+					$GetpId=$this->Get_ParantId($data['loginId']);
+					$ParantId=$GetpId[0]['parentId'];
+					$userId= $data['loginId'];
+					$loginId= $data['loginId'];
+
+					$parameter="".$data['betValue'].",'".$data['OddValue']."',".$data['OddsNumber'].",".$data['TypeID'].",".$data['matchId'].",".$data['FancyID'].",".$ParantId.",".$userId.",'".date('Y-m-d H:i:s',now())."',".$loginId.",".$data['FancyId'].",'".$data['HeadName']."',".$data['SessInptYes'].",".$data['SessInptNo'].",".$data['sportId'].",'".$_SERVER["REMOTE_ADDR"]."',".$data['pointDiff'].",'".$data['deviceInformation']."',"."null";
+					//echo "call sp_PlaceBet_Fancy($parameter)";
+					$query =$this->db->query("call sp_PlaceBet_Fancy($parameter)");
+					$res = $query->result_array();
+					$query->next_result();
+					$query->free_result();
+					return $res;
+                }
+ 		}
+		function saveUserFancyEvenOdd(){
+				if($this->input->post('type')==3){
+					$GetpId=$this->Get_ParantId($this->input->post('loginId'));
+					$ParantId=$GetpId[0]['parentId'];
+					$userId=$this->input->post('loginId');
+					$loginId=$this->input->post('loginId');
+				}else{
+					$ParantId=$this->input->post('ParantId');
+					$userId=$this->input->post('userId');
+					$loginId=$this->input->post('loginId');
+				}
+				if($_POST['TypeID']==1){
+
+                    $parameter="".$this->input->post('betValue').",'".$this->input->post('OddValue')."',".$this->input->post('OddsNumber').",".$this->input->post('TypeID').",".$this->input->post('matchId').",".$this->input->post('FancyID').",".$ParantId.",".$userId.",'".date('Y-m-d H:i:s',now())."',".$loginId.",".$this->input->post('FancyID').",'".$this->input->post('HeadName')."',0,0,".$this->input->post('sportId').",'".$_SERVER["REMOTE_ADDR"]."',0,'".$this->input->post('deviceInformation')."',"."null";
+                    $query =$this->db->query("call sp_PlaceBet_Fancy($parameter)");
+                    $res = $query->result_array();
+                    $query->next_result();
+                    $query->free_result();
+                    return $res;
+				}
+				if($_POST['TypeID']==2){
+
+                   $parameter="".$this->input->post('betValue').",'".$this->input->post('OddValue')."',".$this->input->post('OddsNumber').",".$this->input->post('TypeID').",".$this->input->post('matchId').",".$this->input->post('FancyID').",".$ParantId.",".$userId.",'".date('Y-m-d H:i:s',now())."',".$loginId.",".$this->input->post('FancyId').",'".$this->input->post('HeadName')."',".$this->input->post('SessInptYes').",".$this->input->post('SessInptNo').",".$this->input->post('sportId').",'".$_SERVER["REMOTE_ADDR"]."',".$this->input->post('pointDiff').",".$this->input->post('deviceInformation').","."null";
+                   //echo "call sp_PlaceBet_Fancy($parameter)";
+                    $query =$this->db->query("call sp_PlaceBet_Fancy($parameter)");
+                    $res = $query->result_array();
+                    $query->next_result();
+                    $query->free_result();
+                    return $res;
+                }
+                if($_POST['TypeID']==4){
+                   // $parameter="BetValue=".$this->input->post('betValue').",oddsValue='".$this->input->post('OddValue')."',oddsNo".$this->input->post('OddsNumber').",typeid=".$this->input->post('TypeID').",MatchId=".$this->input->post('matchId').",FancyId=".$this->input->post('FancyID').",ParantId=".$ParantId.",Userid=".$userId.",date='".date('Y-m-d H:i:s',now())."',LoginId=".$loginId.",FancyId=".$this->input->post('FancyId').",HeadName='".$this->input->post('HeadName')."',SEssonYes=".$this->input->post('SessInptYes').",SessionNo=".$this->input->post('SessInptNo').",SPRTID=".$this->input->post('sportId').",REMOTEADD='".$_SERVER["REMOTE_ADDR"]."',POINTDIFF=".$this->input->post('pointDiff').",DEviceInfo".$this->input->post('deviceInformation').",result="."null";
+                    $parameter="".$this->input->post('betValue').",'".$this->input->post('OddValue')."',".$this->input->post('OddsNumber').",".$this->input->post('TypeID').",".$this->input->post('matchId').",".$this->input->post('FancyID').",".$ParantId.",".$userId.",'".date('Y-m-d H:i:s',now())."',".$loginId.",".$this->input->post('FancyId').",'".$this->input->post('HeadName')."','".$this->input->post('SessInptYes')."','".$this->input->post('SessInptNo')."',".$this->input->post('sportId').",'".$_SERVER["REMOTE_ADDR"]."',".$this->input->post('pointDiff').",".$this->input->post('deviceInformation').","."null";
+                    //die();
+                    $query =$this->db->query("call sp_PlaceBet_Fancy($parameter)");
+                    $res = $query->result_array();
+                    $query->next_result();
+                    $query->free_result();
+                    return $res;
+                }
+            if($_POST['TypeID']==3){
+                // $parameter="BetValue=".$this->input->post('betValue').",oddsValue='".$this->input->post('OddValue')."',oddsNo".$this->input->post('OddsNumber').",typeid=".$this->input->post('TypeID').",MatchId=".$this->input->post('matchId').",FancyId=".$this->input->post('FancyID').",ParantId=".$ParantId.",Userid=".$userId.",date='".date('Y-m-d H:i:s',now())."',LoginId=".$loginId.",FancyId=".$this->input->post('FancyId').",HeadName='".$this->input->post('HeadName')."',SEssonYes=".$this->input->post('SessInptYes').",SessionNo=".$this->input->post('SessInptNo').",SPRTID=".$this->input->post('sportId').",REMOTEADD='".$_SERVER["REMOTE_ADDR"]."',POINTDIFF=".$this->input->post('pointDiff').",DEviceInfo".$this->input->post('deviceInformation').",result="."null";
+                $parameter="".$this->input->post('betValue').",'".$this->input->post('OddValue')."',".$this->input->post('OddsNumber').",".$this->input->post('TypeID').",".$this->input->post('matchId').",".$this->input->post('FancyID').",".$ParantId.",".$userId.",'".date('Y-m-d H:i:s',now())."',".$loginId.",".$this->input->post('FancyId').",'".$this->input->post('HeadName')."','".$this->input->post('SessInptYes')."','".$this->input->post('SessInptNo')."',".$this->input->post('sportId').",'".$_SERVER["REMOTE_ADDR"]."',".$this->input->post('pointDiff').",".$this->input->post('deviceInformation').","."null";
+                //die();
+                $query =$this->db->query("call sp_PlaceBet_Fancy($parameter)");
+                $res = $query->result_array();
+                $query->next_result();
+                $query->free_result();
+                return $res;
+            }
+            if($_POST['TypeID']==5){
+                // $parameter="BetValue=".$this->input->post('betValue').",oddsValue='".$this->input->post('OddValue')."',oddsNo".$this->input->post('OddsNumber').",typeid=".$this->input->post('TypeID').",MatchId=".$this->input->post('matchId').",FancyId=".$this->input->post('FancyID').",ParantId=".$ParantId.",Userid=".$userId.",date='".date('Y-m-d H:i:s',now())."',LoginId=".$loginId.",FancyId=".$this->input->post('FancyId').",HeadName='".$this->input->post('HeadName')."',SEssonYes=".$this->input->post('SessInptYes').",SessionNo=".$this->input->post('SessInptNo').",SPRTID=".$this->input->post('sportId').",REMOTEADD='".$_SERVER["REMOTE_ADDR"]."',POINTDIFF=".$this->input->post('pointDiff').",DEviceInfo".$this->input->post('deviceInformation').",result="."null";
+                $parameter="".$this->input->post('betValue').",'".$this->input->post('OddValue')."',".$this->input->post('OddsNumber').",".$this->input->post('TypeID').",".$this->input->post('matchId').",".$this->input->post('FancyID').",".$ParantId.",".$userId.",'".date('Y-m-d H:i:s',now())."',".$loginId.",".$this->input->post('FancyId').",'".$this->input->post('HeadName')."','".$this->input->post('SessInptYes')."','".$this->input->post('SessInptNo')."',".$this->input->post('sportId').",'".$_SERVER["REMOTE_ADDR"]."',".$this->input->post('pointDiff').",".$this->input->post('deviceInformation').","."null";
+                //die();
+                $query =$this->db->query("call sp_PlaceBet_Fancy($parameter)");
+                $res = $query->result_array();
+                $query->next_result();
+                $query->free_result();
+                return $res;
+            }
+
+		}
+		function Get_ParantId($userId){
+			$this->db->select("parentId");
+			$this->db->from('createmaster');
+			$this->db->where('mstrid',$userId);
+			$query = $this->db->get();
+            //echo $this->db->queries[1];
+            return $query->result_array();
+		}
+		function GetSettlementAmt($userId){
+			$this->db->select("Fn_getSettingP($userId) as parentSettling,Fn_getSettlingU($userId) as userSettling");
+			$query = $this->db->get();            
+            return $query->result_array();
+		}
+		function getDataById($userId,$UserType){
+			$this->db->select("SessionComm,OtherComm,InPlayStack,mstruserid,IFNULL(mstrremarks, '') mstrremarks,partner,parentId,set_timeout,lgnUserMaxProfit,lgnUserMaxLoss,lgnUserMaxStake,Commission,stakeLimit,mstrid as usecode,mstrname,mstruserid as usename,active,ipadress,usecrdt,usemodt,case when usetype=0 then 'Admin' else case when usetype=1 then 'Master' else case when usetype=2 then 'Dealer' else case when usetype=3 then 'Client' else case when usetype=4 then 'Helper' end end end end end as usetype1,usetype,liability as Liability,balance as Balance,p_l as P_L,freechips	as FreeChips,mstrlock,lgnusrlckbtng");
+			$this->db->where('usetype > ',$UserType);
+			$this->db->where('parentId',$userId);
+			$this->db->where('lgnusrCloseAc != 0');
+			$this->db->from('createmaster cm');
+			$query = $this->db->get();
+		//	echo $this->db->queries[0];die();		
+			return $query->result_array();
+		}
+
+		/**
+		 * [getDataByIdPaging get user listing for dealers]
+		 * @param  [int] $userId   [user id]
+		 * @param  [int] $UserType [usertype]
+		 * @param  [string] $search   [search by username]
+		 * @param  [int] $pageno   [page no]
+		 * @param  [int] $limit    [limit]
+		 * @return [array]           [result]
+		 */
+		function getDataByIdPaging($userId,$UserType,$search,$pageno,$limit){
+
+			$this->db->select("mstruserid");
+			$this->db->from('createmaster cm');
+			$this->db->where('parentId',$userId);
+			$this->db->where('lgnusrCloseAc != 0');
+			if(!empty($search)){
+				$where = "(mstrname LIKE '%$search%' OR mstruserid LIKE '%$search%')";
+        		$this->db->where($where);
+			}
+
+			$total_rows = $this->db->count_all_results(); 
+
+			$this->db->select("SessionComm,OtherComm,InPlayStack,mstruserid,IFNULL(mstrremarks, '') mstrremarks,partner,parentId,set_timeout,lgnUserMaxProfit,lgnUserMaxLoss,lgnUserMaxStake,Commission,stakeLimit,mstrid as usecode,mstrname,mstruserid as usename,active,ipadress,usecrdt,usemodt,case when usetype=0 then 'Admin' else case when usetype=1 then 'Master' else case when usetype=2 then 'Dealer' else case when usetype=3 then 'Client' else case when usetype=4 then 'Helper' end end end end end as usetype1,usetype,FN_getLibility(cm.mstrid) as Liability,Fn_GetUserBal(cm.mstrid) as Balance,FN_getUserChips(cm.mstrid) as P_L,Fn_getUserFreeChip(cm.mstrid) as FreeChips,mstrlock,lgnusrlckbtng");
+			$this->db->where('usetype > ',$UserType);
+			$this->db->where('parentId',$userId);
+			$this->db->where('lgnusrCloseAc != 0');
+			$this->db->from('createmaster cm');
+			if(!empty($search)){
+
+				$where = "(mstrname LIKE '%$search%' OR mstruserid LIKE '%$search%')";
+        		$this->db->where($where);
+
+			/*	$this->db->like('mstrname', $search, 'both');
+				$this->db->like('mstruserid', $search, 'both'); */
+			}
+
+			if(!empty($limit)){
+				$page_max = $limit;
+	        	$start = ($pageno - 1) * $page_max;
+	        	$end = $pageno * $page_max;
+				$this->db->limit($page_max, $start);	
+			}
+
+			$query = $this->db->get();
+
+		//	echo $this->db->queries[0];die();		
+			return array(
+        		'total_rows' => $total_rows,
+        		'result'     => $query->result_array(),
+    		); 
+			
+		}
+
+		function getDealerById($userId,$UserType){
+			$this->db->select("SessionComm,OtherComm,InPlayStack,mstruserid,IFNULL(mstrremarks, '') mstrremarks,partner,parentId,set_timeout,lgnUserMaxProfit,lgnUserMaxLoss,lgnUserMaxStake,Commission,stakeLimit,mstrid as usecode,mstrname,mstruserid as usename,active,ipadress,usecrdt,usemodt,case when usetype=0 then 'Admin' else case when usetype=1 then 'Master' else case when usetype=2 then 'Dealer' else case when usetype=3 then 'Client' else case when usetype=4 then 'Helper' end end end end end as usetype1,usetype,liability as Liability,balance as Balance,p_l as P_L,freechips	as FreeChips,mstrlock,Fn_DealerAvailBal(cm.mstrid) as availBal,lgnusrlckbtng");
+			$this->db->where('usetype',2);
+			$this->db->where('parentId',$userId);
+			$this->db->where('lgnusrCloseAc != 0');
+			$this->db->from('createmaster cm');
+			$query = $this->db->get();
+			//echo $this->db->queries[0];die();		
+			return $query->result_array();
+		}
+
+		function ChkFancyOnBet($matchId,$fancyId,$SessInptYes,$SessInptNo){
+			$query =$this->db->query("call sp_ChkFancyOnBet($matchId,$fancyId,$SessInptYes,$SessInptNo)");
+			$res = $query->result_array();
+			$query->next_result();
+			$query->free_result();
+			return $res;
+			
+
+		}
+		function GetBetData($matchId,$fancyId,$userId,$usertype){
+
+					$query =$this->db->query("call SP_GetFancy($userId,$usertype,$fancyId)");
+					$res = $query->result_array();
+					$query->next_result();
+					$query->free_result();
+					return $res;
+		}
+		function getFancylistHeader(){
+			$this->db->select("mf.ID,mf.Remarks,mchmst.matchName,mf.HeadName,mf.active,mf.result,mf.TypeID,mchmst.SportID as SportID,mf.MatchID");
+			$this->db->from('matchfancy mf');
+			$this->db->join('matchmst mchmst', 'mf.MatchID=mchmst.MstCode', 'INNER');
+			//$this->db->where('mchmst.active',1);by aj
+			// $this->db->where('mf.active!=','2');
+			$this->db->where('mf.result',null);
+			$this->db->order_by("mf.ID desc");
+
+			/*$this->db->join('seriesmst srmst', 'srmst.ID=mchmst.SeriesID', 'INNER');*/
+		
+			$query = $this->db->get();
+            //echo $this->db->queries[0];
+
+			return $query->result_array();
+		}
+		function updateFancyHeaderSatatus(){
+
+			$dataArray = array('active' => $_POST['active'],'HelperID' => $_POST['HelperID']);
+    		$this->db->where('ID',$_POST['id']);
+            $this->db->update('matchfancy', $dataArray);
+            //echo $this->db->queries[0];die();		
+            return true; 
+		
+		}
+		function updateFancyResult(){
+			$sportId=$_POST['sportId'];
+			$match_id=$_POST['match_id'];
+			$fancy_Id=$_POST['fancy_Id'];
+			$result=$_POST['result'];
+			/*$dataArray = array('result' => $_POST['result']);
+    		$this->db->where('ID',$_POST['id']);
+            $this->db->update('matchfancy', $dataArray);
+            //echo $this->db->queries[0];die();
+            return true; */
+            $query =$this->db->query("call SP_SetResult_Session($sportId,$match_id,$fancy_Id,$result)");
+			$res = $query->result_array();
+			$query->next_result();
+			$query->free_result();
+			//print_r($res);die();
+			return $res;
+		}
+        function updateKhaddalResult(){
+            $sportId=$_POST['sportId'];
+            $match_id=$_POST['match_id'];
+            $fancy_Id=$_POST['fancy_Id'];
+            $fancyType=$_POST['fancyType'];
+            $result=$_POST['result'];
+			$HelperID=$_POST['HelperID'];
+            //print_r($_POST);
+            //echo "call SP_SetResult_Other($sportId,$match_id,$fancy_Id,$result,$fancyType,$HelperID)";
+            $query =$this->db->query("call SP_SetResult_Other($sportId,$match_id,$fancy_Id,$result,$fancyType,$HelperID)");
+            $res = $query->result_array();
+            $query->next_result();
+            $query->free_result();
+            //print_r($res);die();
+            return $res;
+        }
+		function getMatchOddsLimit($matchId)//sourabh 11-nov-2016
+	    {
+		
+			$this->db->select('oddsLimit,volumeLimit');
+			$this->db->from('matchmst');
+			$this->db->where('MstCode', $matchId);
+			$query = $this->db->get();
+			//$result=$query->result()[0]->oddsLimit;
+			//return $result;
+			return $query->result_array();
+		}
+		function closeUserList(){
+			$query  =  "SET @srno = 0;";
+			$this->db->query($query);
+			$this->db->select(" (@srno := @srno + 1) AS Sno,mstrid,mstrname,mstruserid,usecrdt,lgnusrCloseAc, CASE WHEN usetype=0 THEN 'ADMIN' ELSE CASE WHEN usetype=1 THEN 'Master' ELSE CASE WHEN usetype=2 THEN 'Dealer' ELSE CASE WHEN usetype=3 THEN 'Client'  END  END  END END as UserType");
+			$this->db->from('createmaster');
+			$this->db->where('lgnusrCloseAc', 0);
+		//	echo $this->db->queries[0];die();	
+			$query = $this->db->get();
+			return $query->result_array();
+		}
+		function updateClsAc($userId,$status){
+
+			$dataArray = array('lgnusrCloseAc' => $status);
+    		$this->db->where('mstrid',$userId);
+            $query=$this->db->update('createmaster', $dataArray);
+            //echo $this->db->queries[0];die();	
+            return $query; 
+		}
+		function getFancyByEdit($id,$type){
+			$this->db->select('*');
+			$this->db->from('matchfancy');
+			$this->db->where('TypeID',$type);
+			$this->db->where('ID',$id);
+			/*$this->db->where('active',1);*/
+			$query1 = $this->db->get();					
+			return $query1->result_array();	
+		}
+		function scorePosition($userId,$fancyId,$typeId){
+			
+			$query =$this->db->query("call sp_GetScorePosition($userId,$fancyId,$typeId)");
+			$res = $query->result_array();
+			$query->next_result();
+			$query->free_result();
+					
+			return $res;
+		}
+        function scorePosition_evenOdd($userId,$fancyId,$typeId,$matchId){
+
+        $query =$this->db->query("call sp_GetScorePosition_OE($userId,$fancyId,$matchId)");
+        $res = $query->result_array();
+        $query->next_result();
+        $query->free_result();
+
+        return $res;
+        }
+        function EditMultipleFancy($MatchId){
+			$this->db->select('*');
+			$this->db->from('matchfancy');
+			$this->db->where('TypeID',2);
+			$this->db->where('MatchID',$MatchId);
+			$this->db->where('active <>',2);
+			$this->db->where('result',null);
+			$this->db->order_by('ID', 'DESC');
+			$query1 = $this->db->get();		
+			//echo $this->db->queries[0];die();				
+			return $query1->result_array();	
+		}
+        function scorePosition_Khaddal($userId,$fancyId,$typeId,$matchId){
+
+            $query =$this->db->query("call sp_GetScorePosition_Kaddal ($userId,$fancyId,$matchId)");
+            $res = $query->result_array();
+            $query->next_result();
+            $query->free_result();
+
+            return $res;
+        }
+        function scorePosition_LastDigit($userId,$fancyId,$typeId,$matchId){
+
+            $query =$this->db->query("call sp_GetScorePosition_LD ($userId,$fancyId,$matchId)");
+            $res = $query->result_array();
+            $query->next_result();
+            $query->free_result();
+
+            return $res;
+        }
+        function scorePosition_Up_Down($userId,$fancyId,$typeId,$matchId){
+
+            $query =$this->db->query("call sp_GetScorePosition_UpDown ($userId,$fancyId,$matchId)");
+            $res = $query->result_array();
+            $query->next_result();
+            $query->free_result();
+
+            return $res;
+        }
+
+		function setFancyMsg(){
+			$dataArray = array('DisplayMsg' => $_POST['message'],'active' =>4);
+    		$this->db->where('MatchID',$_POST['MatchID']);
+    		//$this->db->where('result',null);
+    		$this->db->where('TypeID',$_POST['TypeId']);
+            $query=$this->db->update('matchfancy', $dataArray);
+        //    echo $this->db->queries[0];
+            return $query; 
+		}
+		function chnageRate(){
+			$dataArray = array('RateChange' => $_POST['RateChange']+1,'active' =>4,'DisplayMsg' => 'Rate Change');
+    		$this->db->where('ID',$_POST['FancyId']);
+    		$query=$this->db->update('matchfancy', $dataArray);
+            return $query;
+		}
+		function updateRateChangeMsg($FancyID,$TypeID){
+			$dataArray = array('active' =>4,'DisplayMsg' => 'Rate Change');
+    		$this->db->where('ID',$FancyID);
+    		$query=$this->db->update('matchfancy', $dataArray);
+            return $query;
+		}
+		function getPartnerShip($userId){
+			$this->db->select('*');
+			$this->db->from('tblpartner');
+			$this->db->where('UserID',$userId);
+			$query1 = $this->db->get();					
+			return $query1->result_array();	
+		}
+		function getParentData($userId){
+			$this->db->select('ca.*');
+			$this->db->from('createmaster cm');
+			$this->db->join('createmaster ca', 'ca.mstrid=cm.parentId', 'INNER');
+			$this->db->where('cm.mstrid',$userId);
+			$query1 = $this->db->get();					
+			return $query1->result_array();	
+		}				
+		function getMTree(){
+		  	$query =$this->db->query("call sp_getMTree()");
+			$res = $query->result_array();
+			$query->next_result();
+			$query->free_result();
+			return $res;
+		}
+	}
